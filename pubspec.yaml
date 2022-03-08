@@ -11,6 +11,24 @@ dependencies:
   flutter:
     sdk: flutter
   device_info: any
+  intl_phone_number_input: any
+  shared_preferences: any
+  flutter_secure_storage: any
+  amazon_cognito_identity_dart_2: any
+  intl: any
+  dio: any
+  path_provider: any
+  permission_handler: any
+  downloads_path_provider_28: any
+  flutter_branch_sdk: any
+  firebase_messaging: any
+  firebase_analytics: any
+  firebase_core: any
+  flutter_local_notifications: any
+  firebase_crashlytics: any
+  image_picker: any
+  file_picker: any
+  url_launcher: any
 
 dev_dependencies:
   flutter_test:
