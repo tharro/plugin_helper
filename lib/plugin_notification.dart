@@ -45,13 +45,13 @@ class PluginNotification {
   static Future<void> settingNotification(
       {required Color colorNotification,
       required Function onMessage,
-      onHandleLocalMessage,
-      onHandleFCMMessage,
-      onRegisterFCM,
+      required Function onHandleLocalMessage,
+      required Function onHandleFCMMessage,
+      required Function onRegisterFCM,
       String? payload,
-      chanelId,
-      chanelName,
-      channelDescription}) async {
+      required String chanelId,
+      required String chanelName,
+      required String channelDescription}) async {
     NotificationSettings settings = await messaging.requestPermission(
       alert: true,
       announcement: false,
