@@ -8,6 +8,7 @@ import 'package:device_info/device_info.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_number_input/src/utils/phone_number/phone_number_util.dart';
 import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
+import 'package:new_version/new_version.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as path;
@@ -191,5 +192,16 @@ class PluginHelper {
     } catch (e) {
       return "-:--";
     }
+  }
+
+  static checkUpdateApp(
+      {required BuildContext context,
+      required String androidId,
+      required String iOSId}) {
+    final newVersion = NewVersion(
+      iOSId: androidId,
+      androidId: iOSId,
+    );
+    newVersion.showAlertIfNecessary(context: context);
   }
 }

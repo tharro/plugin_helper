@@ -29,6 +29,7 @@ dependencies:
   image_picker: any
   file_picker: any
   url_launcher: any
+  new_version: any
 
 dev_dependencies:
   flutter_test:
