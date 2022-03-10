@@ -5,9 +5,9 @@ import 'package:stripe_payment/stripe_payment.dart';
 class PluginPayment {
   static init() {
     StripePayment.setOptions(StripeOptions(
-      publishableKey: AppConfig().stripePublicKey,
-      merchantId: AppConfig().merchantId,
-      androidPayMode: AppConfig().appEnvironment == AppEnvironment.prod
+      publishableKey: PluginAppConfig().stripePublicKey,
+      merchantId: PluginAppConfig().merchantId,
+      androidPayMode: PluginAppConfig().appEnvironment == AppEnvironment.prod
           ? 'production'
           : 'test',
     ));

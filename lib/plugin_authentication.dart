@@ -14,8 +14,8 @@ class PluginAppConstraints {
 
 class PluginAuthentication {
   final userPool = CognitoUserPool(
-    AppConfig().userPoolId!,
-    AppConfig().clientId!,
+    PluginAppConfig().userPoolId!,
+    PluginAppConfig().clientId!,
   );
 
   final storage = const FlutterSecureStorage();
