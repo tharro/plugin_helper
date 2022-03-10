@@ -80,7 +80,10 @@ class WidgetAddCreditCardState extends State<WidgetAddCreditCard> {
           textStyle: widget.textStyle,
         ),
         const SizedBox(height: 15),
-        widget.buttonWidget ?? button()
+        widget.buttonWidget ??
+            Container(
+                margin: const EdgeInsets.only(left: 16, right: 16),
+                child: button())
       ],
     );
   }

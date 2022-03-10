@@ -9,8 +9,6 @@ class WidgetButtonCustom extends StatelessWidget {
   final Color? secondaryBorderColor, primaryBorderColor;
   final Color? outLineBorderColor;
   final Color? borderColor, backgroundColor, textColor;
-  final double height;
-  final double width;
   final Color? textPrimaryColor, textSecondaryColor;
   final Color? textOutLineColor;
   final TextStyle? textStyle;
@@ -22,8 +20,6 @@ class WidgetButtonCustom extends StatelessWidget {
     required this.onPressed,
     required this.title,
     this.isSecondary = false,
-    this.height = 0,
-    this.width = double.infinity,
     this.textColor,
     this.backgroundColor,
     this.borderColor,
@@ -51,7 +47,7 @@ class WidgetButtonCustom extends StatelessWidget {
             }
           : null,
       style: OutlinedButton.styleFrom(
-        padding: padding,
+        padding: padding ?? const EdgeInsets.symmetric(vertical: 18),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius)),
         backgroundColor: enabled == false
