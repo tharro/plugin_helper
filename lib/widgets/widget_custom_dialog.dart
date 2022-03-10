@@ -5,11 +5,8 @@ import 'package:flutter/material.dart';
 
 class WidgetCustomDialog extends StatefulWidget {
   final String title, descriptions;
-  final Function? onClose;
-  final Function? onPressPrimaryButton;
+  final Function()? onClose;
   final bool? isShowSecondButton;
-  final Function? onPressSecondButton;
-  final String? labelPrimary, labelSecondary;
   final TextStyle textStyleTitle;
   final TextStyle? texStyleDescription;
   final Widget buttonPrimary;
@@ -25,10 +22,6 @@ class WidgetCustomDialog extends StatefulWidget {
     required this.descriptions,
     this.onClose,
     this.isShowSecondButton = false,
-    this.onPressSecondButton,
-    this.onPressPrimaryButton,
-    this.labelPrimary,
-    this.labelSecondary,
     required this.textStyleTitle,
     this.texStyleDescription,
     required this.buttonPrimary,

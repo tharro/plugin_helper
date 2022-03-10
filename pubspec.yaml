@@ -33,7 +33,7 @@ dependencies:
   fluttertoast: any
   cached_network_image: any
   pull_to_refresh: any
-  pinput: ^2.1.4
+  pin_code_fields: any
   stripe_payment:
     git:
       url: https://github.com/jonasbark/flutter_stripe_payment.git

@@ -47,8 +47,8 @@ class PluginPickerFile {
   static Future<List<XFile>> uploadMultiImage({
     required BuildContext context,
     required bool isLoading,
-    Function? onLoading,
-    Function? onEndLoading,
+    Function()? onLoading,
+    Function()? onEndLoading,
     required Function({String type}) onError,
   }) async {
     try {

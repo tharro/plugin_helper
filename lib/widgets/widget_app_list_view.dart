@@ -6,12 +6,12 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class WidgetAppListView extends StatefulWidget {
   final List data;
-  final Function? onLoadMore;
+  final Function()? onLoadMore;
   final Axis scrollDirection;
-  final Function renderItem;
+  final Function(dynamic data, int index) renderItem;
   final bool enablePullDown;
   final bool isNeverScroll;
-  final Function? onRefresh;
+  final Function()? onRefresh;
   final RefreshController refreshController;
   final double height;
   final EdgeInsets? padding;

@@ -625,13 +625,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.4.0"
-  pinput:
+  pin_code_fields:
     dependency: "direct main"
     description:
-      name: pinput
+      name: pin_code_fields
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.4"
+    version: "7.3.0"
   platform:
     dependency: transitive
     description:

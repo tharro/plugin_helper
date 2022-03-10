@@ -44,10 +44,10 @@ class PluginNotification {
 
   static Future<void> settingNotification(
       {required Color colorNotification,
-      required Function onMessage,
-      required Function onHandleLocalMessage,
-      required Function onHandleFCMMessage,
-      required Function onRegisterFCM,
+      required Function(RemoteMessage message) onMessage,
+      required Function(String payload) onHandleLocalMessage,
+      required Function(RemoteMessage message) onHandleFCMMessage,
+      required Function(String token) onRegisterFCM,
       String? payload,
       required String chanelId,
       required String chanelName,
@@ -75,7 +75,7 @@ class PluginNotification {
       });
       String? token = await messaging.getToken();
       print('token $token');
-      onRegisterFCM(token);
+      onRegisterFCM(token!);
       fcmListener = FirebaseMessaging.onMessage
           .asBroadcastStream()
           .listen((RemoteMessage message) {
@@ -93,7 +93,7 @@ class PluginNotification {
         }
       });
       FirebaseMessaging.onBackgroundMessage(
-          (message) => _onMessage(message, onMessage));
+          (message) => _onMessage(message, onMessage(message)));
       setupInteractedMessage(onHandleFCMMessage: onHandleFCMMessage);
     }
   }

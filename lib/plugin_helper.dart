@@ -108,8 +108,8 @@ class PluginHelper {
   static Future<void> _startDownload(
       {required String savePath,
       required String url,
-      required Function onComplete,
-      required Function onError,
+      required Function() onComplete,
+      required Function(String error) onError,
       CancelToken? cancelToken}) async {
     Map<String, dynamic> result = {
       'isSuccess': false,
@@ -132,9 +132,9 @@ class PluginHelper {
 
   static Future<void> download({
     required String url,
-    required Function onComplete,
-    required Function onError,
-    required Function onCancel,
+    required Function() onComplete,
+    required Function(String error) onError,
+    required Function() onCancel,
     required CancelToken cancelToken,
   }) async {
     var isPermissionStatusGranted = await requestPermissions();

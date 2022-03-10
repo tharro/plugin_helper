@@ -14,7 +14,7 @@ class WidgetAddCreditCard extends StatefulWidget {
   final String? cardNumberLabel, expiryDateLabel, cvvLabel, cardHolderLabel;
   final TextStyle? labelStyle;
   final Color? inputColor, inputErrorColor;
-  final Function onCreateToken;
+  final Function(String token) onCreateToken;
   final Widget? buttonWidget;
   const WidgetAddCreditCard(
       {Key? key,

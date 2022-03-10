@@ -1,50 +1,94 @@
 import 'package:flutter/material.dart';
-import 'package:pinput/pinput.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 class WidgetPinPut extends StatelessWidget {
-  final Function(String)? onSubmit;
+  final Function(String value)? onCompleted;
   final TextEditingController controller;
   final double paddingHorizontal;
-  final TextStyle textStyle;
   final double radius;
-  final Color colorSubmitBorder, colorDefaultBorder;
-  final Color? submitBackgroundColor, defaultBackgroundColor;
-  const WidgetPinPut(
-      {Key? key,
-      this.onSubmit,
-      required this.controller,
-      required this.paddingHorizontal,
-      required this.textStyle,
-      this.radius = 5.0,
-      required this.colorSubmitBorder,
-      required this.colorDefaultBorder,
-      required this.submitBackgroundColor,
-      this.defaultBackgroundColor})
-      : super(key: key);
+  final bool? obscureText;
+  final Widget? obscuringWidget;
+  final String? obscuringCharacter;
+  final List<BoxShadow>? boxShadows;
+  final Function(String value) onChanged;
+  final Color? activeFillColor,
+      inactiveColor,
+      activeColor,
+      inactiveFillColor,
+      selectedFillColor,
+      selectedColor;
+  final double? borderWidth;
+  final PinCodeFieldShape? shape;
+  const WidgetPinPut({
+    Key? key,
+    this.onCompleted,
+    required this.controller,
+    required this.paddingHorizontal,
+    this.radius = 5.0,
+    this.obscureText = false,
+    this.obscuringCharacter = '*',
+    this.obscuringWidget,
+    this.boxShadows,
+    required this.onChanged,
+    this.activeFillColor,
+    this.inactiveColor,
+    this.activeColor,
+    this.inactiveFillColor,
+    this.selectedFillColor,
+    this.selectedColor,
+    this.borderWidth,
+    this.shape,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double widthItem = (width - paddingHorizontal) / 8.3;
-    return Pinput(
+    return PinCodeTextField(
+      appContext: context,
       length: 6,
-      submittedPinTheme: PinTheme(
-          width: widthItem,
-          height: widthItem * 1.5,
-          textStyle: textStyle,
-          decoration: BoxDecoration(
-              color: submitBackgroundColor ?? Colors.white,
-              border: Border.all(width: 1, color: colorSubmitBorder),
-              borderRadius: BorderRadius.circular(radius))),
-      defaultPinTheme: PinTheme(
-          width: widthItem,
-          height: widthItem * 1.5,
-          textStyle: textStyle,
-          decoration: BoxDecoration(
-              color: defaultBackgroundColor ?? Colors.white,
-              border: Border.all(width: 1, color: colorDefaultBorder),
-              borderRadius: BorderRadius.circular(radius))),
+      obscureText: obscureText!,
+      obscuringCharacter: obscuringCharacter!,
+      obscuringWidget: obscuringWidget,
+      blinkWhenObscuring: true,
+      animationType: AnimationType.fade,
+      validator: (v) {
+        return null;
+      },
+      pinTheme: PinTheme(
+        shape: shape ?? PinCodeFieldShape.box,
+        borderRadius: BorderRadius.circular(radius),
+        fieldHeight: widthItem * 1.3,
+        fieldWidth: widthItem,
+        activeFillColor: activeFillColor ?? Colors.white,
+        inactiveColor: inactiveColor ?? Colors.white,
+        activeColor: activeColor ?? const Color(0xffffb41d),
+        inactiveFillColor: inactiveFillColor ?? Colors.white,
+        selectedFillColor: selectedFillColor ?? Colors.white,
+        selectedColor: selectedColor ?? const Color(0xffffb41d),
+        borderWidth: borderWidth ?? 1,
+      ),
+      cursorColor: Colors.black,
+      animationDuration: const Duration(milliseconds: 300),
+      enableActiveFill: true,
       controller: controller,
-      onSubmitted: onSubmit,
+      keyboardType: TextInputType.number,
+      boxShadows: boxShadows ??
+          const [
+            BoxShadow(
+              offset: Offset(0, 1),
+              color: Colors.black12,
+              blurRadius: 10,
+            )
+          ],
+      onCompleted: (v) {
+        if (onCompleted != null) onCompleted!(v);
+      },
+      onChanged: (value) {
+        onChanged(value);
+      },
+      beforeTextPaste: (text) {
+        return false;
+      },
     );
   }
 }

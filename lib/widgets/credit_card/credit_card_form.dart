@@ -22,7 +22,7 @@ class CreditCardForm extends StatefulWidget {
     ),
     this.cardNumberDecoration = const InputDecoration(
       labelText: 'Card number',
-      hintText: 'XXXX XXXX XXXX XXXX',
+      hintText: 'XXX XXXXX XXXX XXXX',
     ),
     this.expiryDateDecoration = const InputDecoration(
       labelText: 'Expired Date',
@@ -159,6 +159,140 @@ class _CreditCardFormState extends State<CreditCardForm> {
     super.didChangeDependencies();
   }
 
+  /// This function determines the Credit Card type based on the cardPatterns
+  /// and returns it.
+  bool isAmex = false;
+  Map<CardType, Set<List<String>>> cardNumPatterns =
+      <CardType, Set<List<String>>>{
+    CardType.visa: <List<String>>{
+      <String>['4'],
+    },
+    CardType.americanExpress: <List<String>>{
+      <String>['34'],
+      <String>['37'],
+    },
+    CardType.discover: <List<String>>{
+      <String>['6011'],
+      <String>['622126', '622925'],
+      <String>['644', '649'],
+      <String>['65']
+    },
+    CardType.mastercard: <List<String>>{
+      <String>['51', '55'],
+      <String>['2221', '2229'],
+      <String>['223', '229'],
+      <String>['23', '26'],
+      <String>['270', '271'],
+      <String>['2720'],
+    },
+  };
+
+  CardType detectCCType(String cardNumber) {
+    //Default card type is other
+    CardType cardType = CardType.otherBrand;
+
+    if (cardNumber.isEmpty) {
+      return cardType;
+    }
+
+    cardNumPatterns.forEach(
+      (CardType type, Set<List<String>> patterns) {
+        for (List<String> patternRange in patterns) {
+          // Remove any spaces
+          String ccPatternStr =
+              cardNumber.replaceAll(RegExp(r'\s+\b|\b\s'), '');
+          final int rangeLen = patternRange[0].length;
+          // Trim the Credit Card number string to match the pattern prefix length
+          if (rangeLen < cardNumber.length) {
+            ccPatternStr = ccPatternStr.substring(0, rangeLen);
+          }
+
+          if (patternRange.length > 1) {
+            // Convert the prefix range into numbers then make sure the
+            // Credit Card num is in the pattern range.
+            // Because Strings don't have '>=' type operators
+            final int ccPrefixAsInt = int.parse(ccPatternStr);
+            final int startPatternPrefixAsInt = int.parse(patternRange[0]);
+            final int endPatternPrefixAsInt = int.parse(patternRange[1]);
+            if (ccPrefixAsInt >= startPatternPrefixAsInt &&
+                ccPrefixAsInt <= endPatternPrefixAsInt) {
+              // Found a match
+              cardType = type;
+              break;
+            }
+          } else {
+            // Just compare the single pattern prefix with the Credit Card prefix
+            if (ccPatternStr == patternRange[0]) {
+              // Found a match
+              cardType = type;
+              break;
+            }
+          }
+        }
+      },
+    );
+
+    return cardType;
+  }
+
+  // This method returns the icon for the visa card type if found
+  // else will return the empty container
+  Widget getCardTypeIcon(String cardNumber) {
+    Widget icon;
+    switch (detectCCType(cardNumber)) {
+      case CardType.visa:
+        icon = Image.asset(
+          'assets/icons/visa.png',
+          height: 48,
+          width: 48,
+          package: 'flutter_credit_card',
+        );
+        isAmex = false;
+        break;
+
+      case CardType.americanExpress:
+        icon = Image.asset(
+          'assets/icons/amex.png',
+          height: 48,
+          width: 48,
+          package: 'flutter_credit_card',
+        );
+        isAmex = true;
+        break;
+
+      case CardType.mastercard:
+        icon = Image.asset(
+          'assets/icons/mastercard.png',
+          height: 48,
+          width: 48,
+          package: 'flutter_credit_card',
+        );
+        isAmex = false;
+        break;
+
+      case CardType.discover:
+        icon = Image.asset(
+          'assets/icons/discover.png',
+          height: 48,
+          width: 48,
+          package: 'flutter_credit_card',
+        );
+        isAmex = false;
+        break;
+
+      default:
+        icon = Container(
+          height: 48,
+          width: 48,
+          color: Colors.grey[300],
+        );
+        isAmex = false;
+        break;
+    }
+
+    return icon;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -189,84 +323,94 @@ class _CreditCardFormState extends State<CreditCardForm> {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               margin: const EdgeInsets.only(left: 16, top: 16, right: 16),
-              child: TextFormField(
-                obscureText: widget.obscureNumber,
-                controller: _cardNumberController,
-                cursorColor: widget.cursorColor ?? themeColor,
-                onEditingComplete: () {
-                  FocusScope.of(context).requestFocus(expiryDateNode);
-                },
-                style: widget.textStyle,
-                decoration: widget.cardNumberDecoration,
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
-                validator: (String? value) {
-                  // Validate less that 13 digits +3 white spaces
-                  if (value!.isEmpty || value.length < 16) {
-                    return widget.numberValidationMessage;
-                  }
-                  return null;
-                },
+              child: Row(
+                children: [
+                  getCardTypeIcon(_cardNumberController.text),
+                  const SizedBox(width: 6),
+                  Expanded(
+                      child: TextFormField(
+                    obscureText: widget.obscureNumber,
+                    controller: _cardNumberController,
+                    cursorColor: widget.cursorColor ?? themeColor,
+                    onEditingComplete: () {
+                      FocusScope.of(context).requestFocus(expiryDateNode);
+                    },
+                    style: widget.textStyle,
+                    decoration: widget.cardNumberDecoration,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.next,
+                    validator: (String? value) {
+                      // Validate less that 13 digits +3 white spaces
+                      if (value!.isEmpty || value.length < 16) {
+                        return widget.numberValidationMessage;
+                      }
+                      return null;
+                    },
+                  )),
+                ],
               ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
-              child: TextFormField(
-                controller: _expiryDateController,
-                cursorColor: widget.cursorColor ?? themeColor,
-                focusNode: expiryDateNode,
-                onEditingComplete: () {
-                  FocusScope.of(context).requestFocus(cvvFocusNode);
-                },
-                style: widget.textStyle,
-                decoration: widget.expiryDateDecoration,
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
-                validator: (String? value) {
-                  if (value!.isEmpty) {
-                    return widget.dateValidationMessage;
-                  }
+              child: Row(
+                children: [
+                  Expanded(
+                      child: TextFormField(
+                    controller: _expiryDateController,
+                    cursorColor: widget.cursorColor ?? themeColor,
+                    focusNode: expiryDateNode,
+                    onEditingComplete: () {
+                      FocusScope.of(context).requestFocus(cvvFocusNode);
+                    },
+                    style: widget.textStyle,
+                    decoration: widget.expiryDateDecoration,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.next,
+                    validator: (String? value) {
+                      if (value!.isEmpty) {
+                        return widget.dateValidationMessage;
+                      }
 
-                  final DateTime now = DateTime.now();
-                  final List<String> date = value.split(RegExp(r'/'));
-                  final int month = int.parse(date.first);
-                  final int year = int.parse('20${date.last}');
-                  final DateTime cardDate = DateTime(year, month);
+                      final DateTime now = DateTime.now();
+                      final List<String> date = value.split(RegExp(r'/'));
+                      final int month = int.parse(date.first);
+                      final int year = int.parse('20${date.last}');
+                      final DateTime cardDate = DateTime(year, month);
 
-                  if (cardDate.isBefore(now) || month > 12 || month == 0) {
-                    return widget.dateValidationMessage;
-                  }
-                  return null;
-                },
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
-              child: TextFormField(
-                obscureText: widget.obscureCvv,
-                focusNode: cvvFocusNode,
-                controller: _cvvCodeController,
-                cursorColor: widget.cursorColor ?? themeColor,
-                onEditingComplete: () {
-                  FocusScope.of(context).requestFocus(cardHolderNode);
-                },
-                style: widget.textStyle,
-                decoration: widget.cvvCodeDecoration,
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
-                onChanged: (String text) {
-                  setState(() {
-                    cvvCode = text;
-                  });
-                },
-                validator: (String? value) {
-                  if (value!.isEmpty || value.length < 3) {
-                    return widget.cvvValidationMessage;
-                  }
-                  return null;
-                },
+                      if (cardDate.isBefore(now) || month > 12 || month == 0) {
+                        return widget.dateValidationMessage;
+                      }
+                      return null;
+                    },
+                  )),
+                  const SizedBox(width: 6),
+                  Expanded(
+                      child: TextFormField(
+                    obscureText: widget.obscureCvv,
+                    focusNode: cvvFocusNode,
+                    controller: _cvvCodeController,
+                    cursorColor: widget.cursorColor ?? themeColor,
+                    onEditingComplete: () {
+                      FocusScope.of(context).requestFocus(cardHolderNode);
+                    },
+                    style: widget.textStyle,
+                    decoration: widget.cvvCodeDecoration,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.next,
+                    onChanged: (String text) {
+                      setState(() {
+                        cvvCode = text;
+                      });
+                    },
+                    validator: (String? value) {
+                      if (value!.isEmpty || value.length < 3) {
+                        return widget.cvvValidationMessage;
+                      }
+                      return null;
+                    },
+                  )),
+                ],
               ),
             ),
           ],
