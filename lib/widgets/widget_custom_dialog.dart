@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CustomDialog extends StatefulWidget {
+class WidgetCustomDialog extends StatefulWidget {
   final String title, descriptions;
   final Function? onClose;
   final Function? onPressPrimaryButton;
@@ -19,7 +19,7 @@ class CustomDialog extends StatefulWidget {
   final Widget? iconClose;
   final double? radius, space;
   final bool? isColumn;
-  const CustomDialog({
+  const WidgetCustomDialog({
     Key? key,
     required this.title,
     required this.descriptions,
@@ -45,7 +45,7 @@ class CustomDialog extends StatefulWidget {
   _CustomDialogState createState() => _CustomDialogState();
 }
 
-class _CustomDialogState extends State<CustomDialog> {
+class _CustomDialogState extends State<WidgetCustomDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
