@@ -243,19 +243,22 @@ class _CreditCardFormState extends State<CreditCardForm> {
       case CardType.visa:
         icon = Image.asset(
           'assets/icons/visa.png',
-          height: 30,
-          width: 48,
+          height: 26,
+          width: 45,
           package: 'plugin_helper',
+          fit: BoxFit.fill,
         );
         isAmex = false;
+
         break;
 
       case CardType.americanExpress:
         icon = Image.asset(
           'assets/icons/amex.png',
-          height: 30,
-          width: 48,
+          height: 26,
+          width: 45,
           package: 'plugin_helper',
+          fit: BoxFit.fill,
         );
         isAmex = true;
         break;
@@ -263,9 +266,10 @@ class _CreditCardFormState extends State<CreditCardForm> {
       case CardType.mastercard:
         icon = Image.asset(
           'assets/icons/mastercard.png',
-          height: 30,
-          width: 48,
+          height: 26,
+          width: 45,
           package: 'plugin_helper',
+          fit: BoxFit.fill,
         );
         isAmex = false;
         break;
@@ -273,9 +277,10 @@ class _CreditCardFormState extends State<CreditCardForm> {
       case CardType.discover:
         icon = Image.asset(
           'assets/icons/discover.png',
-          height: 22,
-          width: 48,
+          height: 26,
+          width: 45,
           package: 'plugin_helper',
+          fit: BoxFit.fill,
         );
         isAmex = false;
         break;
@@ -319,6 +324,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               margin: const EdgeInsets.only(left: 16, top: 16, right: 16),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Expanded(
                       child: TextFormField(
