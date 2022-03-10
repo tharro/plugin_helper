@@ -237,13 +237,13 @@ class _CreditCardFormState extends State<CreditCardForm> {
 
   // This method returns the icon for the visa card type if found
   // else will return the empty container
-  Widget getCardTypeIcon(String cardNumber) {
-    Widget icon;
+  Widget? getCardTypeIcon(String cardNumber) {
+    Widget? icon;
     switch (detectCCType(cardNumber)) {
       case CardType.visa:
         icon = Image.asset(
           'assets/icons/visa.png',
-          height: 22,
+          height: 30,
           width: 48,
           package: 'plugin_helper',
         );
@@ -253,7 +253,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
       case CardType.americanExpress:
         icon = Image.asset(
           'assets/icons/amex.png',
-          height: 22,
+          height: 30,
           width: 48,
           package: 'plugin_helper',
         );
@@ -263,7 +263,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
       case CardType.mastercard:
         icon = Image.asset(
           'assets/icons/mastercard.png',
-          height: 22,
+          height: 30,
           width: 48,
           package: 'plugin_helper',
         );
@@ -281,11 +281,6 @@ class _CreditCardFormState extends State<CreditCardForm> {
         break;
 
       default:
-        icon = Container(
-          height: 22,
-          width: 48,
-          color: Colors.grey[300],
-        );
         isAmex = false;
         break;
     }
@@ -325,8 +320,6 @@ class _CreditCardFormState extends State<CreditCardForm> {
               margin: const EdgeInsets.only(left: 16, top: 16, right: 16),
               child: Row(
                 children: [
-                  getCardTypeIcon(_cardNumberController.text),
-                  const SizedBox(width: 6),
                   Expanded(
                       child: TextFormField(
                     obscureText: widget.obscureNumber,
@@ -347,6 +340,9 @@ class _CreditCardFormState extends State<CreditCardForm> {
                       return null;
                     },
                   )),
+                  const SizedBox(width: 6),
+                  if (getCardTypeIcon(_cardNumberController.text) != null)
+                    getCardTypeIcon(_cardNumberController.text)!,
                 ],
               ),
             ),
