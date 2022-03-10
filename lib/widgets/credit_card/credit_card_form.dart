@@ -324,7 +324,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               margin: const EdgeInsets.only(left: 16, top: 16, right: 16),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
                       child: TextFormField(
@@ -346,7 +346,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                       return null;
                     },
                   )),
-                  const SizedBox(width: 6),
+                  const SizedBox(width: 16),
                   if (getCardTypeIcon(_cardNumberController.text) != null)
                     getCardTypeIcon(_cardNumberController.text)!,
                 ],
@@ -386,7 +386,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                       return null;
                     },
                   )),
-                  const SizedBox(width: 6),
+                  const SizedBox(width: 16),
                   Expanded(
                       child: TextFormField(
                     obscureText: widget.obscureCvv,
