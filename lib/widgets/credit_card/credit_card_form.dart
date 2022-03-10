@@ -243,9 +243,9 @@ class _CreditCardFormState extends State<CreditCardForm> {
       case CardType.visa:
         icon = Image.asset(
           'assets/icons/visa.png',
-          height: 48,
+          height: 22,
           width: 48,
-          package: 'flutter_credit_card',
+          package: 'plugin_helper',
         );
         isAmex = false;
         break;
@@ -253,9 +253,9 @@ class _CreditCardFormState extends State<CreditCardForm> {
       case CardType.americanExpress:
         icon = Image.asset(
           'assets/icons/amex.png',
-          height: 48,
+          height: 22,
           width: 48,
-          package: 'flutter_credit_card',
+          package: 'plugin_helper',
         );
         isAmex = true;
         break;
@@ -263,9 +263,9 @@ class _CreditCardFormState extends State<CreditCardForm> {
       case CardType.mastercard:
         icon = Image.asset(
           'assets/icons/mastercard.png',
-          height: 48,
+          height: 22,
           width: 48,
-          package: 'flutter_credit_card',
+          package: 'plugin_helper',
         );
         isAmex = false;
         break;
@@ -273,16 +273,16 @@ class _CreditCardFormState extends State<CreditCardForm> {
       case CardType.discover:
         icon = Image.asset(
           'assets/icons/discover.png',
-          height: 48,
+          height: 22,
           width: 48,
-          package: 'flutter_credit_card',
+          package: 'plugin_helper',
         );
         isAmex = false;
         break;
 
       default:
         icon = Container(
-          height: 48,
+          height: 22,
           width: 48,
           color: Colors.grey[300],
         );
