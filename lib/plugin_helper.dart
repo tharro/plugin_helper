@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -211,5 +212,17 @@ class PluginHelper {
       androidId: iOSId,
     );
     newVersion.showAlertIfNecessary(context: context);
+  }
+
+  static bool isTablet(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    var diagonal = sqrt((width * width) + (height * height));
+
+    if (Platform.isAndroid) {
+      return MediaQuery.of(context).size.shortestSide >= 600;
+    }
+    var isTablet = diagonal > 1100.0;
+    return isTablet;
   }
 }
