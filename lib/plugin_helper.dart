@@ -4,7 +4,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:device_info/device_info.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_number_input/src/utils/phone_number/phone_number_util.dart';
 import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
@@ -32,11 +33,11 @@ class PluginHelper {
     String meId = '';
     try {
       if (Platform.isAndroid) {
-        AndroidDeviceInfo androidDevice = await deviceInfoPlugin.androidInfo;
-        meId = androidDevice.id;
+        AndroidDeviceInfo? androidDevice = await deviceInfoPlugin.androidInfo;
+        meId = androidDevice.id!;
       } else if (Platform.isIOS) {
         IosDeviceInfo iosDevice = await deviceInfoPlugin.iosInfo;
-        meId = iosDevice.identifierForVendor;
+        meId = iosDevice.identifierForVendor!;
       }
     } on PlatformException {
       print('Error:' 'Failed to get platform version.');
@@ -159,7 +160,7 @@ class PluginHelper {
     }
   }
 
-  static launchUrl(String url) async {
+  static launchUrl({required String url, required String error}) async {
     if (url.contains('https://') == false || url.contains('http://') == false) {
       url = 'https://$url';
     }
@@ -167,10 +168,10 @@ class PluginHelper {
       if (await canLaunch(url)) {
         await launch(url);
       } else {
-        print('not launch');
+        Fluttertoast.showToast(msg: error, toastLength: Toast.LENGTH_LONG);
       }
     } catch (e) {
-      print('not launch');
+      Fluttertoast.showToast(msg: error, toastLength: Toast.LENGTH_LONG);
     }
   }
 

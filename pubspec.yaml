@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  device_info: any
+  device_info_plus: any
   intl_phone_number_input: any
   shared_preferences: any
   flutter_secure_storage: any
