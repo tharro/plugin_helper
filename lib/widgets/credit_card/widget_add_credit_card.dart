@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:plugin_helper/plugin_payment.dart';
 import 'package:plugin_helper/widgets/credit_card/credit_card_form.dart';
 import 'package:plugin_helper/widgets/credit_card/flutter_credit_card.dart';
 import 'package:plugin_helper/widgets/credit_card/localized_text_model.dart';
-import 'package:plugin_helper/widgets/widget_button_custom.dart';
 
 class WidgetAddCreditCard extends StatefulWidget {
   final TextStyle textStyle;
@@ -14,8 +12,8 @@ class WidgetAddCreditCard extends StatefulWidget {
   final String? cardNumberLabel, expiryDateLabel, cvvLabel, cardHolderLabel;
   final TextStyle? labelStyle;
   final Color? inputColor, inputErrorColor;
-  final Function(String token) onCreateToken;
   final Widget? buttonWidget;
+  final String? cardHolderName, cardNumber, cvvCode, expiryDate;
   const WidgetAddCreditCard(
       {Key? key,
       required this.textStyle,
@@ -30,8 +28,11 @@ class WidgetAddCreditCard extends StatefulWidget {
       this.expiryDateDecorationCustom,
       this.cvvCodeDecorationCustom,
       this.cardHolderDecorationCustom,
-      required this.onCreateToken,
-      this.buttonWidget})
+      this.buttonWidget,
+      this.cardHolderName = '',
+      this.cardNumber = '',
+      this.cvvCode = '',
+      this.expiryDate = ''})
       : super(key: key);
 
   @override
@@ -41,6 +42,7 @@ class WidgetAddCreditCard extends StatefulWidget {
 class WidgetAddCreditCardState extends State<WidgetAddCreditCard> {
   GlobalKey<FormState> formKey = GlobalKey();
   late CreditCardModel card;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -73,17 +75,14 @@ class WidgetAddCreditCardState extends State<WidgetAddCreditCard> {
                   context: context,
                   title: widget.cardHolderLabel ??
                       const LocalizedText().cardHolderLabel),
-          cardHolderName: '',
-          cardNumber: '',
-          cvvCode: '',
-          expiryDate: '',
+          cardHolderName: widget.cardHolderName!,
+          cardNumber: widget.cardNumber!,
+          cvvCode: widget.cvvCode!,
+          expiryDate: widget.expiryDate!,
           textStyle: widget.textStyle,
         ),
         const SizedBox(height: 15),
-        widget.buttonWidget ??
-            Container(
-                margin: const EdgeInsets.only(left: 16, right: 16),
-                child: button())
+        widget.buttonWidget ?? Container()
       ],
     );
   }
@@ -106,20 +105,4 @@ class WidgetAddCreditCardState extends State<WidgetAddCreditCard> {
             borderSide: BorderSide(
                 color: widget.inputErrorColor ?? const Color(0xffFD4646))),
       );
-
-  Widget button() {
-    return WidgetButtonCustom(
-      onPressed: () async {
-        addCreditCard();
-      },
-      title: 'Add card',
-    );
-  }
-
-  addCreditCard() async {
-    if (formKey.currentState!.validate()) {
-      String token = await PluginPayment.createTokenWidthCreditCard(data: card);
-      widget.onCreateToken(token);
-    }
-  }
 }

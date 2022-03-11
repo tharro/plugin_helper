@@ -15,6 +15,10 @@ import 'package:path/path.dart' as path;
 import 'package:url_launcher/url_launcher.dart';
 
 DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+enum PasswordValidType {
+  atLeast8Characters,
+  strongPassword,
+}
 
 class PluginHelper {
   static bool isValidateEmail({required String email}) {
@@ -41,14 +45,17 @@ class PluginHelper {
   }
 
   static bool isValidPassword(
-      {required String password, bool isStrong = false}) {
-    if (isStrong) {
-      //require min 8 characters, include uppercase Characters, numbers, symbol
-      var regexPassword =
-          r"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\^$*.\[\]{}\(\)?\-“!@#%&/,><\’:;|_~`])\S{8,99}";
-      return RegExp(regexPassword).hasMatch(password);
+      {required String password,
+      PasswordValidType passwordValidType =
+          PasswordValidType.atLeast8Characters}) {
+    switch (passwordValidType) {
+      case PasswordValidType.atLeast8Characters:
+        return password.length >= 8;
+      case PasswordValidType.strongPassword:
+        var regexPassword =
+            r"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\^$*.\[\]{}\(\)?\-“!@#%&/,><\’:;|_~`])\S{8,99}";
+        return RegExp(regexPassword).hasMatch(password);
     }
-    return password.length >= 8;
   }
 
   static Future<String?> getParsedPhoneNumber(
@@ -81,7 +88,7 @@ class PluginHelper {
 
   static var dio = Dio();
 
-  static Future<Directory?> getDownloadDirectory() async {
+  static Future<Directory?> _getDownloadDirectory() async {
     if (Platform.isAndroid) {
       return await DownloadsPathProvider.downloadsDirectory;
     }
@@ -99,7 +106,7 @@ class PluginHelper {
     return permission == PermissionStatus.granted;
   }
 
-  static void onReceiveProgress({int? received, int? total}) {
+  static void _onReceiveProgress({int? received, int? total}) {
     if (total != -1) {
       if ((received! / total! * 100).toStringAsFixed(0) == '100') {}
     }
@@ -119,7 +126,7 @@ class PluginHelper {
     try {
       var response = await dio.download(url, savePath, cancelToken: cancelToken,
           onReceiveProgress: (int received, int total) {
-        onReceiveProgress(received: received, total: total);
+        _onReceiveProgress(received: received, total: total);
       });
       result['isSuccess'] = response.statusCode == 200;
       result['filePath'] = savePath;
@@ -139,7 +146,7 @@ class PluginHelper {
   }) async {
     var isPermissionStatusGranted = await requestPermissions();
     if (isPermissionStatusGranted) {
-      var dir = await getDownloadDirectory();
+      var dir = await _getDownloadDirectory();
       var savePath = path.join(dir?.path ?? '', url.split('/').last);
       await _startDownload(
           savePath: savePath,
