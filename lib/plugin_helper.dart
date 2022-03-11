@@ -225,4 +225,8 @@ class PluginHelper {
     var isTablet = diagonal > 1100.0;
     return isTablet;
   }
+
+  static showToast({required String message}) {
+    Fluttertoast.showToast(msg: message, toastLength: Toast.LENGTH_LONG);
+  }
 }
