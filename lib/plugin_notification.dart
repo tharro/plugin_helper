@@ -14,7 +14,7 @@ class PluginNotification {
       FlutterLocalNotificationsPlugin();
   static StreamSubscription? fcmListener;
 
-  static Future<void> showNotification(
+  static Future<void> _showNotification(
       {required String title,
       required String body,
       required Color color,
@@ -70,7 +70,7 @@ class PluginNotification {
           iOS: initializationSettingsIOS);
       flutterLocalNotificationsPlugin.initialize(initializationSettings,
           onSelectNotification: (String? data) async {
-        selectLocalNotification(
+        _selectLocalNotification(
             payload: data!, onHandleMessage: onHandleLocalMessage);
       });
       String? token = await messaging.getToken();
@@ -82,7 +82,7 @@ class PluginNotification {
         print('Got a message whilst in the foreground!');
         _onMessage(message, onMessage);
         if (message.notification != null) {
-          showNotification(
+          _showNotification(
               title: message.notification!.title!,
               body: message.notification!.body!,
               color: colorNotification,
@@ -94,7 +94,7 @@ class PluginNotification {
       });
       FirebaseMessaging.onBackgroundMessage(
           (message) => _onMessage(message, onMessage(message)));
-      setupInteractedMessage(onHandleFCMMessage: onHandleFCMMessage);
+      _setupInteractedMessage(onHandleFCMMessage: onHandleFCMMessage);
     }
   }
 
@@ -102,12 +102,12 @@ class PluginNotification {
     onMessage(message);
   }
 
-  static void selectLocalNotification(
+  static void _selectLocalNotification(
       {required String payload, required Function onHandleMessage}) {
     onHandleMessage(payload);
   }
 
-  static Future<void> setupInteractedMessage(
+  static Future<void> _setupInteractedMessage(
       {required Function onHandleFCMMessage}) async {
     RemoteMessage? initialMessage =
         await FirebaseMessaging.instance.getInitialMessage();
@@ -123,7 +123,7 @@ class PluginNotification {
     onHandleFCMMessage(message);
   }
 
-  static void setupCrashlytics({void main}) {
+  static void setupCrashlytics({required Function main}) {
     runZonedGuarded<Future<void>>(() async {
       WidgetsFlutterBinding.ensureInitialized();
       if (await PluginAuthentication().isFirstInstall()) {
