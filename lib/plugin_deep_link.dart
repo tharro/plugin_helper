@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 
 class PluginDeepLink {
-  StreamSubscription<Map>? streamSubscription;
-  init({required Function(Map<dynamic, dynamic> data) onDeepLink}) {
+  static StreamSubscription<Map>? streamSubscription;
+  static init({required Function(Map<dynamic, dynamic> data) onDeepLink}) {
     streamSubscription = FlutterBranchSdk.initSession().listen((data) async {
       if (data.containsKey("+clicked_branch_link") &&
           data["+clicked_branch_link"] == true) {
@@ -18,7 +18,7 @@ class PluginDeepLink {
     });
   }
 
-  dispose() {
+  static dispose() {
     streamSubscription?.cancel();
   }
 }

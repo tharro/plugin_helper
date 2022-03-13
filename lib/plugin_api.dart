@@ -33,10 +33,10 @@ class PluginApi {
     };
 
     if (useIDToken) {
-      if (await PluginAuthentication().hasExpireToken()) {
-        await PluginAuthentication().refreshToken();
+      if (await PluginAuthentication.hasExpireToken()) {
+        await PluginAuthentication.refreshToken();
       }
-      final _token = await PluginAuthentication().getToken();
+      final _token = await PluginAuthentication.getToken();
       headers['Authorization'] = 'Bearer $_token';
     }
 

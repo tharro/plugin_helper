@@ -13,14 +13,14 @@ class PluginAppConstraints {
 }
 
 class PluginAuthentication {
-  final userPool = CognitoUserPool(
+  static final userPool = CognitoUserPool(
     PluginAppConfig().userPoolId!,
     PluginAppConfig().clientId!,
   );
 
-  final storage = const FlutterSecureStorage();
+  static const storage = FlutterSecureStorage();
 
-  Future<void> refreshToken() async {
+  static Future<void> refreshToken() async {
     dynamic userInfo = await getUserAndPassword();
     final cognitoUser = CognitoUser(userInfo['user'], userPool);
 
@@ -40,7 +40,7 @@ class PluginAuthentication {
     }
   }
 
-  Future<dynamic> getUserAndPassword() async {
+  static Future<dynamic> getUserAndPassword() async {
     try {
       return {
         'user': await storage.read(key: PluginAppConstraints.user),
@@ -54,7 +54,7 @@ class PluginAuthentication {
     }
   }
 
-  Future<void> persistToken(
+  static Future<void> persistToken(
       {required String user,
       required String pass,
       required String token}) async {
@@ -70,11 +70,11 @@ class PluginAuthentication {
     return;
   }
 
-  Future<dynamic> getToken() async {
+  static Future<dynamic> getToken() async {
     return await storage.read(key: PluginAppConstraints.token);
   }
 
-  Future<bool> hasExpireToken() async {
+  static Future<bool> hasExpireToken() async {
     try {
       final currentTime = DateTime.now().millisecondsSinceEpoch;
       if (await storage.read(key: PluginAppConstraints.expired) != null) {
@@ -90,7 +90,7 @@ class PluginAuthentication {
     }
   }
 
-  Future<bool> hasToken() async {
+  static Future<bool> hasToken() async {
     try {
       String? token = await storage.read(key: PluginAppConstraints.token);
       if (token != null) {
@@ -104,7 +104,7 @@ class PluginAuthentication {
     }
   }
 
-  Future<void> deleteToken() async {
+  static Future<void> deleteToken() async {
     await storage.deleteAll();
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
@@ -112,7 +112,7 @@ class PluginAuthentication {
   }
 
   /// API
-  Future<String?> loginCognito(
+  static Future<String?> loginCognito(
       {required String userName, required String password}) async {
     final cognitoUser = CognitoUser(userName, userPool);
     final authDetails = AuthenticationDetails(
@@ -128,7 +128,7 @@ class PluginAuthentication {
     return session?.getIdToken().getJwtToken();
   }
 
-  Future<String> signUpCognito({
+  static Future<String> signUpCognito({
     required String id,
     required String password,
     required List<AttributeArg> userAttributes,
@@ -146,7 +146,8 @@ class PluginAuthentication {
     }
   }
 
-  Future<bool> verifyCodeCognito({String? userName, String? code}) async {
+  static Future<bool> verifyCodeCognito(
+      {String? userName, String? code}) async {
     final cognitoUser = CognitoUser(userName, userPool);
     try {
       return await cognitoUser.confirmRegistration(code!);
@@ -155,7 +156,7 @@ class PluginAuthentication {
     }
   }
 
-  Future<bool> resendCodeCognito({String? userName}) async {
+  static Future<bool> resendCodeCognito({String? userName}) async {
     final cognitoUser = CognitoUser(userName, userPool);
     try {
       await cognitoUser.resendConfirmationCode();
@@ -165,7 +166,7 @@ class PluginAuthentication {
     }
   }
 
-  Future<bool> forgotPassword({required String userName}) async {
+  static Future<bool> forgotPassword({required String userName}) async {
     final cognitoUser = CognitoUser(userName, userPool);
     try {
       await cognitoUser.forgotPassword();
@@ -175,7 +176,7 @@ class PluginAuthentication {
     }
   }
 
-  Future<bool> confirmNewPassword(
+  static Future<bool> confirmNewPassword(
       {required String userName,
       required String code,
       required String newPassword}) async {
@@ -188,7 +189,7 @@ class PluginAuthentication {
     }
   }
 
-  Future<bool> updatePassword(
+  static Future<bool> updatePassword(
       {required String userName,
       required String currentPassword,
       required String newPassword}) async {
@@ -208,13 +209,13 @@ class PluginAuthentication {
     }
   }
 
-  Future<bool> requestUpdateAttribute({required String name}) async {
+  static Future<bool> requestUpdateAttribute({required String name}) async {
     final cognitoUser = await getCognitoUserWithAuthentication();
     await cognitoUser.getAttributeVerificationCode(name);
     return true;
   }
 
-  Future<bool> verifyAttribute(
+  static Future<bool> verifyAttribute(
       {required String confirmationCode,
       required String attributeName,
       required String value}) async {
@@ -228,7 +229,7 @@ class PluginAuthentication {
     return false;
   }
 
-  Future<bool> updateAttribute(
+  static Future<bool> updateAttribute(
       {required String attributeName,
       required String value,
       CognitoUser? cognitoUser}) async {
@@ -242,7 +243,7 @@ class PluginAuthentication {
         [CognitoUserAttribute(name: attributeName, value: value)]);
   }
 
-  Future<CognitoUser> getCognitoUserWithAuthentication() async {
+  static Future<CognitoUser> getCognitoUserWithAuthentication() async {
     final userName = await storage.read(key: PluginAppConstraints.user);
     final password = await storage.read(key: PluginAppConstraints.pwd);
     final cognitoUser = CognitoUser(userName, userPool);
@@ -256,7 +257,7 @@ class PluginAuthentication {
     return cognitoUser;
   }
 
-  Future<List<CognitoUserAttribute>?> getAllAttributes() async {
+  static Future<List<CognitoUserAttribute>?> getAllAttributes() async {
     try {
       var cognito = await getCognitoUserWithAuthentication();
       var attributes = await cognito.getUserAttributes();
@@ -264,7 +265,7 @@ class PluginAuthentication {
     } catch (e) {}
   }
 
-  Future<CognitoUserSession?> getSession() async {
+  static Future<CognitoUserSession?> getSession() async {
     final userName = await storage.read(key: PluginAppConstraints.user);
     final password = await storage.read(key: PluginAppConstraints.pwd);
     final cognitoUser = CognitoUser(userName, userPool);
