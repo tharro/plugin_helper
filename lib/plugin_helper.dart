@@ -14,6 +14,8 @@ import 'package:new_version/new_version.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as path;
+import 'package:plugin_helper/plugin_authentication.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
@@ -228,5 +230,15 @@ class PluginHelper {
 
   static showToast({required String message}) {
     Fluttertoast.showToast(msg: message, toastLength: Toast.LENGTH_LONG);
+  }
+
+  static Future<bool> isFirstInstall() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(PluginAppConstraints.firstRun) ?? true;
+  }
+
+  static Future<void> setFirstInstall() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(PluginAppConstraints.firstRun, false);
   }
 }

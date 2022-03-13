@@ -275,14 +275,4 @@ class PluginAuthentication {
 
     return cognitoUser.authenticateUser(authDetails);
   }
-
-  Future<bool> isFirstInstall() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(PluginAppConstraints.firstRun) ?? true;
-  }
-
-  Future<void> setFirstInstall() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(PluginAppConstraints.firstRun, false);
-  }
 }

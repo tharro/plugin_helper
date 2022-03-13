@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:plugin_helper/plugin_helper.dart';
 import './plugin_authentication.dart';
 
 class PluginNotification {
@@ -123,18 +124,18 @@ class PluginNotification {
     onHandleFCMMessage(message);
   }
 
-  static void setupCrashlytics({required Function main}) {
+  static void setupCrashlytics({required Function() main}) {
     runZonedGuarded<Future<void>>(() async {
+      main();
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
-      main;
-      if (await PluginAuthentication().isFirstInstall()) {
-        FlutterSecureStorage storage = const FlutterSecureStorage();
-        await storage.deleteAll();
-        PluginAuthentication().setFirstInstall();
-      }
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+      if (await PluginHelper.isFirstInstall()) {
+        FlutterSecureStorage storage = const FlutterSecureStorage();
+        await storage.deleteAll();
+        PluginHelper.setFirstInstall();
+      }
     },
         (error, stack) =>
             FirebaseCrashlytics.instance.recordError(error, stack));
