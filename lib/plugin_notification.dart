@@ -126,15 +126,15 @@ class PluginNotification {
   static void setupCrashlytics({required Function main}) {
     runZonedGuarded<Future<void>>(() async {
       WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp();
+      main;
       if (await PluginAuthentication().isFirstInstall()) {
         FlutterSecureStorage storage = const FlutterSecureStorage();
         await storage.deleteAll();
         PluginAuthentication().setFirstInstall();
       }
-      await Firebase.initializeApp();
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-      main;
     },
         (error, stack) =>
             FirebaseCrashlytics.instance.recordError(error, stack));

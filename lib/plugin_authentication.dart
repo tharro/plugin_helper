@@ -278,11 +278,7 @@ class PluginAuthentication {
 
   Future<bool> isFirstInstall() async {
     final prefs = await SharedPreferences.getInstance();
-    final result = prefs.getBool(PluginAppConstraints.firstRun);
-    if (result != null) {
-      return result;
-    }
-    return true;
+    return prefs.getBool(PluginAppConstraints.firstRun) ?? true;
   }
 
   Future<void> setFirstInstall() async {
