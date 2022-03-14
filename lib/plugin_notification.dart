@@ -1,11 +1,7 @@
 import 'dart:async';
 
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:plugin_helper/plugin_helper.dart';
 
 class PluginNotification {
@@ -48,6 +44,7 @@ class PluginNotification {
       required Function(String payload) onHandleLocalMessage,
       required Function(RemoteMessage message) onHandleFCMMessage,
       required Function(String token) onRegisterFCM,
+      required String iconNotification,
       String? payload,
       required String chanelId,
       required String chanelName,
@@ -63,7 +60,7 @@ class PluginNotification {
     );
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       var initializationSettingsAndroid =
-          const AndroidInitializationSettings('@mipmap/notification_icon');
+          AndroidInitializationSettings(iconNotification);
       var initializationSettingsIOS = const IOSInitializationSettings();
       var initializationSettings = InitializationSettings(
           android: initializationSettingsAndroid,

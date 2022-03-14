@@ -6,12 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:plugin_helper/plugin_authentication.dart';
+import 'package:plugin_helper/plugin_message_require.dart';
 
 enum Method { post, put, patch, delete, get }
 
 class PluginApi {
   static final dio = Dio();
-  static String message = 'No internet connection';
 
   static Future<Response> request(
     url,
@@ -89,7 +89,7 @@ class PluginApi {
       if (result == ConnectivityResult.none) {
         throw PlatformException(
           code: 'NOT_CONNECTED',
-          message: message,
+          message: PluginMessageRequire.messNoConnection,
         );
       } else {
         rethrow;

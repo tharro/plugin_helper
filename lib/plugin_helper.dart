@@ -42,6 +42,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as path;
 import 'package:plugin_helper/plugin_authentication.dart';
+import 'package:plugin_helper/plugin_message_require.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -190,7 +191,7 @@ class PluginHelper {
     }
   }
 
-  static launchUrl({required String url, required String error}) async {
+  static launchUrl({required String url, String? error}) async {
     if (url.contains('https://') == false || url.contains('http://') == false) {
       url = 'https://$url';
     }
@@ -198,10 +199,14 @@ class PluginHelper {
       if (await canLaunch(url)) {
         await launch(url);
       } else {
-        Fluttertoast.showToast(msg: error, toastLength: Toast.LENGTH_LONG);
+        Fluttertoast.showToast(
+            msg: error ?? PluginMessageRequire.messCanNotLaunchURL,
+            toastLength: Toast.LENGTH_LONG);
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: error, toastLength: Toast.LENGTH_LONG);
+      Fluttertoast.showToast(
+          msg: error ?? PluginMessageRequire.messCanNotLaunchURL,
+          toastLength: Toast.LENGTH_LONG);
     }
   }
 
