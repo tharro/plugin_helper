@@ -5,6 +5,10 @@ class PluginMessageRequire {
       'Incorrect authentication credentials, please try again.';
   static String messUnHandleError = 'Unhandled error has occurred';
   static String messCanNotLaunchURL = 'Can not launch URL';
+  static String messRefreshingText = '...Refreshing"';
+  static String messCompleteText = 'Refresh completed';
+  static String messReleaseText = 'Release to refresh';
+  static String messIdleText = 'Pull down Refresh';
 
   static messageRequire({
     required String messageNoConnection,
@@ -12,11 +16,19 @@ class PluginMessageRequire {
     required String messageNotAuthorizedException,
     required String messageUnHandleError,
     required String messageCanNotLaunchURL,
+    String? messageRefreshingText,
+    String? messageCompleteText,
+    String? messageReleaseText,
+    String? messageIdleText,
   }) {
     messNoConnection = messageNoConnection;
     messService503 = messageService503;
     messNotAuthorizedException = messageNotAuthorizedException;
     messUnHandleError = messageUnHandleError;
     messCanNotLaunchURL = messageCanNotLaunchURL;
+    messRefreshingText = messageRefreshingText!;
+    messCompleteText = messageCompleteText!;
+    messReleaseText = messageReleaseText!;
+    messIdleText = messageIdleText!;
   }
 }

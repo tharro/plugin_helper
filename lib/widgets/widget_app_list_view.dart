@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:plugin_helper/plugin_message_require.dart';
 import 'package:plugin_helper/widgets/widget_loading.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -120,22 +121,14 @@ class AppListViewState extends State<WidgetAppListView> {
 }
 
 class ClassHeaderIndicator extends StatelessWidget {
-  final String? refreshingText, completeText, releaseText, idleText;
-
-  const ClassHeaderIndicator(
-      {Key? key,
-      this.refreshingText,
-      this.completeText,
-      this.releaseText,
-      this.idleText})
-      : super(key: key);
+  const ClassHeaderIndicator({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ClassicHeader(
-        refreshingText: refreshingText ?? "...Refreshing",
-        completeText: completeText ?? "Refresh completed",
-        releaseText: releaseText ?? "Release to refresh",
-        idleText: idleText ?? "Pull down Refresh");
+        refreshingText: PluginMessageRequire.messRefreshingText,
+        completeText: PluginMessageRequire.messCompleteText,
+        releaseText: PluginMessageRequire.messReleaseText,
+        idleText: PluginMessageRequire.messIdleText);
   }
 }
