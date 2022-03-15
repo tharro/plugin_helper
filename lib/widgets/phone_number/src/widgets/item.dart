@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl_phone_number_input/src/models/country_model.dart';
-import 'package:intl_phone_number_input/src/utils/util.dart';
+import 'package:plugin_helper/widgets/phone_number/src/models/country_model.dart';
+import 'package:plugin_helper/widgets/phone_number/src/utils/util.dart';
 
 /// [Item]
 class Item extends StatelessWidget {

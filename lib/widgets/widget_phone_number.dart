@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plugin_helper/plugin_helper.dart';
+import 'package:plugin_helper/widgets/phone_number/intl_phone_number_input.dart';
 
 class WidgetPhoneNumber extends StatefulWidget {
   final String? label;

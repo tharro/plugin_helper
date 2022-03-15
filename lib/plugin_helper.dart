@@ -1,7 +1,6 @@
 export 'package:firebase_analytics/firebase_analytics.dart';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:device_info_plus/device_info_plus.dart';
-export 'package:intl_phone_number_input/intl_phone_number_input.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:flutter_secure_storage/flutter_secure_storage.dart';
 export 'package:intl/intl.dart';
@@ -35,7 +34,6 @@ import 'package:flutter/services.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:intl_phone_number_input/src/utils/phone_number/phone_number_util.dart';
 import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:new_version/new_version.dart';
 import 'package:path_provider/path_provider.dart';
@@ -43,6 +41,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as path;
 import 'package:plugin_helper/plugin_authentication.dart';
 import 'package:plugin_helper/plugin_message_require.dart';
+import 'package:plugin_helper/widgets/phone_number/src/utils/phone_number/phone_number_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
