@@ -38,15 +38,15 @@ class WidgetButtonCustom extends StatelessWidget {
     this.secondaryBorderColor = const Color(0xffdbdbdb),
     this.primaryBorderColor = const Color(0xffffb41d),
     this.outLineBorderColor = Colors.white,
-    this.width = double.infinity,
-    this.height = 50,
-    this.elevation = 0,
+    this.width,
+    this.height,
+    this.elevation,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width,
-      height: height,
+      width: width ?? double.infinity,
+      height: height ?? 50,
       child: ElevatedButton(
         onPressed: enabled
             ? () {
