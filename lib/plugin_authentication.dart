@@ -211,7 +211,7 @@ class PluginAuthentication {
     }
   }
 
-  static Future<bool> requestUpdateAttribute({required String name}) async {
+  static Future<bool> resendCodeAttribute({required String name}) async {
     final cognitoUser = await getCognitoUserWithAuthentication();
     await cognitoUser.getAttributeVerificationCode(name);
     return true;
@@ -222,13 +222,7 @@ class PluginAuthentication {
       required String attributeName,
       required String value}) async {
     final cognitoUser = await getCognitoUserWithAuthentication();
-    bool isVerify =
-        await cognitoUser.verifyAttribute(attributeName, confirmationCode);
-    if (isVerify) {
-      return updateAttribute(
-          cognitoUser: cognitoUser, attributeName: attributeName, value: value);
-    }
-    return false;
+    return await cognitoUser.verifyAttribute(attributeName, confirmationCode);
   }
 
   static Future<bool> updateAttribute(
