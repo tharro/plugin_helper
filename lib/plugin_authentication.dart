@@ -10,6 +10,9 @@ class PluginAppConstraints {
   static String email = 'EMAIL';
   static String expired = 'EXPIRED';
   static String firstRun = 'FIRST_RUN';
+  static String login = 'LOGIN';
+  static String verify = 'VERIFY';
+  static String signUp = 'SIGN_UP';
 }
 
 class PluginAuthentication {
@@ -198,7 +201,6 @@ class PluginAuthentication {
       username: userName,
       password: currentPassword,
     );
-
     await cognitoUser.authenticateUser(authDetails);
     try {
       await cognitoUser.changePassword(currentPassword, newPassword);
@@ -263,6 +265,7 @@ class PluginAuthentication {
       var attributes = await cognito.getUserAttributes();
       return attributes;
     } catch (e) {}
+    return null;
   }
 
   static Future<CognitoUserSession?> getSession() async {

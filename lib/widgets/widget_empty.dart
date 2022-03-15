@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plugin_helper/plugin_message_require.dart';
 
 class WidgetEmpty extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
@@ -26,7 +27,7 @@ class WidgetEmpty extends StatelessWidget {
             height: 14,
           ),
         Text(
-          message ?? "Empty Data",
+          message ?? PluginMessageRequire.messEmptyData,
           style: textStyle,
         )
       ],
