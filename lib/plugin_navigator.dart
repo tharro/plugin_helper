@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class PluginBottomTabNavigation {
+class PluginNavigation {
   GlobalKey<NavigatorState>? navigationKey;
 
-  static PluginBottomTabNavigation instance = PluginBottomTabNavigation();
+  static PluginNavigation instance = PluginNavigation();
 
-  PluginBottomTabNavigation() {
+  PluginNavigation() {
     navigationKey = GlobalKey<NavigatorState>();
   }
 

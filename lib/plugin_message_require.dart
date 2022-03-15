@@ -6,6 +6,7 @@ class PluginMessageRequire {
   static String messReleaseText = 'Release to refresh';
   static String messIdleText = 'Pull down Refresh';
   static String messEmptyData = 'Empty Data';
+  static String messReconnecting = 'Reconnecting...';
 
   static messageRequire({
     required String messageNoConnection,
@@ -15,6 +16,7 @@ class PluginMessageRequire {
     required String messageReleaseText,
     required String messageIdleText,
     required String messageEmptyData,
+    required String messageReconnecting,
   }) {
     messNoConnection = messageNoConnection;
     messCanNotLaunchURL = messageCanNotLaunchURL;
@@ -23,5 +25,6 @@ class PluginMessageRequire {
     messReleaseText = messageReleaseText;
     messIdleText = messageIdleText;
     messEmptyData = messageEmptyData;
+    messReconnecting = messageReconnecting;
   }
 }
