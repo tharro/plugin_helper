@@ -15,6 +15,7 @@ class WidgetButtonCustom extends StatelessWidget {
   final double borderRadius;
   final EdgeInsetsGeometry? padding;
   final bool enabled;
+  final double? width, height, elevation;
   const WidgetButtonCustom({
     Key? key,
     required this.onPressed,
@@ -37,36 +38,44 @@ class WidgetButtonCustom extends StatelessWidget {
     this.secondaryBorderColor = const Color(0xffdbdbdb),
     this.primaryBorderColor = const Color(0xffffb41d),
     this.outLineBorderColor = Colors.white,
+    this.width = double.infinity,
+    this.height = 50,
+    this.elevation = 0,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: enabled
-          ? () {
-              onPressed();
-            }
-          : null,
-      style: OutlinedButton.styleFrom(
-        padding: padding ?? const EdgeInsets.symmetric(vertical: 18),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius)),
-        backgroundColor: enabled == false
-            ? const Color(0xfff1f1f2)
-            : checkBackgroundColor(), // background
-        primary: checkBackgroundColor() == Colors.white
-            ? Colors.grey
-            : Colors.white, // foreground text
-        side: enabled == false
-            ? const BorderSide(color: Color(0xfff1f1f2))
-            : BorderSide(
-                color: checkBorderColor(),
-              ), // foreground border
+    return SizedBox(
+      width: width,
+      height: height,
+      child: ElevatedButton(
+        onPressed: enabled
+            ? () {
+                onPressed();
+              }
+            : null,
+        style: OutlinedButton.styleFrom(
+          elevation: elevation,
+          padding: padding ?? const EdgeInsets.symmetric(vertical: 18),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius)),
+          backgroundColor: enabled == false
+              ? const Color(0xfff1f1f2)
+              : checkBackgroundColor(), // background
+          primary: checkBackgroundColor() == Colors.white
+              ? Colors.grey
+              : Colors.white, // foreground text
+          side: enabled == false
+              ? const BorderSide(color: Color(0xfff1f1f2))
+              : BorderSide(
+                  color: checkBorderColor(),
+                ), // foreground border
+        ),
+        child: Center(
+            child: Text(
+          title,
+          style: checkTextColor(textStyle!),
+        )),
       ),
-      child: Center(
-          child: Text(
-        title,
-        style: checkTextColor(textStyle!),
-      )),
     );
   }
 
