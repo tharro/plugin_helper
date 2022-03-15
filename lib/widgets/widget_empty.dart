@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plugin_helper/plugin_helper.dart';
 import 'package:plugin_helper/plugin_message_require.dart';
 
 class WidgetEmpty extends StatelessWidget {
@@ -7,17 +8,21 @@ class WidgetEmpty extends StatelessWidget {
   final String? message;
   final TextStyle textStyle;
   final Widget? icon;
+  final VoidCallback? onRefresh;
+  final RefreshController? refreshController;
   const WidgetEmpty(
       {Key? key,
       this.mainAxisAlignment = MainAxisAlignment.center,
       this.message,
       required this.textStyle,
       this.icon,
-      this.crossAxisAlignment = CrossAxisAlignment.center})
+      this.crossAxisAlignment = CrossAxisAlignment.center,
+      this.onRefresh,
+      this.refreshController})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Column(
+    var child = Column(
       mainAxisAlignment: mainAxisAlignment,
       crossAxisAlignment: crossAxisAlignment,
       children: [
@@ -32,5 +37,13 @@ class WidgetEmpty extends StatelessWidget {
         )
       ],
     );
+    if (onRefresh != null) {
+      return SmartRefresher(
+        onRefresh: onRefresh,
+        controller: refreshController!,
+        child: child,
+      );
+    }
+    return child;
   }
 }

@@ -6,21 +6,25 @@ class WidgetError extends StatelessWidget {
   final VoidCallback? onTapRetry;
   final VoidCallback? onRefresh;
   final RefreshController? refreshController;
+  final Widget? iconError;
   const WidgetError(
       {Key? key,
       required this.error,
       this.onRefresh,
       this.refreshController,
-      this.onTapRetry})
+      this.onTapRetry,
+      this.iconError})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     var child = Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        onTapRetry != null
-            ? IconButton(onPressed: onTapRetry, icon: const Icon(Icons.refresh))
-            : const Icon(Icons.error_outline),
+        iconError ??
+            (onTapRetry != null
+                ? IconButton(
+                    onPressed: onTapRetry, icon: const Icon(Icons.refresh))
+                : const Icon(Icons.error_outline)),
         const SizedBox(
           height: 5,
         ),

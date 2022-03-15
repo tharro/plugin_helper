@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:plugin_helper/widgets/widget_loading.dart';
 
 class WidgetOverlayLoading extends StatelessWidget {
   final Widget child;
@@ -28,23 +28,19 @@ class WidgetOverlayLoading extends StatelessWidget {
             ),
           ),
         if (isLoading)
-          if (loadingWidget == null)
-            Positioned.fill(
-              child: Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: backgroundColor ?? const Color(0xff262626),
-                    borderRadius: BorderRadius.circular(12),
+          Positioned.fill(
+            child: Center(
+              child: loadingWidget ??
+                  Container(
+                    decoration: BoxDecoration(
+                      color: backgroundColor ?? const Color(0xff262626),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.all(20),
+                    child: const WidgetLoading(),
                   ),
-                  padding: const EdgeInsets.all(20),
-                  child: const CupertinoActivityIndicator(
-                    radius: 12,
-                  ),
-                ),
-              ),
-            )
-          else
-            loadingWidget!
+            ),
+          )
       ],
     );
   }
