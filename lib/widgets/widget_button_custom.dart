@@ -16,6 +16,7 @@ class WidgetButtonCustom extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final bool enabled;
   final double? width, height, elevation;
+  final Widget? icon;
   const WidgetButtonCustom({
     Key? key,
     required this.onPressed,
@@ -41,6 +42,7 @@ class WidgetButtonCustom extends StatelessWidget {
     this.width,
     this.height,
     this.elevation,
+    this.icon,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -71,9 +73,16 @@ class WidgetButtonCustom extends StatelessWidget {
                 ), // foreground border
         ),
         child: Center(
-            child: Text(
-          title,
-          style: checkTextColor(textStyle!),
+            child: Row(
+          children: [
+            if (icon != null) icon!,
+            Expanded(
+              child: Text(
+                title,
+                style: checkTextColor(textStyle!),
+              ),
+            )
+          ],
         )),
       ),
     );

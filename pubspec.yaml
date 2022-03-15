@@ -11,7 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
   device_info_plus: any
-  intl_phone_number_input: any
+  intl_phone_number_input:
+    path: custom_packages/intl_phone_number_input-0.7.0+2
   shared_preferences: any
   flutter_secure_storage: any
   amazon_cognito_identity_dart_2: any
