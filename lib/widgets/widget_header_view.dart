@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 
 class WidgetHeader {
   static AppBar header({
-    required final BuildContext context,
-    final List<Widget>? actions,
-    final Widget? iconLeft,
-    required final Text title,
-    final bool? centerTitle,
-    final double? elevation,
-    final Function? onPressLeftIcon,
-    final bool? isShowLeftIcon,
-    final double? toolbarHeight,
-    final Color? backgroundColor,
-    backgroundColorIconLeft,
+    required BuildContext context,
+    List<Widget>? actions,
+    Widget? iconLeft,
+    required Text title,
+    bool? centerTitle = true,
+    double? elevation = 0,
+    Function? onPressLeftIcon,
+    bool isShowLeftIcon = true,
+    double? toolbarHeight,
+    Color? backgroundColor,
+    Color? backgroundColorIconLeft,
   }) =>
       AppBar(
         toolbarHeight: toolbarHeight ?? kToolbarHeight,
         elevation: elevation,
         actions: actions,
         backgroundColor: backgroundColor,
-        leading: isShowLeftIcon!
+        leading: isShowLeftIcon
             ? ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     primary: backgroundColorIconLeft ?? Colors.transparent,

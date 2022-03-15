@@ -9,7 +9,7 @@ class WidgetOverlayLoading extends StatelessWidget {
   const WidgetOverlayLoading(
       {Key? key,
       required this.child,
-      this.isLoading = false,
+      required this.isLoading,
       this.backgroundColor,
       this.loadingWidget})
       : super(key: key);
