@@ -35,6 +35,8 @@ class SelectorConfig {
 
   final BoxDecoration? boxDecoration;
 
+  final Widget? icon;
+
   const SelectorConfig({
     this.selectorType = PhoneInputSelectorType.DROPDOWN,
     this.showFlags = true,
@@ -44,5 +46,6 @@ class SelectorConfig {
     this.leadingPadding,
     this.trailingSpace = true,
     this.boxDecoration,
+    this.icon,
   });
 }

@@ -92,6 +92,7 @@ class SelectorButton extends StatelessWidget {
                 trailingSpace: selectorConfig.trailingSpace,
                 textStyle: selectorTextStyle,
                 boxDecoration: selectorConfig.boxDecoration,
+                icon: selectorConfig.icon,
               ),
             ),
           );
@@ -104,13 +105,15 @@ class SelectorButton extends StatelessWidget {
       return DropdownMenuItem<Country>(
         value: country,
         child: Item(
-            key: Key(TestHelper.countryItemKeyValue(country.alpha2Code)),
-            country: country,
-            showFlag: selectorConfig.showFlags,
-            useEmoji: selectorConfig.useEmoji,
-            textStyle: selectorTextStyle,
-            withCountryNames: false,
-            boxDecoration: selectorConfig.boxDecoration),
+          key: Key(TestHelper.countryItemKeyValue(country.alpha2Code)),
+          country: country,
+          showFlag: selectorConfig.showFlags,
+          useEmoji: selectorConfig.useEmoji,
+          textStyle: selectorTextStyle,
+          withCountryNames: false,
+          boxDecoration: selectorConfig.boxDecoration,
+          icon: selectorConfig.icon,
+        ),
       );
     }).toList();
   }

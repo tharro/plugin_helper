@@ -12,6 +12,7 @@ class Item extends StatelessWidget {
   final double? leadingPadding;
   final bool trailingSpace;
   final BoxDecoration? boxDecoration;
+  final Widget? icon;
 
   const Item({
     Key? key,
@@ -23,6 +24,7 @@ class Item extends StatelessWidget {
     this.leadingPadding = 12,
     this.trailingSpace = true,
     this.boxDecoration,
+    this.icon,
   }) : super(key: key);
 
   @override
@@ -59,7 +61,9 @@ class Item extends StatelessWidget {
               style: textStyle,
             ),
             const SizedBox(width: 3),
-            Icon(Icons.arrow_drop_down_outlined, color: Colors.white, size: 35),
+            icon ??
+                const Icon(Icons.arrow_drop_down_outlined,
+                    color: Colors.black, size: 35),
           ],
         ),
       ),
