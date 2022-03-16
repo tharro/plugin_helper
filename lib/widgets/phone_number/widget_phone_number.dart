@@ -23,6 +23,7 @@ class WidgetPhoneNumber extends StatefulWidget {
   final BoxDecoration? boxDecorationPhoneNumber;
   final BoxDecoration? boxDecorationAll;
   final double spaceBetweenSelectorAndTextField;
+  final double paddingIconRight;
   const WidgetPhoneNumber({
     Key? key,
     this.label,
@@ -47,6 +48,7 @@ class WidgetPhoneNumber extends StatefulWidget {
     this.boxDecorationPhoneNumber,
     this.boxDecorationAll,
     this.spaceBetweenSelectorAndTextField = 12,
+    this.paddingIconRight = 25,
   }) : super(key: key);
   @override
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
@@ -171,7 +173,7 @@ class _WidgetPhoneNumberState extends State<WidgetPhoneNumber> {
         ),
         if (_showIcon)
           PositionedDirectional(
-            end: 25,
+            end: widget.paddingIconRight,
             bottom: 0,
             top: 0,
             child: Align(
