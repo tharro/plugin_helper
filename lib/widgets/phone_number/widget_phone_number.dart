@@ -22,6 +22,7 @@ class WidgetPhoneNumber extends StatefulWidget {
   final SelectorConfig? selectorConfig;
   final BoxDecoration? boxDecorationPhoneNumber;
   final BoxDecoration? boxDecorationAll;
+  final double spaceBetweenSelectorAndTextField;
   const WidgetPhoneNumber({
     Key? key,
     this.label,
@@ -45,6 +46,7 @@ class WidgetPhoneNumber extends StatefulWidget {
     this.selectorConfig,
     this.boxDecorationPhoneNumber,
     this.boxDecorationAll,
+    this.spaceBetweenSelectorAndTextField = 12,
   }) : super(key: key);
   @override
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
@@ -53,6 +55,7 @@ class WidgetPhoneNumber extends StatefulWidget {
 class _WidgetPhoneNumberState extends State<WidgetPhoneNumber> {
   bool _showIcon = false;
   bool _hasFocus = false;
+  bool _isValidate = true;
   PhoneNumber? _initPhoneNumber;
   @override
   void initState() {
@@ -121,12 +124,16 @@ class _WidgetPhoneNumberState extends State<WidgetPhoneNumber> {
             },
             focusNode: widget.focusNode,
             onInputValidated: (bool value) {
+              setState(() {
+                _isValidate = value;
+              });
               if (widget.onInputValidated != null) {
                 widget.onInputValidated!(value);
               }
             },
             cursorColor: Colors.black,
-            spaceBetweenSelectorAndTextField: 12,
+            spaceBetweenSelectorAndTextField:
+                widget.spaceBetweenSelectorAndTextField,
             textAlignVertical: TextAlignVertical.top,
             selectorConfig: widget.selectorConfig ??
                 const SelectorConfig(
@@ -169,7 +176,7 @@ class _WidgetPhoneNumberState extends State<WidgetPhoneNumber> {
             top: 0,
             child: Align(
               alignment: Alignment.centerRight,
-              child: widget.hasError! ? widget.iconCorrect : widget.iconError,
+              child: _isValidate ? widget.iconCorrect : widget.iconError,
             ),
           )
       ],
