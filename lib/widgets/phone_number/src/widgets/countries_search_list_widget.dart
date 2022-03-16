@@ -155,7 +155,7 @@ class _Flag extends StatelessWidget {
                     ? CircleAvatar(
                         backgroundImage: AssetImage(
                           country!.flagUri,
-                          package: 'plugin_helper/widgets/phone_number',
+                          package: 'plugin_helper',
                         ),
                       )
                     : SizedBox.shrink(),
