@@ -15,19 +15,13 @@ class WidgetPhoneNumber extends StatefulWidget {
   final bool? hasError;
   final List<String>? countries;
   final bool isLTR;
-  final Color focusBorderColor, defaultBorderColor;
   final Widget? iconError, iconCorrect;
   final TextStyle textStyle;
   final String locale;
-  final Color? backgroundColor;
-  final double? radius;
-  final double? borderBottomWidth,
-      borderTopWidth,
-      borderLeftWidth,
-      borderRightWidth;
   final EdgeInsets? padding;
   final SelectorConfig? selectorConfig;
   final BoxDecoration? boxDecorationPhoneNumber;
+  final BoxDecoration? boxDecorationAll;
   const WidgetPhoneNumber({
     Key? key,
     this.label,
@@ -43,21 +37,14 @@ class WidgetPhoneNumber extends StatefulWidget {
     this.hasError = false,
     this.countries,
     this.isLTR = true,
-    required this.focusBorderColor,
-    required this.defaultBorderColor,
     this.iconError,
     this.iconCorrect,
     required this.textStyle,
     required this.locale,
-    this.backgroundColor,
-    this.radius,
-    this.borderBottomWidth = 1,
-    this.borderTopWidth = 1,
-    this.borderLeftWidth = 1,
-    this.borderRightWidth = 1,
     this.padding,
     this.selectorConfig,
     this.boxDecorationPhoneNumber,
+    this.boxDecorationAll,
   }) : super(key: key);
   @override
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
@@ -95,32 +82,15 @@ class _WidgetPhoneNumberState extends State<WidgetPhoneNumber> {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(
-            color: widget.backgroundColor ?? Colors.white,
-            border: Border(
-              bottom: BorderSide(
-                  width: widget.borderBottomWidth!,
-                  color: _hasFocus
-                      ? widget.focusBorderColor
-                      : widget.defaultBorderColor),
-              top: BorderSide(
-                  width: widget.borderTopWidth!,
-                  color: _hasFocus
-                      ? widget.focusBorderColor
-                      : widget.defaultBorderColor),
-              left: BorderSide(
-                  width: widget.borderLeftWidth!,
-                  color: _hasFocus
-                      ? widget.focusBorderColor
-                      : widget.defaultBorderColor),
-              right: BorderSide(
-                  width: widget.borderRightWidth!,
-                  color: _hasFocus
-                      ? widget.focusBorderColor
-                      : widget.defaultBorderColor),
-            ),
-            borderRadius: BorderRadius.circular(widget.radius ?? 34),
-          ),
+          decoration: widget.boxDecorationAll ??
+              BoxDecoration(
+                color: Colors.white,
+                border: Border.all(
+                    color: _hasFocus
+                        ? const Color(0xffFEC02D)
+                        : const Color(0xffdddddd)),
+                borderRadius: BorderRadius.circular(34),
+              ),
           padding: widget.padding ?? EdgeInsets.zero,
           child: InternationalPhoneNumberInput(
             countries: widget.countries,
@@ -189,7 +159,7 @@ class _WidgetPhoneNumberState extends State<WidgetPhoneNumber> {
               }
             },
             isLTR: isLTR,
-            boxDecorationPhoneNumber: widget.boxDecorationPhoneNumber!,
+            boxDecorationPhoneNumber: widget.boxDecorationPhoneNumber,
           ),
         ),
         if (_showIcon)
