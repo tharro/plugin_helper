@@ -25,6 +25,7 @@ class WidgetPhoneNumber extends StatefulWidget {
       borderTopWidth,
       borderLeftWidth,
       borderRightWidth;
+  final EdgeInsets? padding;
   const WidgetPhoneNumber({
     Key? key,
     this.label,
@@ -52,6 +53,7 @@ class WidgetPhoneNumber extends StatefulWidget {
     this.borderTopWidth = 1,
     this.borderLeftWidth = 1,
     this.borderRightWidth = 1,
+    this.padding,
   }) : super(key: key);
   @override
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
@@ -115,11 +117,7 @@ class _WidgetPhoneNumberState extends State<WidgetPhoneNumber> {
             ),
             borderRadius: BorderRadius.circular(widget.radius ?? 34),
           ),
-          padding: EdgeInsets.only(
-              top: 10,
-              bottom: 10,
-              left: isLTR ? 25 : 50,
-              right: isLTR ? 50 : 10),
+          padding: widget.padding ?? EdgeInsets.zero,
           child: InternationalPhoneNumberInput(
             countries: widget.countries,
             initialValue:
@@ -154,7 +152,7 @@ class _WidgetPhoneNumberState extends State<WidgetPhoneNumber> {
               }
             },
             cursorColor: Colors.black,
-            spaceBetweenSelectorAndTextField: isLTR ? 0 : 12,
+            spaceBetweenSelectorAndTextField: 12,
             textAlignVertical: TextAlignVertical.top,
             selectorConfig: const SelectorConfig(
               selectorType: PhoneInputSelectorType.DIALOG,
