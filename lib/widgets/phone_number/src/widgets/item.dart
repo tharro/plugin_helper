@@ -11,6 +11,7 @@ class Item extends StatelessWidget {
   final bool withCountryNames;
   final double? leadingPadding;
   final bool trailingSpace;
+  final BoxDecoration? boxDecoration;
 
   const Item({
     Key? key,
@@ -21,6 +22,7 @@ class Item extends StatelessWidget {
     this.withCountryNames = false,
     this.leadingPadding = 12,
     this.trailingSpace = true,
+    this.boxDecoration,
   }) : super(key: key);
 
   @override
@@ -30,11 +32,12 @@ class Item extends StatelessWidget {
       dialCode = dialCode.padRight(5, "   ");
     }
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.black,
-        border: Border.all(color: Colors.white),
-        borderRadius: BorderRadius.circular(5),
-      ),
+      decoration: boxDecoration ??
+          BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: Colors.grey[300]!),
+            borderRadius: BorderRadius.circular(5),
+          ),
       height: 50,
       padding: EdgeInsets.symmetric(horizontal: 10),
       child: Center(
@@ -43,19 +46,19 @@ class Item extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            // SizedBox(width: leadingPadding),
-            // _Flag(
-            //   country: country,
-            //   showFlag: showFlag,
-            //   useEmoji: useEmoji,
-            // ),
-            // SizedBox(width: 12.0),
+            SizedBox(width: leadingPadding),
+            _Flag(
+              country: country,
+              showFlag: showFlag,
+              useEmoji: useEmoji,
+            ),
+            if (showFlag!) const SizedBox(width: 12.0),
             Text(
               '$dialCode',
               textDirection: TextDirection.ltr,
               style: textStyle,
             ),
-            SizedBox(width: 3),
+            const SizedBox(width: 3),
             Icon(Icons.arrow_drop_down_outlined, color: Colors.white, size: 35),
           ],
         ),

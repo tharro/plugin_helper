@@ -1,5 +1,5 @@
-import 'package:plugin_helper/widgets/phone_number/src/utils/phone_number.dart';
 import 'package:libphonenumber/libphonenumber.dart' as p;
+import 'package:plugin_helper/widgets/phone_number/intl_phone_number_input.dart';
 
 /// A wrapper class [PhoneNumberUtil] that basically switch between plugin available for `Web` or `Android or IOS` and `Other platforms` when available.
 class PhoneNumberUtil {

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart' show IterableExtension;
+import 'package:libphonenumber/libphonenumber.dart';
 import 'package:plugin_helper/widgets/phone_number/src/models/country_list.dart';
-import 'package:plugin_helper/widgets/phone_number/src/utils/phone_number/phone_number_util.dart';
 
 class PhoneNumberTest {
   final String? phoneNumber;

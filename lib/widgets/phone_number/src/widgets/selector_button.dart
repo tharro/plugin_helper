@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:plugin_helper/widgets/phone_number/intl_phone_number_input.dart';
+import 'package:plugin_helper/widgets/phone_number/intl_phone_number_input_test.dart';
 import 'package:plugin_helper/widgets/phone_number/src/models/country_model.dart';
-import 'package:plugin_helper/widgets/phone_number/src/utils/selector_config.dart';
-import 'package:plugin_helper/widgets/phone_number/src/utils/test/test_helper.dart';
 import 'package:plugin_helper/widgets/phone_number/src/widgets/countries_search_list_widget.dart';
-import 'package:plugin_helper/widgets/phone_number/src/widgets/input_widget.dart';
 import 'package:plugin_helper/widgets/phone_number/src/widgets/item.dart';
 
 /// [SelectorButton]
@@ -92,6 +91,7 @@ class SelectorButton extends StatelessWidget {
                 leadingPadding: selectorConfig.leadingPadding,
                 trailingSpace: selectorConfig.trailingSpace,
                 textStyle: selectorTextStyle,
+                boxDecoration: selectorConfig.boxDecoration,
               ),
             ),
           );
@@ -104,13 +104,13 @@ class SelectorButton extends StatelessWidget {
       return DropdownMenuItem<Country>(
         value: country,
         child: Item(
-          key: Key(TestHelper.countryItemKeyValue(country.alpha2Code)),
-          country: country,
-          showFlag: selectorConfig.showFlags,
-          useEmoji: selectorConfig.useEmoji,
-          textStyle: selectorTextStyle,
-          withCountryNames: false,
-        ),
+            key: Key(TestHelper.countryItemKeyValue(country.alpha2Code)),
+            country: country,
+            showFlag: selectorConfig.showFlags,
+            useEmoji: selectorConfig.useEmoji,
+            textStyle: selectorTextStyle,
+            withCountryNames: false,
+            boxDecoration: selectorConfig.boxDecoration),
       );
     }).toList();
   }

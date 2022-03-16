@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:plugin_helper/widgets/phone_number/intl_phone_number_input_test.dart';
 import 'package:plugin_helper/widgets/phone_number/src/models/country_model.dart';
-import 'package:plugin_helper/widgets/phone_number/src/utils/test/test_helper.dart';
 import 'package:plugin_helper/widgets/phone_number/src/utils/util.dart';
 
 /// Creates a list of Countries with a search textfield.

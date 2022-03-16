@@ -2,13 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:plugin_helper/widgets/phone_number/src/models/country_list.dart';
+import 'package:plugin_helper/widgets/phone_number/intl_phone_number_input.dart';
 import 'package:plugin_helper/widgets/phone_number/src/models/country_model.dart';
 import 'package:plugin_helper/widgets/phone_number/src/providers/country_provider.dart';
 import 'package:plugin_helper/widgets/phone_number/src/utils/formatter/as_you_type_formatter.dart';
-import 'package:plugin_helper/widgets/phone_number/src/utils/phone_number.dart';
 import 'package:plugin_helper/widgets/phone_number/src/utils/phone_number/phone_number_util.dart';
-import 'package:plugin_helper/widgets/phone_number/src/utils/selector_config.dart';
 import 'package:plugin_helper/widgets/phone_number/src/utils/test/test_helper.dart';
 import 'package:plugin_helper/widgets/phone_number/src/utils/util.dart';
 import 'package:plugin_helper/widgets/phone_number/src/utils/widget_view.dart';
@@ -85,8 +83,10 @@ class InternationalPhoneNumberInput extends StatefulWidget {
 
   final List<String>? countries;
   final bool? isLTR;
+  final BoxDecoration? boxDecorationPhoneNumber;
+  final Color? backgroundCountryCode;
 
-  InternationalPhoneNumberInput({
+  const InternationalPhoneNumberInput({
     Key? key,
     this.selectorConfig = const SelectorConfig(),
     required this.onInputChanged,
@@ -125,6 +125,8 @@ class InternationalPhoneNumberInput extends StatefulWidget {
     this.autofillHints,
     this.countries,
     this.isLTR = true,
+    this.boxDecorationPhoneNumber,
+    this.backgroundCountryCode,
   }) : super(key: key);
 
   @override
@@ -419,11 +421,12 @@ class _InputWidgetView
           SizedBox(width: widget.spaceBetweenSelectorAndTextField),
           Flexible(
               child: Container(
-            decoration: BoxDecoration(
-              color: Colors.black,
-              border: Border.all(color: Colors.white),
-              borderRadius: BorderRadius.circular(5),
-            ),
+            decoration: widget.boxDecorationPhoneNumber ??
+                BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.grey[300]!),
+                  borderRadius: BorderRadius.circular(5),
+                ),
             padding: EdgeInsets.only(left: 12),
             child: TextFormField(
               key: Key(TestHelper.TextInputKeyValue),
