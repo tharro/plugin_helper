@@ -166,7 +166,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                 color: Colors.black,
                 fontFamily: 'halter',
                 fontSize: 16,
-                package: 'flutter_credit_card',
+                package: 'plugin_helper',
               ),
             );
 
@@ -264,7 +264,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                 color: Colors.white,
                 fontFamily: 'halter',
                 fontSize: 16,
-                package: 'flutter_credit_card',
+                package: 'plugin_helper',
               ),
             );
 
@@ -420,7 +420,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
         CardTypeIconAsset[cardType]!,
         height: 48,
         width: 48,
-        package: 'flutter_credit_card',
+        package: 'plugin_helper',
       );
 
   // This method returns the icon for the visa card type if found
@@ -433,7 +433,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
           'icons/visa.png',
           height: 48,
           width: 48,
-          package: 'flutter_credit_card',
+          package: 'plugin_helper',
         );
         isAmex = false;
         break;
@@ -443,7 +443,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
           'icons/amex.png',
           height: 48,
           width: 48,
-          package: 'flutter_credit_card',
+          package: 'plugin_helper',
         );
         isAmex = true;
         break;
@@ -453,7 +453,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
           'icons/mastercard.png',
           height: 48,
           width: 48,
-          package: 'flutter_credit_card',
+          package: 'plugin_helper',
         );
         isAmex = false;
         break;
@@ -463,7 +463,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
           'icons/discover.png',
           height: 48,
           width: 48,
-          package: 'flutter_credit_card',
+          package: 'plugin_helper',
         );
         isAmex = false;
         break;
