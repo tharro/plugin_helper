@@ -26,6 +26,8 @@ class WidgetPhoneNumber extends StatefulWidget {
       borderLeftWidth,
       borderRightWidth;
   final EdgeInsets? padding;
+  final SelectorConfig? selectorConfig;
+  final BoxDecoration? boxDecorationPhoneNumber;
   const WidgetPhoneNumber({
     Key? key,
     this.label,
@@ -54,6 +56,8 @@ class WidgetPhoneNumber extends StatefulWidget {
     this.borderLeftWidth = 1,
     this.borderRightWidth = 1,
     this.padding,
+    this.selectorConfig,
+    this.boxDecorationPhoneNumber,
   }) : super(key: key);
   @override
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
@@ -154,9 +158,10 @@ class _WidgetPhoneNumberState extends State<WidgetPhoneNumber> {
             cursorColor: Colors.black,
             spaceBetweenSelectorAndTextField: 12,
             textAlignVertical: TextAlignVertical.top,
-            selectorConfig: const SelectorConfig(
-              selectorType: PhoneInputSelectorType.DIALOG,
-            ),
+            selectorConfig: widget.selectorConfig ??
+                const SelectorConfig(
+                  selectorType: PhoneInputSelectorType.DIALOG,
+                ),
             ignoreBlank: true,
             autoValidateMode: AutovalidateMode.disabled,
             selectorTextStyle: widget.textStyle,
@@ -184,6 +189,7 @@ class _WidgetPhoneNumberState extends State<WidgetPhoneNumber> {
               }
             },
             isLTR: isLTR,
+            boxDecorationPhoneNumber: widget.boxDecorationPhoneNumber!,
           ),
         ),
         if (_showIcon)

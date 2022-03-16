@@ -84,7 +84,6 @@ class InternationalPhoneNumberInput extends StatefulWidget {
   final List<String>? countries;
   final bool? isLTR;
   final BoxDecoration? boxDecorationPhoneNumber;
-  final Color? backgroundCountryCode;
 
   const InternationalPhoneNumberInput({
     Key? key,
@@ -126,7 +125,6 @@ class InternationalPhoneNumberInput extends StatefulWidget {
     this.countries,
     this.isLTR = true,
     this.boxDecorationPhoneNumber,
-    this.backgroundCountryCode,
   }) : super(key: key);
 
   @override
