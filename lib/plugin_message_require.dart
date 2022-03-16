@@ -7,6 +7,9 @@ class PluginMessageRequire {
   static String messIdleText = 'Pull down Refresh';
   static String messEmptyData = 'Empty Data';
   static String messReconnecting = 'Reconnecting...';
+  static String messWeakPassword = 'Weak password';
+  static String messInvalidEmail = 'Invalid email address';
+  static String messCanNotEmpty = 'This field cannot be empty';
 
   static messageRequire({
     required String messageNoConnection,
@@ -17,6 +20,9 @@ class PluginMessageRequire {
     required String messageIdleText,
     required String messageEmptyData,
     required String messageReconnecting,
+    required String messageWeakPassword,
+    required String messageInvalidEmail,
+    required String messageCanNotEmpty,
   }) {
     messNoConnection = messageNoConnection;
     messCanNotLaunchURL = messageCanNotLaunchURL;
@@ -26,5 +32,8 @@ class PluginMessageRequire {
     messIdleText = messageIdleText;
     messEmptyData = messageEmptyData;
     messReconnecting = messageReconnecting;
+    messWeakPassword = messageWeakPassword;
+    messInvalidEmail = messageInvalidEmail;
+    messCanNotEmpty = messageCanNotEmpty;
   }
 }
