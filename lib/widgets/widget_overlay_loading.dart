@@ -32,6 +32,8 @@ class WidgetOverlayLoading extends StatelessWidget {
             child: Center(
               child: loadingWidget ??
                   Container(
+                    width: 100,
+                    height: 100,
                     decoration: BoxDecoration(
                       color: backgroundColor ?? const Color(0xff262626),
                       borderRadius: BorderRadius.circular(12),

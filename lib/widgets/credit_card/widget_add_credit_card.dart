@@ -6,13 +6,12 @@ class WidgetAddCreditCard extends StatefulWidget {
   final TextStyle textStyle;
   final InputDecoration? cardNumberDecorationCustom,
       expiryDateDecorationCustom,
-      cvvCodeDecorationCustom,
-      cardHolderDecorationCustom;
-  final String? cardNumberLabel, expiryDateLabel, cvvLabel, cardHolderLabel;
+      cvvCodeDecorationCustom;
+  final String? cardNumberLabel, expiryDateLabel, cvvLabel;
   final TextStyle? labelStyle;
   final Color? inputColor, inputErrorColor;
   final Widget? buttonWidget;
-  final String? cardHolderName, cardNumber, cvvCode, expiryDate;
+  final String? cardNumber, cvvCode, expiryDate;
   const WidgetAddCreditCard(
       {Key? key,
       required this.textStyle,
@@ -20,15 +19,12 @@ class WidgetAddCreditCard extends StatefulWidget {
       this.cardNumberLabel,
       this.expiryDateLabel,
       this.cvvLabel,
-      this.cardHolderLabel,
       this.labelStyle,
       this.inputColor,
       this.inputErrorColor,
       this.expiryDateDecorationCustom,
       this.cvvCodeDecorationCustom,
-      this.cardHolderDecorationCustom,
       this.buttonWidget,
-      this.cardHolderName = '',
       this.cardNumber = '',
       this.cvvCode = '',
       this.expiryDate = ''})
@@ -69,12 +65,6 @@ class WidgetAddCreditCardState extends State<WidgetAddCreditCard> {
               inputBorder(
                   context: context,
                   title: widget.cvvLabel ?? const LocalizedText().cvvLabel),
-          cardHolderDecoration: widget.cardHolderDecorationCustom ??
-              inputBorder(
-                  context: context,
-                  title: widget.cardHolderLabel ??
-                      const LocalizedText().cardHolderLabel),
-          cardHolderName: widget.cardHolderName!,
           cardNumber: widget.cardNumber!,
           cvvCode: widget.cvvCode!,
           expiryDate: widget.expiryDate!,

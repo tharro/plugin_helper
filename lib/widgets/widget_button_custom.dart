@@ -72,18 +72,18 @@ class WidgetButtonCustom extends StatelessWidget {
                   color: checkBorderColor(),
                 ), // foreground border
         ),
-        child: Center(
-            child: Row(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             if (icon != null) icon!,
-            Expanded(
-              child: Text(
-                title,
-                style: checkTextColor(textStyle!),
-              ),
+            Text(
+              title,
+              style: checkTextColor(textStyle!),
+              maxLines: 1,
             )
           ],
-        )),
+        ),
       ),
     );
   }

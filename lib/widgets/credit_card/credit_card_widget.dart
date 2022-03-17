@@ -14,7 +14,6 @@ class CreditCardWidget extends StatefulWidget {
     Key? key,
     required this.cardNumber,
     required this.expiryDate,
-    required this.cardHolderName,
     required this.cvvCode,
     required this.showBackView,
     this.animationDuration = const Duration(milliseconds: 500),
@@ -31,7 +30,6 @@ class CreditCardWidget extends StatefulWidget {
 
   final String cardNumber;
   final String expiryDate;
-  final String cardHolderName;
   final String cvvCode;
   final TextStyle? textStyle;
   final Color cardBgColor;
@@ -316,19 +314,6 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                 widget.expiryDate.isEmpty
                     ? widget.labelExpiredDate
                     : widget.expiryDate,
-                style: widget.textStyle ?? defaultTextStyle,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-              child: Text(
-                widget.cardHolderName.isEmpty
-                    ? widget.labelCardHolder
-                    : widget.cardHolderName,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
                 style: widget.textStyle ?? defaultTextStyle,
               ),
             ),

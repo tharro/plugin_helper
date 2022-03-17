@@ -5,9 +5,9 @@ class WidgetPhoneNumber extends StatefulWidget {
   final String? label;
   final TextEditingController? controller;
   final PhoneNumber? initialValue;
-  final bool? isEnabled;
+  final bool isEnabled;
   final Function? onInputChanged;
-  final Function? onInputValidated;
+  final Function(bool)? onInputValidated;
   final Function? onFieldSubmitted;
   final Function? onSaved;
   final bool? autoFocus;
@@ -147,7 +147,7 @@ class _WidgetPhoneNumberState extends State<WidgetPhoneNumber> {
             textFieldController: widget.controller,
             textStyle: widget.textStyle,
             locale: widget.locale,
-            isEnabled: widget.isEnabled!,
+            isEnabled: widget.isEnabled,
             inputDecoration: InputDecoration(
               hintText: '',
               hintStyle: widget.textStyle,

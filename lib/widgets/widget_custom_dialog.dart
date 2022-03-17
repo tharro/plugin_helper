@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class WidgetCustomDialog extends StatefulWidget {
@@ -7,7 +5,7 @@ class WidgetCustomDialog extends StatefulWidget {
   final Function()? onClose;
   final bool? isShowSecondButton;
   final TextStyle textStyleTitle;
-  final TextStyle? texStyleDescription;
+  final TextStyle texStyleDescription;
   final Widget buttonPrimary;
   final Widget? buttonSecondary;
   final Color? backgroundColor;
@@ -22,7 +20,7 @@ class WidgetCustomDialog extends StatefulWidget {
     this.onClose,
     this.isShowSecondButton = false,
     required this.textStyleTitle,
-    this.texStyleDescription,
+    required this.texStyleDescription,
     required this.buttonPrimary,
     this.buttonSecondary,
     this.backgroundColor,
@@ -60,66 +58,64 @@ class _CustomDialogState extends State<WidgetCustomDialog> {
         color: widget.backgroundColor ?? Colors.white,
         borderRadius: BorderRadius.circular(widget.radius ?? 10),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 24, left: 24),
-                child: Center(
-                  child: Text(
-                    widget.title,
-                    style: widget.textStyleTitle,
-                    textAlign: TextAlign.center,
-                  ),
+      child: Stack(children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 24, left: 24),
+              child: Center(
+                child: Text(
+                  widget.title,
+                  style: widget.textStyleTitle,
+                  textAlign: TextAlign.center,
                 ),
               ),
-              Positioned(
-                  right: 0,
-                  child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                        if (widget.onClose != null) {
-                          widget.onClose!();
-                        }
-                      },
-                      child: widget.iconClose ??
-                          const Icon(
-                            Icons.close,
-                            size: 25,
-                          ))),
-            ],
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Text(
-            widget.descriptions,
-            style: widget.texStyleDescription,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          if (widget.isColumn!)
-            Column(
-              children: [
-                widget.buttonPrimary,
-                SizedBox(height: widget.space),
-                if (widget.isShowSecondButton!) widget.buttonSecondary!
-              ],
-            )
-          else
-            Row(
-              children: [
-                widget.buttonPrimary,
-                SizedBox(width: widget.space),
-                if (widget.isShowSecondButton!) widget.buttonSecondary!
-              ],
-            )
-        ],
-      ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Text(
+              widget.descriptions,
+              style: widget.texStyleDescription,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            if (widget.isColumn!)
+              Column(
+                children: [
+                  widget.buttonPrimary,
+                  SizedBox(height: widget.space),
+                  if (widget.isShowSecondButton!) widget.buttonSecondary!
+                ],
+              )
+            else
+              Row(
+                children: [
+                  widget.buttonPrimary,
+                  SizedBox(width: widget.space),
+                  if (widget.isShowSecondButton!) widget.buttonSecondary!
+                ],
+              )
+          ],
+        ),
+        Positioned(
+            right: 0,
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  if (widget.onClose != null) {
+                    widget.onClose!();
+                  }
+                },
+                child: widget.iconClose ??
+                    const Icon(
+                      Icons.close,
+                      size: 25,
+                    ))),
+      ]),
     );
   }
 }

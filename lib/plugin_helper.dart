@@ -20,7 +20,6 @@ export 'package:new_version/new_version.dart';
 export 'package:fluttertoast/fluttertoast.dart';
 export 'package:pull_to_refresh/pull_to_refresh.dart';
 export 'package:pin_code_fields/pin_code_fields.dart';
-export 'package:stripe_payment/stripe_payment.dart';
 export 'package:mime_type/mime_type.dart';
 export 'package:connectivity_plus/connectivity_plus.dart';
 export 'package:amazon_cognito_identity_dart_2/cognito.dart';

@@ -14,7 +14,6 @@ class WidgetTextField extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
   final Function(String)? onChanged;
-  final bool showSuffix;
   final bool obscureText;
   final VoidCallback? onSuffixIconTap;
   final ValidType validType;
@@ -23,26 +22,23 @@ class WidgetTextField extends StatefulWidget {
   final TextCapitalization textCapitalization;
   final String Function(String?)? validator;
   final String? hintText;
-  final Color? colorDisable;
   final int? maxLength;
   final String? textError;
-  final double? width;
   final VoidCallback? onTap;
   final EdgeInsets? contentPadding;
-  final double textSize;
   final int? maxLines;
   final int? minLines;
   final FocusNode focus;
   final Function(String)? onFieldSubmitted;
   final TextInputAction? textInputAction;
-  final int? maxCounter;
   final BoxConstraints? constraints;
   final PasswordValidType passwordValidType;
   final TextStyle textStyle, labelStyle, errorStyle;
   final TextStyle? textStyleCounter;
   final InputBorder? errorBorder, border, focusBorder;
   final Color? focusColor;
-
+  final Function? onListenFocus, onListenController;
+  final bool? showError;
   const WidgetTextField({
     Key? key,
     this.prefix,
@@ -55,26 +51,21 @@ class WidgetTextField extends StatefulWidget {
     this.keyboardType,
     this.onChanged,
     this.validType = ValidType.none,
-    this.showSuffix = true,
     this.obscureText = false,
     this.enabled = true,
     this.onValid,
     this.validator,
     this.hintText,
-    this.colorDisable,
     this.maxLength,
-    this.width,
     this.textCapitalization = TextCapitalization.none,
     this.textError,
     this.onTap,
     this.contentPadding,
-    this.textSize = 17,
     this.maxLines = 1,
     this.minLines,
     required this.focus,
     this.onFieldSubmitted,
     this.textInputAction,
-    this.maxCounter,
     this.constraints,
     this.passwordValidType = PasswordValidType.atLeast8Characters,
     required this.textStyle,
@@ -85,6 +76,9 @@ class WidgetTextField extends StatefulWidget {
     this.focusBorder,
     required this.errorStyle,
     this.focusColor,
+    this.onListenFocus,
+    this.onListenController,
+    this.showError = true,
   }) : super(key: key);
 
   @override
@@ -94,25 +88,39 @@ class WidgetTextField extends StatefulWidget {
 class _WidgetTextFieldState extends State<WidgetTextField> {
   bool hasFocus = false;
   bool valid = false;
+  bool hasChanged = false;
   @override
   void initState() {
     super.initState();
     widget.focus.addListener(() {
+      if (widget.onListenFocus != null) {
+        widget.onListenFocus!();
+      }
       if (widget.focus.hasFocus) {
-        setState(() {
-          hasFocus = true;
-        });
+        if (mounted) {
+          setState(() {
+            hasFocus = true;
+          });
+        }
       } else {
-        setState(() {
-          hasFocus = false;
-        });
+        if (mounted) {
+          setState(() {
+            hasFocus = false;
+          });
+        }
       }
     });
+    if (widget.controller.text.isNotEmpty) {
+      hasChanged = true;
+    }
     checkValidate();
     widget.controller.addListener(checkValidate);
   }
 
   checkValidate() {
+    if (widget.onListenController != null) {
+      widget.onListenController!();
+    }
     switch (widget.validType) {
       case ValidType.none:
         setInValid();
@@ -139,6 +147,9 @@ class _WidgetTextFieldState extends State<WidgetTextField> {
         } else {
           setInValid();
         }
+    }
+    if (widget.onValid != null) {
+      widget.onValid!(valid);
     }
   }
 
@@ -175,6 +186,8 @@ class _WidgetTextFieldState extends State<WidgetTextField> {
         return PluginMessageRequire.messInvalidEmail;
       case ValidType.notEmpty:
         return PluginMessageRequire.messCanNotEmpty;
+      default:
+        return '';
     }
   }
 
@@ -209,11 +222,15 @@ class _WidgetTextFieldState extends State<WidgetTextField> {
       onTap: widget.onTap,
       onChanged: (value) {
         checkValidate();
+        if (hasChanged == false && value.isNotEmpty) {
+          if (mounted) {
+            setState(() {
+              hasChanged = true;
+            });
+          }
+        }
         if (widget.onChanged != null) {
           widget.onChanged!(value);
-        }
-        if (widget.onValid != null) {
-          widget.onValid!(valid);
         }
       },
       keyboardType: widget.keyboardType,
@@ -235,8 +252,8 @@ class _WidgetTextFieldState extends State<WidgetTextField> {
             : null,
         errorMaxLines: 2,
         labelStyle: widget.labelStyle,
-        errorText: ((!valid && widget.controller.text.isNotEmpty) ||
-                widget.textError != null)
+        errorText: ((!valid && hasChanged) || widget.textError != null) &&
+                widget.showError!
             ? getError()
             : null,
         errorBorder: widget.errorBorder ?? errorBorder(),
@@ -260,17 +277,10 @@ class _WidgetTextFieldState extends State<WidgetTextField> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    if (widget.suffixIcon != null)
-                      GestureDetector(
-                        onTap: widget.onSuffixIconTap,
-                        child: widget.suffixIcon,
-                      ),
-                    if (widget.validType != ValidType.none &&
-                        widget.suffixIcon == null)
-                      GestureDetector(
-                        onTap: widget.onSuffixIconTap,
-                        child: valid ? const Icon(Icons.check) : Container(),
-                      ),
+                    GestureDetector(
+                      onTap: widget.onSuffixIconTap,
+                      child: widget.suffixIcon,
+                    ),
                   ],
                 ),
               ),

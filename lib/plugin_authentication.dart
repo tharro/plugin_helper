@@ -4,15 +4,15 @@ import 'package:plugin_helper/plugin_app_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PluginAppConstraints {
-  static String user = 'USER';
-  static String pwd = 'PASSWORD';
-  static String token = 'TOKEN';
-  static String email = 'EMAIL';
-  static String expired = 'EXPIRED';
-  static String firstRun = 'FIRST_RUN';
-  static String login = 'LOGIN';
-  static String verify = 'VERIFY';
-  static String signUp = 'SIGN_UP';
+  static const String user = 'USER';
+  static const String pwd = 'PASSWORD';
+  static const String token = 'TOKEN';
+  static const String email = 'EMAIL';
+  static const String expired = 'EXPIRED';
+  static const String firstRun = 'FIRST_RUN';
+  static const String login = 'LOGIN';
+  static const String verify = 'VERIFY';
+  static const String signUp = 'SIGN_UP';
 }
 
 class PluginAuthentication {
