@@ -40,6 +40,9 @@ dependencies:
   libphonenumber: ^2.0.2
   equatable: ^2.0.0
   collection: ^1.15.0
+  flutter_share_me:
+    git:
+      url: https://github.com/jordanjanaq/flutter_share_me
 
 dev_dependencies:
   flutter_test:
