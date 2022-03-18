@@ -41,8 +41,8 @@ class PluginNotification {
   static Future<void> settingNotification(
       {required Color colorNotification,
       required Function(RemoteMessage message) onMessage,
-      required Function(String payload) onHandleLocalMessage,
-      required Function(RemoteMessage message) onHandleFCMMessage,
+      required Function(String payload) onOpenLocalMessage,
+      required Function(RemoteMessage message) onOpenFCMMessage,
       required Function(String token) onRegisterFCM,
       required String iconNotification,
       String? payload,
@@ -68,7 +68,7 @@ class PluginNotification {
       flutterLocalNotificationsPlugin.initialize(initializationSettings,
           onSelectNotification: (String? data) async {
         _selectLocalNotification(
-            payload: data!, onHandleMessage: onHandleLocalMessage);
+            payload: data!, onHandleMessage: onOpenLocalMessage);
       });
       String? token = await messaging.getToken();
       print('token $token');
@@ -91,7 +91,7 @@ class PluginNotification {
       });
       FirebaseMessaging.onBackgroundMessage(
           (message) => _onMessage(message, onMessage(message)));
-      _setupInteractedMessage(onHandleFCMMessage: onHandleFCMMessage);
+      _setupInteractedMessage(onHandleFCMMessage: onOpenFCMMessage);
     }
   }
 
