@@ -208,11 +208,27 @@ class PluginHelper {
     }
   }
 
+  static String formatUtcTime(
+      {required String dateUtc,
+      required String format,
+      String languageCode = 'en',
+      String? newPattern}) {
+    try {
+      var dateTime = DateFormat(
+        newPattern ?? "yyyy-MM-dd'T'HH:mm:ss",
+      ).parseUtc(dateUtc);
+      var dateLocal = dateTime.toLocal();
+
+      return DateFormat(format, languageCode).format(dateLocal);
+    } catch (e) {
+      return '-:--';
+    }
+  }
+
   static String convertTimeToHourOrDay(
       {required String dateTime, required String format}) {
     try {
       var date = DateFormat(format).parse(dateTime);
-
       final x = DateFormat(format).format(DateTime.now());
       final dateNow = DateFormat(format).parse(x);
       final day = dateNow.difference(date).inDays;

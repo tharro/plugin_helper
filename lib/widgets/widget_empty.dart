@@ -34,6 +34,7 @@ class WidgetEmpty extends StatelessWidget {
         Text(
           message ?? PluginMessageRequire.messEmptyData,
           style: textStyle,
+          textAlign: TextAlign.center,
         )
       ],
     );

@@ -7,7 +7,7 @@ class WidgetAppGridView extends StatefulWidget {
   final double mainAxisSpacing;
   final int crossAxisCount;
   final double childAspectRatio;
-  final Function(dynamic data, int index) renderItem;
+  final Function renderItem;
   final Function()? onLoadMore;
   final RefreshController refreshController;
   final Function() onRefresh;

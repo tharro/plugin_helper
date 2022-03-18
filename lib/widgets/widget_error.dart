@@ -7,14 +7,16 @@ class WidgetError extends StatelessWidget {
   final VoidCallback? onRefresh;
   final RefreshController? refreshController;
   final Widget? iconError;
-  const WidgetError(
-      {Key? key,
-      required this.error,
-      this.onRefresh,
-      this.refreshController,
-      this.onTapRetry,
-      this.iconError})
-      : super(key: key);
+  final TextStyle textStyle;
+  const WidgetError({
+    Key? key,
+    required this.error,
+    required this.textStyle,
+    this.onRefresh,
+    this.refreshController,
+    this.onTapRetry,
+    this.iconError,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var child = Column(
@@ -31,6 +33,7 @@ class WidgetError extends StatelessWidget {
         Text(
           error,
           textAlign: TextAlign.center,
+          style: textStyle,
         )
       ],
     );
