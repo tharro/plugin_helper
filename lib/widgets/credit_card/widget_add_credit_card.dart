@@ -12,6 +12,8 @@ class WidgetAddCreditCard extends StatefulWidget {
   final Color? inputColor, inputErrorColor;
   final Widget? buttonWidget;
   final String? cardNumber, cvvCode, expiryDate;
+  final GlobalKey<FormState> formKey;
+  final Function(CreditCardModel) onCreditCardModelChange;
   const WidgetAddCreditCard(
       {Key? key,
       required this.textStyle,
@@ -27,7 +29,9 @@ class WidgetAddCreditCard extends StatefulWidget {
       this.buttonWidget,
       this.cardNumber = '',
       this.cvvCode = '',
-      this.expiryDate = ''})
+      this.expiryDate = '',
+      required this.formKey,
+      required this.onCreditCardModelChange})
       : super(key: key);
 
   @override
@@ -35,18 +39,14 @@ class WidgetAddCreditCard extends StatefulWidget {
 }
 
 class WidgetAddCreditCardState extends State<WidgetAddCreditCard> {
-  GlobalKey<FormState> formKey = GlobalKey();
-  late CreditCardModel card;
-  bool isLoading = false;
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CreditCardForm(
-          formKey: formKey,
+          formKey: widget.formKey,
           onCreditCardModelChange: (CreditCardModel data) {
-            card = data;
+            widget.onCreditCardModelChange(data);
           },
           themeColor: Colors.transparent,
           obscureCvv: false,
