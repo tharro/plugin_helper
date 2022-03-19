@@ -1,4 +1,4 @@
-package com.shekarmudaliyar.social_share
+package com.tharo.helper.plugin_helper
 
 import android.app.Activity
 import android.content.*
