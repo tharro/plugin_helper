@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:plugin_helper/plugin_helper.dart';
 
 class PluginSocialShare {
   static const MethodChannel _channel = MethodChannel('plugin_helper');
@@ -210,5 +210,13 @@ class PluginSocialShare {
     final Map<String, dynamic> args = <String, dynamic>{"content": content};
     final String? version = await _channel.invokeMethod('shareTelegram', args);
     return version;
+  }
+
+  static void shareEmail({required String message, required String link}) {
+    final Uri _emailLaunchUri = Uri(
+      query: "subject=$message&body=$link",
+      scheme: 'mailto',
+    );
+    PluginHelper.launchUrl(url: _emailLaunchUri.toString());
   }
 }

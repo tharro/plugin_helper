@@ -23,6 +23,8 @@ export 'package:pin_code_fields/pin_code_fields.dart';
 export 'package:mime_type/mime_type.dart';
 export 'package:connectivity_plus/connectivity_plus.dart';
 export 'package:amazon_cognito_identity_dart_2/cognito.dart';
+export 'package:flutter_stripe/flutter_stripe.dart';
+export 'package:collection/collection.dart';
 
 import 'dart:async';
 import 'dart:io';
