@@ -25,6 +25,9 @@ export 'package:connectivity_plus/connectivity_plus.dart';
 export 'package:amazon_cognito_identity_dart_2/cognito.dart';
 export 'package:flutter_stripe/flutter_stripe.dart';
 export 'package:collection/collection.dart';
+export 'package:equatable/equatable.dart';
+export 'package:mime_type/mime_type.dart';
+export 'package:meta/meta.dart';
 
 import 'dart:async';
 import 'dart:io';
@@ -288,5 +291,59 @@ class PluginHelper {
   static Future<void> setFirstInstall() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(PluginAppConstraints.firstRun, false);
+  }
+
+  static void showModalBottom({
+    required BuildContext context,
+    double radiusShape = 16,
+    bool isScrollControlled = true,
+    bool isDismissible = true,
+    ShapeBorder? shape,
+    Color? backgroundColor,
+    double initialChildSize = 0.4,
+    double minChildSize = 0.2,
+    double maxChildSize = 0.75,
+    bool expand = false,
+    DraggableScrollableController? controller,
+    bool isShowLine = true,
+    required Widget child,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: true,
+      backgroundColor: backgroundColor,
+      shape: shape ??
+          RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.vertical(top: Radius.circular(radiusShape))),
+      builder: (context) => Padding(
+        padding: MediaQuery.of(context).viewInsets,
+        child: DraggableScrollableSheet(
+          initialChildSize: initialChildSize,
+          minChildSize: minChildSize,
+          maxChildSize: maxChildSize,
+          expand: expand,
+          controller: controller,
+          builder: (_, controller) => Column(
+            children: [
+              if (isShowLine)
+                const SizedBox(
+                  height: 10,
+                ),
+              if (isShowLine)
+                Container(
+                  width: 70,
+                  height: 8,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(17)),
+                ),
+              child
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
