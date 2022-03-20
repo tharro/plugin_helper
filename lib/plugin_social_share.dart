@@ -219,4 +219,27 @@ class PluginSocialShare {
     );
     PluginHelper.launchUrl(url: _emailLaunchUri.toString());
   }
+
+  static void shareLinked(
+      {required String link, required String msgToast}) async {
+    await PluginSocialShare.copyToClipboard(link);
+    Fluttertoast.showToast(msg: msgToast, toastLength: Toast.LENGTH_LONG);
+    String linkedProtocolUrl;
+    if (Platform.isAndroid) {
+      linkedProtocolUrl = 'linkedin://you';
+    } else {
+      linkedProtocolUrl = 'linkedin://profile/';
+    }
+
+    String fallbackUrl = 'https://www.linkedin.com/';
+
+    try {
+      bool launched = await launch(linkedProtocolUrl, forceSafariVC: false);
+      if (!launched) {
+        await launch(fallbackUrl, forceSafariVC: false);
+      }
+    } catch (e) {
+      await launch(fallbackUrl, forceSafariVC: false);
+    }
+  }
 }

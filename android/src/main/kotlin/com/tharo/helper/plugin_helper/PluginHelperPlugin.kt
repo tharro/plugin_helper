@@ -208,7 +208,7 @@ class PluginHelperPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
             apps["twitter"] = packages.any  { it.packageName.toString().contentEquals("com.twitter.android") }
             apps["whatsapp"] = packages.any  { it.packageName.toString().contentEquals("com.whatsapp") }
             apps["telegram"] = packages.any  { it.packageName.toString().contentEquals("org.telegram.messenger") }
-
+            apps["linkedin"] = packages.any  { it.packageName.toString().contentEquals("com.linkedin.android") }
             result.success(apps)
         } else {
             result.notImplemented()

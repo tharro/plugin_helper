@@ -336,6 +336,12 @@
         } else {
             [installedApps setObject:[NSNumber numberWithBool: NO] forKey:@"messenger"];
         }
+
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"linkedin://"]]) {
+            [installedApps setObject:[NSNumber numberWithBool: YES] forKey:@"linkedin"];
+        } else {
+            [installedApps setObject:[NSNumber numberWithBool: NO] forKey:@"linkedin"];
+        }
         result(installedApps);
     } else {
         result(FlutterMethodNotImplemented);
