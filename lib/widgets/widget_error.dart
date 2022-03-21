@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class WidgetError extends StatelessWidget {
+class MyWidgetError extends StatelessWidget {
   final String error;
   final VoidCallback? onTapRetry;
   final VoidCallback? onRefresh;
   final RefreshController? refreshController;
   final Widget? iconError;
   final TextStyle textStyle;
-  const WidgetError({
+  const MyWidgetError({
     Key? key,
     required this.error,
     required this.textStyle,

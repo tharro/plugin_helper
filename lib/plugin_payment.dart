@@ -2,9 +2,9 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:plugin_helper/plugin_app_config.dart';
 import 'package:plugin_helper/widgets/credit_card/flutter_credit_card.dart';
 
-class PluginPayment {
+class MyPluginPayment {
   static init() {
-    Stripe.publishableKey = PluginAppConfig().stripePublicKey!;
+    Stripe.publishableKey = MyPluginAppConfig().stripePublicKey!;
   }
 
   static Future<String> createTokenWidthCreditCard(

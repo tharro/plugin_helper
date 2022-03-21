@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plugin_helper/widgets/phone_number/intl_phone_number_input.dart';
 
-class WidgetPhoneNumber extends StatefulWidget {
+class MyWidgetPhoneNumber extends StatefulWidget {
   final String? label;
   final TextEditingController? controller;
   final PhoneNumber? initialValue;
@@ -24,7 +24,7 @@ class WidgetPhoneNumber extends StatefulWidget {
   final BoxDecoration? boxDecorationAll;
   final double spaceBetweenSelectorAndTextField;
   final double paddingIconRight;
-  const WidgetPhoneNumber({
+  const MyWidgetPhoneNumber({
     Key? key,
     this.label,
     this.controller,
@@ -54,7 +54,7 @@ class WidgetPhoneNumber extends StatefulWidget {
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
 }
 
-class _WidgetPhoneNumberState extends State<WidgetPhoneNumber> {
+class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
   bool _showIcon = false;
   bool _hasFocus = false;
   bool _isValidate = true;

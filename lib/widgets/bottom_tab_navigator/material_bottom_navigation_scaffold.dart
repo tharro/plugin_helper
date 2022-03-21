@@ -1,11 +1,10 @@
 import 'index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 /// A Scaffold with a configured BottomNavigationBar, separate
 /// Navigators for each tab view and state retaining across tab switches.
-class WidgetMaterialBottomNavigationScaffold extends StatefulWidget {
-  const WidgetMaterialBottomNavigationScaffold({
+class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
+  const MyWidgetMaterialBottomNavigationScaffold({
     required this.navigationBarItems,
     required this.onItemSelected,
     required this.selectedIndex,
@@ -16,7 +15,7 @@ class WidgetMaterialBottomNavigationScaffold extends StatefulWidget {
   }) : super(key: key);
 
   /// List of the tabs to be displayed with their respective navigator's keys.
-  final List<WidgetBottomNavigationTab> navigationBarItems;
+  final List<MyWidgetBottomNavigationTab> navigationBarItems;
 
   /// Called when a tab selection occurs.
   final ValueChanged<int> onItemSelected;
@@ -33,8 +32,8 @@ class WidgetMaterialBottomNavigationScaffold extends StatefulWidget {
 }
 
 class _MaterialBottomNavigationScaffoldState
-    extends State<WidgetMaterialBottomNavigationScaffold>
-    with TickerProviderStateMixin<WidgetMaterialBottomNavigationScaffold> {
+    extends State<MyWidgetMaterialBottomNavigationScaffold>
+    with TickerProviderStateMixin<MyWidgetMaterialBottomNavigationScaffold> {
   final List<_MaterialBottomNavigationTab> materialNavigationBarItems = [];
   final List<AnimationController> _animationControllers = [];
 
@@ -185,7 +184,7 @@ class _MaterialBottomNavigationScaffoldState
 
 /// Extension class of BottomNavigationTab that adds another GlobalKey to it
 /// in order to use it within the KeyedSubtree widget.
-class _MaterialBottomNavigationTab extends WidgetBottomNavigationTab {
+class _MaterialBottomNavigationTab extends MyWidgetBottomNavigationTab {
   const _MaterialBottomNavigationTab({
     required BottomNavigationBarItem bottomNavigationBarItem,
     required GlobalKey<NavigatorState> navigatorKey,

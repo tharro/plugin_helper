@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:plugin_helper/plugin_helper.dart';
 import 'package:plugin_helper/plugin_message_require.dart';
 
-class ConnectivityService {
+class MyPluginConnectivity {
   static ConnectivityResult _connectionStatus = ConnectivityResult.none;
   static final Connectivity _connectivity = Connectivity();
   static late StreamSubscription<ConnectivityResult> _connectivitySubscription;
@@ -30,14 +30,14 @@ class ConnectivityService {
     if (isChecking == false) {
       if (result == ConnectivityResult.none) {
         Fluttertoast.showToast(
-            msg: PluginMessageRequire.messNoConnection,
+            msg: MyPluginMessageRequire.messNoConnection,
             toastLength: Toast.LENGTH_LONG);
       }
       if ([ConnectivityResult.mobile, ConnectivityResult.wifi]
               .contains(result) &&
           _connectionStatus == ConnectivityResult.none) {
         Fluttertoast.showToast(
-            msg: PluginMessageRequire.messReconnecting,
+            msg: MyPluginMessageRequire.messReconnecting,
             toastLength: Toast.LENGTH_LONG);
         if (onReconnect != null) {
           onReconnect();

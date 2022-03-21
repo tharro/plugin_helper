@@ -5,7 +5,7 @@ import 'package:plugin_helper/plugin_message_require.dart';
 
 enum ValidType { none, password, email, notEmpty }
 
-class WidgetTextField extends StatefulWidget {
+class MyWidgetTextField extends StatefulWidget {
   final String? label;
   final TextEditingController controller;
   final Widget? suffixIcon;
@@ -39,7 +39,7 @@ class WidgetTextField extends StatefulWidget {
   final Color? focusColor;
   final Function? onListenFocus, onListenController;
   final bool? showError;
-  const WidgetTextField({
+  const MyWidgetTextField({
     Key? key,
     this.prefix,
     this.prefixIcon,
@@ -85,7 +85,7 @@ class WidgetTextField extends StatefulWidget {
   _WidgetTextFieldState createState() => _WidgetTextFieldState();
 }
 
-class _WidgetTextFieldState extends State<WidgetTextField> {
+class _WidgetTextFieldState extends State<MyWidgetTextField> {
   bool hasFocus = false;
   bool valid = false;
   bool hasChanged = false;
@@ -126,7 +126,7 @@ class _WidgetTextFieldState extends State<WidgetTextField> {
         setInValid();
         break;
       case ValidType.password:
-        if (PluginHelper.isValidPassword(
+        if (MyPluginHelper.isValidPassword(
             password: widget.controller.text,
             passwordValidType: widget.passwordValidType)) {
           setValid();
@@ -135,7 +135,7 @@ class _WidgetTextFieldState extends State<WidgetTextField> {
         }
         break;
       case ValidType.email:
-        if (PluginHelper.isValidateEmail(email: widget.controller.text)) {
+        if (MyPluginHelper.isValidateEmail(email: widget.controller.text)) {
           setValid();
         } else {
           setInValid();
@@ -181,11 +181,11 @@ class _WidgetTextFieldState extends State<WidgetTextField> {
       case ValidType.none:
         return '';
       case ValidType.password:
-        return PluginMessageRequire.messWeakPassword;
+        return MyPluginMessageRequire.messWeakPassword;
       case ValidType.email:
-        return PluginMessageRequire.messInvalidEmail;
+        return MyPluginMessageRequire.messInvalidEmail;
       case ValidType.notEmpty:
-        return PluginMessageRequire.messCanNotEmpty;
+        return MyPluginMessageRequire.messCanNotEmpty;
       default:
         return '';
     }

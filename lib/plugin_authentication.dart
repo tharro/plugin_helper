@@ -3,7 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:plugin_helper/plugin_app_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PluginAppConstraints {
+class MyPluginAppConstraints {
   static const String user = 'USER';
   static const String pwd = 'PASSWORD';
   static const String token = 'TOKEN';
@@ -15,10 +15,10 @@ class PluginAppConstraints {
   static const String signUp = 'SIGN_UP';
 }
 
-class PluginAuthentication {
+class MyPluginAuthentication {
   static final userPool = CognitoUserPool(
-    PluginAppConfig().userPoolId!,
-    PluginAppConfig().clientId!,
+    MyPluginAppConfig().userPoolId!,
+    MyPluginAppConfig().clientId!,
   );
 
   static const storage = FlutterSecureStorage();
@@ -46,8 +46,8 @@ class PluginAuthentication {
   static Future<dynamic> getUserAndPassword() async {
     try {
       return {
-        'user': await storage.read(key: PluginAppConstraints.user),
-        'pwd': await storage.read(key: PluginAppConstraints.pwd),
+        'user': await storage.read(key: MyPluginAppConstraints.user),
+        'pwd': await storage.read(key: MyPluginAppConstraints.pwd),
       };
     } catch (e) {
       return {
@@ -61,28 +61,28 @@ class PluginAuthentication {
       {required String user,
       required String pass,
       required String token}) async {
-    await storage.write(key: PluginAppConstraints.user, value: user);
-    await storage.write(key: PluginAppConstraints.pwd, value: pass);
-    await storage.write(key: PluginAppConstraints.token, value: token);
+    await storage.write(key: MyPluginAppConstraints.user, value: user);
+    await storage.write(key: MyPluginAppConstraints.pwd, value: pass);
+    await storage.write(key: MyPluginAppConstraints.token, value: token);
     final expireTimeInTimestamp =
         DateTime.now().millisecondsSinceEpoch + (1 * 60 * 60 * 1000);
     await storage.write(
-        key: PluginAppConstraints.expired,
+        key: MyPluginAppConstraints.expired,
         value: expireTimeInTimestamp.toString());
 
     return;
   }
 
   static Future<dynamic> getToken() async {
-    return await storage.read(key: PluginAppConstraints.token);
+    return await storage.read(key: MyPluginAppConstraints.token);
   }
 
   static Future<bool> hasExpireToken() async {
     try {
       final currentTime = DateTime.now().millisecondsSinceEpoch;
-      if (await storage.read(key: PluginAppConstraints.expired) != null) {
-        final expireTime =
-            int.parse((await storage.read(key: PluginAppConstraints.expired))!);
+      if (await storage.read(key: MyPluginAppConstraints.expired) != null) {
+        final expireTime = int.parse(
+            (await storage.read(key: MyPluginAppConstraints.expired))!);
         if ((expireTime - currentTime) < 60000) {
           return true;
         }
@@ -95,7 +95,7 @@ class PluginAuthentication {
 
   static Future<bool> hasToken() async {
     try {
-      String? token = await storage.read(key: PluginAppConstraints.token);
+      String? token = await storage.read(key: MyPluginAppConstraints.token);
       if (token != null) {
         return true;
       } else {
@@ -204,7 +204,7 @@ class PluginAuthentication {
     await cognitoUser.authenticateUser(authDetails);
     try {
       await cognitoUser.changePassword(currentPassword, newPassword);
-      await storage.write(key: PluginAppConstraints.pwd, value: newPassword);
+      await storage.write(key: MyPluginAppConstraints.pwd, value: newPassword);
       return true;
     } catch (e) {
       rethrow;
@@ -240,8 +240,8 @@ class PluginAuthentication {
   }
 
   static Future<CognitoUser> getCognitoUserWithAuthentication() async {
-    final userName = await storage.read(key: PluginAppConstraints.user);
-    final password = await storage.read(key: PluginAppConstraints.pwd);
+    final userName = await storage.read(key: MyPluginAppConstraints.user);
+    final password = await storage.read(key: MyPluginAppConstraints.pwd);
     final cognitoUser = CognitoUser(userName, userPool);
     final authDetails = AuthenticationDetails(
       username: userName,
@@ -263,8 +263,8 @@ class PluginAuthentication {
   }
 
   static Future<CognitoUserSession?> getSession() async {
-    final userName = await storage.read(key: PluginAppConstraints.user);
-    final password = await storage.read(key: PluginAppConstraints.pwd);
+    final userName = await storage.read(key: MyPluginAppConstraints.user);
+    final password = await storage.read(key: MyPluginAppConstraints.pwd);
     final cognitoUser = CognitoUser(userName, userPool);
     final authDetails = AuthenticationDetails(
       username: userName,

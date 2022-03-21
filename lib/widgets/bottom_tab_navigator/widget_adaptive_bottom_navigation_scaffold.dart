@@ -5,7 +5,7 @@ import 'index.dart';
 /// material's and cupertino's bottom navigation pattern.
 class AdaptiveBottomNavigationScaffold extends StatefulWidget {
   /// List of the tabs to be displayed with their respective navigator's keys.
-  final List<WidgetBottomNavigationTab> navigationBarItems;
+  final List<MyWidgetBottomNavigationTab> navigationBarItems;
   final TextStyle selectedLabelStyle, unselectedLabelStyle;
   final Widget? customBottomBar;
   const AdaptiveBottomNavigationScaffold({
@@ -44,7 +44,7 @@ class AdaptiveBottomNavigationScaffoldState
       child: _buildMaterial(context));
 
   Widget _buildMaterial(BuildContext context) =>
-      WidgetMaterialBottomNavigationScaffold(
+      MyWidgetMaterialBottomNavigationScaffold(
         navigationBarItems: widget.navigationBarItems,
         onItemSelected: onTabSelected,
         selectedIndex: _currentlySelectedIndex,

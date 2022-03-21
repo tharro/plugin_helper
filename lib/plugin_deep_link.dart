@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 
-class PluginDeepLink {
+class MyPluginDeepLink {
   static StreamSubscription<Map>? streamSubscription;
   static init({required Function(Map<dynamic, dynamic> data) onDeepLink}) {
     streamSubscription = FlutterBranchSdk.initSession().listen((data) async {

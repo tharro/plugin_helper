@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class WidgetDoubleCheckToCloseApp extends StatefulWidget {
+class MyWidgetDoubleCheckToCloseApp extends StatefulWidget {
   final Widget child;
   final String message;
-  const WidgetDoubleCheckToCloseApp(
+  const MyWidgetDoubleCheckToCloseApp(
       {Key? key, required this.child, required this.message})
       : super(key: key);
   @override
   _DoubleCheckToCloseAppState createState() => _DoubleCheckToCloseAppState();
 }
 
-class _DoubleCheckToCloseAppState extends State<WidgetDoubleCheckToCloseApp> {
+class _DoubleCheckToCloseAppState extends State<MyWidgetDoubleCheckToCloseApp> {
   DateTime? currentBackPressTime;
   Future<bool> onWillPop() {
     DateTime now = DateTime.now();

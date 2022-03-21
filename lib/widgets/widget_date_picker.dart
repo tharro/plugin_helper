@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart' as Date;
 
-class WidgetDatePicker extends StatelessWidget {
-  const WidgetDatePicker(
+class MyWidgetDatePicker extends StatelessWidget {
+  const MyWidgetDatePicker(
       {Key? key,
       this.date,
       required this.onPress,

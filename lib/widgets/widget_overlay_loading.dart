@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:plugin_helper/widgets/widget_loading.dart';
 
-class WidgetOverlayLoading extends StatelessWidget {
+class MyWidgetOverlayLoading extends StatelessWidget {
   final Widget child;
   final bool isLoading;
   final Color? backgroundColor;
   final Widget? loadingWidget;
-  const WidgetOverlayLoading(
+  const MyWidgetOverlayLoading(
       {Key? key,
       required this.child,
       required this.isLoading,
@@ -39,7 +39,7 @@ class WidgetOverlayLoading extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     padding: const EdgeInsets.all(20),
-                    child: const WidgetLoading(),
+                    child: const MyWidgetLoading(),
                   ),
             ),
           )

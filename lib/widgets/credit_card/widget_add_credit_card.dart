@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:plugin_helper/widgets/credit_card/flutter_credit_card.dart';
 import 'package:plugin_helper/widgets/credit_card/localized_text_model.dart';
 
-class WidgetAddCreditCard extends StatefulWidget {
+class MyWidgetAddCreditCard extends StatefulWidget {
   final TextStyle textStyle;
   final InputDecoration? cardNumberDecorationCustom,
       expiryDateDecorationCustom,
@@ -14,7 +14,7 @@ class WidgetAddCreditCard extends StatefulWidget {
   final String? cardNumber, cvvCode, expiryDate;
   final GlobalKey<FormState> formKey;
   final Function(CreditCardModel) onCreditCardModelChange;
-  const WidgetAddCreditCard(
+  const MyWidgetAddCreditCard(
       {Key? key,
       required this.textStyle,
       this.cardNumberDecorationCustom,
@@ -35,10 +35,10 @@ class WidgetAddCreditCard extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<WidgetAddCreditCard> createState() => WidgetAddCreditCardState();
+  State<MyWidgetAddCreditCard> createState() => MyWidgetAddCreditCardState();
 }
 
-class WidgetAddCreditCardState extends State<WidgetAddCreditCard> {
+class MyWidgetAddCreditCardState extends State<MyWidgetAddCreditCard> {
   @override
   Widget build(BuildContext context) {
     return Column(

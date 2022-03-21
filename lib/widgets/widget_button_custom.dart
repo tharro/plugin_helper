@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class WidgetButtonCustom extends StatelessWidget {
+class MyWidgetButtonCustom extends StatelessWidget {
   final Function() onPressed;
   final String title;
   final bool isSecondary, isOutLine;
@@ -17,7 +17,7 @@ class WidgetButtonCustom extends StatelessWidget {
   final bool enabled;
   final double? width, height, elevation;
   final Widget? icon;
-  const WidgetButtonCustom({
+  const MyWidgetButtonCustom({
     Key? key,
     required this.onPressed,
     required this.title,

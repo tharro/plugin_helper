@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:date_range_picker/date_range_picker.dart' as DateRangePicker;
 
-class WidgetDateRangePickerCustom extends StatelessWidget {
+class MyWidgetDateRangePickerCustom extends StatelessWidget {
   final Widget child;
   final String? initialFirstDate;
   final String? initialLastDate;
@@ -10,7 +10,7 @@ class WidgetDateRangePickerCustom extends StatelessWidget {
   final TextStyle textStyleButton;
   final Color primaryColor, accentColor, iconColor;
   final int? firstDate, lastDate;
-  const WidgetDateRangePickerCustom(
+  const MyWidgetDateRangePickerCustom(
       {Key? key,
       required this.child,
       required this.onSelectedDate,

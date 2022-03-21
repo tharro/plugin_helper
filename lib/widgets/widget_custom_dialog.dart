@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class WidgetCustomDialog extends StatefulWidget {
+class MyWidgetCustomDialog extends StatefulWidget {
   final String title, descriptions;
   final Function()? onClose;
   final bool? isShowSecondButton;
@@ -13,7 +13,7 @@ class WidgetCustomDialog extends StatefulWidget {
   final Widget? iconClose;
   final double? radius, space;
   final bool? isColumn;
-  const WidgetCustomDialog({
+  const MyWidgetCustomDialog({
     Key? key,
     required this.title,
     required this.descriptions,
@@ -35,7 +35,7 @@ class WidgetCustomDialog extends StatefulWidget {
   _CustomDialogState createState() => _CustomDialogState();
 }
 
-class _CustomDialogState extends State<WidgetCustomDialog> {
+class _CustomDialogState extends State<MyWidgetCustomDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(

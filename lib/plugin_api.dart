@@ -10,7 +10,7 @@ import 'package:plugin_helper/plugin_message_require.dart';
 
 enum Method { post, put, patch, delete, get }
 
-class PluginApi {
+class MyPluginApi {
   static final dio = Dio();
 
   static Future<Response> request(
@@ -33,10 +33,10 @@ class PluginApi {
     };
 
     if (useIDToken) {
-      if (await PluginAuthentication.hasExpireToken()) {
-        await PluginAuthentication.refreshToken();
+      if (await MyPluginAuthentication.hasExpireToken()) {
+        await MyPluginAuthentication.refreshToken();
       }
-      final _token = await PluginAuthentication.getToken();
+      final _token = await MyPluginAuthentication.getToken();
       headers['Authorization'] = 'Bearer $_token';
     }
 
@@ -89,7 +89,7 @@ class PluginApi {
       if (result == ConnectivityResult.none) {
         throw PlatformException(
           code: 'NOT_CONNECTED',
-          message: PluginMessageRequire.messNoConnection,
+          message: MyPluginMessageRequire.messNoConnection,
         );
       } else {
         rethrow;

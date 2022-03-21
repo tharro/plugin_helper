@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:plugin_helper/plugin_helper.dart';
 
-class PluginNotification {
+class MyPluginNotification {
   static FirebaseMessaging messaging = FirebaseMessaging.instance;
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -125,10 +125,10 @@ class PluginNotification {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
       main();
-      if (await PluginHelper.isFirstInstall()) {
+      if (await MyPluginHelper.isFirstInstall()) {
         FlutterSecureStorage storage = const FlutterSecureStorage();
         await storage.deleteAll();
-        PluginHelper.setFirstInstall();
+        MyPluginHelper.setFirstInstall();
       }
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;

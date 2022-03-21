@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 enum ImageType { none, avatar }
 
-class WidgetCacheImageNetwork extends StatelessWidget {
+class MyWidgetCacheImageNetwork extends StatelessWidget {
   final String imageUrl;
   final double? width;
   final double? height;
@@ -13,7 +13,7 @@ class WidgetCacheImageNetwork extends StatelessWidget {
 
   final Widget? errorWidget;
   final ImageType imageType;
-  const WidgetCacheImageNetwork({
+  const MyWidgetCacheImageNetwork({
     Key? key,
     required this.imageUrl,
     this.width,

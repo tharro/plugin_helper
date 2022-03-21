@@ -56,7 +56,7 @@ enum PasswordValidType {
   strongPassword,
 }
 
-class PluginHelper {
+class MyPluginHelper {
   static bool isValidateEmail({required String email}) {
     String p =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -204,12 +204,12 @@ class PluginHelper {
         await launch(url);
       } else {
         Fluttertoast.showToast(
-            msg: error ?? PluginMessageRequire.messCanNotLaunchURL,
+            msg: error ?? MyPluginMessageRequire.messCanNotLaunchURL,
             toastLength: Toast.LENGTH_LONG);
       }
     } catch (e) {
       Fluttertoast.showToast(
-          msg: error ?? PluginMessageRequire.messCanNotLaunchURL,
+          msg: error ?? MyPluginMessageRequire.messCanNotLaunchURL,
           toastLength: Toast.LENGTH_LONG);
     }
   }
@@ -286,12 +286,12 @@ class PluginHelper {
 
   static Future<bool> isFirstInstall() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(PluginAppConstraints.firstRun) ?? true;
+    return prefs.getBool(MyPluginAppConstraints.firstRun) ?? true;
   }
 
   static Future<void> setFirstInstall() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(PluginAppConstraints.firstRun, false);
+    await prefs.setBool(MyPluginAppConstraints.firstRun, false);
   }
 
   static void showModalBottom({

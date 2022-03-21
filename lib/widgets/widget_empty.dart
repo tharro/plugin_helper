@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:plugin_helper/plugin_helper.dart';
 import 'package:plugin_helper/plugin_message_require.dart';
 
-class WidgetEmpty extends StatelessWidget {
+class MyWidgetEmpty extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
   final CrossAxisAlignment crossAxisAlignment;
   final String? message;
@@ -10,7 +10,7 @@ class WidgetEmpty extends StatelessWidget {
   final Widget? icon;
   final VoidCallback? onRefresh;
   final RefreshController? refreshController;
-  const WidgetEmpty(
+  const MyWidgetEmpty(
       {Key? key,
       this.mainAxisAlignment = MainAxisAlignment.center,
       this.message,
@@ -32,7 +32,7 @@ class WidgetEmpty extends StatelessWidget {
             height: 14,
           ),
         Text(
-          message ?? PluginMessageRequire.messEmptyData,
+          message ?? MyPluginMessageRequire.messEmptyData,
           style: textStyle,
           textAlign: TextAlign.center,
         )

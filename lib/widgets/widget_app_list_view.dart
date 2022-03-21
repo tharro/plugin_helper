@@ -5,7 +5,7 @@ import 'package:plugin_helper/plugin_message_require.dart';
 import 'package:plugin_helper/widgets/widget_loading.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class WidgetAppListView extends StatefulWidget {
+class MyWidgetAppListView extends StatefulWidget {
   final List data;
   final Function()? onLoadMore;
   final Axis scrollDirection;
@@ -21,7 +21,7 @@ class WidgetAppListView extends StatefulWidget {
   final ScrollController? scrollController;
   final Widget? loadingWidget;
   final String? refreshingText, completeText, releaseText, idleText;
-  const WidgetAppListView({
+  const MyWidgetAppListView({
     Key? key,
     required this.data,
     this.onLoadMore,
@@ -46,7 +46,7 @@ class WidgetAppListView extends StatefulWidget {
   AppListViewState createState() => AppListViewState();
 }
 
-class AppListViewState extends State<WidgetAppListView> {
+class AppListViewState extends State<MyWidgetAppListView> {
   late ScrollController controller;
   @override
   void initState() {
@@ -96,7 +96,7 @@ class AppListViewState extends State<WidgetAppListView> {
         itemBuilder: (context, index) {
           if (index == widget.data.length) {
             return Center(
-              child: widget.loadingWidget ?? const WidgetLoading(),
+              child: widget.loadingWidget ?? const MyWidgetLoading(),
             );
           }
           return widget.renderItem(widget.data[index], index);
@@ -126,9 +126,9 @@ class ClassHeaderIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClassicHeader(
-        refreshingText: PluginMessageRequire.messRefreshingText,
-        completeText: PluginMessageRequire.messCompleteText,
-        releaseText: PluginMessageRequire.messReleaseText,
-        idleText: PluginMessageRequire.messIdleText);
+        refreshingText: MyPluginMessageRequire.messRefreshingText,
+        completeText: MyPluginMessageRequire.messCompleteText,
+        releaseText: MyPluginMessageRequire.messReleaseText,
+        idleText: MyPluginMessageRequire.messIdleText);
   }
 }

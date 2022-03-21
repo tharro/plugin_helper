@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 
 /// Contains the necessary parameters for building either a
 /// [MaterialBottomNavigationScaffold] or [CupertinoBottomNavigationScaffold].
-class WidgetBottomNavigationTab {
-  const WidgetBottomNavigationTab({
+class MyWidgetBottomNavigationTab {
+  const MyWidgetBottomNavigationTab({
     required this.bottomNavigationBarItem,
     required this.navigatorKey,
     required this.initialPageBuilder,

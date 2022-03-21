@@ -5,7 +5,7 @@ import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'package:plugin_helper/plugin_helper.dart';
 
-class PluginSocialShare {
+class MyPluginSocialShare {
   static const MethodChannel _channel = MethodChannel('plugin_helper');
 
   static Future<String?> shareInstagramStory(
@@ -217,12 +217,12 @@ class PluginSocialShare {
       query: "subject=$message&body=$link",
       scheme: 'mailto',
     );
-    PluginHelper.launchUrl(url: _emailLaunchUri.toString());
+    MyPluginHelper.launchUrl(url: _emailLaunchUri.toString());
   }
 
   static void shareLinked(
       {required String link, required String msgToast}) async {
-    await PluginSocialShare.copyToClipboard(link);
+    await MyPluginSocialShare.copyToClipboard(link);
     Fluttertoast.showToast(msg: msgToast, toastLength: Toast.LENGTH_LONG);
     String linkedProtocolUrl;
     if (Platform.isAndroid) {

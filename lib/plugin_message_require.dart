@@ -1,4 +1,4 @@
-class PluginMessageRequire {
+class MyPluginMessageRequire {
   static String messNoConnection = 'No internet connection';
   static String messCanNotLaunchURL = 'Can not launch URL';
   static String messRefreshingText = "...Refreshing";

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class WidgetHeader {
+class MyWidgetHeader {
   static AppBar header({
     required BuildContext context,
     List<Widget>? actions,

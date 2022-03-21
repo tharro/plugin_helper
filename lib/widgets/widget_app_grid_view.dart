@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class WidgetAppGridView extends StatefulWidget {
+class MyWidgetAppGridView extends StatefulWidget {
   final List data;
   final double crossAxisSpacing;
   final double mainAxisSpacing;
@@ -14,7 +14,7 @@ class WidgetAppGridView extends StatefulWidget {
   final bool isLoadMore;
   final Color colorRefresh;
   final Widget? loadingLoadmoreWidget;
-  const WidgetAppGridView(
+  const MyWidgetAppGridView(
       {Key? key,
       required this.data,
       required this.renderItem,
@@ -33,12 +33,12 @@ class WidgetAppGridView extends StatefulWidget {
   _AppGridViewState createState() => _AppGridViewState();
 }
 
-class _AppGridViewState extends State<WidgetAppGridView> {
+class _AppGridViewState extends State<MyWidgetAppGridView> {
   late ScrollController controller;
   @override
   void initState() {
     super.initState();
-    controller = new ScrollController()..addListener(_scrollListener);
+    controller = ScrollController()..addListener(_scrollListener);
   }
 
   @override

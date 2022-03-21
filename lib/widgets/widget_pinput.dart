@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class WidgetPinPut extends StatelessWidget {
+class MyWidgetPinPut extends StatelessWidget {
   final Function(String value)? onCompleted;
   final TextEditingController controller;
   final double paddingHorizontal;
@@ -19,7 +19,7 @@ class WidgetPinPut extends StatelessWidget {
       selectedColor;
   final double? borderWidth;
   final PinCodeFieldShape? shape;
-  const WidgetPinPut({
+  const MyWidgetPinPut({
     Key? key,
     this.onCompleted,
     required this.controller,
