@@ -296,54 +296,56 @@ class PluginHelper {
   static void showModalBottom({
     required BuildContext context,
     double radiusShape = 16,
-    bool isScrollControlled = true,
     bool isDismissible = true,
     ShapeBorder? shape,
     Color? backgroundColor,
-    double initialChildSize = 0.4,
-    double minChildSize = 0.2,
-    double maxChildSize = 0.75,
-    bool expand = false,
-    DraggableScrollableController? controller,
     bool isShowLine = true,
+    Widget? customLine,
     required Widget child,
   }) {
     showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      isDismissible: true,
-      backgroundColor: backgroundColor,
-      shape: shape ??
-          RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.vertical(top: Radius.circular(radiusShape))),
-      builder: (context) => Padding(
-        padding: MediaQuery.of(context).viewInsets,
-        child: DraggableScrollableSheet(
-          initialChildSize: initialChildSize,
-          minChildSize: minChildSize,
-          maxChildSize: maxChildSize,
-          expand: expand,
-          controller: controller,
-          builder: (_, controller) => Column(
-            children: [
-              if (isShowLine)
-                const SizedBox(
-                  height: 10,
-                ),
-              if (isShowLine)
-                Container(
-                  width: 70,
-                  height: 8,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(17)),
-                ),
-              child
-            ],
-          ),
-        ),
-      ),
-    );
+        context: context,
+        isScrollControlled: true,
+        isDismissible: isDismissible,
+        backgroundColor: backgroundColor,
+        shape: shape ??
+            RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.vertical(top: Radius.circular(radiusShape))),
+        builder: (context) => Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: Container(
+                constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height - 100),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (isShowLine)
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    if (isShowLine)
+                      customLine ??
+                          Container(
+                            width: 70,
+                            height: 7,
+                            decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                borderRadius: BorderRadius.circular(17)),
+                          ),
+                    if (isShowLine)
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    Expanded(
+                        child: SingleChildScrollView(
+                            child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        child,
+                      ],
+                    ))),
+                  ],
+                ))));
   }
 }
