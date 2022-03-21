@@ -1,5 +1,5 @@
-import 'package:plugin_helper/google_map/address_detail_model.dart';
-import 'package:plugin_helper/google_map/address_model.dart';
+import 'package:plugin_helper/models/google_map/address_detail_model.dart';
+import 'package:plugin_helper/models/google_map/address_model.dart';
 import 'package:plugin_helper/plugin_api.dart';
 import 'package:plugin_helper/plugin_app_config.dart';
 
