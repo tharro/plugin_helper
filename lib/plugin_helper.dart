@@ -28,6 +28,7 @@ export 'package:collection/collection.dart';
 export 'package:equatable/equatable.dart';
 export 'package:mime_type/mime_type.dart';
 export 'package:meta/meta.dart';
+export 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 import 'dart:async';
 import 'dart:io';
@@ -302,12 +303,15 @@ class PluginHelper {
     bool isShowLine = true,
     Widget? customLine,
     required Widget child,
+    double? height,
   }) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         isDismissible: isDismissible,
         backgroundColor: backgroundColor,
+        constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * 0.98),
         shape: shape ??
             RoundedRectangleBorder(
                 borderRadius:
@@ -316,7 +320,8 @@ class PluginHelper {
             padding: MediaQuery.of(context).viewInsets,
             child: Container(
                 constraints: BoxConstraints(
-                    maxHeight: MediaQuery.of(context).size.height - 100),
+                    maxHeight:
+                        height ?? MediaQuery.of(context).size.height * 0.5),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -327,8 +332,8 @@ class PluginHelper {
                     if (isShowLine)
                       customLine ??
                           Container(
-                            width: 70,
-                            height: 7,
+                            width: 60,
+                            height: 6,
                             decoration: BoxDecoration(
                                 color: Colors.grey[300],
                                 borderRadius: BorderRadius.circular(17)),

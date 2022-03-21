@@ -40,6 +40,8 @@ dependencies:
   libphonenumber: ^2.0.2
   equatable: any
   collection: any
+  flutter_datetime_picker: any
+  date_range_picker: any
 
 dev_dependencies:
   flutter_test:
