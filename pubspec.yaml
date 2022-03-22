@@ -42,6 +42,10 @@ dependencies:
   collection: any
   flutter_datetime_picker: any
   date_range_picker: any
+  google_maps_cluster_manager: any
+  google_maps_flutter: any
+  flutter_cache_manager: any
+  image: any
 
 dev_dependencies:
   flutter_test:
