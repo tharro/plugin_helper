@@ -306,7 +306,7 @@ class MyPluginHelper {
     bool isShowLine = true,
     Widget? customLine,
     required Widget child,
-    double? height,
+    double? maxHeight,
   }) {
     showModalBottomSheet(
         context: context,
@@ -324,7 +324,7 @@ class MyPluginHelper {
             child: Container(
                 constraints: BoxConstraints(
                     maxHeight:
-                        height ?? MediaQuery.of(context).size.height * 0.5),
+                        maxHeight ?? MediaQuery.of(context).size.height * 0.5),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
