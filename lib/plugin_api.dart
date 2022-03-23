@@ -89,7 +89,7 @@ class MyPluginApi {
       if (result == ConnectivityResult.none) {
         throw PlatformException(
           code: 'NOT_CONNECTED',
-          message: MyPluginMessageRequire.messNoConnection,
+          message: MyPluginMessageRequire.noConnection,
         );
       } else {
         rethrow;

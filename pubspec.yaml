@@ -46,6 +46,7 @@ dependencies:
   google_maps_flutter: any
   flutter_cache_manager: any
   image: any
+  ndialog: any
 
 dev_dependencies:
   flutter_test:

@@ -126,9 +126,9 @@ class ClassHeaderIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClassicHeader(
-        refreshingText: MyPluginMessageRequire.messRefreshingText,
-        completeText: MyPluginMessageRequire.messCompleteText,
-        releaseText: MyPluginMessageRequire.messReleaseText,
-        idleText: MyPluginMessageRequire.messIdleText);
+        refreshingText: MyPluginMessageRequire.refreshingText,
+        completeText: MyPluginMessageRequire.completeText,
+        releaseText: MyPluginMessageRequire.releaseText,
+        idleText: MyPluginMessageRequire.idleText);
   }
 }

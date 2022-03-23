@@ -37,12 +37,14 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
+import 'package:ndialog/ndialog.dart';
 import 'package:new_version/new_version.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -145,56 +147,62 @@ class MyPluginHelper {
     return permission == PermissionStatus.granted;
   }
 
-  static void _onReceiveProgress({int? received, int? total}) {
-    if (total != -1) {
-      if ((received! / total! * 100).toStringAsFixed(0) == '100') {}
-    }
-  }
-
-  static Future<void> _startDownload(
-      {required String savePath,
-      required String url,
-      required Function() onComplete,
-      required Function(String error) onError,
-      CancelToken? cancelToken}) async {
-    Map<String, dynamic> result = {
-      'isSuccess': false,
-      'filePath': null,
-      'error': null,
-    };
-    try {
-      var response = await dio.download(url, savePath, cancelToken: cancelToken,
-          onReceiveProgress: (int received, int total) {
-        _onReceiveProgress(received: received, total: total);
-      });
-      result['isSuccess'] = response.statusCode == 200;
-      result['filePath'] = savePath;
-      onComplete();
-    } catch (ex) {
-      result['error'] = ex.toString();
-      onError(ex.toString());
-    }
-  }
-
-  static Future<void> download({
-    required String url,
-    required Function() onComplete,
-    required Function(String error) onError,
-    required Function() onCancel,
-    required CancelToken cancelToken,
+  Future<String> downloadFiles({
+    required BuildContext context,
+    required List<String> links,
+    required Function onSuccess,
+    required Function onError,
   }) async {
-    var isPermissionStatusGranted = await requestPermissions();
-    if (isPermissionStatusGranted) {
-      var dir = await _getDownloadDirectory();
-      var savePath = path.join(dir?.path ?? '', url.split('/').last);
-      await _startDownload(
-          savePath: savePath,
-          url: url,
-          onComplete: onComplete,
-          onError: onError,
-          cancelToken: cancelToken);
-    } else {
-      onCancel();
+    try {
+      if (links == []) {
+        Fluttertoast.showToast(msg: MyPluginMessageRequire.linkEmpty);
+        return '';
+      }
+      final isPermissionStatusGranted = await requestPermissions();
+      Directory? dir = await _getDownloadDirectory();
+      if (isPermissionStatusGranted) {
+        ProgressDialog progressDialog = ProgressDialog(context,
+            dismissable: false,
+            defaultLoadingWidget: CupertinoActivityIndicator(),
+            dialogTransitionType: DialogTransitionType.NONE, onCancel: () {
+          dio.close();
+          Navigator.pop(context);
+        },
+            cancelText: Text(
+              MyPluginMessageRequire.cancel,
+              style: MyPluginMessageRequire.textStyleCancelDownload,
+            ),
+            message: Text(
+              "${MyPluginMessageRequire.downloading}...",
+              style: MyPluginMessageRequire.textStyleCancelDownload,
+            ),
+            title: Text(
+              MyPluginMessageRequire.downloadingFile,
+              style: MyPluginMessageRequire.textStyleTitleDownload,
+            ));
+        progressDialog.show();
+        String saveFileDir = '';
+        for (int i = 0; i < links.length; i++) {
+          String time = DateTime.now().microsecondsSinceEpoch.toString();
+          String name = time + links[i].split('/').last;
+          saveFileDir = path.join(dir!.path, name);
+          progressDialog.setMessage(Text(
+            "${MyPluginMessageRequire.downloading}... ${i + 1}/${links.length}",
+            style: MyPluginMessageRequire.textStyleCancelDownload,
+          ));
+          await dio.download(links[i] + '?$time', saveFileDir);
+        }
+        progressDialog.dismiss();
+        onSuccess();
+        return saveFileDir;
+      } else {
+        Fluttertoast.showToast(msg: MyPluginMessageRequire.permissionDenied);
+        return '';
+      }
+    } catch (e) {
+      Navigator.pop(context);
+      onError(e);
+      return '';
     }
   }
 
@@ -207,12 +215,12 @@ class MyPluginHelper {
         await launch(url);
       } else {
         Fluttertoast.showToast(
-            msg: error ?? MyPluginMessageRequire.messCanNotLaunchURL,
+            msg: error ?? MyPluginMessageRequire.canNotLaunchURL,
             toastLength: Toast.LENGTH_LONG);
       }
     } catch (e) {
       Fluttertoast.showToast(
-          msg: error ?? MyPluginMessageRequire.messCanNotLaunchURL,
+          msg: error ?? MyPluginMessageRequire.canNotLaunchURL,
           toastLength: Toast.LENGTH_LONG);
     }
   }

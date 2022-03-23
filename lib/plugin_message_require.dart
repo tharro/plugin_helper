@@ -1,15 +1,24 @@
+import 'package:flutter/material.dart';
+
 class MyPluginMessageRequire {
-  static String messNoConnection = 'No internet connection';
-  static String messCanNotLaunchURL = 'Can not launch URL';
-  static String messRefreshingText = "...Refreshing";
-  static String messCompleteText = 'Refresh completed';
-  static String messReleaseText = 'Release to refresh';
-  static String messIdleText = 'Pull down Refresh';
-  static String messEmptyData = 'Empty Data';
-  static String messReconnecting = 'Reconnecting...';
-  static String messWeakPassword = 'Weak password';
-  static String messInvalidEmail = 'Invalid email address';
-  static String messCanNotEmpty = 'This field cannot be empty';
+  static String noConnection = 'No internet connection';
+  static String canNotLaunchURL = 'Can not launch URL';
+  static String refreshingText = "...Refreshing";
+  static String completeText = 'Refresh completed';
+  static String releaseText = 'Release to refresh';
+  static String idleText = 'Pull down Refresh';
+  static String emptyData = 'Empty Data';
+  static String reconnecting = 'Reconnecting...';
+  static String weakPassword = 'Weak password';
+  static String invalidEmail = 'Invalid email address';
+  static String canNotEmpty = 'This field cannot be empty';
+  static String cancel = 'Cancel';
+  static TextStyle textStyleCancelDownload = const TextStyle(fontSize: 12);
+  static String downloading = 'Downloading';
+  static String downloadingFile = 'Downloading File';
+  static TextStyle textStyleTitleDownload = const TextStyle(fontSize: 14);
+  static String permissionDenied = 'Permission Denied';
+  static String linkEmpty = 'Link is empty';
 
   static messageRequire({
     required String messageNoConnection,
@@ -23,17 +32,32 @@ class MyPluginMessageRequire {
     required String messageWeakPassword,
     required String messageInvalidEmail,
     required String messageCanNotEmpty,
+    required String messageCancel,
+    String? messageDownloading,
+    String? messageDownloadingFile,
+    String? messagePermissionDenied,
+    TextStyle? textStyleCancelDownloads,
+    textStyleTitleDownloads,
+    String? messageLinkEmpty,
   }) {
-    messNoConnection = messageNoConnection;
-    messCanNotLaunchURL = messageCanNotLaunchURL;
-    messRefreshingText = messageRefreshingText;
-    messCompleteText = messageCompleteText;
-    messReleaseText = messageReleaseText;
-    messIdleText = messageIdleText;
-    messEmptyData = messageEmptyData;
-    messReconnecting = messageReconnecting;
-    messWeakPassword = messageWeakPassword;
-    messInvalidEmail = messageInvalidEmail;
-    messCanNotEmpty = messageCanNotEmpty;
+    noConnection = messageNoConnection;
+    canNotLaunchURL = messageCanNotLaunchURL;
+    refreshingText = messageRefreshingText;
+    completeText = messageCompleteText;
+    releaseText = messageReleaseText;
+    idleText = messageIdleText;
+    emptyData = messageEmptyData;
+    reconnecting = messageReconnecting;
+    weakPassword = messageWeakPassword;
+    invalidEmail = messageInvalidEmail;
+    canNotEmpty = messageCanNotEmpty;
+    canNotEmpty = messageCancel;
+    downloading = messageDownloading ?? downloading;
+    downloadingFile = messageDownloadingFile ?? downloadingFile;
+    permissionDenied = messagePermissionDenied ?? permissionDenied;
+    textStyleCancelDownload =
+        textStyleCancelDownloads ?? textStyleCancelDownload;
+    textStyleTitleDownload = textStyleTitleDownloads ?? textStyleTitleDownload;
+    linkEmpty = messageLinkEmpty ?? linkEmpty;
   }
 }

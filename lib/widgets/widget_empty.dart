@@ -32,7 +32,7 @@ class MyWidgetEmpty extends StatelessWidget {
             height: 14,
           ),
         Text(
-          message ?? MyPluginMessageRequire.messEmptyData,
+          message ?? MyPluginMessageRequire.emptyData,
           style: textStyle,
           textAlign: TextAlign.center,
         )

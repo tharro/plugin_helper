@@ -181,11 +181,11 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
       case ValidType.none:
         return '';
       case ValidType.password:
-        return MyPluginMessageRequire.messWeakPassword;
+        return MyPluginMessageRequire.weakPassword;
       case ValidType.email:
-        return MyPluginMessageRequire.messInvalidEmail;
+        return MyPluginMessageRequire.invalidEmail;
       case ValidType.notEmpty:
-        return MyPluginMessageRequire.messCanNotEmpty;
+        return MyPluginMessageRequire.canNotEmpty;
       default:
         return '';
     }
