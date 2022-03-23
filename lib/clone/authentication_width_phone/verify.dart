@@ -78,7 +78,7 @@
 //             if (widget.password != null) {
 //               //TODO: go to home
 //             } else {
-//               PluginNavigation.instance.replace(Login(
+//               MyPluginNavigation.instance.replace(Login(
 //                 phone: BlocProvider.of<AuthBloc>(context)
 //                     .state
 //                     .getStartedModel!
@@ -128,7 +128,7 @@
 //                               child: Text('key_resend_code'.tr())),
 //                           GestureDetector(
 //                               onTap: () {
-//                                 PluginNavigation.instance
+//                                 MyPluginNavigation.instance
 //                                     .replace(const GetStarted());
 //                               },
 //                               child: Text('key_use_another_account'.tr())),

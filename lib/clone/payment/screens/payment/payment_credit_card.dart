@@ -20,7 +20,7 @@
 
 //   @override
 //   void initState() {
-//     PluginPayment.init();
+//     MyPluginPayment.init();
 //     super.initState();
 //   }
 
@@ -42,7 +42,7 @@
 //                           _isLoading = true;
 //                         });
 //                         String tokenId =
-//                             await PluginPayment.createTokenWidthCreditCard(
+//                             await MyPluginPayment.createTokenWidthCreditCard(
 //                                 data: card);
 //                         setState(() {
 //                           _isLoading = false;

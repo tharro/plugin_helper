@@ -61,7 +61,7 @@
 //           'password': _passwordController.text,
 //         },
 //         onSuccess: () {
-//           PluginNavigation.instance.replace(Verify(
+//           MyPluginNavigation.instance.replace(Verify(
 //             isResend: false,
 //             password: _passwordController.text,
 //             email: widget.email,
@@ -153,7 +153,7 @@
 //                           ),
 //                           GestureDetector(
 //                               onTap: () {
-//                                 PluginNavigation.instance
+//                                 MyPluginNavigation.instance
 //                                     .replace(const GetStarted());
 //                               },
 //                               child: Text('key_use_another_account'.tr())),

@@ -10,14 +10,14 @@
 // }
 
 // class _MainTabState extends State<MainTab> {
-//   List<WidgetAppFlow>? _appFlows;
+//   List<MyWidgetAppFlow>? _appFlows;
 //   GlobalKey<AdaptiveBottomNavigationScaffoldState>? _adapterKey;
 
 //   @override
 //   void initState() {
 //     _adapterKey = GlobalKey<AdaptiveBottomNavigationScaffoldState>();
 //     _appFlows = [
-//       WidgetAppFlow(
+//       MyWidgetAppFlow(
 //         title: 'Home',
 //         iconData: const Icon(
 //           Icons.camera,
@@ -32,7 +32,7 @@
 //           color: Colors.red,
 //         ),
 //       ),
-//       WidgetAppFlow(
+//       MyWidgetAppFlow(
 //         title: 'Message',
 //         iconData: const Icon(
 //           Icons.message,
@@ -56,7 +56,7 @@
 //     return AdaptiveBottomNavigationScaffold(
 //       key: _adapterKey,
 //       navigationBarItems: _appFlows!.map((flow) {
-//         return WidgetBottomNavigationTab(
+//         return MyWidgetBottomNavigationTab(
 //           bottomNavigationBarItem: BottomNavigationBarItem(
 //             label: flow.title,
 //             icon: flow.iconData,

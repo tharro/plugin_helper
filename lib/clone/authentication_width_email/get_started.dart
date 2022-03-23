@@ -47,18 +47,18 @@
 //         },
 //         onSuccess: (String value) {
 //           switch (value) {
-//             case PluginAppConstraints.signUp:
-//               PluginNavigation.instance.replace(SignUp(
+//             case MyPluginAppConstraints.signUp:
+//               MyPluginNavigation.instance.replace(SignUp(
 //                 email: _controller.text,
 //               ));
 //               break;
-//             case PluginAppConstraints.login:
-//               PluginNavigation.instance.push(Login(
+//             case MyPluginAppConstraints.login:
+//               MyPluginNavigation.instance.push(Login(
 //                 email: _controller.text,
 //               ));
 //               break;
-//             case PluginAppConstraints.verify:
-//               PluginNavigation.instance.push(Verify(
+//             case MyPluginAppConstraints.verify:
+//               MyPluginNavigation.instance.push(Verify(
 //                 isResend: true,
 //                 email: _controller.text,
 //               ));

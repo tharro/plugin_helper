@@ -20,7 +20,7 @@
 //   late CreditCardModel _card;
 //   @override
 //   Widget build(BuildContext context) {
-//     return WidgetAddCreditCard(
+//     return MyWidgetAddCreditCard(
 //       formKey: widget.formKey,
 //       buttonWidget: ButtonCustom(
 //           title: 'key_add_card'.tr(),

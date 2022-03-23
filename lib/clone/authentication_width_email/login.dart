@@ -105,7 +105,7 @@
 //                           ),
 //                           GestureDetector(
 //                               onTap: () {
-//                                 PluginNavigation.instance
+//                                 MyPluginNavigation.instance
 //                                     .replace(const GetStarted());
 //                               },
 //                               child: Text('key_use_another_account'.tr())),
@@ -128,7 +128,7 @@
 //                                               });
 //                                         },
 //                                         onSuccess: () {
-//                                           PluginNavigation.instance
+//                                           MyPluginNavigation.instance
 //                                               .replace(const ForgotPassword());
 //                                         }));
 //                               },

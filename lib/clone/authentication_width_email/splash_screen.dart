@@ -26,33 +26,34 @@
 //           message: message,
 //           barrierDismissible: false,
 //           onPressPrimaryButton: () {
-//             PluginNavigation.instance.replace(const GetStarted());
+//             MyPluginNavigation.instance.replace(const GetStarted());
 //           });
 //     }, onSuccess: (bool isResume) {
 //       if (isResume) {
 //         //TODO: navigate to home screen
 //       } else {
-//         PluginNavigation.instance.replace(const GetStarted());
+//         MyPluginNavigation.instance.replace(const GetStarted());
 //       }
 //     }));
 //     super.initState();
 //   }
 
-//   void messageRequire() {
-//     PluginMessageRequire.messageRequire(
-//       messageCanNotLaunchURL: 'key_can_not_launch_url'.tr(),
-//       messageNoConnection: 'key_network_connect'.tr(),
-//       messageCompleteText: 'key_refresh_completed'.tr(),
-//       messageIdleText: 'key_pull_down_refresh'.tr(),
-//       messageRefreshingText: 'key_refreshing'.tr(),
-//       messageReleaseText: 'key_release_to_refresh'.tr(),
-//       messageEmptyData: 'key_empty_data'.tr(),
-//       messageReconnecting: 'key_reconnecting'.tr(),
-//       messageCanNotEmpty: 'key_can_not_empty'.tr(),
-//       messageInvalidEmail: 'key_invalid_email'.tr(),
-//       messageWeakPassword: 'key_weak_password'.tr(),
-//     );
-//   }
+  // void messageRequire() {
+  //   MyPluginMessageRequire.messageRequire(
+  //     messageCanNotLaunchURL: 'key_can_not_launch_url'.tr(),
+  //     messageNoConnection: 'key_network_connect'.tr(),
+  //     messageCompleteText: 'key_refresh_completed'.tr(),
+  //     messageIdleText: 'key_pull_down_refresh'.tr(),
+  //     messageRefreshingText: 'key_refreshing'.tr(),
+  //     messageReleaseText: 'key_release_to_refresh'.tr(),
+  //     messageEmptyData: 'key_empty_data'.tr(),
+  //     messageReconnecting: 'key_reconnecting'.tr(),
+  //     messageCanNotEmpty: 'key_can_not_empty'.tr(),
+  //     messageInvalidEmail: 'key_invalid_email'.tr(),
+  //     messageWeakPassword: 'key_weak_password'.tr(),
+  //     messageCancel: 'key_cancel'.tr(),
+  //   );
+  // }
 
 //   @override
 //   Widget build(BuildContext context) {

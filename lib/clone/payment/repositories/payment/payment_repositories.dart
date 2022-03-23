@@ -4,13 +4,13 @@
 // class PaymentRepositories {
 //   Future<void> addOrUpdateBank({required Map<String, dynamic> body}) async {
 //     final url = ''; // APIUrl.addOrUpdateBankAccount;
-//     final response = await PluginApi.request(url, Method.post, body: body);
+//     final response = await MyPluginApi.request(url, Method.post, body: body);
 //     print(response.data);
 //   }
 
 //   Future<void> addCard({required Map<String, dynamic> body}) async {
 //     final url = ''; // APIUrl.addCard;
-//     final response = await PluginApi.request(url, Method.post, body: body);
+//     final response = await MyPluginApi.request(url, Method.post, body: body);
 //     print(response.data);
 //   }
 // }
