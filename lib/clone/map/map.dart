@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:plugin_helper/plugin_google_map.dart';
+import 'package:plugin_helper/plugin_map.dart';
 import 'package:plugin_helper/plugin_navigator.dart';
 
 class Map extends StatefulWidget {
@@ -124,8 +124,7 @@ class _MapState extends State<Map> {
             //TODO
           },
           icon: cluster.items.length > 1
-              ? await MyPluginGoogleMap.defaultMarker(
-                  cluster.isMultiple ? max : min,
+              ? await MyPluginMap.defaultMarker(cluster.isMultiple ? max : min,
                   number: cluster.items.length)
               : cluster.items.first.bitmapDescriptor,
         );

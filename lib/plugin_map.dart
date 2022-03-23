@@ -3,8 +3,8 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:plugin_helper/models/google_map/address_detail_model.dart';
-import 'package:plugin_helper/models/google_map/address_model.dart';
+import 'package:plugin_helper/models/map/address_detail_model.dart';
+import 'package:plugin_helper/models/map/address_model.dart';
 import 'package:plugin_helper/plugin_api.dart';
 import 'package:plugin_helper/plugin_app_config.dart';
 import 'dart:ui' as ui;
@@ -12,7 +12,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:image/image.dart' as img;
 import 'dart:io';
 
-class MyPluginGoogleMap {
+class MyPluginMap {
   static Future<ListAddressModel> searchAddress(
       {required String input,
       String? language = 'en',
