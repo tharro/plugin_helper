@@ -9,7 +9,7 @@ class MyWidgetAppListView extends StatefulWidget {
   final List data;
   final Function()? onLoadMore;
   final Axis scrollDirection;
-  final Function renderItem;
+  final Widget Function(dynamic item, int index) renderItem;
   final bool enablePullDown;
   final bool isNeverScroll;
   final Function()? onRefresh;
