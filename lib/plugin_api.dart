@@ -13,7 +13,7 @@ enum Method { post, put, patch, delete, get }
 class MyPluginApi {
   static final dio = Dio();
 
-  static Future<Response> request(
+  Future<Response> request(
     url,
     Method method, {
     body,
@@ -97,8 +97,7 @@ class MyPluginApi {
     }
   }
 
-  static Future<Response<dynamic>> requestUploadFile(
-      url, Method method, File file,
+  Future<Response<dynamic>> requestUploadFile(url, Method method, File file,
       {String? typeFile,
       Map<String, dynamic>? body,
       Map<String, dynamic>? customHeader}) async {

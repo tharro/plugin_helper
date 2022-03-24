@@ -24,7 +24,7 @@ class MyPluginMap {
     url =
         '$url&input=$input&language=$language&components=$components&types=$type';
     try {
-      final res = await MyPluginApi.request(url, Method.get);
+      final res = await MyPluginApi().request(url, Method.get);
       return ListAddressModel.fromJson(res.data);
     } catch (e) {
       rethrow;
@@ -38,7 +38,7 @@ class MyPluginMap {
             MyPluginAppConfig().googleAPIKey!;
     url = '$url&place_id=$placeId';
     try {
-      final res = await MyPluginApi.request(url, Method.get);
+      final res = await MyPluginApi().request(url, Method.get);
       return AddressDetailModel.fromJson(res.data);
     } catch (e) {
       rethrow;
