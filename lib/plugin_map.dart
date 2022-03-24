@@ -53,15 +53,15 @@ class MyPluginMap {
       final Uint8List markerImageBytes = await markerImageFile.readAsBytes();
 
       ui.Image image =
-          await resizeAndConvertImage(markerImageBytes, size, size);
-      return paintToCanvas(image, ui.Size.zero);
+          await _resizeAndConvertImage(markerImageBytes, size, size);
+      return _paintToCanvas(image, ui.Size.zero);
     } catch (e) {
       print(e);
       return defaultMarker(size);
     }
   }
 
-  static ui.Canvas performCircleCrop(
+  static ui.Canvas _performCircleCrop(
       ui.Image image, ui.Size size, ui.Canvas canvas) {
     ui.Paint paint = ui.Paint();
     canvas.drawCircle(const ui.Offset(0, 0), 0, paint);
@@ -87,7 +87,7 @@ class MyPluginMap {
     return completer.future;
   }
 
-  static Future<ui.Image> resizeAndConvertImage(
+  static Future<ui.Image> _resizeAndConvertImage(
     Uint8List data,
     int height,
     int width,
@@ -101,14 +101,14 @@ class MyPluginMap {
     return frameInfo.image;
   }
 
-  static Future<BitmapDescriptor> paintToCanvas(
+  static Future<BitmapDescriptor> _paintToCanvas(
       ui.Image image, ui.Size size) async {
     final pictureRecorder = ui.PictureRecorder();
     final canvas = ui.Canvas(pictureRecorder);
     final paint = ui.Paint();
     paint.isAntiAlias = true;
 
-    performCircleCrop(image, size, canvas);
+    _performCircleCrop(image, size, canvas);
 
     final recordedPicture = pictureRecorder.endRecording();
     ui.Image img = await recordedPicture.toImage(image.width, image.height);

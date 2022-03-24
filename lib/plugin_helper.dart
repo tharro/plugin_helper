@@ -127,6 +127,27 @@ class MyPluginHelper {
     }
   }
 
+  static bool isValidFullName({required String text}) {
+    bool isValid = false;
+    if (text.trim().split(' ').length >= 2) {
+      isValid = true;
+    }
+    return isValid;
+  }
+
+  static FullName getFirstNameLastName({required String text}) {
+    var fullNames = text.trim().split(' ');
+    var firstName = "";
+    var lastName = "";
+    fullNames.removeWhere((element) => element.trim() == '');
+    firstName = fullNames.first.toString();
+    if (fullNames.length > 1) {
+      fullNames.removeAt(0);
+      lastName = fullNames.reduce((a, b) => a + " " + b);
+    }
+    return FullName(firstName: firstName, lastName: lastName);
+  }
+
   static var dio = Dio();
 
   static Future<Directory?> _getDownloadDirectory() async {
@@ -364,4 +385,10 @@ class MyPluginHelper {
                   ],
                 ))));
   }
+}
+
+class FullName {
+  final String? firstName, lastName;
+
+  FullName({this.firstName, this.lastName});
 }

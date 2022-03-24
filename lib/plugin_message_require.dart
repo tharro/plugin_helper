@@ -19,6 +19,8 @@ class MyPluginMessageRequire {
   static TextStyle textStyleTitleDownload = const TextStyle(fontSize: 14);
   static String permissionDenied = 'Permission Denied';
   static String linkEmpty = 'Link is empty';
+  static String requiredFullName =
+      'Please enter a valid first name and last name';
 
   static messageRequire({
     required String messageNoConnection,
@@ -39,6 +41,7 @@ class MyPluginMessageRequire {
     TextStyle? textStyleCancelDownloads,
     textStyleTitleDownloads,
     String? messageLinkEmpty,
+    String? messageRequiredFullName,
   }) {
     noConnection = messageNoConnection;
     canNotLaunchURL = messageCanNotLaunchURL;
@@ -59,5 +62,6 @@ class MyPluginMessageRequire {
         textStyleCancelDownloads ?? textStyleCancelDownload;
     textStyleTitleDownload = textStyleTitleDownloads ?? textStyleTitleDownload;
     linkEmpty = messageLinkEmpty ?? linkEmpty;
+    requiredFullName = messageRequiredFullName ?? requiredFullName;
   }
 }

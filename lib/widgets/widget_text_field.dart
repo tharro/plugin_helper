@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:plugin_helper/plugin_helper.dart';
 import 'package:plugin_helper/plugin_message_require.dart';
 
-enum ValidType { none, password, email, notEmpty }
+enum ValidType { none, password, email, fullName, notEmpty }
 
 class MyWidgetTextField extends StatefulWidget {
   final String? label;
@@ -147,6 +147,14 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         } else {
           setInValid();
         }
+        break;
+      case ValidType.fullName:
+        if (MyPluginHelper.isValidFullName(text: widget.controller.text)) {
+          setValid();
+        } else {
+          setInValid();
+        }
+        break;
     }
     if (widget.onValid != null) {
       widget.onValid!(valid);
@@ -186,6 +194,8 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         return MyPluginMessageRequire.invalidEmail;
       case ValidType.notEmpty:
         return MyPluginMessageRequire.canNotEmpty;
+      case ValidType.fullName:
+        return MyPluginMessageRequire.requiredFullName;
       default:
         return '';
     }
