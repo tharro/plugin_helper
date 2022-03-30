@@ -385,6 +385,20 @@ class MyPluginHelper {
                   ],
                 ))));
   }
+
+  static setOrientation({bool isPortrait = true}) {
+    if (isPortrait) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeRight,
+        DeviceOrientation.landscapeLeft,
+      ]);
+    } else {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
+    }
+  }
 }
 
 class FullName {

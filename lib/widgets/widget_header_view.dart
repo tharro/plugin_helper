@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
   const MyWidgetHeader(
@@ -13,12 +14,14 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
       this.backgroundColorIconLeft,
       this.centerTitle = true,
       this.elevation = 0,
-      this.isShowLeftIcon = true})
+      this.isShowLeftIcon = true,
+      this.titleTextStyle,
+      this.systemUiOverlayStyle})
       : super(key: key);
   final BuildContext context;
   final List<Widget>? actions;
   final Widget? iconLeft;
-  final Text title;
+  final Widget title;
   final bool? centerTitle;
   final double? elevation;
   final Function? onPressLeftIcon;
@@ -26,9 +29,12 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
   final double? toolbarHeight;
   final Color? backgroundColor;
   final Color? backgroundColorIconLeft;
+  final TextStyle? titleTextStyle;
+  final SystemUiOverlayStyle? systemUiOverlayStyle;
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      systemOverlayStyle: systemUiOverlayStyle,
       toolbarHeight: toolbarHeight ?? kToolbarHeight,
       elevation: elevation,
       actions: actions,
@@ -44,12 +50,14 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
                 onPressLeftIcon ?? Navigator.pop(context);
               },
               child: iconLeft ??
-                  const Icon(
+                  Icon(
                     Icons.arrow_back_ios_new_rounded,
+                    color: Theme.of(context).appBarTheme.iconTheme!.color,
                   ))
           : null,
       centerTitle: centerTitle,
       title: title,
+      titleTextStyle: titleTextStyle,
     );
   }
 
