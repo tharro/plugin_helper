@@ -1,6 +1,6 @@
 import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:plugin_helper/plugin_app_config.dart';
+import 'package:plugin_helper/plugin_app_environment.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyPluginAppConstraints {
@@ -17,8 +17,8 @@ class MyPluginAppConstraints {
 
 class MyPluginAuthentication {
   static final userPool = CognitoUserPool(
-    MyPluginAppConfig().userPoolId!,
-    MyPluginAppConfig().clientId!,
+    MyPluginAppEnvironment().userPoolId!,
+    MyPluginAppEnvironment().clientId!,
   );
 
   static const storage = FlutterSecureStorage();

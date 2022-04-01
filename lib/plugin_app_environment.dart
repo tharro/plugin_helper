@@ -1,14 +1,15 @@
 enum AppEnvironment { dev, stage, prod }
 
-class MyPluginAppConfig {
+class MyPluginAppEnvironment {
   // Singleton object
-  static final MyPluginAppConfig _singleton = MyPluginAppConfig._internal();
+  static final MyPluginAppEnvironment _singleton =
+      MyPluginAppEnvironment._internal();
 
-  factory MyPluginAppConfig() {
+  factory MyPluginAppEnvironment() {
     return _singleton;
   }
 
-  MyPluginAppConfig._internal();
+  MyPluginAppEnvironment._internal();
 
   AppEnvironment? appEnvironment;
   String? baseUrl;

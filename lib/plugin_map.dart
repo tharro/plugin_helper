@@ -6,7 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:plugin_helper/models/map/address_detail_model.dart';
 import 'package:plugin_helper/models/map/address_model.dart';
 import 'package:plugin_helper/plugin_api.dart';
-import 'package:plugin_helper/plugin_app_config.dart';
+import 'package:plugin_helper/plugin_app_environment.dart';
 import 'dart:ui' as ui;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:image/image.dart' as img;
@@ -20,7 +20,7 @@ class MyPluginMap {
       String? type = 'address'}) async {
     String url =
         'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=' +
-            MyPluginAppConfig().googleAPIKey!;
+            MyPluginAppEnvironment().googleAPIKey!;
     url =
         '$url&input=$input&language=$language&components=$components&types=$type';
     try {
@@ -35,7 +35,7 @@ class MyPluginMap {
       {required String placeId}) async {
     String url =
         'https://maps.googleapis.com/maps/api/place/details/json?key=' +
-            MyPluginAppConfig().googleAPIKey!;
+            MyPluginAppEnvironment().googleAPIKey!;
     url = '$url&place_id=$placeId';
     try {
       final res = await MyPluginApi().request(url, Method.get);
