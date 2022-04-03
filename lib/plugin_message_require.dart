@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//This plugin had used in multiple languages
 class MyPluginMessageRequire {
   static String noConnection = 'No internet connection';
   static String canNotLaunchURL = 'Can not launch URL';

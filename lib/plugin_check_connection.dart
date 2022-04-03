@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:plugin_helper/plugin_helper.dart';
 import 'package:plugin_helper/plugin_message_require.dart';
 
+//This plugin had used to check internet connection
 class MyPluginConnectivity {
   static ConnectivityResult _connectionStatus = ConnectivityResult.none;
   static final Connectivity _connectivity = Connectivity();

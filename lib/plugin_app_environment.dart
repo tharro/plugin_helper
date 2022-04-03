@@ -1,5 +1,6 @@
 enum AppEnvironment { dev, stage, prod }
 
+//This plugin had used to config the environment and its variables of it
 class MyPluginAppEnvironment {
   // Singleton object
   static final MyPluginAppEnvironment _singleton =

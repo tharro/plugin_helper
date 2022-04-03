@@ -3,6 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:plugin_helper/plugin_app_environment.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+//This plugin had used for authentication by AWS
 class MyPluginAppConstraints {
   static const String user = 'USER';
   static const String pwd = 'PASSWORD';

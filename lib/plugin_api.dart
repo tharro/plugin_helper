@@ -8,6 +8,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:plugin_helper/plugin_authentication.dart';
 import 'package:plugin_helper/plugin_message_require.dart';
 
+//This plugin had used to make the HTTP method request
 enum Method { post, put, patch, delete, get }
 
 class MyPluginApi {
