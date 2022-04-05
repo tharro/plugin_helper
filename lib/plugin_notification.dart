@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -43,7 +44,7 @@ class MyPluginNotification {
       required Function(RemoteMessage message) onMessage,
       required Function(String payload) onOpenLocalMessage,
       required Function(RemoteMessage message) onOpenFCMMessage,
-      required Function(String token) onRegisterFCM,
+      required Function(Map<String, dynamic> token) onRegisterFCM,
       required String iconNotification,
       String? payload,
       required String chanelId,
@@ -70,9 +71,8 @@ class MyPluginNotification {
         _selectLocalNotification(
             payload: data!, onHandleMessage: onOpenLocalMessage);
       });
-      String? token = await messaging.getToken();
-      print('token $token');
-      onRegisterFCM(token!);
+      Map<String, dynamic> body = await getInfoToRequest();
+      onRegisterFCM(body);
       fcmListener = FirebaseMessaging.onMessage
           .asBroadcastStream()
           .listen((RemoteMessage message) {
@@ -135,6 +135,19 @@ class MyPluginNotification {
     },
         (error, stack) =>
             FirebaseCrashlytics.instance.recordError(error, stack));
+  }
+
+  static Future<Map<String, dynamic>> getInfoToRequest() async {
+    String? token = await messaging.getToken();
+    print('token $token');
+    String meId = await MyPluginHelper.getMeIdDevice();
+    Map<String, dynamic> body = {
+      "type": "M",
+      "device": Platform.isAndroid ? "A" : "I",
+      "meid": meId,
+      "token": token!,
+    };
+    return body;
   }
 
   static dispose() {
