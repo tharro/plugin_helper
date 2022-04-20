@@ -17,7 +17,6 @@
 // class _SplashScreenState extends State<SplashScreen> {
 //   @override
 //   void initState() {
-//     messageRequire();
 //     BlocProvider.of<AuthBloc>(context)
 //         .add(AuthResumeSession(onError: (String code, message) {
 //       Helper.showErrorDialog(
@@ -37,23 +36,6 @@
 //     }));
 //     super.initState();
 //   }
-
-// void messageRequire() {
-//   MyPluginMessageRequire.messageRequire(
-//     messageCanNotLaunchURL: 'key_can_not_launch_url'.tr(),
-//     messageNoConnection: 'key_network_connect'.tr(),
-//     messageCompleteText: 'key_refresh_completed'.tr(),
-//     messageIdleText: 'key_pull_down_refresh'.tr(),
-//     messageRefreshingText: 'key_refreshing'.tr(),
-//     messageReleaseText: 'key_release_to_refresh'.tr(),
-//     messageEmptyData: 'key_empty_data'.tr(),
-//     messageReconnecting: 'key_reconnecting'.tr(),
-//     messageCanNotEmpty: 'key_can_not_empty'.tr(),
-//     messageInvalidEmail: 'key_invalid_email'.tr(),
-//     messageWeakPassword: 'key_weak_password'.tr(),
-//     messageCancel: 'key_cancel'.tr(),
-//   );
-// }
 
 //   @override
 //   Widget build(BuildContext context) {
