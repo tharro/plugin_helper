@@ -427,6 +427,20 @@ class MyPluginAuthentication {
     }
   }
 
+  static Future<bool> hasToken() async {
+    try {
+      String? token = await storage.read(key: MyPluginAppConstraints.token);
+      if (token != null) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      await storage.deleteAll();
+      return false;
+    }
+  }
+
   static Future<bool> checkTokenValidity() async {
     final user = await getUser();
     if (DateTime.now()

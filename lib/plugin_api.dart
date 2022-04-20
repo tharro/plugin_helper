@@ -34,7 +34,7 @@ class MyPluginApi {
     };
 
     if (useIDToken) {
-      if (await MyPluginAuthentication.checkTokenValidity()) {
+      if (await MyPluginAuthentication.hasToken()) {
         await MyPluginAuthentication.refreshToken();
       }
       final user = await MyPluginAuthentication.getUser();
