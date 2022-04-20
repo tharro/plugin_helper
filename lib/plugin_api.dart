@@ -34,11 +34,11 @@ class MyPluginApi {
     };
 
     if (useIDToken) {
-      if (await MyPluginAuthentication.hasExpireToken()) {
+      if (await MyPluginAuthentication.checkTokenValidity()) {
         await MyPluginAuthentication.refreshToken();
       }
-      final _token = await MyPluginAuthentication.getToken();
-      headers['Authorization'] = 'Bearer $_token';
+      final user = await MyPluginAuthentication.getUser();
+      headers['Authorization'] = 'Bearer ${user['token']}';
     }
 
     var combinedMap = headers;
