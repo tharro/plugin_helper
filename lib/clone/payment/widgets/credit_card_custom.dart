@@ -1,5 +1,5 @@
-// import 'package:bolierplate_mobile/configs/app_text_styles.dart';
-// import 'package:bolierplate_mobile/widgets/button_custom.dart';
+// import '../../configs/app_text_styles.dart';
+// import '../../widgets/button_custom.dart';
 // import 'package:flutter/material.dart';
 // import 'package:plugin_helper/widgets/credit_card/credit_card_model.dart';
 // import 'package:plugin_helper/widgets/credit_card/widget_add_credit_card.dart';

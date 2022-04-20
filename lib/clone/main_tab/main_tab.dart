@@ -1,4 +1,4 @@
-// import 'package:bolierplate_mobile/configs/app_text_styles.dart';
+// import '../../configs/app_text_styles.dart';
 // import 'package:flutter/material.dart';
 // import 'package:plugin_helper/widgets/bottom_tab_navigator/index.dart';
 

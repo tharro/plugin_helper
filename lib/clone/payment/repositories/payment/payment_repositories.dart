@@ -1,4 +1,4 @@
-// import 'package:bolierplate_mobile/api/apiUrl.dart';
+// import '../../api/apiUrl.dart';
 // import 'package:plugin_helper/plugin_api.dart';
 
 // class PaymentRepositories {

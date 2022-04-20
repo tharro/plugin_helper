@@ -1,11 +1,11 @@
 // import 'dart:convert';
 // import 'dart:io';
 
-// import 'package:bolierplate_mobile/blocs/payment/bank/bank_bloc.dart';
-// import 'package:bolierplate_mobile/utils/helper.dart';
-// import 'package:bolierplate_mobile/widgets/button_custom.dart';
-// import 'package:bolierplate_mobile/widgets/overlay_loading.dart';
-// import 'package:bolierplate_mobile/widgets/text_field_custom.dart';
+// import '../../blocs/payment/bank/bank_bloc.dart';
+// import '../../utils/helper.dart';
+// import '../../widgets/button_custom.dart';
+// import '../../widgets/overlay_loading_custom.dart';
+// import '../../widgets/text_field_custom.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:plugin_helper/widgets/widget_text_field.dart';
