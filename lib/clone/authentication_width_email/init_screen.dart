@@ -7,14 +7,14 @@
 // import 'package:easy_localization/easy_localization.dart';
 // import 'package:plugin_helper/plugin_navigator.dart';
 
-// class SplashScreen extends StatefulWidget {
-//   const SplashScreen({Key? key}) : super(key: key);
+// class InitScreen extends StatefulWidget {
+//   const InitScreen({Key? key}) : super(key: key);
 
 //   @override
-//   State<SplashScreen> createState() => _SplashScreenState();
+//   State<InitScreen> createState() => _InitScreenState();
 // }
 
-// class _SplashScreenState extends State<SplashScreen> {
+// class _InitScreenState extends State<InitScreen> {
 //   @override
 //   void initState() {
 //     BlocProvider.of<AuthBloc>(context)
