@@ -35,7 +35,9 @@ class MyPluginApi {
 
     if (useIDToken) {
       if (await MyPluginAuthentication.hasToken()) {
-        await MyPluginAuthentication.refreshToken();
+        if (!await MyPluginAuthentication.checkTokenValidity()) {
+          await MyPluginAuthentication.refreshToken();
+        }
       }
       final user = await MyPluginAuthentication.getUser();
       headers['Authorization'] = 'Bearer ${user['token']}';
