@@ -421,7 +421,11 @@ class MyPluginAuthentication {
     final cognitoUser = CognitoUser(userInfo['user'], userPool);
     try {
       CognitoUserSession? cognitoUserSession = await cognitoUser.getSession();
-      cognitoUser.refreshSession(cognitoUserSession!.refreshToken!);
+      cognitoUserSession =
+          await cognitoUser.refreshSession(cognitoUserSession!.refreshToken!);
+      await persistUser(
+          user: userInfo['user'],
+          token: cognitoUserSession?.getIdToken().getJwtToken() ?? '');
     } catch (e) {
       rethrow;
     }
