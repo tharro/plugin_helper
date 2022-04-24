@@ -10,6 +10,7 @@ class MyPluginAppConstraints {
   static const String user = 'USER';
   static const String pwd = 'PASSWORD';
   static const String token = 'TOKEN';
+  static const String refreshToken = 'REFRESH_TOKEN';
   static const String email = 'EMAIL';
   static const String expired = 'EXPIRED';
   static const String firstRun = 'FIRST_RUN';
@@ -296,9 +297,12 @@ class MyPluginAuthentication {
     CognitoUserSession? session;
     try {
       session = await cognitoUser.authenticateUser(authDetails);
-      await cognitoUser.cacheTokens();
+      // await cognitoUser.cacheTokens();
+
       await persistUser(
-          user: userName, token: session?.getIdToken().getJwtToken() ?? '');
+          user: userName,
+          token: session?.getIdToken().getJwtToken() ?? '',
+          refreshToken: session?.getRefreshToken()?.getToken() ?? '');
     } catch (e) {
       rethrow;
     }
@@ -420,12 +424,14 @@ class MyPluginAuthentication {
     dynamic userInfo = await getUser();
     final cognitoUser = CognitoUser(userInfo['user'], userPool);
     try {
-      CognitoUserSession? cognitoUserSession = await cognitoUser.getSession();
-      cognitoUserSession =
-          await cognitoUser.refreshSession(cognitoUserSession!.refreshToken!);
+      final refreshToken = CognitoRefreshToken(userInfo['refresh_token']);
+      CognitoUserSession? cognitoUserSession =
+          await cognitoUser.refreshSession(refreshToken);
       await persistUser(
           user: userInfo['user'],
-          token: cognitoUserSession?.getIdToken().getJwtToken() ?? '');
+          token: cognitoUserSession?.getIdToken().getJwtToken() ?? '',
+          refreshToken:
+              cognitoUserSession?.getRefreshToken()?.getToken() ?? '');
     } catch (e) {
       rethrow;
     }
@@ -495,19 +501,26 @@ class MyPluginAuthentication {
       return {
         'user': await storage.read(key: MyPluginAppConstraints.user),
         'token': await storage.read(key: MyPluginAppConstraints.token),
+        'refresh_token':
+            await storage.read(key: MyPluginAppConstraints.refreshToken),
       };
     } catch (e) {
       return {
         'user': null,
         'token': null,
+        'refresh_token': null,
       };
     }
   }
 
   static Future<void> persistUser(
-      {required String user, required String token}) async {
+      {required String user,
+      required String token,
+      required String refreshToken}) async {
     await storage.write(key: MyPluginAppConstraints.user, value: user);
     await storage.write(key: MyPluginAppConstraints.token, value: token);
+    await storage.write(
+        key: MyPluginAppConstraints.refreshToken, value: refreshToken);
   }
 
   static Future<void> deleteUser() async {
