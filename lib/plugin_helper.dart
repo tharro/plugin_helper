@@ -117,9 +117,10 @@ class MyPluginHelper {
     return null;
   }
 
-  static String formatCurrency(double number) {
+  static String formatCurrency(
+      {String locale = 'en-US', required double number}) {
     NumberFormat formatCurrency =
-        NumberFormat.currency(locale: 'en-US', symbol: '\$');
+        NumberFormat.currency(locale: locale, symbol: '\$');
     try {
       return formatCurrency.format(number);
     } catch (e) {
