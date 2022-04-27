@@ -388,7 +388,7 @@ class MyPluginHelper {
   }
 
   static setOrientation({bool isPortrait = true}) {
-    if (isPortrait) {
+    if (!isPortrait) {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.landscapeRight,
         DeviceOrientation.landscapeLeft,
