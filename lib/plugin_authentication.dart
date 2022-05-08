@@ -14,6 +14,7 @@ class MyPluginAppConstraints {
   static const String login = 'LOGIN';
   static const String verify = 'VERIFY';
   static const String signUp = 'SIGN_UP';
+  static const String expired = 'EXPIRED';
 }
 
 class MyPluginAuthentication {
@@ -187,11 +188,20 @@ class MyPluginAuthentication {
 
   static Future<bool> checkTokenValidity() async {
     final users = await getUser();
-    if (DateTime.now()
-        .add(const Duration(minutes: 5))
-        .isBefore(_tokenExpiration(users.token!))) {
-      return true;
+    if (MyPluginAppEnvironment().isCognito) {
+      if (DateTime.now()
+          .add(const Duration(minutes: 1))
+          .isBefore(_tokenExpiration(users.token!))) {
+        return true;
+      }
+    } else {
+      if (DateTime.now()
+          .add(const Duration(minutes: 5))
+          .isBefore(DateTime.parse(users.expiredToken!))) {
+        return true;
+      }
     }
+
     return false;
   }
 
@@ -236,7 +246,13 @@ class MyPluginAuthentication {
       String? token = await storage.read(key: MyPluginAppConstraints.token);
       String? refreshToken =
           await storage.read(key: MyPluginAppConstraints.refreshToken);
-      return Users(user: user, token: token, refreshToken: refreshToken);
+      String? expiredToken =
+          await storage.read(key: MyPluginAppConstraints.expired);
+      return Users(
+          user: user,
+          token: token,
+          refreshToken: refreshToken,
+          expiredToken: expiredToken);
     } catch (e) {
       return Users();
     }
@@ -245,11 +261,14 @@ class MyPluginAuthentication {
   static Future<void> persistUser(
       {required String user,
       required String token,
-      required String refreshToken}) async {
+      required String refreshToken,
+      String? expiredToken}) async {
     await storage.write(key: MyPluginAppConstraints.user, value: user);
     await storage.write(key: MyPluginAppConstraints.token, value: token);
     await storage.write(
         key: MyPluginAppConstraints.refreshToken, value: refreshToken);
+    await storage.write(
+        key: MyPluginAppConstraints.expired, value: expiredToken);
   }
 
   static Future<void> deleteUser() async {
@@ -264,6 +283,7 @@ class Users {
   final String? user;
   final String? token;
   final String? refreshToken;
+  final String? expiredToken;
 
-  Users({this.user, this.token, this.refreshToken});
+  Users({this.user, this.token, this.refreshToken, this.expiredToken});
 }

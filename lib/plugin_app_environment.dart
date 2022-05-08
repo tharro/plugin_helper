@@ -19,6 +19,7 @@ class MyPluginAppEnvironment {
   String? stripePublicKey;
   String? merchantId;
   String? googleAPIKey;
+  late bool isCognito;
   Map<String, dynamic>? customKey;
 
   // Set app configuration with single function
@@ -31,6 +32,7 @@ class MyPluginAppEnvironment {
     String? merchantId,
     String? googleAPIKey,
     Map<String, dynamic>? customKey,
+    required bool isCognito,
   }) {
     this.merchantId = merchantId ?? this.merchantId;
     this.stripePublicKey = stripePublicKey ?? this.stripePublicKey;
@@ -40,5 +42,6 @@ class MyPluginAppEnvironment {
     this.clientId = clientId ?? this.clientId;
     this.googleAPIKey = googleAPIKey ?? this.googleAPIKey;
     this.customKey = customKey ?? this.customKey;
+    this.isCognito = isCognito;
   }
 }
