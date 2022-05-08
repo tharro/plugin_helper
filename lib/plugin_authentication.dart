@@ -186,10 +186,10 @@ class MyPluginAuthentication {
   }
 
   static Future<bool> checkTokenValidity() async {
-    final user = await getUser();
+    final users = await getUser();
     if (DateTime.now()
         .add(const Duration(minutes: 5))
-        .isBefore(_tokenExpiration(user['token']))) {
+        .isBefore(_tokenExpiration(users.token!))) {
       return true;
     }
     return false;
@@ -230,20 +230,15 @@ class MyPluginAuthentication {
     return utf8.decode(base64Url.decode(output));
   }
 
-  static Future<dynamic> getUser() async {
+  static Future<Users> getUser() async {
     try {
-      return {
-        'user': await storage.read(key: MyPluginAppConstraints.user),
-        'token': await storage.read(key: MyPluginAppConstraints.token),
-        'refresh_token':
-            await storage.read(key: MyPluginAppConstraints.refreshToken),
-      };
+      String? user = await storage.read(key: MyPluginAppConstraints.user);
+      String? token = await storage.read(key: MyPluginAppConstraints.token);
+      String? refreshToken =
+          await storage.read(key: MyPluginAppConstraints.refreshToken);
+      return Users(user: user, token: token, refreshToken: refreshToken);
     } catch (e) {
-      return {
-        'user': null,
-        'token': null,
-        'refresh_token': null,
-      };
+      return Users();
     }
   }
 
@@ -263,4 +258,12 @@ class MyPluginAuthentication {
     await prefs.clear();
     return;
   }
+}
+
+class Users {
+  final String? user;
+  final String? token;
+  final String? refreshToken;
+
+  Users({this.user, this.token, this.refreshToken});
 }

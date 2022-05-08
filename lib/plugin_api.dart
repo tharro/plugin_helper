@@ -39,8 +39,8 @@ class MyPluginApi {
           await MyPluginAuthentication.refreshToken();
         }
       }
-      final user = await MyPluginAuthentication.getUser();
-      headers['Authorization'] = 'Bearer ${user['token']}';
+      final users = await MyPluginAuthentication.getUser();
+      headers['Authorization'] = 'Bearer ${users.token}';
     }
 
     var combinedMap = headers;
