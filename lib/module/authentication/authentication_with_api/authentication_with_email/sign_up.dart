@@ -38,12 +38,6 @@
 //     if (!_isValidPassword || !_isValidFirstName || !_isValidLastName) {
 //       return;
 //     }
-//     List<AttributeArg> attr = [
-//       AttributeArg(name: 'email', value: widget.email),
-//       AttributeArg(
-//           name: 'name',
-//           value: _firstNameController.text + ' ' + _lastNameController.text),
-//     ];
 //     BlocProvider.of<AuthBloc>(context).add(AuthSignUp(
 //         onError: (code, message) {
 //           Helper.showErrorDialog(
@@ -55,9 +49,11 @@
 //               });
 //         },
 //         body: {
-//           'id':
+//           'user_id':
 //               BlocProvider.of<AuthBloc>(context).state.getStartedModel!.userId!,
-//           'attr': attr,
+//           'email': widget.email,
+//           'first_name': _firstNameController.text,
+//           'last_name': _lastNameController.text,
 //           'password': _passwordController.text,
 //         },
 //         onSuccess: () {

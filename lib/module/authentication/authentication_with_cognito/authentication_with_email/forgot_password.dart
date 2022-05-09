@@ -46,7 +46,7 @@
 //           onSuccess: () {
 //             //TODO: go to home
 //           },
-//           username: BlocProvider.of<AuthBloc>(context)
+//           userName: BlocProvider.of<AuthBloc>(context)
 //               .state
 //               .getStartedModel!
 //               .userId!));
@@ -55,7 +55,7 @@
 
 //   _resendCode() {
 //     BlocProvider.of<AuthBloc>(context).add(AuthForgotPassword(
-//         username:
+//         userName:
 //             BlocProvider.of<AuthBloc>(context).state.getStartedModel!.userId!,
 //         onError: (code, message) {
 //           Helper.showErrorDialog(

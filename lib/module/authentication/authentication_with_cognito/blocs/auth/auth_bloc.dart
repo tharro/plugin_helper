@@ -151,7 +151,7 @@
 //       AuthForgotPassword event, Emitter<AuthState> emit) async {
 //     try {
 //       emit(state.copyWith(resetPasswordLoading: true));
-//       await MyPluginAuthentication.forgotPassword(userName: event.username);
+//       await MyPluginAuthentication.forgotPassword(userName: event.userName);
 //       event.onSuccess();
 //       emit(state.copyWith(resetPasswordLoading: false));
 //     } catch (e) {
@@ -170,11 +170,11 @@
 //       await MyPluginAuthentication.confirmNewPassword(
 //         code: event.code,
 //         newPassword: event.password,
-//         userName: event.username,
+//         userName: event.userName,
 //       );
 //       await MyPluginAuthentication.loginCognito(
 //         password: event.password,
-//         userName: event.username,
+//         userName: event.userName,
 //       );
 //       ProfileModel profileModel = await authRepositories.getProfile();
 //       emit(state.copyWith(

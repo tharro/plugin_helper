@@ -36,7 +36,7 @@ class MyPluginAuthentication {
     try {
       session = await cognitoUser.authenticateUser(authDetails);
       await persistUser(
-          user: userName,
+          userId: userName,
           token: session?.getIdToken().getJwtToken() ?? '',
           refreshToken: session?.getRefreshToken()?.getToken() ?? '');
     } catch (e) {
@@ -125,8 +125,8 @@ class MyPluginAuthentication {
   }
 
   static Future<bool> resendCodeAttribute({required String name}) async {
-    dynamic userInfo = await getUser();
-    final cognitoUser = CognitoUser(userInfo['user'], userPool);
+    Users userInfo = await getUser();
+    final cognitoUser = CognitoUser(userInfo.userId, userPool);
     await cognitoUser.getAttributeVerificationCode(name);
     return true;
   }
@@ -135,8 +135,8 @@ class MyPluginAuthentication {
       {required String confirmationCode,
       required String attributeName,
       required String value}) async {
-    dynamic userInfo = await getUser();
-    final cognitoUser = CognitoUser(userInfo['user'], userPool);
+    Users userInfo = await getUser();
+    final cognitoUser = CognitoUser(userInfo.userId, userPool);
     return await cognitoUser.verifyAttribute(attributeName, confirmationCode);
   }
 
@@ -148,22 +148,22 @@ class MyPluginAuthentication {
     if (cognitoUser != null) {
       cognito = cognitoUser;
     } else {
-      dynamic userInfo = await getUser();
-      cognito = CognitoUser(userInfo['user'], userPool);
+      Users userInfo = await getUser();
+      cognito = CognitoUser(userInfo.userId, userPool);
     }
     return cognito.updateAttributes(
         [CognitoUserAttribute(name: attributeName, value: value)]);
   }
 
   static Future<void> refreshToken() async {
-    dynamic userInfo = await getUser();
-    final cognitoUser = CognitoUser(userInfo['user'], userPool);
+    Users userInfo = await getUser();
+    final cognitoUser = CognitoUser(userInfo.userId!, userPool);
     try {
-      final refreshToken = CognitoRefreshToken(userInfo['refresh_token']);
+      final refreshToken = CognitoRefreshToken(userInfo.refreshToken);
       CognitoUserSession? cognitoUserSession =
           await cognitoUser.refreshSession(refreshToken);
       await persistUser(
-          user: userInfo['user'],
+          userId: userInfo.userId!,
           token: cognitoUserSession?.getIdToken().getJwtToken() ?? '',
           refreshToken:
               cognitoUserSession?.getRefreshToken()?.getToken() ?? '');
@@ -249,7 +249,7 @@ class MyPluginAuthentication {
       String? expiredToken =
           await storage.read(key: MyPluginAppConstraints.expired);
       return Users(
-          user: user,
+          userId: user,
           token: token,
           refreshToken: refreshToken,
           expiredToken: expiredToken);
@@ -259,11 +259,11 @@ class MyPluginAuthentication {
   }
 
   static Future<void> persistUser(
-      {required String user,
+      {required String userId,
       required String token,
       required String refreshToken,
       String? expiredToken}) async {
-    await storage.write(key: MyPluginAppConstraints.user, value: user);
+    await storage.write(key: MyPluginAppConstraints.user, value: userId);
     await storage.write(key: MyPluginAppConstraints.token, value: token);
     await storage.write(
         key: MyPluginAppConstraints.refreshToken, value: refreshToken);
@@ -280,10 +280,10 @@ class MyPluginAuthentication {
 }
 
 class Users {
-  final String? user;
+  final String? userId;
   final String? token;
   final String? refreshToken;
   final String? expiredToken;
 
-  Users({this.user, this.token, this.refreshToken, this.expiredToken});
+  Users({this.userId, this.token, this.refreshToken, this.expiredToken});
 }

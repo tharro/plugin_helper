@@ -113,7 +113,7 @@
 //                               onTap: () {
 //                                 BlocProvider.of<AuthBloc>(context).add(
 //                                     AuthForgotPassword(
-//                                         username:
+//                                         userName:
 //                                             BlocProvider.of<AuthBloc>(context)
 //                                                 .state
 //                                                 .getStartedModel!

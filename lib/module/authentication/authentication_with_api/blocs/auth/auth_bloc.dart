@@ -1,6 +1,7 @@
 // import 'dart:io';
 
 // import 'package:bloc/bloc.dart';
+// import '../../models/auth/token_model.dart';
 // import '../../models/auth/get_started_model.dart';
 // import '../../models/auth/profile_model.dart';
 // import '../../repositories/auth/auth_repository.dart';
@@ -33,8 +34,15 @@
 //     try {
 //       var hasToken = await MyPluginAuthentication.hasToken();
 //       if (hasToken) {
+//         final users = await MyPluginAuthentication.getUser();
 //         if (!await MyPluginAuthentication.checkTokenValidity()) {
-//           await MyPluginAuthentication.refreshToken();
+//           final TokenModel tokenModel = await authRepositories.refreshToken(
+//               refreshToken: users.refreshToken!);
+//           await MyPluginAuthentication.persistUser(
+//               userId: users.userId!,
+//               token: tokenModel.token,
+//               refreshToken: tokenModel.refreshToken,
+//               expiredToken: DateTime.now().toString());
 //         }
 //         final profile = await authRepositories.getProfile();
 //         emit(state.copyWith(profileModel: profile));
@@ -51,10 +59,15 @@
 //   void authLogin(AuthLogin event, Emitter<AuthState> emit) async {
 //     try {
 //       emit(state.copyWith(loginLoading: true));
-//       final token = await MyPluginAuthentication.loginCognito(
+//       final TokenModel tokenModel = await authRepositories.login(
 //         password: event.password,
 //         userName: event.userName,
 //       );
+//       await MyPluginAuthentication.persistUser(
+//           userId: event.userName,
+//           token: tokenModel.token,
+//           refreshToken: tokenModel.refreshToken,
+//           expiredToken: DateTime.now().toString());
 //       ProfileModel profileModel = await authRepositories.getProfile();
 //       emit(state.copyWith(profileModel: profileModel, loginLoading: false));
 //       event.onSuccess();
@@ -95,7 +108,7 @@
 //   void authResendCode(AuthResendCode event, Emitter<AuthState> emit) async {
 //     try {
 //       emit(state.copyWith(verifyCodeLoading: true));
-//       await MyPluginAuthentication.resendCodeCognito(userName: event.userName);
+//       await authRepositories.resendCode(userName: event.userName);
 //       emit(state.copyWith(verifyCodeLoading: false));
 //       event.onSuccess();
 //     } catch (e) {
@@ -108,11 +121,7 @@
 //   void authSignUp(AuthSignUp event, Emitter<AuthState> emit) async {
 //     try {
 //       emit(state.copyWith(signUpLoading: true));
-//       await MyPluginAuthentication.signUpCognito(
-//         id: event.body['id'],
-//         userAttributes: event.body['attr'],
-//         password: event.body['password'],
-//       );
+//       await authRepositories.signUp(event.body);
 //       emit(state.copyWith(signUpLoading: false));
 //       event.onSuccess();
 //     } catch (e) {
@@ -126,13 +135,17 @@
 //     try {
 //       emit(state.copyWith(verifyCodeLoading: true));
 
-//       await MyPluginAuthentication.verifyCodeCognito(
-//           userName: event.userName, code: event.code);
+//       await authRepositories.verify(userName: event.userName, code: event.code);
 //       if (event.password != null) {
-//         await MyPluginAuthentication.loginCognito(
+//         final TokenModel tokenModel = await authRepositories.login(
 //           password: event.password!,
 //           userName: event.userName,
 //         );
+//         await MyPluginAuthentication.persistUser(
+//             userId: event.userName,
+//             token: tokenModel.token,
+//             refreshToken: tokenModel.refreshToken,
+//             expiredToken: DateTime.now().toString());
 //         ProfileModel profileModel = await authRepositories.getProfile();
 //         emit(state.copyWith(
 //             profileModel: profileModel, verifyCodeLoading: false));
@@ -151,7 +164,7 @@
 //       AuthForgotPassword event, Emitter<AuthState> emit) async {
 //     try {
 //       emit(state.copyWith(resetPasswordLoading: true));
-//       await MyPluginAuthentication.forgotPassword(userName: event.username);
+//       await authRepositories.resendPassword(userName: event.userName);
 //       event.onSuccess();
 //       emit(state.copyWith(resetPasswordLoading: false));
 //     } catch (e) {
@@ -167,15 +180,20 @@
 //       AuthResetPassword event, Emitter<AuthState> emit) async {
 //     try {
 //       emit(state.copyWith(resetPasswordLoading: true));
-//       await MyPluginAuthentication.confirmNewPassword(
+//       await authRepositories.resetPassword(
 //         code: event.code,
 //         newPassword: event.password,
-//         userName: event.username,
+//         userName: event.userName,
 //       );
-//       await MyPluginAuthentication.loginCognito(
+//       final TokenModel tokenModel = await authRepositories.login(
 //         password: event.password,
-//         userName: event.username,
+//         userName: event.userName,
 //       );
+//       await MyPluginAuthentication.persistUser(
+//           userId: event.userName,
+//           token: tokenModel.token,
+//           refreshToken: tokenModel.refreshToken,
+//           expiredToken: DateTime.now().toString());
 //       ProfileModel profileModel = await authRepositories.getProfile();
 //       emit(state.copyWith(
 //           profileModel: profileModel, resetPasswordLoading: false));

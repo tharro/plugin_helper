@@ -96,17 +96,17 @@
 // }
 
 // class AuthForgotPassword extends AuthEvent {
-//   final String username;
+//   final String userName;
 //   final Function onSuccess;
 //   final Function(String code, String message) onError;
 //   const AuthForgotPassword(
-//       {required this.username, required this.onError, required this.onSuccess});
+//       {required this.userName, required this.onError, required this.onSuccess});
 // }
 
 // class AuthResetPassword extends AuthEvent {
 //   final String code;
 //   final String password;
-//   final String username;
+//   final String userName;
 //   final Function onSuccess;
 //   final Function(String code, String message) onError;
 //   const AuthResetPassword({
@@ -114,7 +114,7 @@
 //     required this.password,
 //     required this.onError,
 //     required this.onSuccess,
-//     required this.username,
+//     required this.userName,
 //   });
 // }
 
