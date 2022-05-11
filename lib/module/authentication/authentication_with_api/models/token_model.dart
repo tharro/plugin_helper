@@ -8,7 +8,7 @@ class TokenModel extends Equatable {
 
   factory TokenModel.fromJson(dynamic json) {
     return TokenModel(
-        refreshToken: json['refresh_token'], token: json['access_token']);
+        refreshToken: json['refresh_token'], token: json['token']);
   }
 
   TokenModel copyWith({String? token, String? refreshToken}) {
