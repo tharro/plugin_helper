@@ -1,5 +1,7 @@
 enum AppEnvironment { dev, stage, prod }
 
+enum DefaultVerify { phone, email }
+
 //This plugin had used to config the environment and its variables of it
 class MyPluginAppEnvironment {
   // Singleton object
@@ -20,6 +22,8 @@ class MyPluginAppEnvironment {
   String? merchantId;
   String? googleAPIKey;
   late bool isCognito;
+  late bool isVerifyEmailAndPhone;
+  late DefaultVerify defaultVerify;
   Map<String, dynamic>? customKey;
 
   // Set app configuration with single function
@@ -33,6 +37,8 @@ class MyPluginAppEnvironment {
     String? googleAPIKey,
     Map<String, dynamic>? customKey,
     required bool isCognito,
+    required bool isVerifyEmailAndPhone,
+    required DefaultVerify defaultVerify,
   }) {
     this.merchantId = merchantId ?? this.merchantId;
     this.stripePublicKey = stripePublicKey ?? this.stripePublicKey;
@@ -43,5 +49,7 @@ class MyPluginAppEnvironment {
     this.googleAPIKey = googleAPIKey ?? this.googleAPIKey;
     this.customKey = customKey ?? this.customKey;
     this.isCognito = isCognito;
+    this.isVerifyEmailAndPhone = isVerifyEmailAndPhone;
+    this.defaultVerify = defaultVerify;
   }
 }
