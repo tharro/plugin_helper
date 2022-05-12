@@ -12,8 +12,7 @@ class MyPluginAppConstraints {
   static const String refreshToken = 'REFRESH_TOKEN';
   static const String firstRun = 'FIRST_RUN';
   static const String login = 'LOGIN';
-  static const String verifyEmail = 'VERIFY_EMAIL';
-  static const String verifyPhone = 'VERIFY_PHONE';
+  static const String verify = 'VERIFY';
   static const String signUp = 'SIGN_UP';
   static const String expired = 'EXPIRED';
   static const String language = 'LANGUAGE';
