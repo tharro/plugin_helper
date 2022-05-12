@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:typed_data';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:plugin_helper/models/map/address_detail_model.dart';
 import 'package:plugin_helper/models/map/address_model.dart';
-import 'package:plugin_helper/plugin_api.dart';
 import 'package:plugin_helper/plugin_app_environment.dart';
 import 'dart:ui' as ui;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -24,7 +24,7 @@ class MyPluginMap {
     url =
         '$url&input=$input&language=$language&components=$components&types=$type';
     try {
-      final res = await MyPluginApi().request(url, Method.get);
+      final res = await Dio().get(url);
       return ListAddressModel.fromJson(res.data);
     } catch (e) {
       rethrow;
@@ -38,7 +38,7 @@ class MyPluginMap {
             MyPluginAppEnvironment().googleAPIKey!;
     url = '$url&place_id=$placeId';
     try {
-      final res = await MyPluginApi().request(url, Method.get);
+      final res = await Dio().get(url);
       return AddressDetailModel.fromJson(res.data);
     } catch (e) {
       rethrow;

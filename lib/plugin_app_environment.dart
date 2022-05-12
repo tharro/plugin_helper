@@ -21,7 +21,6 @@ class MyPluginAppEnvironment {
   String? stripePublicKey;
   String? merchantId;
   String? googleAPIKey;
-  late bool isCognito;
   late bool isVerifyEmailAndPhone;
   late DefaultVerify defaultVerify;
   Map<String, dynamic>? customKey;
@@ -36,7 +35,6 @@ class MyPluginAppEnvironment {
     String? merchantId,
     String? googleAPIKey,
     Map<String, dynamic>? customKey,
-    required bool isCognito,
     required bool isVerifyEmailAndPhone,
     required DefaultVerify defaultVerify,
   }) {
@@ -48,7 +46,6 @@ class MyPluginAppEnvironment {
     this.clientId = clientId ?? this.clientId;
     this.googleAPIKey = googleAPIKey ?? this.googleAPIKey;
     this.customKey = customKey ?? this.customKey;
-    this.isCognito = isCognito;
     this.isVerifyEmailAndPhone = isVerifyEmailAndPhone;
     this.defaultVerify = defaultVerify;
   }

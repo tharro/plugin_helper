@@ -14,7 +14,7 @@ dependencies:
   device_info_plus: ^3.2.3
   shared_preferences: ^2.0.13
   flutter_secure_storage: ^5.0.2
-  amazon_cognito_identity_dart_2: ^2.0.0
+  # amazon_cognito_identity_dart_2: ^2.0.0
   intl: ^0.17.0
   dio: ^4.0.6
   path_provider: ^2.0.9
