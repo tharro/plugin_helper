@@ -41,6 +41,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
@@ -311,6 +312,17 @@ class MyPluginHelper {
     }
     var isTablet = diagonal > 1100.0;
     return isTablet;
+  }
+
+  static Future setLanguage({required String language}) async {
+    const storage = FlutterSecureStorage();
+    await storage.write(key: MyPluginAppConstraints.language, value: language);
+  }
+
+  static Future<String> getLanguage() async {
+    const storage = FlutterSecureStorage();
+    String? language = await storage.read(key: MyPluginAppConstraints.language);
+    return language ?? 'en';
   }
 
   static showToast({required String message}) {

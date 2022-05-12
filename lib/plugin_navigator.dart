@@ -62,10 +62,6 @@ class MyPluginNavigation {
     return navigationKey!.currentState!.pop();
   }
 
-  Future<dynamic> pushFadeRoute(BuildContext context, Widget _rn) {
-    return Navigator.of(context).push(FadePageRoute(child: _rn));
-  }
-
   PageRoute<T> _buildAdaptivePageRoute<T>({
     required WidgetBuilder builder,
     bool fullScreenDialog = false,

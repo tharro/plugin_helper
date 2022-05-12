@@ -15,6 +15,7 @@ class MyPluginAppConstraints {
   static const String verify = 'VERIFY';
   static const String signUp = 'SIGN_UP';
   static const String expired = 'EXPIRED';
+  static const String language = 'LANGUAGE';
 }
 
 class MyPluginAuthentication {
@@ -258,11 +259,12 @@ class MyPluginAuthentication {
     }
   }
 
-  static Future<void> persistUser(
-      {required String userId,
-      required String token,
-      required String refreshToken,
-      String? expiredToken}) async {
+  static Future<void> persistUser({
+    required String userId,
+    required String token,
+    required String refreshToken,
+    String? expiredToken,
+  }) async {
     await storage.write(key: MyPluginAppConstraints.user, value: userId);
     await storage.write(key: MyPluginAppConstraints.token, value: token);
     await storage.write(

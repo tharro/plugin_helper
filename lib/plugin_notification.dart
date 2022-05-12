@@ -18,21 +18,21 @@ class MyPluginNotification {
       String? payload,
       chanelId,
       chanelName,
-      channelDescription}) async {
+      channelDescription,
+      soundName = ''}) async {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      chanelId,
-      chanelName,
-      channelDescription: channelDescription,
-      importance: Importance.max,
-      playSound: true,
-      showProgress: true,
-      priority: Priority.high,
-      color: color,
-    );
+        chanelId, chanelName,
+        channelDescription: channelDescription,
+        importance: Importance.max,
+        playSound: true,
+        showProgress: true,
+        priority: Priority.high,
+        color: color,
+        sound: RawResourceAndroidNotificationSound(soundName));
 
-    var iOSChannelSpecifics = const IOSNotificationDetails(
-      presentSound: true,
-    );
+    var iOSChannelSpecifics = IOSNotificationDetails(
+        presentSound: true,
+        sound: soundName != '' ? '$soundName.aiff' : soundName);
     var platformChannelSpecifics = NotificationDetails(
         android: androidPlatformChannelSpecifics, iOS: iOSChannelSpecifics);
     await flutterLocalNotificationsPlugin
@@ -47,6 +47,7 @@ class MyPluginNotification {
       required Function(Map<String, dynamic> token) onRegisterFCM,
       required String iconNotification,
       String? payload,
+      soundName,
       required String chanelId,
       required String chanelName,
       required String channelDescription}) async {
@@ -86,7 +87,8 @@ class MyPluginNotification {
               payload: payload,
               chanelId: chanelId,
               chanelName: chanelName,
-              channelDescription: channelDescription);
+              channelDescription: channelDescription,
+              soundName: soundName);
         }
       });
       FirebaseMessaging.onBackgroundMessage(
@@ -139,7 +141,6 @@ class MyPluginNotification {
 
   static Future<Map<String, dynamic>> getInfoToRequest() async {
     String? token = await messaging.getToken();
-    print('token $token');
     String meId = await MyPluginHelper.getMeIdDevice();
     Map<String, dynamic> body = {
       "type": "M",

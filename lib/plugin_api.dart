@@ -1,11 +1,9 @@
 import 'dart:collection';
 import 'dart:io';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
-import 'package:mime_type/mime_type.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:plugin_helper/plugin_authentication.dart';
+import 'package:plugin_helper/plugin_helper.dart';
 import 'package:plugin_helper/plugin_message_require.dart';
 
 //This plugin had used to make the HTTP method request
@@ -52,6 +50,13 @@ class MyPluginApi {
     if (headerAddition != null) {
       header.addAll(headerAddition);
     }
+    String _languageCode = await MyPluginHelper.getLanguage();
+    if (params != null) {
+      params = params..addAll({'language_code': _languageCode});
+    } else {
+      params = {'language_code': _languageCode};
+    }
+
     try {
       if (method == Method.post) {
         return await dio.post(url,
@@ -103,7 +108,8 @@ class MyPluginApi {
   Future<Response<dynamic>> requestUploadFile(url, Method method, File file,
       {String? typeFile,
       Map<String, dynamic>? body,
-      Map<String, dynamic>? customHeader}) async {
+      Map<String, dynamic>? customHeader,
+      Function(int, int)? onSendProgress}) async {
     String fileName = file.path.split('/').last;
     String mimeType = mime(fileName)!;
     String mimee = mimeType.split('/')[0];
@@ -118,7 +124,9 @@ class MyPluginApi {
 
     return await request(url, method, customHeader: customHeader, body: data,
         onSendProgress: (value, total) {
-      print("value: $value, total: $total");
+      if (onSendProgress != null) {
+        onSendProgress(value, total);
+      }
     });
   }
 }

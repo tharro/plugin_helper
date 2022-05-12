@@ -1,3 +1,5 @@
+import 'package:plugin_helper/plugin_helper.dart';
+
 enum AppEnvironment { dev, stage, prod }
 
 //This plugin had used to config the environment and its variables of it
@@ -20,7 +22,7 @@ class MyPluginAppEnvironment {
   String? merchantId;
   String? googleAPIKey;
   late bool isCognito;
-  Map<String, dynamic>? customKey;
+  CustomKey? customKey;
 
   // Set app configuration with single function
   void setAppConfig({
@@ -31,7 +33,7 @@ class MyPluginAppEnvironment {
     String? stripePublicKey,
     String? merchantId,
     String? googleAPIKey,
-    Map<String, dynamic>? customKey,
+    CustomKey? customKey,
     required bool isCognito,
   }) {
     this.merchantId = merchantId ?? this.merchantId;
@@ -44,4 +46,13 @@ class MyPluginAppEnvironment {
     this.customKey = customKey ?? this.customKey;
     this.isCognito = isCognito;
   }
+}
+
+class CustomKey extends Equatable {
+  final String key;
+  final dynamic value;
+
+  const CustomKey({required this.key, required this.value});
+  @override
+  List<Object?> get props => [key, value];
 }
