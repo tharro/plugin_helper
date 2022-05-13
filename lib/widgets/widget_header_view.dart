@@ -7,7 +7,7 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
       required this.context,
       this.actions,
       this.iconLeft,
-      required this.title,
+      this.title,
       this.onPressLeftIcon,
       this.toolbarHeight,
       this.backgroundColor,
@@ -16,19 +16,20 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
       this.elevation = 0,
       this.isShowLeftIcon = true,
       this.titleTextStyle,
-      this.systemUiOverlayStyle})
+      this.systemUiOverlayStyle,
+      this.onPrimaryColorIconLeft})
       : super(key: key);
   final BuildContext context;
   final List<Widget>? actions;
   final Widget? iconLeft;
-  final Widget title;
+  final Widget? title;
   final bool? centerTitle;
   final double? elevation;
   final Function? onPressLeftIcon;
   final bool isShowLeftIcon;
   final double? toolbarHeight;
   final Color? backgroundColor;
-  final Color? backgroundColorIconLeft;
+  final Color? backgroundColorIconLeft, onPrimaryColorIconLeft;
   final TextStyle? titleTextStyle;
   final SystemUiOverlayStyle? systemUiOverlayStyle;
   @override
@@ -43,6 +44,8 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
           ? ElevatedButton(
               style: ElevatedButton.styleFrom(
                   primary: backgroundColorIconLeft ?? Colors.transparent,
+                  onPrimary:
+                      onPrimaryColorIconLeft ?? Colors.grey.withOpacity(0.5),
                   elevation: 0,
                   shadowColor: Colors.transparent,
                   shape: const CircleBorder()),
@@ -62,5 +65,5 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size(0, kToolbarHeight);
+  Size get preferredSize => Size(0, toolbarHeight ?? kToolbarHeight);
 }
