@@ -36,9 +36,14 @@ class MyWidgetTextField extends StatefulWidget {
   final TextStyle textStyle, labelStyle, errorStyle;
   final TextStyle? textStyleCounter;
   final InputBorder? errorBorder, border, focusBorder;
-  final Color? focusColor;
   final Function? onListenFocus, onListenController;
   final bool? showError;
+  final double? paddingLeftPrefixIcon,
+      paddingRightPrefixIcon,
+      paddingLeftSuffixIcon,
+      paddingRightSuffixIcon,
+      borderRadius;
+  final Color? borderColor, focusBorderColor, errorBorderColor;
   const MyWidgetTextField({
     Key? key,
     this.prefix,
@@ -75,10 +80,17 @@ class MyWidgetTextField extends StatefulWidget {
     this.border,
     this.focusBorder,
     required this.errorStyle,
-    this.focusColor,
     this.onListenFocus,
     this.onListenController,
     this.showError = true,
+    this.paddingLeftPrefixIcon = 15,
+    this.paddingRightPrefixIcon = 11,
+    this.paddingLeftSuffixIcon = 15,
+    this.paddingRightSuffixIcon = 11,
+    this.borderRadius = 4,
+    this.borderColor,
+    this.focusBorderColor,
+    this.errorBorderColor,
   }) : super(key: key);
 
   @override
@@ -202,21 +214,21 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
   }
 
   OutlineInputBorder errorBorder() => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(widget.borderRadius!),
         borderSide: BorderSide(
-          color: Colors.red[400]!,
+          color: widget.errorBorderColor ?? Colors.red[400]!,
         ),
       );
   OutlineInputBorder border() => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(widget.borderRadius!),
         borderSide: BorderSide(
-          color: Colors.grey[400]!,
+          color: widget.borderColor ?? Colors.grey[400]!,
         ),
       );
   OutlineInputBorder focusBorder() => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5),
-        borderSide: const BorderSide(
-          color: Colors.yellow,
+        borderRadius: BorderRadius.circular(widget.borderRadius!),
+        borderSide: BorderSide(
+          color: widget.focusBorderColor ?? Colors.green,
         ),
       );
 
@@ -269,20 +281,28 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         errorBorder: widget.errorBorder ?? errorBorder(),
         focusedErrorBorder: widget.errorBorder ?? errorBorder(),
         contentPadding: widget.contentPadding ??
-            const EdgeInsets.symmetric(horizontal: 17, vertical: 13),
+            const EdgeInsets.symmetric(horizontal: 17, vertical: 11),
         border: widget.border ?? border(),
         enabledBorder: widget.border ?? border(),
         focusedBorder: widget.focusBorder ?? focusBorder(),
         labelText: widget.label,
         counterText: '',
-        focusColor: widget.focusColor ?? Colors.yellow,
         errorStyle: widget.errorStyle,
         prefix: widget.prefix,
-        prefixIcon: widget.prefixIcon,
+        prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
+        prefixIcon: Padding(
+          padding: EdgeInsets.only(
+              left: widget.paddingLeftPrefixIcon!,
+              right: widget.paddingRightPrefixIcon!),
+          child: widget.prefixIcon,
+        ),
+        suffixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
         suffixIcon: widget.suffixIcon == null
             ? null
             : Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 17),
+                padding: EdgeInsets.only(
+                    left: widget.paddingLeftSuffixIcon!,
+                    right: widget.paddingRightSuffixIcon!),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.end,
