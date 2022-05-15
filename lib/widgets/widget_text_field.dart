@@ -4,6 +4,7 @@ import 'package:plugin_helper/plugin_helper.dart';
 import 'package:plugin_helper/plugin_message_require.dart';
 
 enum ValidType { none, password, email, fullName, notEmpty }
+enum TextFieldType { normal, animation }
 
 class MyWidgetTextField extends StatefulWidget {
   final String? label;
@@ -42,8 +43,11 @@ class MyWidgetTextField extends StatefulWidget {
       paddingRightPrefixIcon,
       paddingLeftSuffixIcon,
       paddingRightSuffixIcon,
-      borderRadius;
+      borderRadius,
+      spaceBetweenLabelAndTextField;
+  final TextFieldType? textFieldType;
   final Color? borderColor, focusBorderColor, errorBorderColor;
+  final Widget? customLabelOfTextFieldNormal;
   const MyWidgetTextField({
     Key? key,
     this.prefix,
@@ -91,6 +95,9 @@ class MyWidgetTextField extends StatefulWidget {
     this.borderColor,
     this.focusBorderColor,
     this.errorBorderColor,
+    this.textFieldType = TextFieldType.normal,
+    this.spaceBetweenLabelAndTextField = 8,
+    this.customLabelOfTextFieldNormal,
   }) : super(key: key);
 
   @override
@@ -234,87 +241,114 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      textInputAction: widget.textInputAction,
-      onFieldSubmitted: widget.onFieldSubmitted,
-      validator: widget.validator,
-      focusNode: widget.focus,
-      textCapitalization: widget.textCapitalization,
-      enabled: widget.enabled,
-      onTap: widget.onTap,
-      onChanged: (value) {
-        checkValidate();
-        if (hasChanged == false && value.isNotEmpty) {
-          if (mounted) {
-            setState(() {
-              hasChanged = true;
-            });
-          }
-        }
-        if (widget.onChanged != null) {
-          widget.onChanged!(value);
-        }
-      },
-      keyboardType: widget.keyboardType,
-      controller: widget.controller,
-      obscureText: widget.obscureText,
-      inputFormatters: widget.inputFormatters,
-      style: widget.textStyle,
-      scrollPadding: EdgeInsets.zero,
-      maxLength: widget.maxLength,
-      maxLines: widget.maxLines,
-      minLines: widget.minLines,
-      decoration: InputDecoration(
-        constraints: widget.constraints,
-        hintText: widget.hintText,
-        counter: widget.maxLength != null && hasFocus
-            ? Text(
-                "${widget.controller.text.characters.length} /${widget.maxLength}",
-                style: widget.textStyleCounter ?? const TextStyle(fontSize: 13))
-            : null,
-        errorMaxLines: 2,
-        labelStyle: widget.labelStyle,
-        errorText: ((!valid && hasChanged) || widget.textError != null) &&
-                widget.showError!
-            ? getError()
-            : null,
-        errorBorder: widget.errorBorder ?? errorBorder(),
-        focusedErrorBorder: widget.errorBorder ?? errorBorder(),
-        contentPadding: widget.contentPadding ??
-            const EdgeInsets.symmetric(horizontal: 17, vertical: 11),
-        border: widget.border ?? border(),
-        enabledBorder: widget.border ?? border(),
-        focusedBorder: widget.focusBorder ?? focusBorder(),
-        labelText: widget.label,
-        counterText: '',
-        errorStyle: widget.errorStyle,
-        prefix: widget.prefix,
-        prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
-        prefixIcon: Padding(
-          padding: EdgeInsets.only(
-              left: widget.paddingLeftPrefixIcon!,
-              right: widget.paddingRightPrefixIcon!),
-          child: widget.prefixIcon,
-        ),
-        suffixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
-        suffixIcon: widget.suffixIcon == null
-            ? null
-            : Padding(
-                padding: EdgeInsets.only(
-                    left: widget.paddingLeftSuffixIcon!,
-                    right: widget.paddingRightSuffixIcon!),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTap: widget.onSuffixIconTap,
-                      child: widget.suffixIcon,
-                    ),
-                  ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (widget.textFieldType == TextFieldType.normal)
+          Padding(
+            padding:
+                EdgeInsets.only(bottom: widget.spaceBetweenLabelAndTextField!),
+            child: Row(
+              children: [
+                Text(
+                  widget.label!,
+                  style: widget.labelStyle,
                 ),
-              ),
-      ),
+                if (widget.customLabelOfTextFieldNormal != null)
+                  widget.customLabelOfTextFieldNormal!,
+              ],
+            ),
+          ),
+        TextFormField(
+          textInputAction: widget.textInputAction,
+          onFieldSubmitted: widget.onFieldSubmitted,
+          validator: widget.validator,
+          focusNode: widget.focus,
+          textCapitalization: widget.textCapitalization,
+          enabled: widget.enabled,
+          onTap: widget.onTap,
+          onChanged: (value) {
+            checkValidate();
+            if (hasChanged == false && value.isNotEmpty) {
+              if (mounted) {
+                setState(() {
+                  hasChanged = true;
+                });
+              }
+            }
+            if (widget.onChanged != null) {
+              widget.onChanged!(value);
+            }
+          },
+          keyboardType: widget.keyboardType,
+          controller: widget.controller,
+          obscureText: widget.obscureText,
+          inputFormatters: widget.inputFormatters,
+          style: widget.textStyle,
+          scrollPadding: EdgeInsets.zero,
+          maxLength: widget.maxLength,
+          maxLines: widget.maxLines,
+          minLines: widget.minLines,
+          decoration: InputDecoration(
+            constraints: widget.constraints,
+            hintText: widget.hintText,
+            counter: widget.maxLength != null && hasFocus
+                ? Text(
+                    "${widget.controller.text.characters.length} /${widget.maxLength}",
+                    style: widget.textStyleCounter ??
+                        const TextStyle(fontSize: 13))
+                : null,
+            errorMaxLines: 2,
+            labelStyle: widget.textFieldType == TextFieldType.animation
+                ? widget.labelStyle
+                : null,
+            errorText: ((!valid && hasChanged) || widget.textError != null) &&
+                    widget.showError!
+                ? getError()
+                : null,
+            errorBorder: widget.errorBorder ?? errorBorder(),
+            focusedErrorBorder: widget.errorBorder ?? errorBorder(),
+            contentPadding: widget.contentPadding ??
+                const EdgeInsets.symmetric(horizontal: 17, vertical: 11),
+            border: widget.border ?? border(),
+            enabledBorder: widget.border ?? border(),
+            focusedBorder: widget.focusBorder ?? focusBorder(),
+            labelText: widget.textFieldType == TextFieldType.animation
+                ? widget.label
+                : null,
+            counterText: '',
+            errorStyle: widget.errorStyle,
+            prefix: widget.prefix,
+            prefixIconConstraints:
+                const BoxConstraints(minWidth: 0, minHeight: 0),
+            prefixIcon: Padding(
+              padding: EdgeInsets.only(
+                  left: widget.paddingLeftPrefixIcon!,
+                  right: widget.paddingRightPrefixIcon!),
+              child: widget.prefixIcon,
+            ),
+            suffixIconConstraints:
+                const BoxConstraints(minWidth: 0, minHeight: 0),
+            suffixIcon: widget.suffixIcon == null
+                ? null
+                : Padding(
+                    padding: EdgeInsets.only(
+                        left: widget.paddingLeftSuffixIcon!,
+                        right: widget.paddingRightSuffixIcon!),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: widget.onSuffixIconTap,
+                          child: widget.suffixIcon,
+                        ),
+                      ],
+                    ),
+                  ),
+          ),
+        ),
+      ],
     );
   }
 }
