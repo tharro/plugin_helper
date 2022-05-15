@@ -48,6 +48,7 @@ class MyWidgetTextField extends StatefulWidget {
   final TextFieldType? textFieldType;
   final Color? borderColor, focusBorderColor, errorBorderColor;
   final Widget? customLabelOfTextFieldNormal;
+  final Widget eyeActiveIcon, eyeDisableIcon;
   const MyWidgetTextField({
     Key? key,
     this.prefix,
@@ -98,6 +99,8 @@ class MyWidgetTextField extends StatefulWidget {
     this.textFieldType = TextFieldType.normal,
     this.spaceBetweenLabelAndTextField = 8,
     this.customLabelOfTextFieldNormal,
+    required this.eyeActiveIcon,
+    required this.eyeDisableIcon,
   }) : super(key: key);
 
   @override
@@ -108,6 +111,8 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
   bool hasFocus = false;
   bool valid = false;
   bool hasChanged = false;
+  late bool _obscureText = true;
+
   @override
   void initState() {
     super.initState();
@@ -282,7 +287,9 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
           },
           keyboardType: widget.keyboardType,
           controller: widget.controller,
-          obscureText: widget.obscureText,
+          obscureText: widget.validType == ValidType.password
+              ? _obscureText
+              : widget.obscureText,
           inputFormatters: widget.inputFormatters,
           style: widget.textStyle,
           scrollPadding: EdgeInsets.zero,
@@ -329,7 +336,8 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
             ),
             suffixIconConstraints:
                 const BoxConstraints(minWidth: 0, minHeight: 0),
-            suffixIcon: widget.suffixIcon == null
+            suffixIcon: widget.validType != ValidType.password &&
+                    widget.suffixIcon == null
                 ? null
                 : Padding(
                     padding: EdgeInsets.only(
@@ -340,8 +348,20 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         GestureDetector(
-                          onTap: widget.onSuffixIconTap,
-                          child: widget.suffixIcon,
+                          onTap: () {
+                            if (widget.validType == ValidType.password) {
+                              if (mounted) {
+                                setState(() {
+                                  _obscureText = !_obscureText;
+                                });
+                              }
+                            } else {
+                              if (widget.onSuffixIconTap != null) {
+                                widget.onSuffixIconTap!();
+                              }
+                            }
+                          },
+                          child: _checkIcon(),
                         ),
                       ],
                     ),
@@ -350,5 +370,16 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         ),
       ],
     );
+  }
+
+  Widget _checkIcon() {
+    if (widget.validType == ValidType.password) {
+      if (_obscureText) {
+        return widget.eyeActiveIcon;
+      } else {
+        return widget.eyeDisableIcon;
+      }
+    }
+    return widget.suffixIcon!;
   }
 }
