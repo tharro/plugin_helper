@@ -14,13 +14,11 @@ dependencies:
   device_info_plus: ^3.2.3
   shared_preferences: ^2.0.13
   flutter_secure_storage: ^5.0.2
-  # amazon_cognito_identity_dart_2: ^2.0.0
   intl: ^0.17.0
   dio: ^4.0.6
   path_provider: ^2.0.9
   permission_handler: ^9.2.0
   downloads_path_provider_28: ^0.1.2
-  flutter_branch_sdk: ^5.0.0
   firebase_messaging: ^11.2.13
   firebase_analytics: ^9.1.5
   firebase_core: ^1.14.1
