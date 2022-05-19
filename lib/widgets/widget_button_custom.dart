@@ -17,6 +17,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
   final bool enabled;
   final double? width, height, elevation;
   final Widget? icon;
+  final Gradient? gradient;
   const MyWidgetButtonCustom({
     Key? key,
     required this.onPressed,
@@ -43,12 +44,16 @@ class MyWidgetButtonCustom extends StatelessWidget {
     this.height,
     this.elevation,
     this.icon,
+    this.gradient,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: width ?? double.infinity,
       height: height ?? 50,
+      decoration: BoxDecoration(
+          gradient: gradient,
+          borderRadius: BorderRadius.circular(borderRadius)),
       child: ElevatedButton(
         onPressed: enabled
             ? () {
