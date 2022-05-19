@@ -24,6 +24,7 @@ dependencies:
   firebase_messaging: ^11.2.13
   firebase_analytics: ^9.1.5
   firebase_core: ^1.14.1
+  firebase_dynamic_links: ^2.0.6
   flutter_local_notifications: ^9.4.0
   firebase_crashlytics: ^2.6.2
   image_picker: ^0.8.5

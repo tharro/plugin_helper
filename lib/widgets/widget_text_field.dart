@@ -249,7 +249,8 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.textFieldType == TextFieldType.normal)
+        if (widget.textFieldType == TextFieldType.normal &&
+            widget.label != null)
           Padding(
             padding:
                 EdgeInsets.only(bottom: widget.spaceBetweenLabelAndTextField!),
