@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class MyWidgetAppGridView<T> extends StatefulWidget {
-  final List<T> data;
+class MyWidgetAppGridView<E> extends StatefulWidget {
+  final List<E> data;
   final double crossAxisSpacing;
   final double mainAxisSpacing;
   final int crossAxisCount;
   final double childAspectRatio;
-  final Widget Function(T item, int index) renderItem;
+  final Widget Function(int index) renderItem;
   final Function()? onLoadMore;
   final RefreshController refreshController;
   final Function() onRefresh;
   final bool isLoadMore;
   final Color colorRefresh;
-  final Widget? loadingLoadmoreWidget;
+  final Widget? loadingLoadMoreWidget;
   const MyWidgetAppGridView(
       {Key? key,
       required this.data,
@@ -27,7 +27,7 @@ class MyWidgetAppGridView<T> extends StatefulWidget {
       required this.onRefresh,
       this.isLoadMore = false,
       required this.colorRefresh,
-      this.loadingLoadmoreWidget})
+      this.loadingLoadMoreWidget})
       : super(key: key);
   @override
   _AppGridViewState createState() => _AppGridViewState();
@@ -69,10 +69,10 @@ class _AppGridViewState extends State<MyWidgetAppGridView> {
         itemBuilder: (context, index) {
           if (index == widget.data.length) {
             return Center(
-              child: widget.loadingLoadmoreWidget ?? Container(),
+              child: widget.loadingLoadMoreWidget ?? Container(),
             );
           }
-          return widget.renderItem(widget.data[index], index);
+          return widget.renderItem(index);
         },
         itemCount:
             widget.isLoadMore ? widget.data.length + 1 : widget.data.length,

@@ -5,11 +5,11 @@ import 'package:plugin_helper/plugin_message_require.dart';
 import 'package:plugin_helper/widgets/widget_loading.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class MyWidgetAppListView<T> extends StatefulWidget {
-  final List<T> data;
+class MyWidgetAppListView<E> extends StatefulWidget {
+  final List<E> data;
   final Function()? onLoadMore;
   final Axis scrollDirection;
-  final Widget Function(T item, int index) renderItem;
+  final Widget Function(int index) renderItem;
   final bool enablePullDown;
   final bool isNeverScroll;
   final Function()? onRefresh;
@@ -115,12 +115,12 @@ class AppListViewState extends State<MyWidgetAppListView> {
           if (widget.scrollDirection == Axis.horizontal) {
             return Row(children: [
               if (index == 0) SizedBox(width: widget.paddingHorizontal),
-              widget.renderItem(widget.data[index], index),
+              widget.renderItem(index),
               if (index == widget.data.length - 1)
                 SizedBox(width: widget.paddingHorizontal),
             ]);
           }
-          return widget.renderItem(widget.data[index], index);
+          return widget.renderItem(index);
         },
         itemCount:
             widget.isLoadMore! ? widget.data.length + 1 : widget.data.length,
