@@ -11,6 +11,7 @@ enum ValidType {
   notEmpty,
   cardNumber,
   expired,
+  cvv,
 }
 enum TextFieldType { normal, animation }
 
@@ -214,6 +215,14 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
 
         setValid();
         break;
+      case ValidType.cvv:
+        if (widget.controller.text.isEmpty ||
+            widget.controller.text.length < 3) {
+          setInValid();
+          return;
+        }
+        setValid();
+        break;
     }
     if (widget.onValid != null) {
       widget.onValid!(valid);
@@ -259,6 +268,8 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         return MyPluginMessageRequire.invalidCardNumber;
       case ValidType.expired:
         return MyPluginMessageRequire.invalidExpired;
+      case ValidType.cvv:
+        return MyPluginMessageRequire.invalidCvv;
       default:
         return '';
     }
