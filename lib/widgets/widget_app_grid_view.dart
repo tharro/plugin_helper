@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class MyWidgetAppGridView extends StatefulWidget {
-  final List data;
+class MyWidgetAppGridView<T> extends StatefulWidget {
+  final List<T> data;
   final double crossAxisSpacing;
   final double mainAxisSpacing;
   final int crossAxisCount;
   final double childAspectRatio;
-  final Widget Function(dynamic item, int index) renderItem;
+  final Widget Function(T item, int index) renderItem;
   final Function()? onLoadMore;
   final RefreshController refreshController;
   final Function() onRefresh;

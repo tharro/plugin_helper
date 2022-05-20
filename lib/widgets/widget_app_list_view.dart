@@ -5,11 +5,11 @@ import 'package:plugin_helper/plugin_message_require.dart';
 import 'package:plugin_helper/widgets/widget_loading.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class MyWidgetAppListView extends StatefulWidget {
-  final List data;
+class MyWidgetAppListView<T> extends StatefulWidget {
+  final List<T> data;
   final Function()? onLoadMore;
   final Axis scrollDirection;
-  final Widget Function(dynamic item, int index) renderItem;
+  final Widget Function(T item, int index) renderItem;
   final bool enablePullDown;
   final bool isNeverScroll;
   final Function()? onRefresh;
