@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-class MyWidgetMaskedTextController extends TextEditingController {
-  MyWidgetMaskedTextController(
+class MaskedTextController extends TextEditingController {
+  MaskedTextController(
       {String? text, required this.mask, Map<String, RegExp>? translator})
       : super(text: text) {
-    this.translator =
-        translator ?? MyWidgetMaskedTextController.getDefaultTranslator();
+    this.translator = translator ?? MaskedTextController.getDefaultTranslator();
 
     addListener(() {
       final String previous = _lastUpdatedText;
