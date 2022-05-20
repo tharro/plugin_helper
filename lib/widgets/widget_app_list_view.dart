@@ -13,14 +13,15 @@ class MyWidgetAppListView extends StatefulWidget {
   final bool enablePullDown;
   final bool isNeverScroll;
   final Function()? onRefresh;
-  final RefreshController refreshController;
-  final double height;
+  final RefreshController? refreshController;
+  final double heightSeparator;
   final EdgeInsets? padding;
   final Widget? separator;
   final bool? isLoadMore;
   final ScrollController? scrollController;
   final Widget? loadingWidget;
   final String? refreshingText, completeText, releaseText, idleText;
+  final double? heightListViewHorizontal, paddingHorizontal;
   const MyWidgetAppListView({
     Key? key,
     required this.data,
@@ -30,8 +31,8 @@ class MyWidgetAppListView extends StatefulWidget {
     this.enablePullDown = true,
     this.isNeverScroll = false,
     this.onRefresh,
-    required this.refreshController,
-    this.height = 24.0,
+    this.refreshController,
+    this.heightSeparator = 24.0,
     this.padding,
     this.separator,
     this.isLoadMore = false,
@@ -41,6 +42,8 @@ class MyWidgetAppListView extends StatefulWidget {
     this.completeText,
     this.releaseText,
     this.idleText,
+    this.heightListViewHorizontal = 200,
+    this.paddingHorizontal = 16,
   }) : super(key: key);
   @override
   AppListViewState createState() => AppListViewState();
@@ -69,7 +72,7 @@ class AppListViewState extends State<MyWidgetAppListView> {
   Widget build(BuildContext context) {
     if (widget.onRefresh != null) {
       return SmartRefresher(
-          controller: widget.refreshController,
+          controller: widget.refreshController!,
           enablePullDown: widget.enablePullDown,
           header: Platform.isIOS
               ? const ClassHeaderIndicator()
@@ -80,6 +83,16 @@ class AppListViewState extends State<MyWidgetAppListView> {
             }
           },
           child: listView());
+    }
+    return switchDirection();
+  }
+
+  Widget switchDirection() {
+    if (widget.scrollDirection == Axis.horizontal) {
+      return SizedBox(
+        height: widget.heightListViewHorizontal,
+        child: listView(),
+      );
     }
     return listView();
   }
@@ -99,6 +112,14 @@ class AppListViewState extends State<MyWidgetAppListView> {
               child: widget.loadingWidget ?? const MyWidgetLoading(),
             );
           }
+          if (widget.scrollDirection == Axis.horizontal) {
+            return Row(children: [
+              if (index == 0) SizedBox(width: widget.paddingHorizontal),
+              widget.renderItem(widget.data[index], index),
+              if (index == widget.data.length - 1)
+                SizedBox(width: widget.paddingHorizontal),
+            ]);
+          }
           return widget.renderItem(widget.data[index], index);
         },
         itemCount:
@@ -106,7 +127,7 @@ class AppListViewState extends State<MyWidgetAppListView> {
         separatorBuilder: (BuildContext context, int index) {
           return widget.separator ??
               SizedBox(
-                height: widget.height,
+                height: widget.heightSeparator,
               );
         },
       );
