@@ -1,6 +1,6 @@
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:plugin_helper/models/credit_card/credit_card_model.dart';
 import 'package:plugin_helper/plugin_app_environment.dart';
-import 'package:plugin_helper/widgets/credit_card/flutter_credit_card.dart';
 
 class MyPluginPayment {
   static init() {

@@ -22,6 +22,9 @@ class MyPluginMessageRequire {
   static String linkEmpty = 'Link is empty';
   static String requiredFullName =
       'Please enter a valid first name and last name';
+  static String invalidCvv = 'Please input a valid CVV';
+  static String invalidExpired = 'Please input a valid date';
+  static String invalidCardNumber = 'Please input a valid number';
 
   static messageRequire({
     required String messageNoConnection,
@@ -43,6 +46,9 @@ class MyPluginMessageRequire {
     textStyleTitleDownloads,
     String? messageLinkEmpty,
     String? messageRequiredFullName,
+    String? messageInvalidCvv,
+    messageInvalidExpired,
+    messageInvalidCardNumber,
   }) {
     noConnection = messageNoConnection;
     canNotLaunchURL = messageCanNotLaunchURL;
@@ -64,5 +70,8 @@ class MyPluginMessageRequire {
     textStyleTitleDownload = textStyleTitleDownloads ?? textStyleTitleDownload;
     linkEmpty = messageLinkEmpty ?? linkEmpty;
     requiredFullName = messageRequiredFullName ?? requiredFullName;
+    invalidCvv = messageInvalidCvv ?? invalidCvv;
+    invalidExpired = messageInvalidExpired ?? invalidExpired;
+    invalidCardNumber = messageInvalidCardNumber ?? invalidCardNumber;
   }
 }

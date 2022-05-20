@@ -3,7 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:plugin_helper/plugin_helper.dart';
 import 'package:plugin_helper/plugin_message_require.dart';
 
-enum ValidType { none, password, email, fullName, notEmpty }
+enum ValidType {
+  none,
+  password,
+  email,
+  fullName,
+  notEmpty,
+  cardNumber,
+  expired,
+}
 enum TextFieldType { normal, animation }
 
 class MyWidgetTextField extends StatefulWidget {
@@ -179,6 +187,33 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
           setInValid();
         }
         break;
+      case ValidType.cardNumber:
+        if (widget.controller.text.isEmpty ||
+            widget.controller.text.length < 16) {
+          setInValid();
+          return;
+        }
+        setValid();
+        break;
+      case ValidType.expired:
+        if (widget.controller.text.isEmpty) {
+          setInValid();
+          return;
+        }
+
+        final DateTime now = DateTime.now();
+        final List<String> date = widget.controller.text.split(RegExp(r'/'));
+        final int month = int.parse(date.first);
+        final int year = int.parse('20${date.last}');
+        final DateTime cardDate = DateTime(year, month);
+
+        if (cardDate.isBefore(now) || month > 12 || month == 0) {
+          setInValid();
+          return;
+        }
+
+        setValid();
+        break;
     }
     if (widget.onValid != null) {
       widget.onValid!(valid);
@@ -220,6 +255,10 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         return MyPluginMessageRequire.canNotEmpty;
       case ValidType.fullName:
         return MyPluginMessageRequire.requiredFullName;
+      case ValidType.cardNumber:
+        return MyPluginMessageRequire.invalidCardNumber;
+      case ValidType.expired:
+        return MyPluginMessageRequire.invalidExpired;
       default:
         return '';
     }
