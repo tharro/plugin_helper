@@ -18,8 +18,7 @@ enum TextFieldType { normal, animation }
 class MyWidgetTextField extends StatefulWidget {
   final String? label;
   final TextEditingController controller;
-  final Widget? suffixIcon;
-  final Widget? prefix;
+  final Widget? suffixActiveIcon, suffixDisableIcon;
   final Widget? prefixIcon;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
@@ -55,62 +54,63 @@ class MyWidgetTextField extends StatefulWidget {
       borderRadius,
       spaceBetweenLabelAndTextField;
   final TextFieldType? textFieldType;
-  final Color? borderColor, focusBorderColor, errorBorderColor;
+  final Color? borderColor, focusBorderColor, errorBorderColor, fillColor;
   final Widget? customLabelOfTextFieldNormal;
   final Widget eyeActiveIcon, eyeDisableIcon;
-  const MyWidgetTextField({
-    Key? key,
-    this.prefix,
-    this.prefixIcon,
-    this.label,
-    this.onSuffixIconTap,
-    this.inputFormatters,
-    required this.controller,
-    this.suffixIcon,
-    this.keyboardType,
-    this.onChanged,
-    this.validType = ValidType.none,
-    this.obscureText = false,
-    this.enabled = true,
-    this.onValid,
-    this.validator,
-    this.hintText,
-    this.maxLength,
-    this.textCapitalization = TextCapitalization.none,
-    this.textError,
-    this.onTap,
-    this.contentPadding,
-    this.maxLines = 1,
-    this.minLines,
-    required this.focus,
-    this.onFieldSubmitted,
-    this.textInputAction,
-    this.constraints,
-    this.passwordValidType = PasswordValidType.atLeast8Characters,
-    required this.textStyle,
-    this.textStyleCounter,
-    required this.labelStyle,
-    this.errorBorder,
-    this.border,
-    this.focusBorder,
-    required this.errorStyle,
-    this.onListenFocus,
-    this.onListenController,
-    this.showError = true,
-    this.paddingLeftPrefixIcon = 15,
-    this.paddingRightPrefixIcon = 11,
-    this.paddingLeftSuffixIcon = 15,
-    this.paddingRightSuffixIcon = 11,
-    this.borderRadius = 4,
-    this.borderColor,
-    this.focusBorderColor,
-    this.errorBorderColor,
-    this.textFieldType = TextFieldType.normal,
-    this.spaceBetweenLabelAndTextField = 8,
-    this.customLabelOfTextFieldNormal,
-    required this.eyeActiveIcon,
-    required this.eyeDisableIcon,
-  }) : super(key: key);
+  const MyWidgetTextField(
+      {Key? key,
+      this.prefixIcon,
+      this.label,
+      this.onSuffixIconTap,
+      this.inputFormatters,
+      required this.controller,
+      this.suffixActiveIcon,
+      this.suffixDisableIcon,
+      this.keyboardType,
+      this.onChanged,
+      this.validType = ValidType.none,
+      this.obscureText = false,
+      this.enabled = true,
+      this.onValid,
+      this.validator,
+      this.hintText,
+      this.maxLength,
+      this.textCapitalization = TextCapitalization.none,
+      this.textError,
+      this.onTap,
+      this.contentPadding,
+      this.maxLines = 1,
+      this.minLines,
+      required this.focus,
+      this.onFieldSubmitted,
+      this.textInputAction,
+      this.constraints,
+      this.passwordValidType = PasswordValidType.atLeast8Characters,
+      required this.textStyle,
+      this.textStyleCounter,
+      required this.labelStyle,
+      this.errorBorder,
+      this.border,
+      this.focusBorder,
+      required this.errorStyle,
+      this.onListenFocus,
+      this.onListenController,
+      this.showError = true,
+      this.paddingLeftPrefixIcon = 15,
+      this.paddingRightPrefixIcon = 11,
+      this.paddingLeftSuffixIcon = 15,
+      this.paddingRightSuffixIcon = 11,
+      this.borderRadius = 4,
+      this.borderColor,
+      this.focusBorderColor,
+      this.errorBorderColor,
+      this.textFieldType = TextFieldType.normal,
+      this.spaceBetweenLabelAndTextField = 8,
+      this.customLabelOfTextFieldNormal,
+      required this.eyeActiveIcon,
+      required this.eyeDisableIcon,
+      this.fillColor = Colors.transparent})
+      : super(key: key);
 
   @override
   _WidgetTextFieldState createState() => _WidgetTextFieldState();
@@ -121,7 +121,6 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
   bool valid = false;
   bool hasChanged = false;
   late bool _obscureText = true;
-
   @override
   void initState() {
     super.initState();
@@ -345,7 +344,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
           style: widget.textStyle,
           scrollPadding: EdgeInsets.zero,
           maxLength: widget.maxLength,
-          maxLines: widget.maxLines,
+          maxLines: widget.maxLines ?? 1,
           minLines: widget.minLines,
           decoration: InputDecoration(
             constraints: widget.constraints,
@@ -375,20 +374,24 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
                 ? widget.label
                 : null,
             counterText: '',
+            fillColor: widget.fillColor,
+            filled: true,
             errorStyle: widget.errorStyle,
-            prefix: widget.prefix,
             prefixIconConstraints:
                 const BoxConstraints(minWidth: 0, minHeight: 0),
-            prefixIcon: Padding(
-              padding: EdgeInsets.only(
-                  left: widget.paddingLeftPrefixIcon!,
-                  right: widget.paddingRightPrefixIcon!),
-              child: widget.prefixIcon,
-            ),
+            prefixIcon: widget.prefixIcon != null
+                ? Padding(
+                    padding: EdgeInsets.only(
+                        left: widget.paddingLeftPrefixIcon!,
+                        right: widget.paddingRightPrefixIcon!),
+                    child: widget.prefixIcon,
+                  )
+                : null,
             suffixIconConstraints:
                 const BoxConstraints(minWidth: 0, minHeight: 0),
             suffixIcon: widget.validType != ValidType.password &&
-                    widget.suffixIcon == null
+                    widget.suffixDisableIcon == null &&
+                    widget.suffixDisableIcon == null
                 ? null
                 : Padding(
                     padding: EdgeInsets.only(
@@ -406,10 +409,9 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
                                   _obscureText = !_obscureText;
                                 });
                               }
-                            } else {
-                              if (widget.onSuffixIconTap != null) {
-                                widget.onSuffixIconTap!();
-                              }
+                            }
+                            if (widget.onSuffixIconTap != null) {
+                              widget.onSuffixIconTap!();
                             }
                           },
                           child: _checkIcon(),
@@ -431,6 +433,10 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         return widget.eyeDisableIcon;
       }
     }
-    return widget.suffixIcon!;
+    if (hasFocus) {
+      return widget.suffixActiveIcon!;
+    } else {
+      return widget.suffixDisableIcon!;
+    }
   }
 }
