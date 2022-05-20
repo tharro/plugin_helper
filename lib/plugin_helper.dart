@@ -363,6 +363,7 @@ class MyPluginHelper {
         builder: (context) => Padding(
             padding: MediaQuery.of(context).viewInsets,
             child: Container(
+                width: MediaQuery.of(context).size.width,
                 constraints: BoxConstraints(
                     maxHeight:
                         maxHeight ?? MediaQuery.of(context).size.height * 0.5),
