@@ -61,7 +61,7 @@ class MyPluginMessageRequire {
     weakPassword = messageWeakPassword;
     invalidEmail = messageInvalidEmail;
     canNotEmpty = messageCanNotEmpty;
-    canNotEmpty = messageCancel;
+    cancel = messageCancel;
     downloading = messageDownloading ?? downloading;
     downloadingFile = messageDownloadingFile ?? downloadingFile;
     permissionDenied = messagePermissionDenied ?? permissionDenied;
