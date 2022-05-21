@@ -29,7 +29,6 @@ class MyWidgetTextField extends StatefulWidget {
   final bool enabled;
   final Function(bool)? onValid;
   final TextCapitalization textCapitalization;
-  final String Function(String?)? validator;
   final String? hintText;
   final int? maxLength;
   final String? textError;
@@ -72,7 +71,6 @@ class MyWidgetTextField extends StatefulWidget {
       this.obscureText = false,
       this.enabled = true,
       this.onValid,
-      this.validator,
       this.hintText,
       this.maxLength,
       this.textCapitalization = TextCapitalization.none,
@@ -220,9 +218,16 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         setValid();
         break;
     }
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 200));
     if (widget.onListenController != null) {
       widget.onListenController!();
+    }
+    if (hasChanged == false && widget.controller.text.isNotEmpty) {
+      if (mounted) {
+        setState(() {
+          hasChanged = true;
+        });
+      }
     }
   }
 
@@ -321,24 +326,10 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         TextFormField(
           textInputAction: widget.textInputAction,
           onFieldSubmitted: widget.onFieldSubmitted,
-          validator: widget.validator,
           focusNode: widget.focus,
           textCapitalization: widget.textCapitalization,
           enabled: widget.enabled,
           onTap: widget.onTap,
-          onChanged: (value) {
-            checkValidate();
-            if (hasChanged == false && value.isNotEmpty) {
-              if (mounted) {
-                setState(() {
-                  hasChanged = true;
-                });
-              }
-            }
-            if (widget.onChanged != null) {
-              widget.onChanged!(value);
-            }
-          },
           keyboardType: widget.keyboardType,
           controller: widget.controller,
           obscureText: widget.validType == ValidType.password
