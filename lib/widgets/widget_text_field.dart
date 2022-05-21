@@ -149,10 +149,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
     widget.controller.addListener(checkValidate);
   }
 
-  checkValidate() {
-    if (widget.onListenController != null) {
-      widget.onListenController!();
-    }
+  checkValidate() async {
     switch (widget.validType) {
       case ValidType.none:
         setInValid();
@@ -222,6 +219,10 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         }
         setValid();
         break;
+    }
+    await Future.delayed(const Duration(milliseconds: 500));
+    if (widget.onListenController != null) {
+      widget.onListenController!();
     }
     if (widget.onValid != null) {
       widget.onValid!(valid);
