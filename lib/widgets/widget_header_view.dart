@@ -17,7 +17,9 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
       this.isShowLeftIcon = true,
       this.titleTextStyle,
       this.systemUiOverlayStyle,
-      this.onPrimaryColorIconLeft})
+      this.onPrimaryColorIconLeft,
+      this.titleSpacing = 16,
+      this.leadingWidth = 48})
       : super(key: key);
   final BuildContext context;
   final List<Widget>? actions;
@@ -27,10 +29,11 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
   final double? elevation;
   final Function? onPressLeftIcon;
   final bool isShowLeftIcon;
-  final double? toolbarHeight;
+  final double? toolbarHeight, titleSpacing;
   final Color? backgroundColor;
   final Color? backgroundColorIconLeft, onPrimaryColorIconLeft;
   final TextStyle? titleTextStyle;
+  final double? leadingWidth;
   final SystemUiOverlayStyle? systemUiOverlayStyle;
   @override
   Widget build(BuildContext context) {
@@ -40,16 +43,10 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
       elevation: elevation,
       actions: actions,
       backgroundColor: backgroundColor,
+      leadingWidth: leadingWidth,
       leading: isShowLeftIcon
-          ? ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  primary: backgroundColorIconLeft ?? Colors.transparent,
-                  onPrimary:
-                      onPrimaryColorIconLeft ?? Colors.grey.withOpacity(0.5),
-                  elevation: 0,
-                  shadowColor: Colors.transparent,
-                  shape: const CircleBorder()),
-              onPressed: () {
+          ? GestureDetector(
+              onTap: () {
                 onPressLeftIcon ?? Navigator.pop(context);
               },
               child: iconLeft ??
@@ -58,6 +55,7 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
                     color: Theme.of(context).appBarTheme.iconTheme!.color,
                   ))
           : null,
+      titleSpacing: titleSpacing,
       centerTitle: centerTitle,
       title: title,
       titleTextStyle: titleTextStyle,
