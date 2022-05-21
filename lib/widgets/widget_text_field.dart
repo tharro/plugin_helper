@@ -224,9 +224,6 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
     if (widget.onListenController != null) {
       widget.onListenController!();
     }
-    if (widget.onValid != null) {
-      widget.onValid!(valid);
-    }
   }
 
   setValid() {
@@ -235,6 +232,9 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         setState(() {
           valid = true;
         });
+        if (widget.onValid != null) {
+          widget.onValid!(valid);
+        }
       }
     }
   }
@@ -245,6 +245,9 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         setState(() {
           valid = false;
         });
+        if (widget.onValid != null) {
+          widget.onValid!(valid);
+        }
       }
     }
   }
