@@ -18,7 +18,7 @@ class MyPluginPickerFile {
   static Future<XFile?> uploadImage({
     required BuildContext context,
     required bool isCamera,
-    required Function({String type}) onError,
+    required Function(String code) onError,
   }) async {
     try {
       bool isGranted = true;
@@ -33,13 +33,13 @@ class MyPluginPickerFile {
             maxHeight: 1024);
         return imageFile;
       } else {
-        onError(type: 'camera_access_denied');
+        onError('camera_access_denied');
         return null;
       }
     } catch (error) {
       await requestPermissionsCamera();
       PlatformException e = error as PlatformException;
-      onError(type: e.code);
+      onError(e.code);
       throw e;
     }
   }
@@ -49,7 +49,7 @@ class MyPluginPickerFile {
     required bool isLoading,
     Function()? onLoading,
     Function()? onEndLoading,
-    required Function({String type}) onError,
+    required Function(String code) onError,
   }) async {
     try {
       if (isLoading) {
@@ -62,7 +62,7 @@ class MyPluginPickerFile {
         onEndLoading!();
       }
       PlatformException e = error as PlatformException;
-      onError(type: e.code);
+      onError(e.code);
       throw e;
     }
   }
