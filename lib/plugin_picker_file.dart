@@ -55,8 +55,8 @@ class MyPluginPickerFile {
         onError('-1');
       }
     }
-    if (onStartLoading != null) {
-      onEndLoading!();
+    if (onEndLoading != null) {
+      onEndLoading();
     }
     return null;
   }
