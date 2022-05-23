@@ -5,66 +5,60 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class MyPluginPickerFile {
-  static Future<PickedFile?> pickerFileCustom() async {
+  static Future<PickedFile?>? pickerFileCustom() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     if (result != null) {
       PickedFile file = PickedFile(result.files.single.path!);
       return file;
-    } else {
-      return null;
     }
+    return null;
   }
 
-  static Future<XFile?> uploadImage({
+  static Future<XFile?>? uploadSingleImage({
     required BuildContext context,
     required bool isCamera,
     required Function(String code) onError,
   }) async {
     try {
-      bool isGranted = true;
-      if (isCamera) {
-        isGranted = await requestPermissionsCamera();
-      }
-      if (isGranted) {
-        final imageFile = await ImagePicker().pickImage(
-            source: isCamera ? ImageSource.camera : ImageSource.gallery,
-            imageQuality: 50,
-            maxWidth: 800,
-            maxHeight: 1024);
-        return imageFile;
-      } else {
-        onError('camera_access_denied');
-        return null;
-      }
+      final imageFile = await ImagePicker().pickImage(
+          source: isCamera ? ImageSource.camera : ImageSource.gallery,
+          imageQuality: 50,
+          maxWidth: 800,
+          maxHeight: 1024);
+      return imageFile;
     } catch (error) {
-      await requestPermissionsCamera();
-      PlatformException e = error as PlatformException;
-      onError(e.code);
-      throw e;
+      if (error is PlatformException) {
+        onError(error.code);
+      } else {
+        onError('-1');
+      }
     }
+    return null;
   }
 
-  static Future<List<XFile>> uploadMultiImage({
+  static Future<List<XFile>?>? uploadMultiImage({
     required BuildContext context,
-    required bool isLoading,
-    Function()? onLoading,
+    Function()? onStartLoading,
     Function()? onEndLoading,
     required Function(String code) onError,
   }) async {
     try {
-      if (isLoading) {
-        onLoading!();
+      if (onStartLoading != null) {
+        onStartLoading();
       }
       final pickedFileList = await ImagePicker().pickMultiImage();
-      return pickedFileList!;
+      return pickedFileList;
     } catch (error) {
-      if (isLoading) {
-        onEndLoading!();
+      if (error is PlatformException) {
+        onError(error.code);
+      } else {
+        onError('-1');
       }
-      PlatformException e = error as PlatformException;
-      onError(e.code);
-      throw e;
     }
+    if (onStartLoading != null) {
+      onEndLoading!();
+    }
+    return null;
   }
 
   static Future<bool> requestPermissionsCamera() async {

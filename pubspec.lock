@@ -204,13 +204,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.6"
-  downloads_path_provider_28:
-    dependency: "direct main"
-    description:
-      name: downloads_path_provider_28
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
   equatable:
     dependency: "direct main"
     description:

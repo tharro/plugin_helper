@@ -7,7 +7,6 @@ export 'package:intl/intl.dart';
 export 'package:dio/dio.dart';
 export 'package:path_provider/path_provider.dart';
 export 'package:permission_handler/permission_handler.dart';
-export 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 export 'package:firebase_messaging/firebase_messaging.dart';
 export 'package:firebase_analytics/firebase_analytics.dart';
 export 'package:firebase_core/firebase_core.dart';
@@ -42,7 +41,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:new_version/new_version.dart';
 import 'package:path_provider/path_provider.dart';
@@ -160,7 +158,11 @@ class MyPluginHelper {
 
   static Future<Directory?> _getDownloadDirectory() async {
     if (Platform.isAndroid) {
-      return await DownloadsPathProvider.downloadsDirectory;
+      Directory? directory = Directory('/storage/emulated/0/Download');
+      if (!await directory.exists()) {
+        directory = await getExternalStorageDirectory();
+      }
+      return directory;
     }
     return await getApplicationDocumentsDirectory();
   }
