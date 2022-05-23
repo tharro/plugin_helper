@@ -258,16 +258,25 @@ class MyPluginHelper {
 
   static String formatUtcTime(
       {required String dateUtc,
+      //2022-05-23T07:54:17Z
       required String format,
-      String languageCode = 'en',
-      String? newPattern}) {
+      String languageCode = 'en'}) {
     try {
-      var dateTime = DateFormat(
-        newPattern ?? "yyyy-MM-dd'T'HH:mm:ss",
-      ).parseUtc(dateUtc);
-      var dateLocal = dateTime.toLocal();
-
+      var dateLocal = DateTime.parse(dateUtc).toLocal();
       return DateFormat(format, languageCode).format(dateLocal);
+    } catch (e) {
+      return '-:--';
+    }
+  }
+
+  static String convertLocalTimeToUtcTime({String? dateTime}) {
+    try {
+      if (dateTime != null) {
+        var dateUTC = DateTime.parse(dateTime).toUtc().toString();
+        return dateUTC.replaceAll(' ', 'T');
+      } else {
+        return DateTime.now().toUtc().toString().replaceAll(' ', 'T');
+      }
     } catch (e) {
       return '-:--';
     }

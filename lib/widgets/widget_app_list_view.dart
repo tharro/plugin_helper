@@ -17,11 +17,12 @@ class MyWidgetAppListView<E> extends StatefulWidget {
   final double heightSeparator;
   final EdgeInsets? padding;
   final Widget? separator;
-  final bool? isLoadMore;
+  final bool? isLoadMore, reverse;
   final ScrollController? scrollController;
   final Widget? loadingWidget;
   final String? refreshingText, completeText, releaseText, idleText;
   final double? heightListViewHorizontal, paddingHorizontal;
+
   const MyWidgetAppListView({
     Key? key,
     required this.data,
@@ -44,6 +45,7 @@ class MyWidgetAppListView<E> extends StatefulWidget {
     this.idleText,
     this.heightListViewHorizontal = 200,
     this.paddingHorizontal = 16,
+    this.reverse = false,
   }) : super(key: key);
   @override
   AppListViewState createState() => AppListViewState();
@@ -105,6 +107,7 @@ class AppListViewState extends State<MyWidgetAppListView> {
         addAutomaticKeepAlives: true,
         scrollDirection: widget.scrollDirection,
         controller: controller,
+        reverse: widget.reverse!,
         shrinkWrap: true,
         itemBuilder: (context, index) {
           if (index == widget.data.length) {
