@@ -19,6 +19,7 @@ class MyWidgetAppListView<E> extends StatefulWidget {
   final Widget? separator;
   final bool? isLoadMore, reverse;
   final ScrollController? scrollController;
+  final Function()? onScrollListener;
   final Widget? loadingWidget;
   final String? refreshingText, completeText, releaseText, idleText;
   final double? heightListViewHorizontal, paddingHorizontal;
@@ -46,6 +47,7 @@ class MyWidgetAppListView<E> extends StatefulWidget {
     this.heightListViewHorizontal = 200,
     this.paddingHorizontal = 16,
     this.reverse = false,
+    this.onScrollListener,
   }) : super(key: key);
   @override
   AppListViewState createState() => AppListViewState();
@@ -136,6 +138,9 @@ class AppListViewState extends State<MyWidgetAppListView> {
       );
 
   void _scrollListener() {
+    if (widget.onScrollListener != null) {
+      widget.onScrollListener!();
+    }
     var triggerFetchMoreSize = controller.position.maxScrollExtent;
     if (widget.onLoadMore != null &&
         controller.position.pixels > triggerFetchMoreSize) {

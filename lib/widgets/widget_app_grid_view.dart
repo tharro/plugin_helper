@@ -9,6 +9,7 @@ class MyWidgetAppGridView<E> extends StatefulWidget {
   final double childAspectRatio;
   final Widget Function(int index) renderItem;
   final Function()? onLoadMore;
+  final Function()? onScrollListener;
   final RefreshController refreshController;
   final Function() onRefresh;
   final bool isLoadMore;
@@ -27,7 +28,8 @@ class MyWidgetAppGridView<E> extends StatefulWidget {
       required this.onRefresh,
       this.isLoadMore = false,
       required this.colorRefresh,
-      this.loadingLoadMoreWidget})
+      this.loadingLoadMoreWidget,
+      this.onScrollListener})
       : super(key: key);
   @override
   _AppGridViewState createState() => _AppGridViewState();
@@ -81,6 +83,9 @@ class _AppGridViewState extends State<MyWidgetAppGridView> {
   }
 
   void _scrollListener() {
+    if (widget.onScrollListener != null) {
+      widget.onScrollListener!();
+    }
     var triggerFetchMoreSize = controller.position.maxScrollExtent;
     if (widget.onLoadMore is Function &&
         controller.position.pixels > triggerFetchMoreSize) {
