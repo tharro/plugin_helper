@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class MyWidgetAppGridView<E> extends StatefulWidget {
-  final List<E> data;
+class MyWidgetAppGridView<T> extends StatefulWidget {
+  final List<T> data;
   final double crossAxisSpacing;
   final double mainAxisSpacing;
   final int crossAxisCount;

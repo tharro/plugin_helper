@@ -5,8 +5,8 @@ import 'package:plugin_helper/plugin_message_require.dart';
 import 'package:plugin_helper/widgets/widget_loading.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class MyWidgetAppListView<E> extends StatefulWidget {
-  final List<E> data;
+class MyWidgetAppListView<T> extends StatefulWidget {
+  final List<T> data;
   final Function()? onLoadMore;
   final Axis scrollDirection;
   final Widget Function(int index) renderItem;
