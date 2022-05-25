@@ -186,7 +186,7 @@ class MyPluginHelper {
   }) async {
     try {
       if (links == []) {
-        Fluttertoast.showToast(msg: MyPluginMessageRequire.linkEmpty);
+        showToast(message: MyPluginMessageRequire.linkEmpty);
         return '';
       }
       final isPermissionStatusGranted = await requestPermissions();
@@ -227,7 +227,7 @@ class MyPluginHelper {
         onSuccess();
         return saveFileDir;
       } else {
-        Fluttertoast.showToast(msg: MyPluginMessageRequire.permissionDenied);
+        showToast(message: MyPluginMessageRequire.permissionDenied);
         return '';
       }
     } catch (e) {
@@ -245,14 +245,10 @@ class MyPluginHelper {
       if (await canLaunch(url)) {
         await launch(url);
       } else {
-        Fluttertoast.showToast(
-            msg: error ?? MyPluginMessageRequire.canNotLaunchURL,
-            toastLength: Toast.LENGTH_LONG);
+        showToast(message: error ?? MyPluginMessageRequire.canNotLaunchURL);
       }
     } catch (e) {
-      Fluttertoast.showToast(
-          msg: error ?? MyPluginMessageRequire.canNotLaunchURL,
-          toastLength: Toast.LENGTH_LONG);
+      showToast(message: error ?? MyPluginMessageRequire.canNotLaunchURL);
     }
   }
 
@@ -343,7 +339,10 @@ class MyPluginHelper {
   }
 
   static showToast({required String message}) {
-    Fluttertoast.showToast(msg: message, toastLength: Toast.LENGTH_LONG);
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_LONG,
+        backgroundColor: Colors.black.withOpacity(0.5));
   }
 
   static Future<bool> isFirstInstall() async {
