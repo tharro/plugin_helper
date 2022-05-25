@@ -25,6 +25,10 @@ class MyPluginMessageRequire {
   static String invalidCvv = 'Please input a valid CVV';
   static String invalidExpired = 'Please input a valid date';
   static String invalidCardNumber = 'Please input a valid number';
+  static String hour = 'hour';
+  static String day = 'day';
+  static String minute = 'minuter';
+  static String second = 'second';
 
   static messageRequire({
     required String messageNoConnection,
@@ -49,6 +53,10 @@ class MyPluginMessageRequire {
     String? messageInvalidCvv,
     messageInvalidExpired,
     messageInvalidCardNumber,
+    messageHour,
+    messageDay,
+    messageMinute,
+    messageSecond,
   }) {
     noConnection = messageNoConnection;
     canNotLaunchURL = messageCanNotLaunchURL;
@@ -73,5 +81,9 @@ class MyPluginMessageRequire {
     invalidCvv = messageInvalidCvv ?? invalidCvv;
     invalidExpired = messageInvalidExpired ?? invalidExpired;
     invalidCardNumber = messageInvalidCardNumber ?? invalidCardNumber;
+    hour = messageHour ?? hour;
+    day = messageDay ?? day;
+    minute = messageMinute ?? minute;
+    second = messageSecond ?? second;
   }
 }

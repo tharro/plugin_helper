@@ -290,15 +290,17 @@ class MyPluginHelper {
         if (hours == 0) {
           final minutes = dateNow.difference(date).inMinutes;
           if (minutes == 0) {
-            return "${dateNow.difference(date).inSeconds}sec";
+            final sec = dateNow.difference(date).inSeconds;
+            return "$sec ${MyPluginMessageRequire.second}${sec > 1 ? 's' : ''}";
           } else {
-            return "${minutes}min";
+            return "$minutes ${MyPluginMessageRequire.minute}${minutes > 1 ? 's' : ''}";
           }
         } else {
-          return "${hours.abs()}h";
+          return "${hours.abs()} ${MyPluginMessageRequire.hour}${hours.abs() > 1 ? 's' : ''}";
         }
       }
-      return "${dateNow.difference(date).inDays}d";
+      final dday = dateNow.difference(date).inDays;
+      return "$dday ${MyPluginMessageRequire.day}${dday > 1 ? 's' : ''}";
     } catch (e) {
       return "-:--";
     }
