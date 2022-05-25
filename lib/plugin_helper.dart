@@ -255,7 +255,7 @@ class MyPluginHelper {
   static String formatUtcTime(
       {required String dateUtc,
       //2022-05-23T07:54:17Z
-      required String format,
+      String? format = 'dd/MM/yyyy HH:mm:ss',
       String languageCode = 'en'}) {
     try {
       var dateLocal = DateTime.parse(dateUtc).toLocal();
@@ -279,7 +279,7 @@ class MyPluginHelper {
   }
 
   static String convertTimeToHourOrDay(
-      {required String dateTime, required String format}) {
+      {required String dateTime, String? format = 'dd/MM/yyyy HH:mm:ss'}) {
     try {
       var date = DateFormat(format).parse(dateTime);
       final x = DateFormat(format).format(DateTime.now());
