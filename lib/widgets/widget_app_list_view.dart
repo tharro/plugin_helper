@@ -69,7 +69,7 @@ class AppListViewState extends State<MyWidgetAppListView> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.onRefresh != null) {
+    if (widget.refreshController != null) {
       return SmartRefresher(
           controller: widget.refreshController!,
           enablePullDown: widget.enablePullDown,

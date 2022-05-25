@@ -38,7 +38,7 @@ class MyWidgetEmpty extends StatelessWidget {
         )
       ],
     );
-    if (onRefresh != null) {
+    if (refreshController != null) {
       return SmartRefresher(
         onRefresh: onRefresh,
         controller: refreshController!,
