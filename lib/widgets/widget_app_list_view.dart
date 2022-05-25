@@ -21,7 +21,6 @@ class MyWidgetAppListView<T> extends StatefulWidget {
   final ScrollController? scrollController;
   final Function()? onScrollListener;
   final Widget? loadingWidget;
-  final String? refreshingText, completeText, releaseText, idleText;
   final double? heightListViewHorizontal, paddingHorizontal;
 
   const MyWidgetAppListView({
@@ -40,10 +39,6 @@ class MyWidgetAppListView<T> extends StatefulWidget {
     this.isLoadMore = false,
     this.scrollController,
     this.loadingWidget,
-    this.refreshingText,
-    this.completeText,
-    this.releaseText,
-    this.idleText,
     this.heightListViewHorizontal = 200,
     this.paddingHorizontal = 16,
     this.reverse = false,
