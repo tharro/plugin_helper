@@ -8,7 +8,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
   final Color? outLineColor;
   final Color? secondaryBorderColor, primaryBorderColor;
   final Color? outLineBorderColor;
-  final Color? borderColor, backgroundColor, textColor;
+  final Color? borderColor, backgroundColor, disableBackgroundColor, textColor;
   final Color? textPrimaryColor, textSecondaryColor;
   final Color? textOutLineColor;
   final TextStyle? textStyle;
@@ -45,6 +45,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
     this.elevation,
     this.icon,
     this.gradient,
+    this.disableBackgroundColor = const Color(0xfff1f1f2),
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -66,7 +67,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius)),
           backgroundColor: enabled == false
-              ? const Color(0xfff1f1f2)
+              ? disableBackgroundColor
               : checkBackgroundColor(), // background
           primary: checkBackgroundColor() == Colors.white
               ? Colors.grey
