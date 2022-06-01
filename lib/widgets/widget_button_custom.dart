@@ -8,7 +8,11 @@ class MyWidgetButtonCustom extends StatelessWidget {
   final Color? outLineColor;
   final Color? secondaryBorderColor, primaryBorderColor;
   final Color? outLineBorderColor;
-  final Color? borderColor, backgroundColor, disableBackgroundColor, textColor;
+  final Color? borderColor,
+      backgroundColor,
+      disableBackgroundColor,
+      disableTextColor,
+      textColor;
   final Color? textPrimaryColor, textSecondaryColor;
   final Color? textOutLineColor;
   final TextStyle? textStyle;
@@ -46,6 +50,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
     this.icon,
     this.gradient,
     this.disableBackgroundColor = const Color(0xfff1f1f2),
+    this.disableTextColor = const Color(0xff9a9a9a),
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -123,7 +128,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
 
   TextStyle checkTextColor(TextStyle textStyle) {
     if (!enabled) {
-      return textStyle.copyWith(color: const Color(0xff9a9a9a));
+      return textStyle.copyWith(color: disableTextColor);
     } else {
       if (textColor != null) {
         return textStyle.copyWith(color: textColor);
