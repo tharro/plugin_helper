@@ -58,10 +58,8 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
   bool _showIcon = false;
   bool _hasFocus = false;
   bool _isValidate = true;
-  PhoneNumber? _initPhoneNumber;
   @override
   void initState() {
-    _initPhoneNumber = widget.initialValue;
     widget.controller!.addListener(() {
       if (widget.controller!.text != '') {
         setState(() {
@@ -99,8 +97,8 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
           padding: widget.padding ?? EdgeInsets.zero,
           child: InternationalPhoneNumberInput(
             countries: widget.countries,
-            initialValue:
-                _initPhoneNumber ?? PhoneNumber(isoCode: 'AU', dialCode: '+61'),
+            initialValue: widget.initialValue ??
+                PhoneNumber(isoCode: 'AU', dialCode: '+61'),
             searchBoxDecoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey[300]!)),
@@ -112,9 +110,6 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
                 labelText: widget.label,
                 labelStyle: widget.textStyle),
             onInputChanged: (PhoneNumber number) {
-              if (_initPhoneNumber?.dialCode != number.dialCode) {
-                _initPhoneNumber = number;
-              }
               if (widget.onInputChanged != null) {
                 if (number.phoneNumber!.replaceAll('${number.dialCode}', '') !=
                     '0') {
