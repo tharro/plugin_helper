@@ -10,7 +10,7 @@ class MyWidgetPhoneNumber extends StatefulWidget {
   final Function(bool)? onInputValidated;
   final Function? onFieldSubmitted;
   final Function? onSaved;
-  final bool? autoFocus;
+  final bool autoFocus;
   final FocusNode? focusNode;
   final bool? hasError;
   final List<String>? countries;
@@ -158,7 +158,7 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
                 widget.onFieldSubmitted!();
               }
             },
-            autoFocus: widget.autoFocus!,
+            autoFocus: widget.autoFocus,
             formatInput: false,
             keyboardType: TextInputType.number,
             inputBorder: const OutlineInputBorder(),
