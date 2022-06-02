@@ -33,7 +33,7 @@ export 'package:ndialog/ndialog.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'extensions.dart';
 export 'plugin_app_environment.dart';
-export 'plugin_app_environment.dart';
+export 'plugin_authentication.dart';
 export 'plugin_check_connection.dart';
 export 'plugin_deep_link_with_firebase.dart';
 export 'plugin_helper.dart';
