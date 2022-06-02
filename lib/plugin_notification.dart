@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:plugin_helper/plugin_helper.dart';
+import 'package:plugin_helper/index.dart';
 
 class MyPluginNotification {
   static FirebaseMessaging messaging = FirebaseMessaging.instance;

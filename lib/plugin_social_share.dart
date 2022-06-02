@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
-import 'package:plugin_helper/plugin_helper.dart';
+import 'package:plugin_helper/index.dart';
 
 class MyPluginSocialShare {
   static const MethodChannel _channel = MethodChannel('plugin_helper');

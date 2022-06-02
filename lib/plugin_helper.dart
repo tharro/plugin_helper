@@ -1,56 +1,13 @@
-export 'package:firebase_analytics/firebase_analytics.dart';
-export 'package:cached_network_image/cached_network_image.dart';
-export 'package:device_info_plus/device_info_plus.dart';
-export 'package:shared_preferences/shared_preferences.dart';
-export 'package:flutter_secure_storage/flutter_secure_storage.dart';
-export 'package:intl/intl.dart';
-export 'package:dio/dio.dart';
-export 'package:path_provider/path_provider.dart';
-export 'package:permission_handler/permission_handler.dart';
-export 'package:firebase_messaging/firebase_messaging.dart';
-export 'package:firebase_analytics/firebase_analytics.dart';
-export 'package:firebase_core/firebase_core.dart';
-export 'package:firebase_crashlytics/firebase_crashlytics.dart';
-export 'package:image_picker/image_picker.dart';
-export 'package:file_picker/file_picker.dart';
-export 'package:url_launcher/url_launcher.dart';
-export 'package:new_version/new_version.dart';
-export 'package:fluttertoast/fluttertoast.dart';
-export 'package:pull_to_refresh/pull_to_refresh.dart';
-export 'package:pin_code_fields/pin_code_fields.dart';
-export 'package:mime_type/mime_type.dart';
-export 'package:connectivity_plus/connectivity_plus.dart';
-export 'package:flutter_stripe/flutter_stripe.dart';
-export 'package:collection/collection.dart';
-export 'package:equatable/equatable.dart';
-export 'package:mime_type/mime_type.dart';
-export 'package:meta/meta.dart';
-export 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-export 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
-export 'package:google_maps_flutter/google_maps_flutter.dart';
-export 'package:flutter_cache_manager/flutter_cache_manager.dart';
-
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl/intl.dart';
-import 'package:ndialog/ndialog.dart';
-import 'package:new_version/new_version.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:path/path.dart' as path;
 import 'package:plugin_helper/plugin_authentication.dart';
-import 'package:plugin_helper/plugin_message_require.dart';
 import 'package:plugin_helper/widgets/phone_number/src/utils/phone_number/phone_number_util.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
+import './index.dart';
+import 'package:path/path.dart' as path;
 
 DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 enum PasswordValidType {
@@ -194,7 +151,7 @@ class MyPluginHelper {
       if (isPermissionStatusGranted) {
         ProgressDialog progressDialog = ProgressDialog(context,
             dismissable: false,
-            defaultLoadingWidget: CupertinoActivityIndicator(),
+            defaultLoadingWidget: const CupertinoActivityIndicator(),
             dialogTransitionType: DialogTransitionType.NONE, onCancel: () {
           dio.close();
           Navigator.pop(context);

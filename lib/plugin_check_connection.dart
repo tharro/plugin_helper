@@ -1,6 +1,5 @@
 import 'dart:async';
-import 'package:plugin_helper/plugin_helper.dart';
-import 'package:plugin_helper/plugin_message_require.dart';
+import 'package:plugin_helper/index.dart';
 
 //This plugin had used to check internet connection
 class MyPluginConnectivity {

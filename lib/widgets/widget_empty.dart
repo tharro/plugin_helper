@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plugin_helper/plugin_helper.dart';
-import 'package:plugin_helper/plugin_message_require.dart';
+import 'package:plugin_helper/index.dart';
 
 class MyWidgetEmpty extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
