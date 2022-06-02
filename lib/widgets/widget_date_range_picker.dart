@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:date_range_picker/date_range_picker.dart' as DateRangePicker;
 
 class MyWidgetDateRangePickerCustom extends StatelessWidget {
   final Widget child;
@@ -29,9 +28,11 @@ class MyWidgetDateRangePickerCustom extends StatelessWidget {
     return Theme(
       data: Theme.of(context).copyWith(
           primaryTextTheme: TextTheme(button: textStyleButton),
-          accentColor: accentColor, //dot
           primaryColor: primaryColor,
-          iconTheme: IconThemeData(color: iconColor)),
+          iconTheme: IconThemeData(color: iconColor),
+          colorScheme:
+              ColorScheme.fromSwatch().copyWith(secondary: accentColor) //dot
+          ),
       child: Builder(
         builder: (context) => GestureDetector(
           child: child,
@@ -39,17 +40,18 @@ class MyWidgetDateRangePickerCustom extends StatelessWidget {
             if (onTap != null) {
               onTap!();
             }
-            final List<DateTime> picked = await DateRangePicker.showDatePicker(
+            DateTimeRange? picked = await showDateRangePicker(
                 context: context,
-                initialFirstDate: initialFirstDate != null
-                    ? DateTime.parse(initialFirstDate!)
-                    : DateTime.now(),
-                initialLastDate: initialLastDate != null
-                    ? DateTime.parse(initialLastDate!)
-                    : (DateTime.now()).add(const Duration(days: 7)),
+                initialDateRange: DateTimeRange(
+                    start: initialFirstDate != null
+                        ? DateTime.parse(initialFirstDate!)
+                        : DateTime.now(),
+                    end: initialLastDate != null
+                        ? DateTime.parse(initialLastDate!)
+                        : (DateTime.now()).add(const Duration(days: 7))),
                 firstDate: DateTime(firstDate ?? 2015),
                 lastDate: DateTime(lastDate ?? DateTime.now().year + 100));
-            if (picked.length == 2) {
+            if (picked != null) {
               onSelectedDate(picked);
             }
           },

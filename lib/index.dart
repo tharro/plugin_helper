@@ -53,7 +53,6 @@ export './widgets/widget_button_custom.dart';
 export './widgets/widget_cache_image.dart';
 export './widgets/widget_custom_dialog.dart';
 export './widgets/widget_date_picker.dart';
-export './widgets/widget_date_range_picker.dart';
 export './widgets/widget_double_check_to_close_app.dart';
 export './widgets/widget_empty.dart';
 export './widgets/widget_error.dart';
