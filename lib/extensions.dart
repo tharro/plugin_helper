@@ -14,9 +14,9 @@ extension DateTimeX on DateTime {
   }
 }
 
-extension SizedBoxX on double {
-  Widget get h => SizedBox(height: this);
-  Widget get w => SizedBox(width: this);
+extension SizedBoxX on int {
+  Widget get h => SizedBox(height: toDouble());
+  Widget get w => SizedBox(width: toDouble());
 }
 
 myNavigatorPush(Widget page) {
