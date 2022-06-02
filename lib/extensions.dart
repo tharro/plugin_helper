@@ -35,7 +35,7 @@ Future<dynamic> pushAnimation(Widget page) {
   return MyPluginNavigation.instance.pushAnimationRoute(page);
 }
 
-Future<dynamic> replacementInTab(
+Future<dynamic> replaceInTab(
     {required BuildContext context,
     required Widget page,
     bool isHoldTab = true}) {
