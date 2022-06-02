@@ -19,23 +19,23 @@ extension SizedBoxX on int {
   Widget get w => SizedBox(width: toDouble());
 }
 
-myNavigatorPush(Widget page) {
+Future<dynamic> push(Widget page) {
   return MyPluginNavigation.instance.push(page);
 }
 
-myNavigatorReplace(Widget page) {
+Future<dynamic> replace(Widget page) {
   return MyPluginNavigation.instance.replace(page);
 }
 
-myNavigatorNavigatePopUtil(Widget page) {
+Future<dynamic> popUtil(Widget page) {
   return MyPluginNavigation.instance.navigatePopUtil(page);
 }
 
-myNavigatorPushAnimationRoute(Widget page) {
-  return MyPluginNavigation.instance.replace(page);
+Future<dynamic> pushAnimation(Widget page) {
+  return MyPluginNavigation.instance.pushAnimationRoute(page);
 }
 
-myNavigatorReplacementInTab(
+Future<dynamic> replacementInTab(
     {required BuildContext context,
     required Widget page,
     bool isHoldTab = true}) {
@@ -43,7 +43,7 @@ myNavigatorReplacementInTab(
       screen: page, isHoldTab: isHoldTab, context: context);
 }
 
-myNavigatorInTab(
+Future<dynamic> pushInTab(
     {required BuildContext context,
     required Widget page,
     bool isHoldTab = true}) {
@@ -51,6 +51,6 @@ myNavigatorInTab(
       .navigateToInTab(screen: page, isHoldTab: isHoldTab, context: context);
 }
 
-myNavigatorGoBack(Widget page) {
+goBack(Widget page) {
   return MyPluginNavigation.instance.goBack();
 }

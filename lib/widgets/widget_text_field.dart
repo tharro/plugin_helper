@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:plugin_helper/plugin_helper.dart';
-import 'package:plugin_helper/plugin_message_require.dart';
+import 'package:plugin_helper/index.dart';
 
 enum ValidType {
   none,

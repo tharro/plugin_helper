@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plugin_helper/widgets/widget_loading.dart';
+import 'package:plugin_helper/index.dart';
 
 class MyWidgetOverlayLoading extends StatelessWidget {
   final Widget child;
