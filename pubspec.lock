@@ -616,10 +616,12 @@ packages:
   new_version:
     dependency: "direct main"
     description:
-      name: new_version
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.0"
+      path: "."
+      ref: master
+      resolved-ref: "3e1c6636c99b49a40bcedab1c359874820e8c32e"
+      url: "https://github.com/timtraversy/new_version.git"
+    source: git
+    version: "0.3.1"
   nm:
     dependency: transitive
     description:
