@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:plugin_helper/plugin_authentication.dart';
 import 'package:plugin_helper/widgets/phone_number/src/utils/phone_number/phone_number_util.dart';
 import './index.dart';
 import 'package:path/path.dart' as path;
@@ -29,6 +28,21 @@ class MyPluginHelper {
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regExp = RegExp(p);
     return regExp.hasMatch(email.trim());
+  }
+
+  static String parsePhoneWithCountry({required String phone}) {
+    final List<Locale> systemLocales = WidgetsBinding.instance!.window.locales;
+    String? isoCountryCode = systemLocales.first.countryCode;
+    if (phone.isNotEmpty) {
+      if (!phone.startsWith('+', 0)) {
+        if (phone.startsWith('0', 0)) {
+          phone = phone.replaceFirst('0', '');
+        } else {
+          phone = '+' + isoCountryCode! + phone;
+        }
+      }
+    }
+    return phone;
   }
 
   static Future<String> getMeIdDevice() async {
