@@ -149,7 +149,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
   checkValidate() async {
     switch (widget.validType) {
       case ValidType.none:
-        setInValid();
+        setValid();
         break;
       case ValidType.password:
         if (MyPluginHelper.isValidPassword(

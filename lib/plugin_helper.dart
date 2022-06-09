@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:plugin_helper/widgets/phone_number/src/models/country_list.dart';
 import 'package:plugin_helper/widgets/phone_number/src/utils/phone_number/phone_number_util.dart';
 import './index.dart';
 import 'package:path/path.dart' as path;
@@ -33,12 +34,18 @@ class MyPluginHelper {
   static String parsePhoneWithCountry({required String phone}) {
     final List<Locale> systemLocales = WidgetsBinding.instance!.window.locales;
     String? isoCountryCode = systemLocales.first.countryCode;
+    String? dial = '+61';
+    for (var e in Countries.countryList) {
+      if (isoCountryCode == e['alpha_2_code']) {
+        dial = e['dial_code'];
+      }
+    }
     if (phone.isNotEmpty) {
       if (!phone.startsWith('+', 0)) {
         if (phone.startsWith('0', 0)) {
-          phone = phone.replaceFirst('0', '');
+          phone = phone.replaceFirst('0', dial!);
         } else {
-          phone = '+' + isoCountryCode! + phone;
+          phone = dial! + phone;
         }
       }
     }
