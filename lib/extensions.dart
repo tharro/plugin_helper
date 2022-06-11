@@ -19,6 +19,12 @@ extension SizedBoxX on int {
   Widget get w => SizedBox(width: toDouble());
 }
 
+extension StringX on String {
+  bool get isPhoneNumber {
+    return startsWith('+') || RegExp(r'^-?[0-9]+$').hasMatch(this);
+  }
+}
+
 Future<dynamic> push(Widget page) {
   return MyPluginNavigation.instance.push(page);
 }
