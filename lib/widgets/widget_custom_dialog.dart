@@ -9,7 +9,7 @@ class MyWidgetCustomDialog extends StatefulWidget {
   final Widget buttonPrimary;
   final Widget? buttonSecondary;
   final Color? backgroundColor;
-  final EdgeInsets? paddingContainer;
+  final EdgeInsets? paddingHeader, paddingFooter, paddingCloseIcon;
   final Widget? iconClose;
   final double? spaceBetweenButton,
       spaceBetweenTitleAndMessage,
@@ -27,7 +27,8 @@ class MyWidgetCustomDialog extends StatefulWidget {
     required this.buttonPrimary,
     this.buttonSecondary,
     this.backgroundColor,
-    this.paddingContainer,
+    this.paddingHeader,
+    this.paddingFooter,
     this.iconClose,
     this.isColumn = true,
     this.isShowCloseIcon = true,
@@ -35,6 +36,7 @@ class MyWidgetCustomDialog extends StatefulWidget {
     this.spaceBetweenTitleAndMessage = 8,
     this.spaceBetweenMessageAndButton = 40,
     this.shapeRadius = 10,
+    this.paddingCloseIcon,
   }) : super(key: key);
 
   @override
@@ -56,8 +58,6 @@ class _CustomDialogState extends State<MyWidgetCustomDialog> {
 
   contentBox(context) {
     return Container(
-        padding: widget.paddingContainer ??
-            const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           color: widget.backgroundColor ?? Colors.white,
@@ -68,56 +68,82 @@ class _CustomDialogState extends State<MyWidgetCustomDialog> {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                if (widget.title != null)
-                  Center(
-                    child: Text(
-                      widget.title!,
-                      style: widget.textStyleTitle,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                if (widget.title != null || widget.isShowCloseIcon!)
-                  SizedBox(height: widget.spaceBetweenTitleAndMessage!),
-                if (widget.descriptions != null)
-                  Text(
-                    widget.descriptions!,
-                    style: widget.texStyleDescription,
-                    textAlign: TextAlign.center,
-                  ),
-                SizedBox(height: widget.spaceBetweenMessageAndButton!),
-                if (widget.isColumn!)
-                  Column(
+                Padding(
+                  padding: widget.paddingHeader ??
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                  child: Column(
                     children: [
-                      widget.buttonPrimary,
-                      SizedBox(height: widget.spaceBetweenButton),
-                      if (widget.isShowSecondButton!) widget.buttonSecondary!
+                      if (widget.title != null)
+                        Center(
+                          child: Text(
+                            widget.title!,
+                            style: widget.textStyleTitle,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      if (widget.title != null || widget.isShowCloseIcon!)
+                        SizedBox(height: widget.spaceBetweenTitleAndMessage!),
+                      if (widget.descriptions != null)
+                        Text(
+                          widget.descriptions!,
+                          style: widget.texStyleDescription,
+                          textAlign: TextAlign.center,
+                        ),
+                      SizedBox(height: widget.spaceBetweenMessageAndButton!),
                     ],
+                  ),
+                ),
+                if (widget.isColumn!)
+                  Padding(
+                    padding: widget.paddingFooter ??
+                        const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+                    child: Column(
+                      children: [
+                        widget.buttonPrimary,
+                        if (widget.isShowSecondButton!)
+                          SizedBox(height: widget.spaceBetweenButton),
+                        if (widget.isShowSecondButton!) widget.buttonSecondary!
+                      ],
+                    ),
                   )
                 else
-                  Row(
-                    children: [
-                      if (widget.isShowSecondButton!) widget.buttonSecondary!,
-                      SizedBox(width: widget.spaceBetweenButton),
-                      widget.buttonPrimary,
-                    ],
+                  Padding(
+                    padding: widget.paddingFooter ??
+                        const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+                    child: Row(
+                      children: [
+                        if (widget.isShowSecondButton!)
+                          Expanded(
+                            child: widget.buttonSecondary!,
+                          ),
+                        if (widget.isShowSecondButton!)
+                          SizedBox(width: widget.spaceBetweenButton),
+                        Expanded(child: widget.buttonPrimary),
+                      ],
+                    ),
                   )
               ],
             ),
             if (widget.isShowCloseIcon!)
               Positioned(
                   right: 0,
-                  child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                        if (widget.onClose != null) {
-                          widget.onClose!();
-                        }
-                      },
-                      child: widget.iconClose ??
-                          const Icon(
-                            Icons.close,
-                            size: 15,
-                          )))
+                  child: Padding(
+                    padding: widget.paddingCloseIcon ??
+                        const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 24),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          if (widget.onClose != null) {
+                            widget.onClose!();
+                          }
+                        },
+                        child: widget.iconClose ??
+                            const Icon(
+                              Icons.close,
+                              size: 15,
+                            )),
+                  ))
           ],
         ));
   }
