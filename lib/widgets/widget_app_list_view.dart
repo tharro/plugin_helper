@@ -14,9 +14,9 @@ class MyWidgetAppListView<T> extends StatefulWidget {
   final bool isNeverScroll;
   final Function()? onRefresh;
   final RefreshController? refreshController;
-  final double heightSeparator;
+  final double separatorItem;
   final EdgeInsets? padding;
-  final Widget? separator;
+  final Widget? separatorBuilder;
   final bool? isLoadMore, reverse;
   final ScrollController? scrollController;
   final Function()? onScrollListener;
@@ -33,9 +33,9 @@ class MyWidgetAppListView<T> extends StatefulWidget {
     this.isNeverScroll = false,
     this.onRefresh,
     this.refreshController,
-    this.heightSeparator = 24.0,
+    this.separatorItem = 24.0,
     this.padding,
-    this.separator,
+    this.separatorBuilder,
     this.isLoadMore = false,
     this.scrollController,
     this.loadingWidget,
@@ -125,9 +125,15 @@ class AppListViewState extends State<MyWidgetAppListView> {
         itemCount:
             widget.isLoadMore! ? widget.data.length + 1 : widget.data.length,
         separatorBuilder: (BuildContext context, int index) {
-          return widget.separator ??
+          if (widget.scrollDirection == Axis.horizontal) {
+            return widget.separatorBuilder ??
+                SizedBox(
+                  width: widget.separatorItem,
+                );
+          }
+          return widget.separatorBuilder ??
               SizedBox(
-                height: widget.heightSeparator,
+                height: widget.separatorItem,
               );
         },
       );
