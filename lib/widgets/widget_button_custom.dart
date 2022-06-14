@@ -12,6 +12,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
       backgroundColor,
       disableBackgroundColor,
       disableTextColor,
+      disableBorderColor,
       textColor;
   final Color? textPrimaryColor, textSecondaryColor;
   final Color? textOutLineColor;
@@ -51,6 +52,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
     this.gradient,
     this.disableBackgroundColor = const Color(0xfff1f1f2),
     this.disableTextColor = const Color(0xff9a9a9a),
+    this.disableBorderColor = const Color(0xfff1f1f2),
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -78,7 +80,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
               ? Colors.grey
               : Colors.white, // foreground text
           side: enabled == false
-              ? const BorderSide(color: Color(0xfff1f1f2))
+              ? BorderSide(color: disableBorderColor!)
               : BorderSide(
                   color: checkBorderColor(),
                 ), // foreground border
