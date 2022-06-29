@@ -487,6 +487,19 @@ class MyPluginHelper {
 
     return cardType;
   }
+  
+  static WidgetsBinding? _widgetsBinding;
+  // Prevents app from closing splash screen, app layout will be build but not displayed.
+  static void preserve({required WidgetsBinding widgetsBinding}) {
+    _widgetsBinding = widgetsBinding;
+    _widgetsBinding?.deferFirstFrame();
+  }
+
+ static Future<void> remove() async {
+    await Future.delayed(const Duration(seconds: 1));
+    _widgetsBinding?.allowFirstFrame();
+    _widgetsBinding = null;
+  }
 }
 
 class FullName {
