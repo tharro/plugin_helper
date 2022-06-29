@@ -127,11 +127,6 @@ class MyPluginNotification {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
       main();
-      if (await MyPluginHelper.isFirstInstall()) {
-        FlutterSecureStorage storage = const FlutterSecureStorage();
-        await storage.deleteAll();
-        MyPluginHelper.setFirstInstall();
-      }
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     },
