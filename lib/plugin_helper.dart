@@ -502,14 +502,13 @@ class MyPluginHelper {
     _widgetsBinding = null;
   }
 
-  static String getImage(
-      {required String bucket,
-      required String key,
+  static String getLinkImage(
+      {required String key,
       required double width,
       required double height,
       BoxFit fit = BoxFit.cover}) {
     var json = jsonEncode({
-      "bucket": MyPluginAppEnvironment().customKey![bucket],
+      "bucket": MyPluginAppEnvironment().bucket,
       "key": key,
       "edits": {
         "resize": {
@@ -521,7 +520,7 @@ class MyPluginHelper {
     });
     Codec<String, dynamic> stringToBase64 = utf8.fuse(base64);
     String encoded = stringToBase64.encode(json);
-    return encoded;
+    return MyPluginAppEnvironment().linkCloudfront! + encoded;
   }
 }
 
