@@ -19,26 +19,29 @@ class MyWidgetPinPut extends StatelessWidget {
       selectedColor;
   final double? borderWidth;
   final PinCodeFieldShape? shape;
-  const MyWidgetPinPut({
-    Key? key,
-    this.onCompleted,
-    required this.controller,
-    required this.paddingHorizontal,
-    this.radius = 5.0,
-    this.obscureText = false,
-    this.obscuringCharacter = '*',
-    this.obscuringWidget,
-    this.boxShadows,
-    required this.onChanged,
-    this.activeFillColor,
-    this.inactiveColor,
-    this.activeColor,
-    this.inactiveFillColor,
-    this.selectedFillColor,
-    this.selectedColor,
-    this.borderWidth,
-    this.shape,
-  }) : super(key: key);
+  final double? widthPinput, heightPinput;
+  const MyWidgetPinPut(
+      {Key? key,
+      this.onCompleted,
+      required this.controller,
+      required this.paddingHorizontal,
+      this.radius = 5.0,
+      this.obscureText = false,
+      this.obscuringCharacter = '*',
+      this.obscuringWidget,
+      this.boxShadows,
+      required this.onChanged,
+      this.activeFillColor,
+      this.inactiveColor,
+      this.activeColor,
+      this.inactiveFillColor,
+      this.selectedFillColor,
+      this.selectedColor,
+      this.borderWidth,
+      this.shape,
+      this.widthPinput,
+      this.heightPinput})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -57,8 +60,8 @@ class MyWidgetPinPut extends StatelessWidget {
       pinTheme: PinTheme(
         shape: shape ?? PinCodeFieldShape.box,
         borderRadius: BorderRadius.circular(radius),
-        fieldHeight: widthItem * 1.3,
-        fieldWidth: widthItem,
+        fieldHeight: heightPinput ?? widthItem * 1.3,
+        fieldWidth: widthPinput ?? widthItem,
         activeFillColor: activeFillColor ?? Colors.white,
         inactiveColor: inactiveColor ?? Colors.white,
         activeColor: activeColor ?? const Color(0xffffb41d),
