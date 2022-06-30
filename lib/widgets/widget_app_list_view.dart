@@ -142,9 +142,7 @@ class AppListViewState extends State<MyWidgetAppListView> {
     if (widget.onScrollListener != null) {
       widget.onScrollListener!();
     }
-    var triggerFetchMoreSize = controller.position.maxScrollExtent;
-    if (widget.onLoadMore != null &&
-        controller.position.pixels > triggerFetchMoreSize) {
+    if (widget.onLoadMore != null && controller.position.extentAfter < 200) {
       widget.onLoadMore!();
     }
   }
