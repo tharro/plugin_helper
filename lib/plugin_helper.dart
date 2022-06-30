@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
@@ -499,6 +500,28 @@ class MyPluginHelper {
     await Future.delayed(const Duration(seconds: 1));
     _widgetsBinding?.allowFirstFrame();
     _widgetsBinding = null;
+  }
+
+  static String getImage(
+      {required String bucket,
+      required String key,
+      required double width,
+      required double height,
+      BoxFit fit = BoxFit.cover}) {
+    var json = jsonEncode({
+      "bucket": MyPluginAppEnvironment().customKey![bucket],
+      "key": key,
+      "edits": {
+        "resize": {
+          "width": width,
+          "height": height,
+          "fit": fit.toString().replaceAll('BoxFit.', '')
+        }
+      }
+    });
+    Codec<String, dynamic> stringToBase64 = utf8.fuse(base64);
+    String encoded = stringToBase64.encode(json);
+    return encoded;
   }
 }
 
