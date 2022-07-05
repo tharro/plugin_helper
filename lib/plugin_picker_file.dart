@@ -18,13 +18,16 @@ class MyPluginPickerFile {
     required BuildContext context,
     required bool isCamera,
     required Function(String code) onError,
+    double maxWidth = 1024,
+    double maxHeight = 1024,
+    int? imageQuality,
   }) async {
     try {
       final imageFile = await ImagePicker().pickImage(
           source: isCamera ? ImageSource.camera : ImageSource.gallery,
-          imageQuality: 50,
-          maxWidth: 800,
-          maxHeight: 1024);
+          imageQuality: imageQuality,
+          maxWidth: maxWidth,
+          maxHeight: maxHeight);
       return imageFile;
     } catch (error) {
       if (error is PlatformException) {
