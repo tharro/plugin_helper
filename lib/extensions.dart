@@ -21,7 +21,7 @@ extension SizedBoxX on int {
 
 extension StringX on String {
   bool get isPhoneNumber {
-    return startsWith('+') || RegExp(r'^-?[0-9]+$').hasMatch(this);
+    return this.startsWith('+', 0) || RegExp(r'^-?[0-9]+$').hasMatch(this);
   }
 }
 
