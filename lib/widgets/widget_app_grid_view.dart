@@ -86,9 +86,8 @@ class _AppGridViewState extends State<MyWidgetAppGridView> {
     if (widget.onScrollListener != null) {
       widget.onScrollListener!();
     }
-    var triggerFetchMoreSize = controller.position.maxScrollExtent;
     if (widget.onLoadMore is Function &&
-        controller.position.pixels > triggerFetchMoreSize) {
+        controller.position.extentAfter < 200) {
       widget.onLoadMore!();
     }
   }
