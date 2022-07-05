@@ -51,6 +51,7 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
                 onPressLeftIcon ?? Navigator.pop(context);
               },
               child: Container(
+                  color: Colors.transparent,
                   alignment: Alignment.center,
                   child: iconLeft ??
                       Icon(
