@@ -50,11 +50,13 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
               onTap: () {
                 onPressLeftIcon ?? Navigator.pop(context);
               },
-              child: iconLeft ??
-                  Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: Theme.of(context).appBarTheme.iconTheme!.color,
-                  ))
+              child: Container(
+                  alignment: Alignment.center,
+                  child: iconLeft ??
+                      Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        color: Theme.of(context).appBarTheme.iconTheme!.color,
+                      )))
           : null,
       titleSpacing: titleSpacing,
       centerTitle: centerTitle,
