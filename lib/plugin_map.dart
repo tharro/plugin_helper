@@ -13,32 +13,38 @@ import 'package:image/image.dart' as img;
 import 'dart:io';
 
 class MyPluginMap {
-  static Future<ListAddressModel> searchAddress(
-      {required String input,
-      String? language = 'en',
-      String? components = 'country:au',
-      String? type = 'address'}) async {
+  static Future<ListAddressModel> searchAddress({
+    required String input,
+    String? language = 'en',
+    String? components = 'country:au',
+    String? type = 'address',
+    dynamic? customerHeader,
+  }) async {
     String url =
         'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=' +
             MyPluginAppEnvironment().googleAPIKey!;
     url =
         '$url&input=$input&language=$language&components=$components&types=$type';
     try {
-      final res = await Dio().get(url);
+      final res =
+          await Dio().get(url, options: Options(headers: customerHeader));
       return ListAddressModel.fromJson(res.data);
     } catch (e) {
       rethrow;
     }
   }
 
-  static Future<AddressDetailModel> getAddressDetail(
-      {required String placeId}) async {
+  static Future<AddressDetailModel> getAddressDetail({
+    required String placeId,
+    dynamic? customerHeader,
+  }) async {
     String url =
         'https://maps.googleapis.com/maps/api/place/details/json?key=' +
             MyPluginAppEnvironment().googleAPIKey!;
     url = '$url&place_id=$placeId';
     try {
-      final res = await Dio().get(url);
+      final res =
+          await Dio().get(url, options: Options(headers: customerHeader));
       return AddressDetailModel.fromJson(res.data);
     } catch (e) {
       rethrow;
