@@ -19,6 +19,16 @@ extension SizedBoxX on int {
   Widget get w => SizedBox(width: toDouble());
 }
 
+extension ConvertDouble on double {
+  String get showPerfectDouble {
+    String str = toString();
+    if (int.parse(str.split('.')[1]) > 0) {
+      return toString();
+    }
+    return str.split('.')[0];
+  }
+}
+
 extension StringX on String {
   bool get isPhoneNumber {
     return this.startsWith('+', 0) || RegExp(r'^-?[0-9]+$').hasMatch(this);
