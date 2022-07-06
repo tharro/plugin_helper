@@ -22,10 +22,13 @@ extension SizedBoxX on int {
 extension ConvertDouble on double {
   String get showPerfectDouble {
     String str = toString();
-    if (int.parse(str.split('.')[1]) > 0) {
-      return toString();
+    if (str.split('.').length > 2) {
+      if (int.parse(str.split('.')[1]) > 0) {
+        return toString();
+      }
+      return str.split('.')[0];
     }
-    return str.split('.')[0];
+    return str;
   }
 }
 
