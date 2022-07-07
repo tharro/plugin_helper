@@ -55,6 +55,7 @@ class MyWidgetTextField extends StatefulWidget {
   final Color? borderColor, focusBorderColor, errorBorderColor, fillColor;
   final Widget? customLabelOfTextFieldNormal;
   final Widget eyeActiveIcon, eyeDisableIcon;
+  final bool autoFocus;
   const MyWidgetTextField(
       {Key? key,
       this.prefixIcon,
@@ -106,6 +107,7 @@ class MyWidgetTextField extends StatefulWidget {
       this.customLabelOfTextFieldNormal,
       required this.eyeActiveIcon,
       required this.eyeDisableIcon,
+      this.autoFocus = false,
       this.fillColor = Colors.transparent})
       : super(key: key);
 
@@ -323,6 +325,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
             ),
           ),
         TextFormField(
+          autoFocus: widget.autoFocus,
           textInputAction: widget.textInputAction,
           onFieldSubmitted: widget.onFieldSubmitted,
           focusNode: widget.focus,
