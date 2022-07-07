@@ -107,9 +107,10 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
               Country country = filteredCountries[index];
               return ListTile(
                 key: Key(TestHelper.countryItemKeyValue(country.alpha2Code)),
-                leading: widget.showFlags!
-                    ? _Flag(country: country, useEmoji: widget.useEmoji)
-                    : null,
+                leading:
+                    // widget.showFlags!?
+                    _Flag(country: country, useEmoji: widget.useEmoji),
+                // : null,
                 title: Align(
                     alignment: AlignmentDirectional.centerStart,
                     child: Text('${getCountryName(country)}',

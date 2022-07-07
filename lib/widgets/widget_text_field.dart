@@ -325,7 +325,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
             ),
           ),
         TextFormField(
-          autoFocus: widget.autoFocus,
+          autofocus: widget.autoFocus,
           textInputAction: widget.textInputAction,
           onFieldSubmitted: widget.onFieldSubmitted,
           focusNode: widget.focus,
