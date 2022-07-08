@@ -24,6 +24,14 @@ enum CardType {
   discover,
 }
 
+enum RegExpType {
+  numberWithDecimal,
+  onlyNumber,
+  onlyCharacter,
+  numberWithDecimalWithNegative,
+  onlyNumberWithNegative,
+}
+
 class MyPluginHelper {
   static bool isValidateEmail({required String email}) {
     String p =
@@ -521,6 +529,27 @@ class MyPluginHelper {
     Codec<String, dynamic> stringToBase64 = utf8.fuse(base64);
     String encoded = stringToBase64.encode(json);
     return MyPluginAppEnvironment().linkCloudfront! + encoded;
+  }
+
+  static List<TextInputFormatter> checkRegExt({required RegExpType type}) {
+    switch (type) {
+      case RegExpType.numberWithDecimal:
+        return [
+          FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'))
+        ];
+      case RegExpType.numberWithDecimalWithNegative:
+        return [
+          FilteringTextInputFormatter.allow(RegExp(r'^-(\d+)?\.?\d{0,2}'))
+        ];
+      case RegExpType.onlyNumber:
+        return [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))];
+      case RegExpType.onlyNumberWithNegative:
+        return [FilteringTextInputFormatter.allow(RegExp(r'[-0-9]'))];
+      case RegExpType.onlyCharacter:
+        return [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))];
+      default:
+        return [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))];
+    }
   }
 }
 
