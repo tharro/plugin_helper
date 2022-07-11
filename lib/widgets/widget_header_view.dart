@@ -48,7 +48,7 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
       leading: isShowLeftIcon
           ? GestureDetector(
               onTap: () {
-                onPressLeftIcon ?? Navigator.pop(context);
+                onPressLeftIcon!() ?? Navigator.pop(context);
               },
               child: Container(
                   color: Colors.transparent,
