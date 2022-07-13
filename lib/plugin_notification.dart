@@ -21,18 +21,18 @@ class MyPluginNotification {
       channelDescription,
       soundName = ''}) async {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        chanelId, chanelName,
-        channelDescription: channelDescription,
-        importance: Importance.max,
-        playSound: true,
-        showProgress: true,
-        priority: Priority.high,
-        color: color,
-        sound: RawResourceAndroidNotificationSound(soundName));
+      chanelId,
+      chanelName,
+      channelDescription: channelDescription,
+      importance: Importance.max,
+      // playSound: true,
+      showProgress: true,
+      priority: Priority.high,
+      color: color,
+    ); //sound: RawResourceAndroidNotificationSound(soundName)
 
-    var iOSChannelSpecifics = IOSNotificationDetails(
-        presentSound: true,
-        sound: soundName != '' ? '$soundName.aiff' : soundName);
+    var iOSChannelSpecifics = const IOSNotificationDetails();
+    //presentSound: true, sound: soundName != '' ? '$soundName.aiff' : soundName
     var platformChannelSpecifics = NotificationDetails(
         android: androidPlatformChannelSpecifics, iOS: iOSChannelSpecifics);
     await flutterLocalNotificationsPlugin
