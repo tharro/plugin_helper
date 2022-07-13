@@ -8,12 +8,15 @@ class AdaptiveBottomNavigationScaffold extends StatefulWidget {
   final List<MyWidgetBottomNavigationTab> navigationBarItems;
   final TextStyle selectedLabelStyle, unselectedLabelStyle;
   final Widget? customBottomBar;
+  final Color selectedItemColor, unselectedItemColor;
   const AdaptiveBottomNavigationScaffold({
     required this.navigationBarItems,
     Key? key,
     required this.selectedLabelStyle,
     required this.unselectedLabelStyle,
     this.customBottomBar,
+    required this.selectedItemColor,
+    required this.unselectedItemColor,
   }) : super(key: key);
 
   @override
@@ -50,6 +53,8 @@ class AdaptiveBottomNavigationScaffoldState
         selectedIndex: _currentlySelectedIndex,
         selectedLabelStyle: widget.selectedLabelStyle,
         unselectedLabelStyle: widget.unselectedLabelStyle,
+        selectedItemColor: widget.selectedItemColor,
+        unselectedItemColor: widget.unselectedItemColor,
         customBottomBar: widget.customBottomBar,
       );
 

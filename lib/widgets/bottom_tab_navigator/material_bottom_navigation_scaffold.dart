@@ -12,6 +12,8 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
     required this.unselectedLabelStyle,
     Key? key,
     this.customBottomBar,
+    required this.selectedItemColor,
+    required this.unselectedItemColor,
   }) : super(key: key);
 
   /// List of the tabs to be displayed with their respective navigator's keys.
@@ -25,6 +27,8 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
   final int selectedIndex;
 
   final Widget? customBottomBar;
+
+  final Color selectedItemColor, unselectedItemColor;
 
   @override
   _MaterialBottomNavigationScaffoldState createState() =>
@@ -123,6 +127,8 @@ class _MaterialBottomNavigationScaffoldState
               type: BottomNavigationBarType.fixed,
               selectedLabelStyle: widget.selectedLabelStyle,
               unselectedLabelStyle: widget.unselectedLabelStyle,
+              selectedItemColor: widget.selectedItemColor,
+              unselectedItemColor: widget.unselectedItemColor,
             ),
             if (widget.customBottomBar != null) widget.customBottomBar!,
           ],
