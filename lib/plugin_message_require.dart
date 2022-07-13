@@ -27,7 +27,7 @@ class MyPluginMessageRequire {
   static String invalidCardNumber = 'Please input a valid number';
   static String hour = 'hour';
   static String day = 'day';
-  static String minute = 'minuter';
+  static String minute = 'minute';
   static String second = 'second';
 
   static messageRequire({
