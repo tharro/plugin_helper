@@ -17,7 +17,9 @@ class MyPluginPayment {
     );
     await Stripe.instance.dangerouslyUpdateCardDetails(_card);
     final paymentMethod = await Stripe.instance
-        .createPaymentMethod(const PaymentMethodParams.card());
+        .createPaymentMethod(const PaymentMethodParams.card(
+      paymentMethodData: PaymentMethodData(billingDetails: null),
+    ));
     return paymentMethod.id;
   }
 }

@@ -244,7 +244,7 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
           if (widget.onInputValidated != null) {
             widget.onInputValidated!(false);
           }
-          this.isNotValid = true;
+          isNotValid = true;
         } else {
           if (widget.onInputChanged != null) {
             widget.onInputChanged!(PhoneNumber(
@@ -256,7 +256,7 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
           if (widget.onInputValidated != null) {
             widget.onInputValidated!(true);
           }
-          this.isNotValid = false;
+          isNotValid = false;
         }
       });
     }
@@ -319,16 +319,15 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
   /// Also updates [selectorButtonBottomPadding]
   String? validator(String? value) {
     bool isValid =
-        this.isNotValid && (value!.isNotEmpty || widget.ignoreBlank == false);
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+        isNotValid && (value!.isNotEmpty || widget.ignoreBlank == false);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       if (isValid && widget.errorMessage != null) {
         setState(() {
-          this.selectorButtonBottomPadding =
-              widget.selectorButtonOnErrorPadding;
+          selectorButtonBottomPadding = widget.selectorButtonOnErrorPadding;
         });
       } else {
         setState(() {
-          this.selectorButtonBottomPadding = 0;
+          selectorButtonBottomPadding = 0;
         });
       }
     });
@@ -345,18 +344,17 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
   }
 
   void _phoneNumberSaved() {
-    if (this.mounted) {
+    if (mounted) {
       String parsedPhoneNumberString =
           controller!.text.replaceAll(RegExp(r'[^\d+]'), '');
 
-      String phoneNumber =
-          '${this.country?.dialCode ?? ''}' + parsedPhoneNumberString;
+      String phoneNumber = (country?.dialCode ?? '') + parsedPhoneNumberString;
 
       widget.onSaved?.call(
         PhoneNumber(
             phoneNumber: phoneNumber,
-            isoCode: this.country?.alpha2Code,
-            dialCode: this.country?.dialCode),
+            isoCode: country?.alpha2Code,
+            dialCode: country?.dialCode),
       );
     }
   }
@@ -382,7 +380,7 @@ class _InputWidgetView
     extends WidgetView<InternationalPhoneNumberInput, _InputWidgetState> {
   final _InputWidgetState state;
 
-  _InputWidgetView({Key? key, required this.state})
+  const _InputWidgetView({Key? key, required this.state})
       : super(key: key, state: state);
 
   @override
@@ -425,9 +423,9 @@ class _InputWidgetView
                   border: Border.all(color: Colors.grey[300]!),
                   borderRadius: BorderRadius.circular(5),
                 ),
-            padding: EdgeInsets.only(left: 12),
+            padding: const EdgeInsets.only(left: 12),
             child: TextFormField(
-              key: Key(TestHelper.TextInputKeyValue),
+              key: const Key(TestHelper.TextInputKeyValue),
               textDirection:
                   widget.isLTR! ? TextDirection.ltr : TextDirection.rtl,
               controller: state.controller,

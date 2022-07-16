@@ -11,6 +11,7 @@ import './index.dart';
 import 'package:path/path.dart' as path;
 
 DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+
 enum PasswordValidType {
   atLeast8Characters,
   strongPassword,
@@ -41,7 +42,7 @@ class MyPluginHelper {
   }
 
   static String parsePhoneWithCountry({required String phone}) {
-    final List<Locale> systemLocales = WidgetsBinding.instance!.window.locales;
+    final List<Locale> systemLocales = WidgetsBinding.instance.window.locales;
     String? isoCountryCode = systemLocales.first.countryCode;
     String? dial = '+61';
     for (var e in Countries.countryList) {
