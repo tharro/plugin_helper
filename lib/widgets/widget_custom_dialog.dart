@@ -34,7 +34,7 @@ class MyWidgetCustomDialog extends StatefulWidget {
     this.isShowCloseIcon = true,
     this.spaceBetweenButton = 6,
     this.spaceBetweenTitleAndMessage = 8,
-    this.spaceBetweenMessageAndButton = 40,
+    this.spaceBetweenMessageAndButton = 8,
     this.shapeRadius = 10,
     this.paddingCloseIcon,
   }) : super(key: key);

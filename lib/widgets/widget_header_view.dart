@@ -17,7 +17,7 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
       this.isShowLeftIcon = true,
       this.systemUiOverlayStyle,
       this.onPrimaryColorIconLeft,
-      this.titleSpacing = 16,
+      this.titleSpacing = 0,
       this.leadingWidth = 48,
       this.bottom})
       : super(key: key);
