@@ -58,7 +58,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width ?? double.infinity,
-      height: height,
+      height: height ?? 50,
       decoration: BoxDecoration(
           gradient: gradient,
           borderRadius: BorderRadius.circular(borderRadius)),
@@ -70,7 +70,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
             : null,
         style: OutlinedButton.styleFrom(
           elevation: elevation,
-          padding: padding ?? const EdgeInsets.symmetric(vertical: 18),
+          padding: padding,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius)),
           backgroundColor: enabled == false
