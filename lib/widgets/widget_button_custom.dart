@@ -58,7 +58,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width ?? double.infinity,
-      height: height ?? 50,
+      height: height,
       decoration: BoxDecoration(
           gradient: gradient,
           borderRadius: BorderRadius.circular(borderRadius)),
