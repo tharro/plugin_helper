@@ -35,9 +35,11 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
   final double? leadingWidth;
   final SystemUiOverlayStyle? systemUiOverlayStyle;
   final PreferredSizeWidget? bottom;
+  final bool automaticallyImplyLeading = true;
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: automaticallyImplyLeading,
       systemOverlayStyle: systemUiOverlayStyle,
       toolbarHeight: toolbarHeight ?? kToolbarHeight,
       elevation: elevation,
