@@ -14,7 +14,8 @@ class MyWidgetCustomDialog extends StatefulWidget {
   final double? spaceBetweenButton,
       spaceBetweenTitleAndMessage,
       spaceBetweenMessageAndButton,
-      shapeRadius;
+      shapeRadius,
+      widthContent;
   final bool? isColumn, isShowCloseIcon;
   const MyWidgetCustomDialog({
     Key? key,
@@ -37,6 +38,7 @@ class MyWidgetCustomDialog extends StatefulWidget {
     this.spaceBetweenMessageAndButton = 8,
     this.shapeRadius = 10,
     this.paddingCloseIcon,
+    this.widthContent,
   }) : super(key: key);
 
   @override
@@ -58,6 +60,7 @@ class _CustomDialogState extends State<MyWidgetCustomDialog> {
 
   contentBox(context) {
     return Container(
+        width: widget.widthContent,
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           color: widget.backgroundColor ?? Colors.white,
@@ -111,14 +114,12 @@ class _CustomDialogState extends State<MyWidgetCustomDialog> {
                     padding: widget.paddingFooter ??
                         const EdgeInsets.only(left: 24, right: 24, bottom: 24),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        if (widget.isShowSecondButton!)
-                          Expanded(
-                            child: widget.buttonSecondary!,
-                          ),
+                        if (widget.isShowSecondButton!) widget.buttonSecondary!,
                         if (widget.isShowSecondButton!)
                           SizedBox(width: widget.spaceBetweenButton),
-                        Expanded(child: widget.buttonPrimary),
+                        widget.buttonPrimary
                       ],
                     ),
                   )

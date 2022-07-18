@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
+import 'dart:ui' as ui;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -306,15 +306,18 @@ class MyPluginHelper {
   }
 
   static bool isTablet(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    var diagonal = sqrt((width * width) + (height * height));
+    final double devicePixelRatio = ui.window.devicePixelRatio;
+    final ui.Size size = ui.window.physicalSize;
+    final double width = size.width;
+    final double height = size.height;
 
-    if (Platform.isAndroid) {
-      return MediaQuery.of(context).size.shortestSide >= 600;
+    if (devicePixelRatio < 2 && (width >= 1000 || height >= 1000)) {
+      return true;
+    } else if (devicePixelRatio == 2 && (width >= 1920 || height >= 1920)) {
+      return true;
+    } else {
+      return false;
     }
-    var isTablet = diagonal > 1100.0;
-    return isTablet;
   }
 
   static Future setLanguage({required String language}) async {
