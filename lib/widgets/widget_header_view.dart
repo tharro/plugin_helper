@@ -19,6 +19,7 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
       this.onPrimaryColorIconLeft,
       this.titleSpacing = 0,
       this.leadingWidth = 48,
+      this.automaticallyImplyLeading = true,
       this.bottom})
       : super(key: key);
   final BuildContext context;
@@ -35,7 +36,7 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
   final double? leadingWidth;
   final SystemUiOverlayStyle? systemUiOverlayStyle;
   final PreferredSizeWidget? bottom;
-  final bool automaticallyImplyLeading = true;
+  final bool automaticallyImplyLeading;
   @override
   Widget build(BuildContext context) {
     return AppBar(
