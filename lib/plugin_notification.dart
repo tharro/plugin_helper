@@ -31,10 +31,9 @@ class MyPluginNotification {
       color: color,
     ); //sound: RawResourceAndroidNotificationSound(soundName)
 
-    var iOSChannelSpecifics = const IOSNotificationDetails();
     //presentSound: true, sound: soundName != '' ? '$soundName.aiff' : soundName
-    var platformChannelSpecifics = NotificationDetails(
-        android: androidPlatformChannelSpecifics, iOS: iOSChannelSpecifics);
+    var platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin
         .show(0, title, body, platformChannelSpecifics, payload: payload ?? '');
   }
