@@ -76,11 +76,11 @@ class MyPluginNotification {
       onRegisterFCM(body);
       fcmListener = FirebaseMessaging.onMessage
           .asBroadcastStream()
-          .listen((RemoteMessage message) {
+          .listen((RemoteMessage message) async {
         print('Got a message whilst in the foreground!');
         _onMessage(message, onMessage);
         if (message.notification != null) {
-          _showNotification(
+          await _showNotification(
               title: message.notification!.title!,
               body: message.notification!.body!,
               color: colorNotification,
