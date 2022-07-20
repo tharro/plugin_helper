@@ -21,7 +21,7 @@ class MyPluginAppEnvironment {
   String? googleAPIKey;
   String? bucket;
   String? linkCloudfront;
-  Map<String, dynamic>? customKey;
+  Map? customKey;
 
   // Set app configuration with single function
   void setAppConfig({
@@ -34,7 +34,7 @@ class MyPluginAppEnvironment {
     String? googleAPIKey,
     String? bucket,
     String? linkCloudfront,
-    Map<String, dynamic>? customKey,
+    Map? customKey,
   }) {
     this.merchantId = merchantId ?? this.merchantId;
     this.stripePublicKey = stripePublicKey ?? this.stripePublicKey;
