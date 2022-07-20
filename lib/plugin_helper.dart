@@ -34,6 +34,8 @@ enum RegExpType {
 }
 
 class MyPluginHelper {
+  static const MethodChannel _channel = MethodChannel('plugin_helper');
+
   static bool isValidateEmail({required String email}) {
     String p =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -554,6 +556,10 @@ class MyPluginHelper {
       default:
         return [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))];
     }
+  }
+
+  static Future<String?> getTimeZone() async {
+    return await _channel.invokeMethod('getLocalTimezone');
   }
 }
 

@@ -343,7 +343,14 @@
             [installedApps setObject:[NSNumber numberWithBool: NO] forKey:@"linkedin"];
         }
         result(installedApps);
-    } else {
+    } else if([@"getLocalTimezone" isEqualToString:call.method]) {
+        NSTimeZone *timeZone = [NSTimeZone localTimeZone];
+        NSString *tzName = [timeZone name];
+        result(tzName);
+    } else if([@"getAvailableTimezones" isEqualToString:call.method]) {
+        result([NSTimeZone knownTimeZoneNames]);
+    }
+    else {
         result(FlutterMethodNotImplemented);
     }
 }

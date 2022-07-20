@@ -210,8 +210,28 @@ class PluginHelperPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
             apps["telegram"] = packages.any  { it.packageName.toString().contentEquals("org.telegram.messenger") }
             apps["linkedin"] = packages.any  { it.packageName.toString().contentEquals("com.linkedin.android") }
             result.success(apps)
+        } else if (call.method == "getLocalTimezone") {
+            result.success(getLocalTimezone())
+        } else if (call.method == "getAvailableTimezones") {
+            result.success(getAvailableTimezones())
         } else {
             result.notImplemented()
+        }
+    }
+
+    private fun getLocalTimezone(): String {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            ZoneId.systemDefault().id
+        } else {
+            TimeZone.getDefault().id
+        }
+    }
+
+    private fun getAvailableTimezones(): List<String> {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            ZoneId.getAvailableZoneIds().toCollection(ArrayList())
+        } else {
+            TimeZone.getAvailableIDs().toCollection(ArrayList())
         }
     }
 
