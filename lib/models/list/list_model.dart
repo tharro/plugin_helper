@@ -11,8 +11,12 @@ class ListModel<T> extends Equatable {
       T Function(Map<String, dynamic> json) convert) {
     return ListModel(
         count: json['count'],
-        next: json['next'],
-        previous: json['previous'],
+        next: json['next'] != null
+            ? (json['next'] as String).replaceAll('http://', 'https://')
+            : null,
+        previous: json['previous'] != null
+            ? (json['previous'] as String).replaceAll('http://', 'https://')
+            : null,
         results: (json['results'] as List).map((e) => convert(e)).toList());
   }
 
