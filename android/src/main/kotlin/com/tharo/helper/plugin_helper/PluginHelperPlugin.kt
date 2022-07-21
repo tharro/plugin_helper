@@ -19,6 +19,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
 import java.io.File
+import kotlin.collections.ArrayList
 
 class PluginHelperPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
     private lateinit var channel: MethodChannel
