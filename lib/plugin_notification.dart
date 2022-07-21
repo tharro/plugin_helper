@@ -18,20 +18,17 @@ class MyPluginNotification {
       String? payload,
       chanelId,
       chanelName,
-      channelDescription,
-      soundName = ''}) async {
+      channelDescription}) async {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
       chanelId,
       chanelName,
       channelDescription: channelDescription,
       importance: Importance.max,
-      // playSound: true,
       showProgress: true,
       priority: Priority.high,
       color: color,
-    ); //sound: RawResourceAndroidNotificationSound(soundName)
+    );
 
-    //presentSound: true, sound: soundName != '' ? '$soundName.aiff' : soundName
     var platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin
@@ -46,7 +43,6 @@ class MyPluginNotification {
       required Function(Map<String, dynamic> token) onRegisterFCM,
       required String iconNotification,
       String? payload,
-      soundName,
       required String chanelId,
       required String chanelName,
       required String channelDescription}) async {
@@ -69,7 +65,7 @@ class MyPluginNotification {
       flutterLocalNotificationsPlugin.initialize(initializationSettings,
           onSelectNotification: (String? data) async {
         _selectLocalNotification(
-            payload: data!, onHandleMessage: onOpenLocalMessage);
+            payload: data ?? '', onHandleMessage: onOpenLocalMessage);
       });
       Map<String, dynamic> body = await getInfoToRequest();
       onRegisterFCM(body);
@@ -77,7 +73,7 @@ class MyPluginNotification {
           .asBroadcastStream()
           .listen((RemoteMessage message) async {
         print('Got a message whilst in the foreground!');
-        _onMessage(message, onMessage);
+        onMessage(message);
         if (message.notification != null) {
           await _showNotification(
               title: message.notification!.title!,
@@ -86,22 +82,15 @@ class MyPluginNotification {
               payload: payload,
               chanelId: chanelId,
               chanelName: chanelName,
-              channelDescription: channelDescription,
-              soundName: soundName);
+              channelDescription: channelDescription);
         }
       });
-      FirebaseMessaging.onBackgroundMessage(
-          (message) => _onMessage(message, onMessage(message)));
       _setupInteractedMessage(onHandleFCMMessage: onOpenFCMMessage);
     }
   }
 
-  static _onMessage(RemoteMessage message, Function onMessage) {
-    onMessage(message);
-  }
-
   static void _selectLocalNotification(
-      {required String payload, required Function onHandleMessage}) {
+      {required String payload, required Function(String) onHandleMessage}) {
     onHandleMessage(payload);
   }
 
@@ -110,15 +99,10 @@ class MyPluginNotification {
     RemoteMessage? initialMessage =
         await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage != null) {
-      _handleMessage(initialMessage, onHandleFCMMessage);
+      onHandleFCMMessage(initialMessage);
     }
     FirebaseMessaging.onMessageOpenedApp
-        .listen((message) => _handleMessage(message, onHandleFCMMessage));
-  }
-
-  static void _handleMessage(
-      RemoteMessage message, Function onHandleFCMMessage) {
-    onHandleFCMMessage(message);
+        .listen((message) => onHandleFCMMessage(message));
   }
 
   static void setupCrashlytics({required Function() main}) {

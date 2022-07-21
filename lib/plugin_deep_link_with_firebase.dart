@@ -12,8 +12,10 @@ class MyPluginDeepLinkWithFirebase {
     }
     FirebaseDynamicLinks.instance.onLink(
         onSuccess: (PendingDynamicLinkData? dynamicLink) async {
-      final Uri deepLink = dynamicLink!.link;
-      handleDynamicLink(deepLink);
+      if (dynamicLink != null) {
+        final Uri deepLink = dynamicLink.link;
+        handleDynamicLink(deepLink);
+      }
     }, onError: (OnLinkErrorException e) async {
       if (onError != null) {
         onError(e);
