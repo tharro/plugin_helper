@@ -12,6 +12,7 @@ enum ValidType {
   expired,
   cvv,
 }
+
 enum TextFieldType { normal, animation }
 
 class MyWidgetTextField extends StatefulWidget {
@@ -344,6 +345,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
           maxLines: widget.maxLines ?? 1,
           minLines: widget.minLines,
           decoration: InputDecoration(
+            isDense: true,
             constraints: widget.constraints,
             hintText: widget.hintText,
             counter: widget.maxLength != null && hasFocus
