@@ -21,6 +21,7 @@ class MyWidgetPinPut extends StatelessWidget {
   final double? borderWidth;
   final PinCodeFieldShape? shape;
   final double? widthPinput, heightPinput;
+  final int? length;
   const MyWidgetPinPut(
       {Key? key,
       this.onCompleted,
@@ -42,7 +43,8 @@ class MyWidgetPinPut extends StatelessWidget {
       this.shape,
       this.widthPinput,
       this.heightPinput,
-      required this.textStyle})
+      required this.textStyle,
+      this.length})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class MyWidgetPinPut extends StatelessWidget {
     double widthItem = (width - paddingHorizontal) / 8.3;
     return PinCodeTextField(
       appContext: context,
-      length: 6,
+      length: length ?? 6,
       obscureText: obscureText!,
       obscuringCharacter: obscuringCharacter!,
       obscuringWidget: obscuringWidget,
