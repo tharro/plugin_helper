@@ -17,6 +17,7 @@ class MyWidgetPinPut extends StatelessWidget {
       inactiveFillColor,
       selectedFillColor,
       selectedColor;
+  final TextStyle textStyle;
   final double? borderWidth;
   final PinCodeFieldShape? shape;
   final double? widthPinput, heightPinput;
@@ -40,7 +41,8 @@ class MyWidgetPinPut extends StatelessWidget {
       this.borderWidth,
       this.shape,
       this.widthPinput,
-      this.heightPinput})
+      this.heightPinput,
+      required this.textStyle})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -70,6 +72,7 @@ class MyWidgetPinPut extends StatelessWidget {
         selectedColor: selectedColor ?? const Color(0xffffb41d),
         borderWidth: borderWidth ?? 1,
       ),
+      textStyle: textStyle,
       cursorColor: Colors.black,
       animationDuration: const Duration(milliseconds: 300),
       enableActiveFill: true,
