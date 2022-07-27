@@ -70,6 +70,6 @@ Future<dynamic> pushInTab(
       .navigateToInTab(screen: page, isHoldTab: isHoldTab, context: context);
 }
 
-goBack(Widget page) {
+goBack() {
   return MyPluginNavigation.instance.goBack();
 }
