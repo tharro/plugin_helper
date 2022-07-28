@@ -34,8 +34,20 @@ extension ConvertDouble on double {
 
 extension StringX on String {
   bool get isPhoneNumber {
-    return this.startsWith('+', 0) || RegExp(r'^-?[0-9]+$').hasMatch(this);
+    return startsWith('+', 0) || RegExp(r'^-?[0-9]+$').hasMatch(this);
   }
+}
+
+class HexColor extends Color {
+  static int _getColorFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll("#", "");
+    if (hexColor.length == 6) {
+      hexColor = "FF" + hexColor;
+    }
+    return int.parse(hexColor, radix: 16);
+  }
+
+  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
 
 Future<dynamic> push(Widget page) {
