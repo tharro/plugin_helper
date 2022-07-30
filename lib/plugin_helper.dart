@@ -545,7 +545,7 @@ class MyPluginHelper {
         ];
       case RegExpType.numberWithDecimalWithNegative:
         return [
-          FilteringTextInputFormatter.allow(RegExp(r'^-(\d+)?\.?\d{0,2}'))
+          FilteringTextInputFormatter.allow(RegExp(r'^-?(\d+)?\.?\d{0,2}'))
         ];
       case RegExpType.onlyNumber:
         return [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))];
