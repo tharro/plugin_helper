@@ -74,7 +74,7 @@ class AppListViewState extends State<MyWidgetAppListView> {
           controller: widget.refreshController!,
           enablePullDown: widget.enablePullDown,
           header: Platform.isIOS
-              ? const ClassHeaderIndicator()
+              ? const ClassHeaderGridIndicator()
               : const MaterialClassicHeader(),
           onRefresh: () {
             if (widget.onRefresh != null) {
@@ -148,8 +148,8 @@ class AppListViewState extends State<MyWidgetAppListView> {
   }
 }
 
-class ClassHeaderIndicator extends StatelessWidget {
-  const ClassHeaderIndicator({Key? key}) : super(key: key);
+class ClassHeaderGridIndicator extends StatelessWidget {
+  const ClassHeaderGridIndicator({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
