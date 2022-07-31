@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:plugin_helper/plugin_message_require.dart';
 
 class MyWidgetAppGridView<T> extends StatefulWidget {
   final List<T> data;
@@ -53,9 +55,9 @@ class _AppGridViewState extends State<MyWidgetAppGridView> {
   Widget build(BuildContext context) {
     return SmartRefresher(
       controller: widget.refreshController,
-      header: WaterDropMaterialHeader(
-        backgroundColor: widget.colorRefresh,
-      ),
+      header: Platform.isIOS
+          ? const ClassHeaderIndicator()
+          : const MaterialClassicHeader(),
       onRefresh: () {
         widget.onRefresh();
       },
@@ -90,5 +92,18 @@ class _AppGridViewState extends State<MyWidgetAppGridView> {
         controller.position.extentAfter < 200) {
       widget.onLoadMore!();
     }
+  }
+}
+
+class ClassHeaderIndicator extends StatelessWidget {
+  const ClassHeaderIndicator({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClassicHeader(
+        refreshingText: MyPluginMessageRequire.refreshingText,
+        completeText: MyPluginMessageRequire.completeText,
+        releaseText: MyPluginMessageRequire.releaseText,
+        idleText: MyPluginMessageRequire.idleText);
   }
 }
