@@ -300,7 +300,7 @@ class MyPluginHelper {
       {required String iOSId,
       required String androidId,
       String? iOSAppStoreCountry,
-      required Function(bool) onUpdate,
+      required Function(VersionStatus) onUpdate,
       required Function() onError}) async {
     final newVersion = NewVersion(
         androidId: androidId,
@@ -308,7 +308,7 @@ class MyPluginHelper {
         iOSAppStoreCountry: iOSAppStoreCountry);
     try {
       final status = await newVersion.getVersionStatus();
-      onUpdate(status!.canUpdate);
+      onUpdate(status!);
     } catch (e) {
       onError();
     }
