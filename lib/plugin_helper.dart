@@ -296,13 +296,13 @@ class MyPluginHelper {
     }
   }
 
-  static checkUpdateApp(
+   static checkUpdateApp(
       {required BuildContext context,
       required String androidId,
       required String iOSId}) {
     final newVersion = NewVersion(
-      iOSId: androidId,
-      androidId: iOSId,
+      iOSId: iOSId,
+      androidId: androidId,
     );
     newVersion.showAlertIfNecessary(context: context);
   }

@@ -28,7 +28,7 @@ extension ConvertDouble on double {
       }
       return toString();
     }
-    return str;
+    return double.parse(str).abs().toStringAsFixed(2);
   }
 }
 
