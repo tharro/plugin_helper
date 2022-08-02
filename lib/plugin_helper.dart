@@ -296,15 +296,22 @@ class MyPluginHelper {
     }
   }
 
-   static checkUpdateApp(
-      {required BuildContext context,
+  static checkUpdateApp(
+      {required String iOSId,
       required String androidId,
-      required String iOSId}) {
+      String? iOSAppStoreCountry,
+      required Function(bool) onUpdate,
+      required Function() onError}) async {
     final newVersion = NewVersion(
-      iOSId: iOSId,
-      androidId: androidId,
-    );
-    newVersion.showAlertIfNecessary(context: context);
+        androidId: androidId,
+        iOSId: iOSId,
+        iOSAppStoreCountry: iOSAppStoreCountry);
+    try {
+      final status = await newVersion.getVersionStatus();
+      onUpdate(status!.canUpdate);
+    } catch (e) {
+      onError();
+    }
   }
 
   static bool isTablet(BuildContext context) {
