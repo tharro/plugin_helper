@@ -80,6 +80,7 @@ class MyWidgetPinPut extends StatelessWidget {
       enableActiveFill: true,
       controller: controller,
       keyboardType: TextInputType.number,
+      autoDisposeControllers: false,
       boxShadows: boxShadows ??
           const [
             BoxShadow(
