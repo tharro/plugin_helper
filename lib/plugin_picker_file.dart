@@ -44,12 +44,16 @@ class MyPluginPickerFile {
     Function()? onStartLoading,
     Function()? onEndLoading,
     required Function(String code) onError,
+    double maxWidth = 1024,
+    double maxHeight = 1024,
+    int? imageQuality,
   }) async {
     try {
       if (onStartLoading != null) {
         onStartLoading();
       }
-      final pickedFileList = await ImagePicker().pickMultiImage();
+      final pickedFileList = await ImagePicker().pickMultiImage(
+          imageQuality: imageQuality, maxWidth: maxWidth, maxHeight: maxHeight);
       return pickedFileList;
     } catch (error) {
       if (error is PlatformException) {
