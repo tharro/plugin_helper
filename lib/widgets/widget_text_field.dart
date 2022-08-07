@@ -22,7 +22,6 @@ class MyWidgetTextField extends StatefulWidget {
   final Widget? prefixIcon;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
-  final Function(String)? onChanged;
   final bool obscureText;
   final VoidCallback? onSuffixIconTap;
   final ValidType validType;
@@ -67,7 +66,6 @@ class MyWidgetTextField extends StatefulWidget {
       this.suffixActiveIcon,
       this.suffixDisableIcon,
       this.keyboardType,
-      this.onChanged,
       this.validType = ValidType.none,
       this.obscureText = false,
       this.enabled = true,
@@ -335,7 +333,6 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
           onTap: widget.onTap,
           keyboardType: widget.keyboardType,
           controller: widget.controller,
-          onChanged: widget.onChanged,
           obscureText: widget.validType == ValidType.password
               ? _obscureText
               : widget.obscureText,
