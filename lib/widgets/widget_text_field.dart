@@ -335,6 +335,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
           onTap: widget.onTap,
           keyboardType: widget.keyboardType,
           controller: widget.controller,
+          onChanged: widget.onChanged,
           obscureText: widget.validType == ValidType.password
               ? _obscureText
               : widget.obscureText,
