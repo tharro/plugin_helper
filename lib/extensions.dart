@@ -21,14 +21,13 @@ extension SizedBoxX on int {
 
 extension ConvertDouble on double {
   String get showPerfectDouble {
-    String str = toString();
-    if (str.split('.').length > 1) {
+    String str = toStringAsFixed(2);
+    if (str.split('.').isNotEmpty) {
       if (int.parse(str.split('.')[1]) == 0) {
         return str.split('.')[0];
       }
-      return toString();
     }
-    return double.parse(str).abs().toStringAsFixed(2);
+    return str;
   }
 }
 
