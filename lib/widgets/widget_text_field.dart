@@ -150,6 +150,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
   }
 
   checkValidate() async {
+    await Future.delayed(const Duration(milliseconds: 100));
     switch (widget.validType) {
       case ValidType.none:
         setValid();
