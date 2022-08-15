@@ -18,7 +18,7 @@ class MyPluginMap {
     String? language = 'en',
     String? components = 'country:au',
     String? type = 'address',
-    dynamic? customerHeader,
+    dynamic customerHeader,
   }) async {
     String url =
         'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=' +

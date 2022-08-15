@@ -35,7 +35,7 @@ class MyWidgetTextField extends StatefulWidget {
   final EdgeInsets? contentPadding;
   final int? maxLines;
   final int? minLines;
-  final FocusNode focus;
+  final FocusNode? focus;
   final Function(String)? onFieldSubmitted;
   final TextInputAction? textInputAction;
   final BoxConstraints? constraints;
@@ -122,24 +122,26 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
   @override
   void initState() {
     super.initState();
-    widget.focus.addListener(() {
-      if (widget.onListenFocus != null) {
-        widget.onListenFocus!();
-      }
-      if (widget.focus.hasFocus) {
-        if (mounted) {
-          setState(() {
-            hasFocus = true;
-          });
+    if (widget.focus != null) {
+      widget.focus!.addListener(() {
+        if (widget.onListenFocus != null) {
+          widget.onListenFocus!();
         }
-      } else {
-        if (mounted) {
-          setState(() {
-            hasFocus = false;
-          });
+        if (widget.focus!.hasFocus) {
+          if (mounted) {
+            setState(() {
+              hasFocus = true;
+            });
+          }
+        } else {
+          if (mounted) {
+            setState(() {
+              hasFocus = false;
+            });
+          }
         }
-      }
-    });
+      });
+    }
     if (widget.controller.text.isNotEmpty) {
       hasChanged = true;
     }
