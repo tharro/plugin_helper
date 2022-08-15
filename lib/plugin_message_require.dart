@@ -8,7 +8,7 @@ class MyPluginMessageRequire {
   static String completeText = 'Refresh completed';
   static String releaseText = 'Release to refresh';
   static String idleText = 'Pull down Refresh';
-  static String emptyData = 'Empty Data';
+  static String emptyData = 'No data found';
   static String reconnecting = 'Reconnecting...';
   static String weakPassword = 'Weak password';
   static String invalidEmail = 'Invalid email address';

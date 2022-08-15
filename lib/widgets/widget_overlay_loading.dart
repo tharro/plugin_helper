@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plugin_helper/index.dart';
 
+//This widget has been discontinued. Plz don't use it.
 class MyWidgetOverlayLoading extends StatelessWidget {
   final Widget child;
   final bool isLoading;
