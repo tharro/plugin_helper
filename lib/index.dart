@@ -23,8 +23,6 @@ export 'package:collection/collection.dart';
 export 'package:equatable/equatable.dart';
 export 'package:meta/meta.dart';
 export 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-export 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
-export 'package:google_maps_flutter/google_maps_flutter.dart';
 export 'package:flutter_cache_manager/flutter_cache_manager.dart';
 export 'package:ndialog/ndialog.dart';
 export 'package:flutter_svg/flutter_svg.dart';
