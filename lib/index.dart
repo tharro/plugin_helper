@@ -19,7 +19,6 @@ export 'package:pull_to_refresh/pull_to_refresh.dart';
 export 'package:pin_code_fields/pin_code_fields.dart';
 export 'package:mime_type/mime_type.dart';
 export 'package:connectivity_plus/connectivity_plus.dart';
-export 'package:flutter_stripe/flutter_stripe.dart';
 export 'package:collection/collection.dart';
 export 'package:equatable/equatable.dart';
 export 'package:meta/meta.dart';
