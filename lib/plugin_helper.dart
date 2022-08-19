@@ -248,7 +248,11 @@ class MyPluginHelper {
       String? format = 'dd/MM/yyyy HH:mm:ss',
       String languageCode = 'en'}) {
     try {
-      var dateLocal = DateTime.parse(dateUtc).toLocal();
+      String date = dateUtc;
+      if (!date.contains("Z")) {
+        date = date + "Z";
+      }
+      var dateLocal = DateTime.parse(date).toLocal();
       return DateFormat(format, languageCode).format(dateLocal);
     } catch (e) {
       return '-:--';
