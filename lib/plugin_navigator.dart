@@ -22,8 +22,8 @@ class MyPluginNavigation {
   }
 
   Future<dynamic> navigatePopUtil(Widget _rn) {
-    return navigationKey!.currentState!.pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => _rn), (route) => route.isFirst);
+    navigationKey!.currentState!.popUntil((route) => route.isFirst);
+    return replace(_rn);
   }
 
   Future<dynamic> pushAnimationRoute(Widget widget) {
