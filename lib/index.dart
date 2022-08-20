@@ -51,7 +51,6 @@ export './widgets/widget_empty.dart';
 export './widgets/widget_error.dart';
 export './widgets/widget_header_view.dart';
 export './widgets/widget_loading.dart';
-export './widgets/widget_overlay_loading.dart';
 export './widgets/widget_pinput.dart';
 export './widgets/widget_text_field.dart';
 export './models/list/list_model.dart';
