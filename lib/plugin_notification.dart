@@ -42,7 +42,6 @@ class MyPluginNotification {
       required Function(RemoteMessage message) onOpenFCMMessage,
       required Function(Map<String, dynamic> token) onRegisterFCM,
       required String iconNotification,
-      String? payload,
       required String chanelId,
       required String chanelName,
       required String channelDescription}) async {
@@ -64,8 +63,7 @@ class MyPluginNotification {
           iOS: initializationSettingsIOS);
       flutterLocalNotificationsPlugin.initialize(initializationSettings,
           onSelectNotification: (String? data) async {
-        _selectLocalNotification(
-            payload: data ?? '', onHandleMessage: onOpenLocalMessage);
+        onOpenLocalMessage(data ?? '');
       });
       Map<String, dynamic> body = await getInfoToRequest();
       onRegisterFCM(body);
@@ -79,7 +77,7 @@ class MyPluginNotification {
               title: message.notification!.title!,
               body: message.notification!.body!,
               color: colorNotification,
-              payload: payload,
+              payload: message.data.toString(),
               chanelId: chanelId,
               chanelName: chanelName,
               channelDescription: channelDescription);
@@ -87,11 +85,6 @@ class MyPluginNotification {
       });
       _setupInteractedMessage(onHandleFCMMessage: onOpenFCMMessage);
     }
-  }
-
-  static void _selectLocalNotification(
-      {required String payload, required Function(String) onHandleMessage}) {
-    onHandleMessage(payload);
   }
 
   static Future<void> _setupInteractedMessage(
