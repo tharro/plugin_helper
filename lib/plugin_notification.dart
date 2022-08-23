@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -77,7 +78,7 @@ class MyPluginNotification {
               title: message.notification!.title!,
               body: message.notification!.body!,
               color: colorNotification,
-              payload: message.data.toString(),
+              payload: jsonEncode(message.data),
               chanelId: chanelId,
               chanelName: chanelName,
               channelDescription: channelDescription);
