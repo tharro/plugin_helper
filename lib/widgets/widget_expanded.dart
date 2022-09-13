@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class MyWidgetExpandedCustom extends StatefulWidget {
+class MyWidgetExpanded extends StatefulWidget {
   final Widget child;
   final bool expand;
   final Duration? duration;
 
-  const MyWidgetExpandedCustom(
+  const MyWidgetExpanded(
       {Key? key, required this.expand, this.duration, required this.child})
       : super(key: key);
 
   @override
-  _MyWidgetExpandedCustomState createState() => _MyWidgetExpandedCustomState();
+  _MyWidgetExpandedState createState() => _MyWidgetExpandedState();
 }
 
-class _MyWidgetExpandedCustomState extends State<MyWidgetExpandedCustom>
+class _MyWidgetExpandedState extends State<MyWidgetExpanded>
     with SingleTickerProviderStateMixin {
   AnimationController? expandController;
   Animation<double>? animation;
@@ -43,7 +43,7 @@ class _MyWidgetExpandedCustomState extends State<MyWidgetExpandedCustom>
   }
 
   @override
-  void didUpdateWidget(MyWidgetExpandedCustom oldWidget) {
+  void didUpdateWidget(MyWidgetExpanded oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.expand) {
       expandController!.forward();
