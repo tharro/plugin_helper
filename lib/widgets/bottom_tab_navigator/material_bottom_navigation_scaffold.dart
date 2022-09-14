@@ -14,6 +14,7 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
     this.customBottomBar,
     required this.selectedItemColor,
     required this.unselectedItemColor,
+    this.backgroundColor,
   }) : super(key: key);
 
   /// List of the tabs to be displayed with their respective navigator's keys.
@@ -29,7 +30,7 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
   final Widget? customBottomBar;
 
   final Color selectedItemColor, unselectedItemColor;
-
+  final Color? backgroundColor;
   @override
   _MaterialBottomNavigationScaffoldState createState() =>
       _MaterialBottomNavigationScaffoldState();
@@ -90,9 +91,9 @@ class _MaterialBottomNavigationScaffoldState
 
   @override
   void dispose() {
-    _animationControllers.forEach(
-      (controller) => controller.dispose(),
-    );
+    for (var controller in _animationControllers) {
+      controller.dispose();
+    }
 
     super.dispose();
   }
@@ -117,6 +118,7 @@ class _MaterialBottomNavigationScaffoldState
             child: Stack(
           children: [
             BottomNavigationBar(
+              backgroundColor: widget.backgroundColor,
               currentIndex: widget.selectedIndex,
               items: materialNavigationBarItems
                   .map(

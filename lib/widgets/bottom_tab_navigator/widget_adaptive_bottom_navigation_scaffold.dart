@@ -10,6 +10,7 @@ class AdaptiveBottomNavigationScaffold extends StatefulWidget {
   final Widget? customBottomBar;
   final Color selectedItemColor, unselectedItemColor;
   final Function(int)? onTabSelected;
+  final Color? backgroundColor;
   const AdaptiveBottomNavigationScaffold({
     required this.navigationBarItems,
     Key? key,
@@ -19,6 +20,7 @@ class AdaptiveBottomNavigationScaffold extends StatefulWidget {
     required this.selectedItemColor,
     required this.unselectedItemColor,
     this.onTabSelected,
+    this.backgroundColor,
   }) : super(key: key);
 
   @override
@@ -58,11 +60,12 @@ class AdaptiveBottomNavigationScaffoldState
         selectedItemColor: widget.selectedItemColor,
         unselectedItemColor: widget.unselectedItemColor,
         customBottomBar: widget.customBottomBar,
+        backgroundColor: widget.backgroundColor,
       );
 
   /// Called when a tab selection occurs.
   void onTabSelected(int newIndex) {
-    FocusScope.of(context).requestFocus(new FocusNode());
+    FocusScope.of(context).requestFocus(FocusNode());
     if (_currentlySelectedIndex == newIndex) {
       // If the user is re-selecting the tab, the common
       // behavior is to empty the stack.
