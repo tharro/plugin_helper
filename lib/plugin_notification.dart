@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:plugin_helper/index.dart';
@@ -104,8 +105,11 @@ class MyPluginNotification {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
       main();
-      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+      if (kIsWeb) {
+        await FirebaseCrashlytics.instance
+            .setCrashlyticsCollectionEnabled(true);
+        FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+      }
     },
         (error, stack) =>
             FirebaseCrashlytics.instance.recordError(error, stack));
