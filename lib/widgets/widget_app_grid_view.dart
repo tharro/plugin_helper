@@ -14,9 +14,9 @@ class MyWidgetAppGridView<T> extends StatefulWidget {
   final Function()? onScrollListener;
   final RefreshController refreshController;
   final Function() onRefresh;
-  final bool isLoadMore;
+  final bool isLoadingMore;
   final Color colorRefresh;
-  final Widget? loadingLoadMoreWidget;
+  final Widget loadingMoreWidget;
   const MyWidgetAppGridView(
       {Key? key,
       required this.data,
@@ -28,9 +28,9 @@ class MyWidgetAppGridView<T> extends StatefulWidget {
       this.onLoadMore,
       required this.refreshController,
       required this.onRefresh,
-      this.isLoadMore = false,
+      this.isLoadingMore = false,
       required this.colorRefresh,
-      this.loadingLoadMoreWidget,
+      required this.loadingMoreWidget,
       this.onScrollListener})
       : super(key: key);
   @override
@@ -73,13 +73,13 @@ class _AppGridViewState extends State<MyWidgetAppGridView> {
         itemBuilder: (context, index) {
           if (index == widget.data.length) {
             return Center(
-              child: widget.loadingLoadMoreWidget ?? Container(),
+              child: widget.loadingMoreWidget,
             );
           }
           return widget.renderItem(index);
         },
         itemCount:
-            widget.isLoadMore ? widget.data.length + 1 : widget.data.length,
+            widget.isLoadingMore ? widget.data.length + 1 : widget.data.length,
       ),
     );
   }
