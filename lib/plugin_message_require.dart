@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 //This plugin had used in multiple languages
 class MyPluginMessageRequire {
   static String noConnection = 'No internet connection';
@@ -13,11 +11,7 @@ class MyPluginMessageRequire {
   static String weakPassword = 'Weak password';
   static String invalidEmail = 'Invalid email address';
   static String canNotEmpty = 'This field cannot be empty';
-  static String cancel = 'Cancel';
-  static TextStyle textStyleCancelDownload = const TextStyle(fontSize: 12);
   static String downloading = 'Downloading';
-  static String downloadingFile = 'Downloading File';
-  static TextStyle textStyleTitleDownload = const TextStyle(fontSize: 14);
   static String permissionDenied = 'Permission Denied';
   static String linkEmpty = 'Link is empty';
   static String requiredFullName =
@@ -42,12 +36,9 @@ class MyPluginMessageRequire {
     required String messageWeakPassword,
     required String messageInvalidEmail,
     required String messageCanNotEmpty,
-    required String messageCancel,
     String? messageDownloading,
     String? messageDownloadingFile,
     String? messagePermissionDenied,
-    TextStyle? textStyleCancelDownloads,
-    textStyleTitleDownloads,
     String? messageLinkEmpty,
     String? messageRequiredFullName,
     String? messageInvalidCvv,
@@ -69,13 +60,8 @@ class MyPluginMessageRequire {
     weakPassword = messageWeakPassword;
     invalidEmail = messageInvalidEmail;
     canNotEmpty = messageCanNotEmpty;
-    cancel = messageCancel;
     downloading = messageDownloading ?? downloading;
-    downloadingFile = messageDownloadingFile ?? downloadingFile;
     permissionDenied = messagePermissionDenied ?? permissionDenied;
-    textStyleCancelDownload =
-        textStyleCancelDownloads ?? textStyleCancelDownload;
-    textStyleTitleDownload = textStyleTitleDownloads ?? textStyleTitleDownload;
     linkEmpty = messageLinkEmpty ?? linkEmpty;
     requiredFullName = messageRequiredFullName ?? requiredFullName;
     invalidCvv = messageInvalidCvv ?? invalidCvv;
