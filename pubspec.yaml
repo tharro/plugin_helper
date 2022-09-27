@@ -31,7 +31,6 @@ dependencies:
     git:
       url: https://github.com/timtraversy/new_version.git
       ref: master
-  fluttertoast: ^8.0.9
   cached_network_image: ^3.2.0
   pull_to_refresh: ^2.0.0
   pin_code_fields: ^7.4.0
@@ -44,9 +43,9 @@ dependencies:
   flutter_datetime_picker:
     git: https://github.com/Realank/flutter_datetime_picker.git
   image: ^3.1.3
-  ndialog: ^4.1.1
   flutter_svg: ^1.0.3
   photo_view: ^0.14.0
+  overlay_support: ^2.0.1
 
 dev_dependencies:
   flutter_test:

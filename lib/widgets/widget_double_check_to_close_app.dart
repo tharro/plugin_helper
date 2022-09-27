@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:plugin_helper/index.dart';
 
 class MyWidgetDoubleCheckToCloseApp extends StatefulWidget {
   final Widget child;
@@ -20,7 +20,7 @@ class _DoubleCheckToCloseAppState extends State<MyWidgetDoubleCheckToCloseApp> {
             now.difference(currentBackPressTime!) >
                 const Duration(seconds: 2))) {
       currentBackPressTime = now;
-      Fluttertoast.showToast(msg: widget.message);
+      toast(widget.message);
       return Future.value(false);
     }
     return Future.value(true);

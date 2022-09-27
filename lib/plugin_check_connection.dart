@@ -29,16 +29,12 @@ class MyPluginConnectivity {
       ConnectivityResult result, Function? onReconnect) async {
     if (isChecking == false) {
       if (result == ConnectivityResult.none) {
-        Fluttertoast.showToast(
-            msg: MyPluginMessageRequire.noConnection,
-            toastLength: Toast.LENGTH_LONG);
+        toast(MyPluginMessageRequire.noConnection);
       }
       if ([ConnectivityResult.mobile, ConnectivityResult.wifi]
               .contains(result) &&
           _connectionStatus == ConnectivityResult.none) {
-        Fluttertoast.showToast(
-            msg: MyPluginMessageRequire.reconnecting,
-            toastLength: Toast.LENGTH_LONG);
+        toast(MyPluginMessageRequire.reconnecting);
         if (onReconnect != null) {
           onReconnect();
         }

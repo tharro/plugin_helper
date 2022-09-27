@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:plugin_helper/index.dart';
@@ -119,9 +118,9 @@ class MyPluginSocialShare {
     }
     if (hashtags != null && hashtags.isNotEmpty) {
       String tags = "";
-      hashtags.forEach((f) {
+      for (var f in hashtags) {
         tags += ("%23" + f.toString() + " ").toString();
-      });
+      }
       args = <String, dynamic>{
         "captionText": captionText + "\n" + tags.toString(),
         "url": modifiedUrl,
@@ -223,7 +222,7 @@ class MyPluginSocialShare {
   static void shareLinked(
       {required String link, required String msgToast}) async {
     await MyPluginSocialShare.copyToClipboard(link);
-    Fluttertoast.showToast(msg: msgToast, toastLength: Toast.LENGTH_LONG);
+    toast(msgToast);
     String linkedProtocolUrl;
     if (Platform.isAndroid) {
       linkedProtocolUrl = 'linkedin://you';

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:plugin_helper/widgets/phone_number/src/models/country_list.dart';
@@ -11,6 +10,7 @@ import './index.dart';
 import 'package:path/path.dart' as path;
 
 DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+var dio = Dio();
 
 enum PasswordValidType {
   atLeast8Characters,
@@ -144,8 +144,6 @@ class MyPluginHelper {
     return FullName(firstName: firstName, lastName: lastName);
   }
 
-  static var dio = Dio();
-
   static Future<Directory?> _getDownloadDirectory() async {
     if (Platform.isAndroid) {
       Directory? directory = Directory('/storage/emulated/0/Download');
@@ -176,48 +174,24 @@ class MyPluginHelper {
   }) async {
     try {
       if (links == []) {
-        showToast(message: MyPluginMessageRequire.linkEmpty);
+        toast(MyPluginMessageRequire.linkEmpty);
         return '';
       }
       final isPermissionStatusGranted = await requestPermissions();
       Directory? dir = await _getDownloadDirectory();
       if (isPermissionStatusGranted) {
-        ProgressDialog progressDialog = ProgressDialog(context,
-            dismissable: false,
-            defaultLoadingWidget: const CupertinoActivityIndicator(),
-            dialogTransitionType: DialogTransitionType.NONE, onCancel: () {
-          dio.close();
-          Navigator.pop(context);
-        },
-            cancelText: Text(
-              MyPluginMessageRequire.cancel,
-              style: MyPluginMessageRequire.textStyleCancelDownload,
-            ),
-            message: Text(
-              "${MyPluginMessageRequire.downloading}...",
-              style: MyPluginMessageRequire.textStyleCancelDownload,
-            ),
-            title: Text(
-              MyPluginMessageRequire.downloadingFile,
-              style: MyPluginMessageRequire.textStyleTitleDownload,
-            ));
-        progressDialog.show();
+        toast(MyPluginMessageRequire.downloading);
         String saveFileDir = '';
         for (int i = 0; i < links.length; i++) {
           String time = DateTime.now().microsecondsSinceEpoch.toString();
           String name = time + links[i].split('/').last;
           saveFileDir = path.join(dir!.path, name);
-          progressDialog.setMessage(Text(
-            "${MyPluginMessageRequire.downloading}... ${i + 1}/${links.length}",
-            style: MyPluginMessageRequire.textStyleCancelDownload,
-          ));
           await dio.download(links[i] + '?$time', saveFileDir);
         }
-        progressDialog.dismiss();
         onSuccess();
         return saveFileDir;
       } else {
-        showToast(message: MyPluginMessageRequire.permissionDenied);
+        toast(MyPluginMessageRequire.permissionDenied);
         return '';
       }
     } catch (e) {
@@ -235,10 +209,10 @@ class MyPluginHelper {
       if (await canLaunch(url)) {
         await launch(url);
       } else {
-        showToast(message: error ?? MyPluginMessageRequire.canNotLaunchURL);
+        toast(error ?? MyPluginMessageRequire.canNotLaunchURL);
       }
     } catch (e) {
-      showToast(message: error ?? MyPluginMessageRequire.canNotLaunchURL);
+      toast(error ?? MyPluginMessageRequire.canNotLaunchURL);
     }
   }
 
@@ -342,13 +316,6 @@ class MyPluginHelper {
     const storage = FlutterSecureStorage();
     String? language = await storage.read(key: MyPluginAppConstraints.language);
     return language ?? 'en';
-  }
-
-  static showToast({required String message}) {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_LONG,
-        backgroundColor: Colors.black.withOpacity(0.5));
   }
 
   static Future<bool> isFirstInstall() async {

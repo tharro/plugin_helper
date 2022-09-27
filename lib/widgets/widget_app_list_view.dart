@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:plugin_helper/plugin_message_require.dart';
-import 'package:plugin_helper/widgets/widget_loading.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MyWidgetAppListView<T> extends StatefulWidget {
@@ -20,7 +19,7 @@ class MyWidgetAppListView<T> extends StatefulWidget {
   final bool? isLoadMore, reverse;
   final ScrollController? scrollController;
   final Function()? onScrollListener;
-  final Widget? loadingWidget;
+  final Widget loadingWidget;
   final double? heightListViewHorizontal, paddingHorizontal;
 
   const MyWidgetAppListView({
@@ -38,11 +37,11 @@ class MyWidgetAppListView<T> extends StatefulWidget {
     this.separatorBuilder,
     this.isLoadMore = false,
     this.scrollController,
-    this.loadingWidget,
     this.heightListViewHorizontal = 200,
     this.paddingHorizontal = 16,
     this.reverse = false,
     this.onScrollListener,
+    required this.loadingWidget,
   }) : super(key: key);
   @override
   AppListViewState createState() => AppListViewState();
@@ -108,9 +107,7 @@ class AppListViewState extends State<MyWidgetAppListView> {
         shrinkWrap: true,
         itemBuilder: (context, index) {
           if (index == widget.data.length) {
-            return Center(
-              child: widget.loadingWidget ?? const MyWidgetLoading(),
-            );
+            return Center(child: widget.loadingWidget);
           }
           if (widget.scrollDirection == Axis.horizontal) {
             return Row(children: [
