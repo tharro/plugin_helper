@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyPluginNavigation {
+class MyPluginNavigation<T> {
   GlobalKey<NavigatorState>? navigationKey;
 
   static MyPluginNavigation instance = MyPluginNavigation();
@@ -30,36 +30,32 @@ class MyPluginNavigation {
     return navigationKey!.currentState!.push(AnimatedRoute(widget));
   }
 
-  Future<dynamic> navigateToReplacementInTab(
+  Future<void> navigateToReplacementInTab(
       {required BuildContext context,
       bool isHoldTab = true,
       required Widget screen}) async {
-    final complete =
-        await Navigator.of(context, rootNavigator: !isHoldTab).pushReplacement(
+    await Navigator.of(context, rootNavigator: !isHoldTab).pushReplacement(
       _buildAdaptivePageRoute(
         builder: (context) => screen,
       ),
     );
-    return complete;
   }
 
-  Future<dynamic> navigateToInTab(
+  Future<void> navigateToInTab(
       {required BuildContext context,
       bool isHoldTab = true,
       required Widget screen,
       customRoute}) async {
-    final complete =
-        await Navigator.of(context, rootNavigator: !isHoldTab).push(
+    await Navigator.of(context, rootNavigator: !isHoldTab).push(
       customRoute ??
           _buildAdaptivePageRoute(
             builder: (context) => screen,
           ),
     );
-    return complete;
   }
 
-  goBack() {
-    return navigationKey!.currentState!.pop();
+  void goBack([T? result]) {
+    return navigationKey!.currentState!.pop(result);
   }
 
   PageRoute<T> _buildAdaptivePageRoute<T>({
