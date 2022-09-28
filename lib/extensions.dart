@@ -37,6 +37,7 @@ extension StringX on String {
   }
 }
 
+// Convert hex to Color
 class HexColor extends Color {
   static int _getColorFromHex(String hexColor) {
     hexColor = hexColor.toUpperCase().replaceAll("#", "");
@@ -59,10 +60,6 @@ Future<dynamic> replace(Widget page) {
 
 Future<dynamic> popUtil(Widget page) {
   return MyPluginNavigation.instance.navigatePopUtil(page);
-}
-
-Future<dynamic> pushAnimation(Widget page) {
-  return MyPluginNavigation.instance.pushAnimationRoute(page);
 }
 
 Future<dynamic> replaceInTab(
