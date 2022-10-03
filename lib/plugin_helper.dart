@@ -328,7 +328,7 @@ class MyPluginHelper {
     await prefs.setBool(MyPluginAppConstraints.firstRun, false);
   }
 
-  static void showModalBottom({
+  static Future<T> showModalBottom<T>({
     required BuildContext context,
     double radiusShape = 16,
     bool isDismissible = true,
@@ -338,8 +338,8 @@ class MyPluginHelper {
     Widget? customLine,
     required Widget child,
     double? maxHeight,
-  }) {
-    showModalBottomSheet(
+  }) async {
+    return await showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         isDismissible: isDismissible,
