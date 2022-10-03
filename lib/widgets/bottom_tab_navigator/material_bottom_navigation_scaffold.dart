@@ -15,6 +15,7 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
     required this.selectedItemColor,
     required this.unselectedItemColor,
     this.backgroundColor,
+    this.padding,
   }) : super(key: key);
 
   /// List of the tabs to be displayed with their respective navigator's keys.
@@ -29,6 +30,7 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
 
   final Widget? customBottomBar;
 
+  final EdgeInsets? padding;
   final Color selectedItemColor, unselectedItemColor;
   final Color? backgroundColor;
   @override
@@ -115,26 +117,27 @@ class _MaterialBottomNavigationScaffoldState
               .toList(),
         ),
         bottomNavigationBar: Container(
+            padding: widget.padding,
             child: Stack(
-          children: [
-            BottomNavigationBar(
-              backgroundColor: widget.backgroundColor,
-              currentIndex: widget.selectedIndex,
-              items: materialNavigationBarItems
-                  .map(
-                    (item) => item.bottomNavigationBarItem,
-                  )
-                  .toList(),
-              onTap: widget.onItemSelected,
-              type: BottomNavigationBarType.fixed,
-              selectedLabelStyle: widget.selectedLabelStyle,
-              unselectedLabelStyle: widget.unselectedLabelStyle,
-              selectedItemColor: widget.selectedItemColor,
-              unselectedItemColor: widget.unselectedItemColor,
-            ),
-            if (widget.customBottomBar != null) widget.customBottomBar!,
-          ],
-        )),
+              children: [
+                BottomNavigationBar(
+                  backgroundColor: widget.backgroundColor,
+                  currentIndex: widget.selectedIndex,
+                  items: materialNavigationBarItems
+                      .map(
+                        (item) => item.bottomNavigationBarItem,
+                      )
+                      .toList(),
+                  onTap: widget.onItemSelected,
+                  type: BottomNavigationBarType.fixed,
+                  selectedLabelStyle: widget.selectedLabelStyle,
+                  unselectedLabelStyle: widget.unselectedLabelStyle,
+                  selectedItemColor: widget.selectedItemColor,
+                  unselectedItemColor: widget.unselectedItemColor,
+                ),
+                if (widget.customBottomBar != null) widget.customBottomBar!,
+              ],
+            )),
       );
 
   // The best practice here would be to extract this to another Widget,
