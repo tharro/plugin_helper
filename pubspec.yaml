@@ -17,7 +17,7 @@ dependencies:
   intl: ^0.17.0
   dio: ^4.0.6
   path_provider: ^2.0.9
-  permission_handler: ^9.2.0
+  permission_handler: ^10.1.0
   firebase_messaging: ^11.2.13
   firebase_analytics: ^9.1.5
   firebase_core: ^1.14.1
