@@ -1,44 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:plugin_helper/index.dart';
 
-class PhotoViewCustom extends StatefulWidget {
-  PhotoViewCustom({
+class MyWidgetPhotoViewCustom extends StatefulWidget {
+  MyWidgetPhotoViewCustom({
     Key? key,
     this.loadingBuilder,
     this.backgroundDecoration,
-    this.minScale,
-    this.maxScale,
     this.initialIndex = 0,
     this.scrollDirection = Axis.horizontal,
     required this.images,
-    this.customChild,
-    this.customCloseIcon,
+    this.customHeader,
+    this.customFooter,
   })  : pageController = PageController(initialPage: initialIndex),
         super(key: key);
 
   final LoadingBuilder? loadingBuilder;
   final BoxDecoration? backgroundDecoration;
-  final dynamic minScale;
-  final dynamic maxScale;
   final int initialIndex;
   final PageController pageController;
   final Axis scrollDirection;
   final List<String> images;
-  final Widget? customChild, customCloseIcon;
+  final Widget? customHeader, customFooter;
   @override
   State<StatefulWidget> createState() {
-    return _PhotoViewCustomState();
+    return _MyWidgetPhotoViewCustomState();
   }
 }
 
-class _PhotoViewCustomState extends State<PhotoViewCustom> {
-  late int currentIndex = widget.initialIndex;
+class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
+  late int _currentIndex = widget.initialIndex;
+  bool _isShowClose = false;
 
   void onPageChanged(int index) {
     setState(() {
-      currentIndex = index;
+      _currentIndex = index;
     });
   }
 
@@ -46,56 +42,74 @@ class _PhotoViewCustomState extends State<PhotoViewCustom> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Container(
-        decoration: widget.backgroundDecoration,
-        constraints: BoxConstraints.expand(
-          height: MediaQuery.of(context).size.height,
-        ),
-        child: Stack(
-          alignment: Alignment.bottomRight,
-          children: <Widget>[
-            PhotoViewGallery.builder(
-              scrollPhysics: const BouncingScrollPhysics(),
-              builder: _buildItem,
-              itemCount: widget.images.length,
-              loadingBuilder: widget.loadingBuilder,
-              backgroundDecoration: widget.backgroundDecoration,
-              pageController: widget.pageController,
-              onPageChanged: onPageChanged,
-              scrollDirection: widget.scrollDirection,
+      body: GestureDetector(
+          onTap: () {
+            setState(() {
+              _isShowClose = !_isShowClose;
+            });
+          },
+          child: Container(
+            decoration: widget.backgroundDecoration,
+            constraints: BoxConstraints.expand(
+              height: MediaQuery.of(context).size.height,
             ),
-            if (widget.customCloseIcon == null)
-              Positioned(
-                top: 10,
-                right: 10,
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.close,
-                    size: 25,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+            child: Stack(
+              children: <Widget>[
+                PhotoViewGallery.builder(
+                  scrollPhysics: const BouncingScrollPhysics(),
+                  builder: _buildItem,
+                  itemCount: widget.images.length,
+                  loadingBuilder: widget.loadingBuilder,
+                  backgroundDecoration: widget.backgroundDecoration,
+                  pageController: widget.pageController,
+                  onPageChanged: onPageChanged,
+                  scrollDirection: widget.scrollDirection,
                 ),
-              )
-            else
-              widget.customCloseIcon!,
-            if (widget.customChild != null) widget.customChild!
-          ],
-        ),
-      ),
+                AnimatedOpacity(
+                    // If the widget is visible, animate to 0.0 (invisible).
+                    // If the widget is hidden, animate to 1.0 (fully visible).
+                    opacity: _isShowClose ? 1.0 : 0.0,
+                    duration: const Duration(milliseconds: 100),
+                    // The green box must be a child of the AnimatedOpacity widget.
+                    child: widget.customHeader ??
+                        Container(
+                          width: double.infinity,
+                          height: 60,
+                          decoration: BoxDecoration(
+                              color: Colors.grey[100],
+                              border: Border(
+                                  bottom: BorderSide(
+                                      color: Colors.grey.withOpacity(0.2)))),
+                          alignment: Alignment.centerLeft,
+                          child: GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.only(left: 16, top: 15),
+                                child: Icon(
+                                  Icons.arrow_back_ios,
+                                  color: Colors.black,
+                                ),
+                              )),
+                        )),
+                if (widget.customFooter != null)
+                  AnimatedOpacity(
+                      // If the widget is visible, animate to 0.0 (invisible).
+                      // If the widget is hidden, animate to 1.0 (fully visible).
+                      opacity: _isShowClose ? 1.0 : 0.0,
+                      duration: const Duration(milliseconds: 100),
+                      // The green box must be a child of the AnimatedOpacity widget.
+                      child: widget.customFooter!)
+              ],
+            ),
+          )),
     );
   }
 
   PhotoViewGalleryPageOptions _buildItem(BuildContext context, int index) {
-    return PhotoViewGalleryPageOptions.customChild(
-      child: SizedBox(
-        width: 300,
-        height: 300,
-        child: MyWidgetCacheImageNetwork(imageUrl: widget.images[index]),
-      ),
-      childSize: const Size(300, 300),
+    return PhotoViewGalleryPageOptions(
+      imageProvider: NetworkImage(widget.images[index]),
       initialScale: PhotoViewComputedScale.contained,
       minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
       maxScale: PhotoViewComputedScale.covered * 4.1,

@@ -466,20 +466,24 @@ class MyPluginHelper {
 
   static String getLinkImage(
       {required String key,
-      required double width,
-      required double height,
+      double? width,
+      double? height,
       BoxFit fit = BoxFit.cover}) {
-    var json = jsonEncode({
+    Map<String, dynamic> data = {
       "bucket": MyPluginAppEnvironment().bucket,
       "key": key,
-      "edits": {
+    };
+
+    if (width != null && height != null) {
+      data["edits"] = {
         "resize": {
           "width": width,
           "height": height,
           "fit": fit.toString().replaceAll('BoxFit.', '')
         }
-      }
-    });
+      };
+    }
+    var json = jsonEncode(data);
     Codec<String, dynamic> stringToBase64 = utf8.fuse(base64);
     String encoded = stringToBase64.encode(json);
     return MyPluginAppEnvironment().linkCloudfront! + encoded;
