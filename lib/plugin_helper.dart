@@ -334,8 +334,6 @@ class MyPluginHelper {
     bool isDismissible = true,
     ShapeBorder? shape,
     Color? backgroundColor,
-    bool isShowLine = true,
-    Widget? customLine,
     required Widget child,
     double? maxHeight,
   }) async {
@@ -353,40 +351,12 @@ class MyPluginHelper {
         builder: (context) => Padding(
             padding: MediaQuery.of(context).viewInsets,
             child: Container(
-                width: MediaQuery.of(context).size.width,
-                constraints: BoxConstraints(
-                    maxHeight:
-                        maxHeight ?? MediaQuery.of(context).size.height * 0.5),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (isShowLine)
-                      const SizedBox(
-                        height: 10,
-                      ),
-                    if (isShowLine)
-                      customLine ??
-                          Container(
-                            width: 60,
-                            height: 6,
-                            decoration: BoxDecoration(
-                                color: Colors.grey[300],
-                                borderRadius: BorderRadius.circular(17)),
-                          ),
-                    if (isShowLine)
-                      const SizedBox(
-                        height: 10,
-                      ),
-                    Expanded(
-                        child: SingleChildScrollView(
-                            child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        child,
-                      ],
-                    ))),
-                  ],
-                ))));
+              width: MediaQuery.of(context).size.width,
+              constraints: BoxConstraints(
+                  maxHeight:
+                      maxHeight ?? MediaQuery.of(context).size.height * 0.8),
+              child: child,
+            )));
   }
 
   static setOrientation({bool isPortrait = true}) {
