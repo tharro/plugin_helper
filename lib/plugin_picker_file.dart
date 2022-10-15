@@ -14,6 +14,25 @@ class MyPluginPickerFile {
     return null;
   }
 
+  static Future<XFile?>? uploadSingleVideo(
+      {required BuildContext context,
+      required bool isCamera,
+      required Function(String code) onError}) async {
+    try {
+      final videoFile = await ImagePicker().pickVideo(
+          source: isCamera ? ImageSource.camera : ImageSource.gallery,
+          preferredCameraDevice: CameraDevice.front);
+      return videoFile;
+    } catch (error) {
+      if (error is PlatformException) {
+        onError(error.code);
+      } else {
+        onError('-1');
+      }
+    }
+    return null;
+  }
+
   static Future<XFile?>? uploadSingleImage({
     required BuildContext context,
     required bool isCamera,
