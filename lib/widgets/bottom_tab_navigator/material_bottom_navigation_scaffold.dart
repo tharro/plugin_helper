@@ -16,6 +16,8 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
     required this.unselectedItemColor,
     this.backgroundColor,
     this.padding,
+    this.height,
+    this.decoration,
   }) : super(key: key);
 
   /// List of the tabs to be displayed with their respective navigator's keys.
@@ -33,6 +35,9 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
   final EdgeInsets? padding;
   final Color selectedItemColor, unselectedItemColor;
   final Color? backgroundColor;
+  final double? height;
+  final BoxDecoration? decoration;
+
   @override
   _MaterialBottomNavigationScaffoldState createState() =>
       _MaterialBottomNavigationScaffoldState();
@@ -117,6 +122,8 @@ class _MaterialBottomNavigationScaffoldState
               .toList(),
         ),
         bottomNavigationBar: Container(
+            height: widget.height,
+            decoration: widget.decoration,
             padding: widget.padding,
             child: Stack(
               children: [
