@@ -16,7 +16,6 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
     required this.unselectedItemColor,
     this.backgroundColor,
     this.padding,
-    this.height,
     this.decoration,
   }) : super(key: key);
 
@@ -35,7 +34,6 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
   final EdgeInsets? padding;
   final Color selectedItemColor, unselectedItemColor;
   final Color? backgroundColor;
-  final double? height;
   final BoxDecoration? decoration;
 
   @override
@@ -122,7 +120,6 @@ class _MaterialBottomNavigationScaffoldState
               .toList(),
         ),
         bottomNavigationBar: Container(
-            height: widget.height,
             decoration: widget.decoration,
             padding: widget.padding,
             child: Stack(

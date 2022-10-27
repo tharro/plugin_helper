@@ -12,7 +12,6 @@ class AdaptiveBottomNavigationScaffold extends StatefulWidget {
   final Function(int)? onTabSelected;
   final Color? backgroundColor;
   final EdgeInsets? padding;
-  final double? height;
   final BoxDecoration? decoration;
 
   const AdaptiveBottomNavigationScaffold({
@@ -26,7 +25,6 @@ class AdaptiveBottomNavigationScaffold extends StatefulWidget {
     this.onTabSelected,
     this.backgroundColor,
     this.padding,
-    this.height,
     this.decoration,
   }) : super(key: key);
 
@@ -70,7 +68,6 @@ class AdaptiveBottomNavigationScaffoldState
         backgroundColor: widget.backgroundColor,
         padding: widget.padding,
         decoration: widget.decoration,
-        height: widget.height,
       );
 
   /// Called when a tab selection occurs.
