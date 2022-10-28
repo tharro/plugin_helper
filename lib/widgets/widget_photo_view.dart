@@ -74,7 +74,7 @@ class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
                     child: widget.customHeader ??
                         Container(
                           width: double.infinity,
-                          height: 60,
+                          height: 80,
                           decoration: BoxDecoration(
                               color: Colors.grey[100],
                               border: Border(
@@ -86,7 +86,7 @@ class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
                                 Navigator.pop(context);
                               },
                               child: const Padding(
-                                padding: EdgeInsets.only(left: 16, top: 15),
+                                padding: EdgeInsets.only(left: 16, top: 25),
                                 child: Icon(
                                   Icons.arrow_back_ios,
                                   color: Colors.black,
