@@ -250,12 +250,11 @@ class MyPluginHelper {
       {required String dateTime, String? format = 'dd/MM/yyyy HH:mm:ss'}) {
     try {
       var date = DateFormat(format).parse(dateTime);
-      final x = DateFormat(format).format(DateTime.now());
-      final dateNow = DateFormat(format).parse(x);
+      final dateNow = DateTime.now();
       final day = dateNow.difference(date).inDays;
       if (day == 0) {
         final hours = dateNow.difference(date).inHours;
-        if (hours == 0) {
+        if (hours >= 0) {
           final minutes = dateNow.difference(date).inMinutes;
           if (minutes == 0) {
             final sec = dateNow.difference(date).inSeconds;
@@ -267,8 +266,7 @@ class MyPluginHelper {
           return "${hours.abs()} ${MyPluginMessageRequire.hour}${hours.abs() > 1 ? 's' : ''}";
         }
       }
-      final dday = dateNow.difference(date).inDays;
-      return "$dday ${MyPluginMessageRequire.day}${dday > 1 ? 's' : ''}";
+      return "$day ${MyPluginMessageRequire.day}${day > 1 ? 's' : ''}";
     } catch (e) {
       return "-:--";
     }
