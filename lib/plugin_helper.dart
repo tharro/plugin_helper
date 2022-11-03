@@ -254,9 +254,9 @@ class MyPluginHelper {
       final day = dateNow.difference(date).inDays;
       if (day == 0) {
         final hours = dateNow.difference(date).inHours;
-        if (hours >= 0) {
+        if (hours <= 0) {
           final minutes = dateNow.difference(date).inMinutes;
-          if (minutes == 0) {
+          if (minutes <= 0) {
             final sec = dateNow.difference(date).inSeconds;
             return "$sec ${MyPluginMessageRequire.second}${sec > 1 ? 's' : ''}";
           } else {
