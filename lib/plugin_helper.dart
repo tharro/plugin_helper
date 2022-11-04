@@ -251,19 +251,19 @@ class MyPluginHelper {
     try {
       var date = DateFormat(format).parse(dateTime);
       final dateNow = DateTime.now();
-      final day = dateNow.difference(date).inDays;
+      final day = dateNow.difference(date).inDays.abs();
       if (day == 0) {
-        final hours = dateNow.difference(date).inHours;
-        if (hours <= 0) {
-          final minutes = dateNow.difference(date).inMinutes;
-          if (minutes <= 0) {
-            final sec = dateNow.difference(date).inSeconds;
+        final hours = dateNow.difference(date).inHours.abs();
+        if (hours == 0) {
+          final minutes = dateNow.difference(date).inMinutes.abs();
+          if (minutes == 0) {
+            final sec = dateNow.difference(date).inSeconds.abs();
             return "$sec ${MyPluginMessageRequire.second}${sec > 1 ? 's' : ''}";
           } else {
             return "$minutes ${MyPluginMessageRequire.minute}${minutes > 1 ? 's' : ''}";
           }
         } else {
-          return "${hours.abs()} ${MyPluginMessageRequire.hour}${hours.abs() > 1 ? 's' : ''}";
+          return "$hours ${MyPluginMessageRequire.hour}${hours > 1 ? 's' : ''}";
         }
       }
       return "$day ${MyPluginMessageRequire.day}${day > 1 ? 's' : ''}";
