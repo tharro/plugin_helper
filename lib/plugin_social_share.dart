@@ -211,12 +211,9 @@ class MyPluginSocialShare {
     return version;
   }
 
-  static void shareEmail({required String message, required String link}) {
-    final Uri _emailLaunchUri = Uri(
-      query: "subject=$message&body=$link",
-      scheme: 'mailto',
-    );
-    MyPluginHelper.launchUrl(url: _emailLaunchUri.toString());
+  static void shareEmail(
+      {required String subject, required String message}) async {
+    await launch("mailto:email?subject=$subject&body=$message");
   }
 
   static void shareLinked(
