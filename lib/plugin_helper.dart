@@ -268,6 +268,9 @@ class MyPluginHelper {
           return "$hours ${MyPluginMessageRequire.hour}${hours > 1 ? 's' : ''}";
         }
       }
+      if (day > 7) {
+        return DateFormat(format).format(date);
+      }
       return "$day ${MyPluginMessageRequire.day}${day > 1 ? 's' : ''}";
     } catch (e) {
       return "-:--";
