@@ -19,7 +19,7 @@ class MyWidgetAppListView<T> extends StatefulWidget {
   final Widget? separatorBuilder;
   final bool? isLoadingMore, reverse;
   final ScrollController? scrollController;
-  final Function()? onScrollListener;
+  final Function(ScrollController)? onScrollListener;
   final Widget loadingWidget;
   final double? heightListViewHorizontal, paddingHorizontal;
 
@@ -140,7 +140,7 @@ class AppListViewState extends State<MyWidgetAppListView> {
 
   void _scrollListener() {
     if (widget.onScrollListener != null) {
-      widget.onScrollListener!();
+      widget.onScrollListener!(controller);
     }
     if (widget.onLoadMore != null && controller.position.extentAfter < 200) {
       widget.onLoadMore!();
