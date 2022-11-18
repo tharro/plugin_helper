@@ -39,6 +39,7 @@ class MyPluginNotification {
 
   static Future<void> settingNotification(
       {required Color colorNotification,
+      required bool Function(RemoteMessage message) onShowLocalNotification,
       required Function(RemoteMessage message) onMessage,
       required Function(String payload) onOpenLocalMessage,
       required Function(RemoteMessage message) onOpenFCMMessage,
@@ -75,14 +76,16 @@ class MyPluginNotification {
         print('Got a message whilst in the foreground!');
         onMessage(message);
         if (message.notification != null) {
-          await _showNotification(
-              title: message.notification!.title!,
-              body: message.notification!.body!,
-              color: colorNotification,
-              payload: jsonEncode(message.data),
-              chanelId: chanelId,
-              chanelName: chanelName,
-              channelDescription: channelDescription);
+          if (onShowLocalNotification(message)) {
+            await _showNotification(
+                title: message.notification!.title!,
+                body: message.notification!.body!,
+                color: colorNotification,
+                payload: jsonEncode(message.data),
+                chanelId: chanelId,
+                chanelName: chanelName,
+                channelDescription: channelDescription);
+          }
         }
       });
       _setupInteractedMessage(onHandleFCMMessage: onOpenFCMMessage);
