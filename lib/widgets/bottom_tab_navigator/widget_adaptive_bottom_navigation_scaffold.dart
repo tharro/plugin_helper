@@ -13,6 +13,9 @@ class AdaptiveBottomNavigationScaffold extends StatefulWidget {
   final Color? backgroundColor;
   final EdgeInsets? padding;
   final BoxDecoration? decoration;
+  final Widget? customBottomBarBehind;
+  final double elevation;
+  final bool extendBody;
 
   const AdaptiveBottomNavigationScaffold({
     required this.navigationBarItems,
@@ -26,6 +29,9 @@ class AdaptiveBottomNavigationScaffold extends StatefulWidget {
     this.backgroundColor,
     this.padding,
     this.decoration,
+    this.customBottomBarBehind,
+    this.elevation = 1,
+    this.extendBody = false,
   }) : super(key: key);
 
   @override
@@ -68,6 +74,9 @@ class AdaptiveBottomNavigationScaffoldState
         backgroundColor: widget.backgroundColor,
         padding: widget.padding,
         decoration: widget.decoration,
+        customBottomBarBehind: widget.customBottomBarBehind,
+        elevation: widget.elevation,
+        extendBody: widget.extendBody,
       );
 
   /// Called when a tab selection occurs.

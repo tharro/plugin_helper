@@ -17,6 +17,9 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
     this.backgroundColor,
     this.padding,
     this.decoration,
+    this.customBottomBarBehind,
+    this.elevation = 1,
+    this.extendBody = false,
   }) : super(key: key);
 
   /// List of the tabs to be displayed with their respective navigator's keys.
@@ -30,11 +33,14 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
   final int selectedIndex;
 
   final Widget? customBottomBar;
+  final Widget? customBottomBarBehind;
+  final double elevation;
 
   final EdgeInsets? padding;
   final Color selectedItemColor, unselectedItemColor;
   final Color? backgroundColor;
   final BoxDecoration? decoration;
+  final bool extendBody;
 
   @override
   _MaterialBottomNavigationScaffoldState createState() =>
@@ -105,6 +111,7 @@ class _MaterialBottomNavigationScaffoldState
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        extendBody: widget.extendBody,
         // The Stack is what allows us to retain state across tab
         // switches by keeping all of our views in the widget tree.
         body: Stack(
@@ -122,11 +129,15 @@ class _MaterialBottomNavigationScaffoldState
         bottomNavigationBar: Container(
             decoration: widget.decoration,
             padding: widget.padding,
+            color: widget.backgroundColor,
             child: Stack(
               children: [
+                if (widget.customBottomBarBehind != null)
+                  widget.customBottomBarBehind!,
                 BottomNavigationBar(
                   backgroundColor: widget.backgroundColor,
                   currentIndex: widget.selectedIndex,
+                  elevation: widget.elevation,
                   items: materialNavigationBarItems
                       .map(
                         (item) => item.bottomNavigationBarItem,
