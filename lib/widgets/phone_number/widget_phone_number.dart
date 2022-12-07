@@ -65,19 +65,25 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
   void initState() {
     widget.controller!.addListener(() {
       if (widget.controller!.text != '') {
-        setState(() {
-          _showIcon = true;
-        });
+        if (mounted) {
+          setState(() {
+            _showIcon = true;
+          });
+        }
       } else {
-        setState(() {
-          _showIcon = false;
-        });
+        if (mounted) {
+          setState(() {
+            _showIcon = false;
+          });
+        }
       }
     });
     widget.focusNode!.addListener(() {
-      setState(() {
-        _hasFocus = widget.focusNode!.hasFocus;
-      });
+      if (mounted) {
+        setState(() {
+          _hasFocus = widget.focusNode!.hasFocus;
+        });
+      }
     });
     super.initState();
   }
