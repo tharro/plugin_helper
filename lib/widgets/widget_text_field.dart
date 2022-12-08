@@ -41,7 +41,7 @@ class MyWidgetTextField extends StatefulWidget {
   final BoxConstraints? constraints;
   final PasswordValidType passwordValidType;
   final TextStyle textStyle, labelStyle, errorStyle;
-  final TextStyle? textStyleCounter;
+  final TextStyle? textStyleCounter, textStyleHint;
   final InputBorder? errorBorder, border, focusBorder;
   final Function? onListenFocus, onListenController;
   final bool? showError;
@@ -107,7 +107,8 @@ class MyWidgetTextField extends StatefulWidget {
       required this.eyeActiveIcon,
       required this.eyeDisableIcon,
       this.autoFocus = false,
-      this.fillColor = Colors.transparent})
+      this.fillColor = Colors.transparent,
+      this.textStyleHint})
       : super(key: key);
 
   @override
@@ -349,6 +350,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
             isDense: true,
             constraints: widget.constraints,
             hintText: widget.hintText,
+            hintStyle: widget.textStyleHint,
             counter: widget.maxLength != null && hasFocus
                 ? Text(
                     "${widget.controller.text.characters.length} /${widget.maxLength}",
