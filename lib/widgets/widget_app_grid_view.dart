@@ -17,22 +17,24 @@ class MyWidgetAppGridView<T> extends StatefulWidget {
   final bool isLoadingMore;
   final Color colorRefresh;
   final Widget loadingMoreWidget;
-  const MyWidgetAppGridView(
-      {Key? key,
-      required this.data,
-      required this.renderItem,
-      this.crossAxisSpacing = 12,
-      this.mainAxisSpacing = 16,
-      this.crossAxisCount = 2,
-      this.childAspectRatio = 1 / 1.5,
-      this.onLoadMore,
-      required this.refreshController,
-      required this.onRefresh,
-      this.isLoadingMore = false,
-      required this.colorRefresh,
-      required this.loadingMoreWidget,
-      this.onScrollListener})
-      : super(key: key);
+  final bool shrinkWrap;
+  const MyWidgetAppGridView({
+    Key? key,
+    required this.data,
+    required this.renderItem,
+    this.crossAxisSpacing = 12,
+    this.mainAxisSpacing = 16,
+    this.crossAxisCount = 2,
+    this.childAspectRatio = 1 / 1.5,
+    this.onLoadMore,
+    required this.refreshController,
+    required this.onRefresh,
+    this.isLoadingMore = false,
+    required this.colorRefresh,
+    required this.loadingMoreWidget,
+    this.onScrollListener,
+    this.shrinkWrap = false,
+  }) : super(key: key);
   @override
   _AppGridViewState createState() => _AppGridViewState();
 }
@@ -68,6 +70,7 @@ class _AppGridViewState extends State<MyWidgetAppGridView> {
           crossAxisCount: widget.crossAxisCount,
           childAspectRatio: widget.childAspectRatio,
         ),
+        shrinkWrap: widget.shrinkWrap,
         controller: controller,
         padding: const EdgeInsets.all(8),
         itemBuilder: (context, index) {
