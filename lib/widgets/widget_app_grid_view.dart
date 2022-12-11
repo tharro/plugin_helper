@@ -72,7 +72,6 @@ class _AppGridViewState extends State<MyWidgetAppGridView> {
         ),
         shrinkWrap: widget.shrinkWrap,
         controller: controller,
-        padding: const EdgeInsets.all(8),
         itemBuilder: (context, index) {
           if (index == widget.data.length) {
             return Center(
