@@ -130,7 +130,6 @@ class _MaterialBottomNavigationScaffoldState
               .toList(),
         ),
         bottomNavigationBar: Container(
-            decoration: widget.decoration,
             padding: widget.padding,
             color: widget.backgroundColor,
             child: Stack(

@@ -26,10 +26,7 @@ class MyWidgetEmpty extends StatelessWidget {
       crossAxisAlignment: crossAxisAlignment,
       children: [
         if (icon != null) icon!,
-        if (icon != null)
-          const SizedBox(
-            height: 14,
-          ),
+        if (icon != null) const SizedBox(height: 14),
         Text(
           message ?? MyPluginMessageRequire.emptyData,
           style: textStyle,

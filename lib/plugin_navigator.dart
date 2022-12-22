@@ -52,8 +52,8 @@ class MyPluginNavigation<T> {
     );
   }
 
-  void goBack([T? result]) {
-    return navigationKey!.currentState!.pop(result);
+  void goBack({T? callback}) {
+    return navigationKey!.currentState!.pop(callback);
   }
 
   PageRoute<T> _buildAdaptivePageRoute<T>({

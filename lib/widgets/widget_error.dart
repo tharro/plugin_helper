@@ -3,7 +3,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MyWidgetError extends StatelessWidget {
   final String error;
-  final VoidCallback? onTapRetry;
   final VoidCallback? onRefresh;
   final RefreshController? refreshController;
   final Widget? iconError;
@@ -14,7 +13,6 @@ class MyWidgetError extends StatelessWidget {
     required this.textStyle,
     this.onRefresh,
     this.refreshController,
-    this.onTapRetry,
     this.iconError,
   }) : super(key: key);
   @override
@@ -22,14 +20,8 @@ class MyWidgetError extends StatelessWidget {
     var child = Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        iconError ??
-            (onTapRetry != null
-                ? IconButton(
-                    onPressed: onTapRetry, icon: const Icon(Icons.refresh))
-                : const Icon(Icons.error_outline)),
-        const SizedBox(
-          height: 5,
-        ),
+        iconError ?? const Icon(Icons.error_outline, size: 20),
+        const SizedBox(height: 5),
         Text(
           error,
           textAlign: TextAlign.center,
