@@ -69,16 +69,16 @@ class MyWidgetButtonCustom extends StatelessWidget {
               }
             : null,
         style: OutlinedButton.styleFrom(
+          foregroundColor: checkBackgroundColor() == Colors.white
+              ? Colors.grey
+              : Colors.white,
           elevation: elevation,
           padding: padding,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius)),
           backgroundColor: enabled == false
               ? disableBackgroundColor
-              : checkBackgroundColor(), // background
-          primary: checkBackgroundColor() == Colors.white
-              ? Colors.grey
-              : Colors.white, // foreground text
+              : checkBackgroundColor(), // foreground text
           side: enabled == false
               ? BorderSide(color: disableBorderColor!)
               : BorderSide(

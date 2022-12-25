@@ -6,6 +6,7 @@ class WidgetPickerImage extends StatelessWidget {
   final TextStyle titleStyle, itemStyles;
   final String? labelCamera, labelChoosePhoto, labelClose;
   final Function() onTakePhoto, onPickImage;
+  final Widget? children;
   const WidgetPickerImage(
       {Key? key,
       required this.title,
@@ -15,7 +16,8 @@ class WidgetPickerImage extends StatelessWidget {
       required this.onPickImage,
       this.labelCamera,
       this.labelChoosePhoto,
-      this.labelClose})
+      this.labelClose,
+      this.children})
       : super(key: key);
 
   @override
@@ -89,6 +91,7 @@ class WidgetPickerImage extends StatelessWidget {
                         ),
                       )),
                 ),
+                if (children != null) children!
               ],
             ),
           ),
