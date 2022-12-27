@@ -9,7 +9,10 @@ class MyWidgetCustomDialog extends StatefulWidget {
   final Widget buttonPrimary;
   final Widget? buttonSecondary;
   final Color? backgroundColor;
-  final EdgeInsets? paddingHeader, paddingFooter, paddingCloseIcon;
+  final EdgeInsets? paddingHeader,
+      paddingFooter,
+      paddingCloseIcon,
+      insetPadding;
   final Widget? iconClose;
   final double? spaceBetweenButton,
       spaceBetweenTitleAndMessage,
@@ -39,6 +42,7 @@ class MyWidgetCustomDialog extends StatefulWidget {
     this.shapeRadius = 10,
     this.paddingCloseIcon,
     this.widthContent,
+    this.insetPadding,
   }) : super(key: key);
 
   @override
@@ -52,6 +56,7 @@ class _CustomDialogState extends State<MyWidgetCustomDialog> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(widget.shapeRadius!),
       ),
+      insetPadding: widget.insetPadding,
       elevation: 0,
       backgroundColor: Colors.transparent,
       child: contentBox(context),
