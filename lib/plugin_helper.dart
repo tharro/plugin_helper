@@ -17,6 +17,7 @@ var dio = Dio();
 enum PasswordValidType {
   atLeast8Characters,
   strongPassword,
+  notEmpty,
 }
 
 enum CardType {
@@ -93,6 +94,8 @@ class MyPluginHelper {
         var regexPassword =
             r"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\^$*.\[\]{}\(\)?\-“!@#%&/,><\’:;|_~`])\S{8,99}";
         return RegExp(regexPassword).hasMatch(password);
+      case PasswordValidType.notEmpty:
+        return password.isNotEmpty;
     }
   }
 
