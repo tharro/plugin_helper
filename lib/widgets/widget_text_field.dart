@@ -56,6 +56,7 @@ class MyWidgetTextField extends StatefulWidget {
   final Widget? customLabelOfTextFieldNormal;
   final Widget eyeActiveIcon, eyeDisableIcon;
   final bool autoFocus;
+  final bool Function()? isValidCustomPassword;
   const MyWidgetTextField(
       {Key? key,
       this.prefixIcon,
@@ -108,7 +109,8 @@ class MyWidgetTextField extends StatefulWidget {
       required this.eyeDisableIcon,
       this.autoFocus = false,
       this.fillColor = Colors.transparent,
-      this.textStyleHint})
+      this.textStyleHint,
+      this.isValidCustomPassword})
       : super(key: key);
 
   @override
@@ -157,13 +159,22 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         setValid();
         break;
       case ValidType.password:
-        if (MyPluginHelper.isValidPassword(
-            password: widget.controller.text,
-            passwordValidType: widget.passwordValidType)) {
-          setValid();
+        if (widget.isValidCustomPassword != null) {
+          if (widget.isValidCustomPassword!()) {
+            setValid();
+          } else {
+            setInValid();
+          }
         } else {
-          setInValid();
+          if (MyPluginHelper.isValidPassword(
+              password: widget.controller.text,
+              passwordValidType: widget.passwordValidType)) {
+            setValid();
+          } else {
+            setInValid();
+          }
         }
+
         break;
       case ValidType.email:
         if (MyPluginHelper.isValidateEmail(email: widget.controller.text)) {
