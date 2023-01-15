@@ -292,7 +292,11 @@ class MyPluginAuthentication {
   }
 
   static Future<void> deleteUser() async {
-    await storage.deleteAll();
+    await storage.delete(key: MyPluginAppConstraints.user);
+    await storage.delete(key: MyPluginAppConstraints.token);
+    await storage.delete(key: MyPluginAppConstraints.refreshToken);
+    await storage.delete(key: MyPluginAppConstraints.expired);
+    await storage.delete(key: MyPluginAppConstraints.expiredRefresh);
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
     return;
