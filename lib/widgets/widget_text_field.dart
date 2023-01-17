@@ -57,61 +57,63 @@ class MyWidgetTextField extends StatefulWidget {
   final Widget eyeActiveIcon, eyeDisableIcon;
   final bool autoFocus;
   final bool Function()? isValidCustomPassword;
-  const MyWidgetTextField(
-      {Key? key,
-      this.prefixIcon,
-      this.label,
-      this.onSuffixIconTap,
-      this.inputFormatters,
-      required this.controller,
-      this.suffixActiveIcon,
-      this.suffixDisableIcon,
-      this.keyboardType,
-      this.validType = ValidType.none,
-      this.obscureText = false,
-      this.enabled = true,
-      this.onValid,
-      this.hintText,
-      this.maxLength,
-      this.textCapitalization = TextCapitalization.none,
-      this.textError,
-      this.onTap,
-      this.contentPadding,
-      this.maxLines = 1,
-      this.minLines,
-      required this.focus,
-      this.onFieldSubmitted,
-      this.textInputAction,
-      this.constraints,
-      this.passwordValidType = PasswordValidType.atLeast8Characters,
-      required this.textStyle,
-      this.textStyleCounter,
-      required this.labelStyle,
-      this.errorBorder,
-      this.border,
-      this.focusBorder,
-      required this.errorStyle,
-      this.onListenFocus,
-      this.onListenController,
-      this.showError = true,
-      this.paddingLeftPrefixIcon = 15,
-      this.paddingRightPrefixIcon = 11,
-      this.paddingLeftSuffixIcon = 15,
-      this.paddingRightSuffixIcon = 11,
-      this.borderRadius = 4,
-      this.borderColor,
-      this.focusBorderColor,
-      this.errorBorderColor,
-      this.textFieldType = TextFieldType.normal,
-      this.spaceBetweenLabelAndTextField = 8,
-      this.customLabelOfTextFieldNormal,
-      required this.eyeActiveIcon,
-      required this.eyeDisableIcon,
-      this.autoFocus = false,
-      this.fillColor = Colors.transparent,
-      this.textStyleHint,
-      this.isValidCustomPassword})
-      : super(key: key);
+  final bool Function()? isValidNotEmpty;
+  const MyWidgetTextField({
+    Key? key,
+    this.prefixIcon,
+    this.label,
+    this.onSuffixIconTap,
+    this.inputFormatters,
+    required this.controller,
+    this.suffixActiveIcon,
+    this.suffixDisableIcon,
+    this.keyboardType,
+    this.validType = ValidType.none,
+    this.obscureText = false,
+    this.enabled = true,
+    this.onValid,
+    this.hintText,
+    this.maxLength,
+    this.textCapitalization = TextCapitalization.none,
+    this.textError,
+    this.onTap,
+    this.contentPadding,
+    this.maxLines = 1,
+    this.minLines,
+    required this.focus,
+    this.onFieldSubmitted,
+    this.textInputAction,
+    this.constraints,
+    this.passwordValidType = PasswordValidType.atLeast8Characters,
+    required this.textStyle,
+    this.textStyleCounter,
+    required this.labelStyle,
+    this.errorBorder,
+    this.border,
+    this.focusBorder,
+    required this.errorStyle,
+    this.onListenFocus,
+    this.onListenController,
+    this.showError = true,
+    this.paddingLeftPrefixIcon = 15,
+    this.paddingRightPrefixIcon = 11,
+    this.paddingLeftSuffixIcon = 15,
+    this.paddingRightSuffixIcon = 11,
+    this.borderRadius = 4,
+    this.borderColor,
+    this.focusBorderColor,
+    this.errorBorderColor,
+    this.textFieldType = TextFieldType.normal,
+    this.spaceBetweenLabelAndTextField = 8,
+    this.customLabelOfTextFieldNormal,
+    required this.eyeActiveIcon,
+    required this.eyeDisableIcon,
+    this.autoFocus = false,
+    this.fillColor = Colors.transparent,
+    this.textStyleHint,
+    this.isValidCustomPassword,
+    this.isValidNotEmpty,
+  }) : super(key: key);
 
   @override
   _WidgetTextFieldState createState() => _WidgetTextFieldState();
@@ -184,10 +186,18 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         }
         break;
       case ValidType.notEmpty:
-        if (widget.controller.text.isNotEmpty) {
-          setValid();
+        if (widget.isValidNotEmpty != null) {
+          if (widget.isValidNotEmpty!()) {
+            setValid();
+          } else {
+            setInValid();
+          }
         } else {
-          setInValid();
+          if (widget.controller.text.isNotEmpty) {
+            setValid();
+          } else {
+            setInValid();
+          }
         }
         break;
       case ValidType.fullName:
