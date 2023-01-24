@@ -108,8 +108,13 @@ class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
   }
 
   PhotoViewGalleryPageOptions _buildItem(BuildContext context, int index) {
+    bool isFromUrl = widget.images[index].contains('http') ||
+        widget.images[index].contains('https');
+    ImageProvider<Object>? imageProvider = (isFromUrl
+        ? NetworkImage(widget.images[index])
+        : AssetImage(widget.images[index])) as ImageProvider<Object>?;
     return PhotoViewGalleryPageOptions(
-      imageProvider: NetworkImage(widget.images[index]),
+      imageProvider: imageProvider,
       initialScale: PhotoViewComputedScale.contained,
       minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
       maxScale: PhotoViewComputedScale.covered * 4.1,
