@@ -10,6 +10,7 @@ class AdaptiveBottomNavigationScaffold extends StatefulWidget {
   final Widget? customBottomBar;
   final Color selectedItemColor, unselectedItemColor;
   final Function(int)? onTabSelected;
+  final int? indexDisableTap;
   final Color? backgroundColor;
   final EdgeInsets? padding;
   final BoxDecoration? decoration;
@@ -35,6 +36,7 @@ class AdaptiveBottomNavigationScaffold extends StatefulWidget {
     this.extendBody = false,
     this.showSelectedLabels = true,
     this.showUnselectedLabels = true,
+    this.indexDisableTap,
   }) : super(key: key);
 
   @override
@@ -87,15 +89,22 @@ class AdaptiveBottomNavigationScaffoldState
   /// Called when a tab selection occurs.
   void onTabSelected(int newIndex) {
     FocusScope.of(context).requestFocus(FocusNode());
-    if (_currentlySelectedIndex == newIndex) {
-      // If the user is re-selecting the tab, the common
-      // behavior is to empty the stack.
-      widget.navigationBarItems[newIndex].navigatorKey.currentState!
-          .popUntil((route) => route.isFirst);
+
+    if (widget.indexDisableTap == null ||
+        (widget.indexDisableTap != null &&
+            newIndex != widget.indexDisableTap)) {
+      if (_currentlySelectedIndex == newIndex) {
+        // If the user is re-selecting the tab, the common
+        // behavior is to empty the stack.
+        widget.navigationBarItems[newIndex].navigatorKey.currentState!
+            .popUntil((route) => route.isFirst);
+      }
+
+      setState(() {
+        _currentlySelectedIndex = newIndex;
+      });
     }
-    setState(() {
-      _currentlySelectedIndex = newIndex;
-    });
+
     if (widget.onTabSelected != null) {
       widget.onTabSelected!(newIndex);
     }
