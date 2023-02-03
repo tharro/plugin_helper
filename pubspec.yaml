@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  device_info_plus: ^3.2.3
+  device_info_plus: ^8.0.0
   shared_preferences: ^2.0.13
   flutter_secure_storage: ^5.0.2
   intl: ^0.17.0
@@ -25,13 +25,10 @@ dependencies:
   firebase_crashlytics: ^3.0.7
   flutter_local_notifications: ^9.4.0
   image_picker: ^0.8.5
-  file_picker: ^4.5.1
+  file_picker: ^5.2.5
   url_launcher: ^6.0.20
   http: ^0.13.5
-  new_version:
-    git:
-      url: https://github.com/timtraversy/new_version.git
-      ref: master
+  new_version_plus: ^0.0.9
   cached_network_image: ^3.2.0
   pull_to_refresh: ^2.0.0
   pin_code_fields: ^7.4.0

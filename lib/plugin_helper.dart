@@ -5,6 +5,7 @@ import 'dart:math';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:new_version_plus/new_version_plus.dart';
 import 'package:plugin_helper/widgets/phone_number/src/models/country_list.dart';
 import 'package:plugin_helper/widgets/phone_number/src/utils/phone_number/phone_number_util.dart';
 import './index.dart';
@@ -72,7 +73,7 @@ class MyPluginHelper {
     try {
       if (Platform.isAndroid) {
         AndroidDeviceInfo? androidDevice = await deviceInfoPlugin.androidInfo;
-        meId = androidDevice.id!;
+        meId = androidDevice.id;
       } else if (Platform.isIOS) {
         IosDeviceInfo iosDevice = await deviceInfoPlugin.iosInfo;
         meId = iosDevice.identifierForVendor!;
@@ -286,7 +287,7 @@ class MyPluginHelper {
       String? iOSAppStoreCountry,
       required Function(VersionStatus) onUpdate,
       required Function() onError}) async {
-    final newVersion = NewVersion(
+    final newVersion = NewVersionPlus(
         androidId: androidId,
         iOSId: iOSId,
         iOSAppStoreCountry: iOSAppStoreCountry);
