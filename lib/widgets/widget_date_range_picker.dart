@@ -7,7 +7,10 @@ class MyWidgetDateRangePickerCustom extends StatelessWidget {
   final Function onSelectedDate;
   final Function? onTap;
   final TextStyle textStyleButton;
-  final Color primaryColor, accentColor, iconColor;
+  final Color headerBackground,
+      headerTextColor,
+      bodyTextColor,
+      buttonHoverColor;
   final int? firstDate, lastDate;
   const MyWidgetDateRangePickerCustom(
       {Key? key,
@@ -17,9 +20,10 @@ class MyWidgetDateRangePickerCustom extends StatelessWidget {
       this.initialLastDate,
       this.onTap,
       required this.textStyleButton,
-      required this.primaryColor,
-      required this.accentColor,
-      required this.iconColor,
+      required this.headerBackground,
+      required this.headerTextColor,
+      required this.bodyTextColor,
+      required this.buttonHoverColor,
       this.firstDate,
       this.lastDate})
       : super(key: key);
@@ -27,12 +31,17 @@ class MyWidgetDateRangePickerCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-          primaryTextTheme: TextTheme(button: textStyleButton),
-          primaryColor: primaryColor,
-          iconTheme: IconThemeData(color: iconColor),
-          colorScheme:
-              ColorScheme.fromSwatch().copyWith(secondary: accentColor) //dot
+        colorScheme: ColorScheme.light(
+          primary: headerBackground, // header background color
+          onPrimary: headerTextColor, // header text color
+          onSurface: bodyTextColor, // body text color
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            foregroundColor: buttonHoverColor, // button text color
           ),
+        ),
+      ),
       child: Builder(
         builder: (context) => GestureDetector(
           child: child,
