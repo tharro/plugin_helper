@@ -422,7 +422,10 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
                     : null,
             suffixIconConstraints:
                 const BoxConstraints(minWidth: 0, minHeight: 0),
-            suffixIcon: _suffixIcon,
+            suffixIcon: widget.validType == ValidType.password &&
+                    widget.alignmentPasswordIcon == AlignmentPasswordIcon.left
+                ? null
+                : _suffixIcon,
           ),
         ),
       ],
@@ -431,10 +434,8 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
 
   Widget? get _suffixIcon {
     return (widget.validType != ValidType.password &&
-                widget.suffixDisableIcon == null &&
-                widget.suffixDisableIcon == null) ||
-            (widget.validType == ValidType.password &&
-                widget.alignmentPasswordIcon == AlignmentPasswordIcon.left)
+            widget.suffixDisableIcon == null &&
+            widget.suffixDisableIcon == null)
         ? null
         : Padding(
             padding: EdgeInsets.only(
