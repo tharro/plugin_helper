@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+enum AlignmentButtonColum { down, up }
+
+enum AlignmentButtonRow { left, right }
+
 class MyWidgetCustomDialog extends StatefulWidget {
   final String? title, descriptions;
   final Function()? onClose;
@@ -13,13 +17,16 @@ class MyWidgetCustomDialog extends StatefulWidget {
       paddingFooter,
       paddingCloseIcon,
       insetPadding;
-  final Widget? iconClose;
+  final AlignmentButtonRow alignmentPrimaryRow;
+  final AlignmentButtonColum alignmentPrimaryColumn;
+  final Widget? iconClose, headerCustom;
   final double? spaceBetweenButton,
       spaceBetweenTitleAndMessage,
       spaceBetweenMessageAndButton,
       shapeRadius,
       widthContent;
   final bool? isColumn, isShowCloseIcon;
+
   const MyWidgetCustomDialog({
     Key? key,
     this.title,
@@ -43,6 +50,9 @@ class MyWidgetCustomDialog extends StatefulWidget {
     this.paddingCloseIcon,
     this.widthContent,
     this.insetPadding,
+    this.headerCustom,
+    this.alignmentPrimaryRow = AlignmentButtonRow.left,
+    this.alignmentPrimaryColumn = AlignmentButtonColum.up,
   }) : super(key: key);
 
   @override
@@ -81,6 +91,7 @@ class _CustomDialogState extends State<MyWidgetCustomDialog> {
                       const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
                   child: Column(
                     children: [
+                      if (widget.headerCustom != null) widget.headerCustom!,
                       if (widget.title != null)
                         Center(
                           child: Text(
@@ -107,10 +118,25 @@ class _CustomDialogState extends State<MyWidgetCustomDialog> {
                         const EdgeInsets.only(left: 24, right: 24, bottom: 24),
                     child: Column(
                       children: [
-                        widget.buttonPrimary,
-                        if (widget.isShowSecondButton!)
-                          SizedBox(height: widget.spaceBetweenButton),
-                        if (widget.isShowSecondButton!) widget.buttonSecondary!
+                        if (widget.alignmentPrimaryColumn ==
+                            AlignmentButtonColum.up)
+                          Column(
+                            children: [
+                              widget.buttonPrimary,
+                              if (widget.isShowSecondButton!)
+                                SizedBox(height: widget.spaceBetweenButton),
+                              if (widget.isShowSecondButton!)
+                                widget.buttonSecondary!
+                            ],
+                          )
+                        else
+                          Column(children: [
+                            if (widget.isShowSecondButton!)
+                              widget.buttonSecondary!,
+                            if (widget.isShowSecondButton!)
+                              SizedBox(height: widget.spaceBetweenButton),
+                            widget.buttonPrimary,
+                          ])
                       ],
                     ),
                   )
@@ -121,10 +147,29 @@ class _CustomDialogState extends State<MyWidgetCustomDialog> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        if (widget.isShowSecondButton!) widget.buttonSecondary!,
-                        if (widget.isShowSecondButton!)
-                          SizedBox(width: widget.spaceBetweenButton),
-                        widget.buttonPrimary
+                        if (widget.alignmentPrimaryRow ==
+                            AlignmentButtonRow.right)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              if (widget.isShowSecondButton!)
+                                widget.buttonSecondary!,
+                              if (widget.isShowSecondButton!)
+                                SizedBox(width: widget.spaceBetweenButton),
+                              widget.buttonPrimary
+                            ],
+                          )
+                        else
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              widget.buttonPrimary,
+                              if (widget.isShowSecondButton!)
+                                SizedBox(width: widget.spaceBetweenButton),
+                              if (widget.isShowSecondButton!)
+                                widget.buttonSecondary!,
+                            ],
+                          )
                       ],
                     ),
                   )
