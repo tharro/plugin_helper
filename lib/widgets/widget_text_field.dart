@@ -15,6 +15,8 @@ enum ValidType {
 
 enum TextFieldType { normal, animation }
 
+enum AlignmentPasswordIcon { left, right }
+
 class MyWidgetTextField extends StatefulWidget {
   final String? label;
   final TextEditingController controller;
@@ -58,6 +60,7 @@ class MyWidgetTextField extends StatefulWidget {
   final bool autoFocus;
   final bool Function()? isValidCustomPassword;
   final bool Function()? isValidNotEmpty;
+  final AlignmentPasswordIcon alignmentPasswordIcon;
   const MyWidgetTextField({
     Key? key,
     this.prefixIcon,
@@ -113,6 +116,7 @@ class MyWidgetTextField extends StatefulWidget {
     this.textStyleHint,
     this.isValidCustomPassword,
     this.isValidNotEmpty,
+    this.alignmentPasswordIcon = AlignmentPasswordIcon.right,
   }) : super(key: key);
 
   @override
@@ -405,50 +409,59 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
             errorStyle: widget.errorStyle,
             prefixIconConstraints:
                 const BoxConstraints(minWidth: 0, minHeight: 0),
-            prefixIcon: widget.prefixIcon != null
-                ? Padding(
-                    padding: EdgeInsets.only(
-                        left: widget.paddingLeftPrefixIcon!,
-                        right: widget.paddingRightPrefixIcon!),
-                    child: widget.prefixIcon,
-                  )
-                : null,
+            prefixIcon: widget.validType == ValidType.password &&
+                    widget.alignmentPasswordIcon == AlignmentPasswordIcon.left
+                ? _suffixIcon
+                : widget.prefixIcon != null
+                    ? Padding(
+                        padding: EdgeInsets.only(
+                            left: widget.paddingLeftPrefixIcon!,
+                            right: widget.paddingRightPrefixIcon!),
+                        child: widget.prefixIcon,
+                      )
+                    : null,
             suffixIconConstraints:
                 const BoxConstraints(minWidth: 0, minHeight: 0),
-            suffixIcon: widget.validType != ValidType.password &&
-                    widget.suffixDisableIcon == null &&
-                    widget.suffixDisableIcon == null
-                ? null
-                : Padding(
-                    padding: EdgeInsets.only(
-                        left: widget.paddingLeftSuffixIcon!,
-                        right: widget.paddingRightSuffixIcon!),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            if (widget.validType == ValidType.password) {
-                              if (mounted) {
-                                setState(() {
-                                  _obscureText = !_obscureText;
-                                });
-                              }
-                            }
-                            if (widget.onSuffixIconTap != null) {
-                              widget.onSuffixIconTap!();
-                            }
-                          },
-                          child: _checkIcon(),
-                        ),
-                      ],
-                    ),
-                  ),
+            suffixIcon: _suffixIcon,
           ),
         ),
       ],
     );
+  }
+
+  Widget? get _suffixIcon {
+    return (widget.validType != ValidType.password &&
+                widget.suffixDisableIcon == null &&
+                widget.suffixDisableIcon == null) ||
+            (widget.validType == ValidType.password &&
+                widget.alignmentPasswordIcon == AlignmentPasswordIcon.left)
+        ? null
+        : Padding(
+            padding: EdgeInsets.only(
+                left: widget.paddingLeftSuffixIcon!,
+                right: widget.paddingRightSuffixIcon!),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    if (widget.validType == ValidType.password) {
+                      if (mounted) {
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
+                      }
+                    }
+                    if (widget.onSuffixIconTap != null) {
+                      widget.onSuffixIconTap!();
+                    }
+                  },
+                  child: _checkIcon(),
+                ),
+              ],
+            ),
+          );
   }
 
   Widget _checkIcon() {
