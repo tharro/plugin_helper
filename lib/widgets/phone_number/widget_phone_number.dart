@@ -20,47 +20,49 @@ class MyWidgetPhoneNumber extends StatefulWidget {
   final TextStyle textStyle, labelStyle, hintStyle, selectorTextStyle;
   final String locale;
   final EdgeInsets? padding, contentPaddingInputPhoneNumber;
+  final double maxHeightInputPhoneNumber;
   final String hintText;
   final SelectorConfig selectorConfig;
   final BoxDecoration? boxDecorationPhoneNumber;
   final BoxDecoration? boxDecorationAll;
   final double spaceBetweenSelectorAndTextField;
   final double paddingIconRight, spaceBetweenLabelAndPhoneNumber;
-  const MyWidgetPhoneNumber({
-    Key? key,
-    this.label,
-    this.controller,
-    this.initialValue,
-    this.isEnabled = true,
-    this.onInputChanged,
-    this.onInputValidated,
-    this.onFieldSubmitted,
-    this.onSaved,
-    this.autoFocus = false,
-    this.focusNode,
-    this.hasError = false,
-    this.countries,
-    this.isLTR = true,
-    this.iconError,
-    this.iconCorrect,
-    required this.textStyle,
-    required this.locale,
-    this.padding,
-    this.selectorConfig = const SelectorConfig(
-      selectorType: PhoneInputSelectorType.DIALOG,
-    ),
-    this.boxDecorationPhoneNumber,
-    this.boxDecorationAll,
-    this.spaceBetweenSelectorAndTextField = 12,
-    this.paddingIconRight = 25,
-    this.labelSearch,
-    this.spaceBetweenLabelAndPhoneNumber = 8,
-    this.hintText = '',
-    required this.labelStyle,
-    required this.hintStyle,
-    required this.selectorTextStyle,
-    this.contentPaddingInputPhoneNumber,
-  }) : super(key: key);
+  const MyWidgetPhoneNumber(
+      {Key? key,
+      this.label,
+      this.controller,
+      this.initialValue,
+      this.isEnabled = true,
+      this.onInputChanged,
+      this.onInputValidated,
+      this.onFieldSubmitted,
+      this.onSaved,
+      this.autoFocus = false,
+      this.focusNode,
+      this.hasError = false,
+      this.countries,
+      this.isLTR = true,
+      this.iconError,
+      this.iconCorrect,
+      required this.textStyle,
+      required this.locale,
+      this.padding,
+      this.selectorConfig = const SelectorConfig(
+        selectorType: PhoneInputSelectorType.DIALOG,
+      ),
+      this.boxDecorationPhoneNumber,
+      this.boxDecorationAll,
+      this.spaceBetweenSelectorAndTextField = 12,
+      this.paddingIconRight = 25,
+      this.labelSearch,
+      this.spaceBetweenLabelAndPhoneNumber = 8,
+      this.hintText = '',
+      required this.labelStyle,
+      required this.hintStyle,
+      required this.selectorTextStyle,
+      this.contentPaddingInputPhoneNumber,
+      this.maxHeightInputPhoneNumber = 44})
+      : super(key: key);
   @override
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
 }
@@ -175,6 +177,8 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
                   border: InputBorder.none,
                   isDense: true,
                   contentPadding: widget.contentPaddingInputPhoneNumber,
+                  constraints: BoxConstraints(
+                      maxHeight: widget.maxHeightInputPhoneNumber),
                 ),
                 onFieldSubmitted: (text) {
                   if (widget.onFieldSubmitted != null) {
