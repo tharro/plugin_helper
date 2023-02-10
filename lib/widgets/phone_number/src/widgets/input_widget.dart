@@ -423,7 +423,6 @@ class _InputWidgetView
                   border: Border.all(color: Colors.grey[300]!),
                   borderRadius: BorderRadius.circular(5),
                 ),
-            padding: const EdgeInsets.only(left: 12),
             child: TextFormField(
               key: const Key(TestHelper.TextInputKeyValue),
               textDirection:

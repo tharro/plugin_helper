@@ -10,10 +10,11 @@ class Item extends StatelessWidget {
   final TextStyle? textStyle;
   final bool withCountryNames;
   final double? leadingPadding;
-  final bool trailingSpace;
   final BoxDecoration? boxDecoration;
-  final Widget? icon;
-
+  final Widget? iconRight;
+  final Widget? iconLeft;
+  final EdgeInsets? flagPadding;
+  final double? heightItem;
   const Item({
     Key? key,
     this.country,
@@ -22,17 +23,16 @@ class Item extends StatelessWidget {
     this.textStyle,
     this.withCountryNames = false,
     this.leadingPadding = 12,
-    this.trailingSpace = true,
     this.boxDecoration,
-    this.icon,
+    this.iconRight,
+    this.iconLeft,
+    this.flagPadding,
+    this.heightItem,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     String dialCode = (country?.dialCode ?? '');
-    if (trailingSpace) {
-      dialCode = dialCode.padRight(5, "   ");
-    }
     return Container(
       decoration: boxDecoration ??
           BoxDecoration(
@@ -40,30 +40,29 @@ class Item extends StatelessWidget {
             border: Border.all(color: Colors.grey[300]!),
             borderRadius: BorderRadius.circular(5),
           ),
-      height: 50,
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      height: heightItem ?? 50,
       child: Center(
         child: Row(
           textDirection: TextDirection.ltr,
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            SizedBox(width: leadingPadding),
-            _Flag(
-              country: country,
-              showFlag: showFlag,
-              useEmoji: useEmoji,
-            ),
-            if (showFlag!) const SizedBox(width: 12.0),
+            if (iconRight != null) iconRight!,
+            if (showFlag!)
+              Padding(
+                padding: flagPadding ?? EdgeInsets.zero,
+                child: _Flag(
+                  country: country,
+                  showFlag: showFlag,
+                  useEmoji: useEmoji,
+                ),
+              ),
             Text(
-              '$dialCode',
+              dialCode,
               textDirection: TextDirection.ltr,
               style: textStyle,
             ),
-            const SizedBox(width: 3),
-            icon ??
-                const Icon(Icons.arrow_drop_down_outlined,
-                    color: Colors.black, size: 35),
+            if (iconRight != null) iconRight!,
           ],
         ),
       ),

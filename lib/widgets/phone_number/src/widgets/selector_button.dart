@@ -41,13 +41,14 @@ class SelectorButton extends StatelessWidget {
                 child: DropdownButton<Country>(
                   key: Key(TestHelper.DropdownButtonKeyValue),
                   hint: Item(
-                    country: country,
-                    showFlag: selectorConfig.showFlags,
-                    useEmoji: selectorConfig.useEmoji,
-                    leadingPadding: selectorConfig.leadingPadding,
-                    trailingSpace: selectorConfig.trailingSpace,
-                    textStyle: selectorTextStyle,
-                  ),
+                      country: country,
+                      showFlag: selectorConfig.showFlags,
+                      useEmoji: selectorConfig.useEmoji,
+                      iconRight: selectorConfig.iconRight,
+                      iconLeft: selectorConfig.iconLeft,
+                      flagPadding: selectorConfig.flagPadding,
+                      textStyle: selectorTextStyle,
+                      heightItem: selectorConfig.heightItem),
                   value: country,
                   items: mapCountryToDropdownItem(countries),
                   onChanged: isEnabled ? onCountryChanged : null,
@@ -57,10 +58,11 @@ class SelectorButton extends StatelessWidget {
                 country: country,
                 showFlag: selectorConfig.showFlags,
                 useEmoji: selectorConfig.useEmoji,
-                leadingPadding: selectorConfig.leadingPadding,
-                trailingSpace: selectorConfig.trailingSpace,
+                iconRight: selectorConfig.iconRight,
+                iconLeft: selectorConfig.iconLeft,
+                flagPadding: selectorConfig.flagPadding,
                 textStyle: selectorTextStyle,
-              )
+                heightItem: selectorConfig.heightItem)
         : MaterialButton(
             key: Key(TestHelper.DropdownButtonKeyValue),
             padding: EdgeInsets.zero,
@@ -85,15 +87,15 @@ class SelectorButton extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0),
               child: Item(
-                country: country,
-                showFlag: selectorConfig.showFlags,
-                useEmoji: selectorConfig.useEmoji,
-                leadingPadding: selectorConfig.leadingPadding,
-                trailingSpace: selectorConfig.trailingSpace,
-                textStyle: selectorTextStyle,
-                boxDecoration: selectorConfig.boxDecoration,
-                icon: selectorConfig.icon,
-              ),
+                  country: country,
+                  showFlag: selectorConfig.showFlags,
+                  useEmoji: selectorConfig.useEmoji,
+                  textStyle: selectorTextStyle,
+                  boxDecoration: selectorConfig.boxDecoration,
+                  iconRight: selectorConfig.iconRight,
+                  iconLeft: selectorConfig.iconLeft,
+                  flagPadding: selectorConfig.flagPadding,
+                  heightItem: selectorConfig.heightItem),
             ),
           );
   }
@@ -112,7 +114,10 @@ class SelectorButton extends StatelessWidget {
           textStyle: selectorTextStyle,
           withCountryNames: false,
           boxDecoration: selectorConfig.boxDecoration,
-          icon: selectorConfig.icon,
+          iconRight: selectorConfig.iconRight,
+          iconLeft: selectorConfig.iconLeft,
+          flagPadding: selectorConfig.flagPadding,
+          heightItem: selectorConfig.heightItem,
         ),
       );
     }).toList();
