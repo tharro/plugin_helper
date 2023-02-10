@@ -47,7 +47,7 @@ class Item extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            if (iconRight != null) iconRight!,
+            if (iconLeft != null) iconLeft!,
             if (showFlag!)
               Padding(
                 padding: flagPadding ?? EdgeInsets.zero,
