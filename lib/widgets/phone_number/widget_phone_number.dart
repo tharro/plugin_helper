@@ -7,10 +7,10 @@ class MyWidgetPhoneNumber extends StatefulWidget {
   final TextEditingController? controller;
   final PhoneNumber? initialValue;
   final bool isEnabled;
-  final Function? onInputChanged;
+  final Function(PhoneNumber)? onInputChanged;
   final Function(bool)? onInputValidated;
-  final Function? onFieldSubmitted;
-  final Function? onSaved;
+  final Function()? onFieldSubmitted;
+  final Function(PhoneNumber)? onSaved;
   final bool autoFocus;
   final FocusNode? focusNode;
   final bool? hasError;
