@@ -20,7 +20,7 @@ class MyWidgetPhoneNumber extends StatefulWidget {
   final TextStyle textStyle, labelStyle, hintStyle, selectorTextStyle;
   final String locale;
   final EdgeInsets? padding, contentPaddingInputPhoneNumber;
-  final double maxHeightInputPhoneNumber;
+  final double maxHeightInputPhoneNumber, height;
   final String hintText;
   final SelectorConfig selectorConfig;
   final BoxDecoration? boxDecorationPhoneNumber;
@@ -61,7 +61,8 @@ class MyWidgetPhoneNumber extends StatefulWidget {
       required this.hintStyle,
       required this.selectorTextStyle,
       this.contentPaddingInputPhoneNumber,
-      this.maxHeightInputPhoneNumber = 44})
+      this.maxHeightInputPhoneNumber = 44,
+      this.height = 44})
       : super(key: key);
   @override
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
@@ -124,6 +125,7 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
                             : const Color(0xffdddddd)),
                     borderRadius: BorderRadius.circular(34),
                   ),
+              height: widget.height,
               padding: widget.padding ?? EdgeInsets.zero,
               child: InternationalPhoneNumberInput(
                 countries: widget.countries,
