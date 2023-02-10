@@ -20,7 +20,7 @@ class MyWidgetPhoneNumber extends StatefulWidget {
   final TextStyle textStyle;
   final String locale;
   final EdgeInsets? padding;
-  final SelectorConfig? selectorConfig;
+  final SelectorConfig selectorConfig;
   final BoxDecoration? boxDecorationPhoneNumber;
   final BoxDecoration? boxDecorationAll;
   final double spaceBetweenSelectorAndTextField;
@@ -45,7 +45,9 @@ class MyWidgetPhoneNumber extends StatefulWidget {
     required this.textStyle,
     required this.locale,
     this.padding,
-    this.selectorConfig,
+    this.selectorConfig = const SelectorConfig(
+      selectorType: PhoneInputSelectorType.DIALOG,
+    ),
     this.boxDecorationPhoneNumber,
     this.boxDecorationAll,
     this.spaceBetweenSelectorAndTextField = 12,
@@ -153,10 +155,7 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
                 spaceBetweenSelectorAndTextField:
                     widget.spaceBetweenSelectorAndTextField,
                 textAlignVertical: TextAlignVertical.top,
-                selectorConfig: widget.selectorConfig ??
-                    const SelectorConfig(
-                      selectorType: PhoneInputSelectorType.DIALOG,
-                    ),
+                selectorConfig: widget.selectorConfig,
                 ignoreBlank: true,
                 autoValidateMode: AutovalidateMode.disabled,
                 selectorTextStyle: widget.textStyle,
