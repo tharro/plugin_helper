@@ -32,12 +32,7 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) {
     String dialCode = (country?.dialCode ?? '');
     return Container(
-        decoration: boxDecoration ??
-            BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: Colors.grey[300]!),
-              borderRadius: BorderRadius.circular(5),
-            ),
+        decoration: boxDecoration,
         child: Row(
           textDirection: TextDirection.ltr,
           mainAxisAlignment: MainAxisAlignment.start,

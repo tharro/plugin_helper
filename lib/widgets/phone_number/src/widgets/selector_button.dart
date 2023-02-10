@@ -16,7 +16,6 @@ class SelectorButton extends StatelessWidget {
   final String? locale;
   final bool isEnabled;
   final bool isScrollControlled;
-  final double? itemHeight;
 
   final ValueChanged<Country?> onCountryChanged;
 
@@ -32,7 +31,6 @@ class SelectorButton extends StatelessWidget {
     required this.onCountryChanged,
     required this.isEnabled,
     required this.isScrollControlled,
-    this.itemHeight,
   }) : super(key: key);
 
   @override
@@ -42,7 +40,6 @@ class SelectorButton extends StatelessWidget {
             ? DropdownButtonHideUnderline(
                 child: DropdownButton<Country>(
                   key: Key(TestHelper.DropdownButtonKeyValue),
-                  itemHeight: itemHeight,
                   hint: Item(
                       country: country,
                       showFlag: selectorConfig.showFlags,
@@ -70,6 +67,7 @@ class SelectorButton extends StatelessWidget {
             key: Key(TestHelper.DropdownButtonKeyValue),
             padding: EdgeInsets.zero,
             minWidth: 0,
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             onPressed: countries.isNotEmpty && countries.length > 1 && isEnabled
                 ? () async {
                     Country? selected;
@@ -87,19 +85,16 @@ class SelectorButton extends StatelessWidget {
                     }
                   }
                 : null,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: Item(
-                  country: country,
-                  showFlag: selectorConfig.showFlags,
-                  useEmoji: selectorConfig.useEmoji,
-                  textStyle: selectorTextStyle,
-                  boxDecoration: selectorConfig.boxDecoration,
-                  iconRight: selectorConfig.iconRight,
-                  iconLeft: selectorConfig.iconLeft,
-                  flagPadding: selectorConfig.flagPadding,
-                  heightItem: selectorConfig.heightItem),
-            ),
+            child: Item(
+                country: country,
+                showFlag: selectorConfig.showFlags,
+                useEmoji: selectorConfig.useEmoji,
+                textStyle: selectorTextStyle,
+                boxDecoration: selectorConfig.boxDecoration,
+                iconRight: selectorConfig.iconRight,
+                iconLeft: selectorConfig.iconLeft,
+                flagPadding: selectorConfig.flagPadding,
+                heightItem: selectorConfig.heightItem),
           );
   }
 
