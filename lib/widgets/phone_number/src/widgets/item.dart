@@ -9,7 +9,6 @@ class Item extends StatelessWidget {
   final bool? useEmoji;
   final TextStyle? textStyle;
   final bool withCountryNames;
-  final double? leadingPadding;
   final BoxDecoration? boxDecoration;
   final Widget? iconRight;
   final Widget? iconLeft;
@@ -22,7 +21,6 @@ class Item extends StatelessWidget {
     this.useEmoji,
     this.textStyle,
     this.withCountryNames = false,
-    this.leadingPadding = 12,
     this.boxDecoration,
     this.iconRight,
     this.iconLeft,
@@ -34,14 +32,12 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) {
     String dialCode = (country?.dialCode ?? '');
     return Container(
-      decoration: boxDecoration ??
-          BoxDecoration(
-            color: Colors.white,
-            border: Border.all(color: Colors.grey[300]!),
-            borderRadius: BorderRadius.circular(5),
-          ),
-      height: heightItem ?? 50,
-      child: Center(
+        decoration: boxDecoration ??
+            BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.grey[300]!),
+              borderRadius: BorderRadius.circular(5),
+            ),
         child: Row(
           textDirection: TextDirection.ltr,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -64,9 +60,7 @@ class Item extends StatelessWidget {
             ),
             if (iconRight != null) iconRight!,
           ],
-        ),
-      ),
-    );
+        ));
   }
 }
 
@@ -90,12 +84,12 @@ class _Flag extends StatelessWidget {
                 : Image.asset(
                     country!.flagUri,
                     width: 32.0,
-                    package: 'plugin_helper',
+                    package: 'lenddle',
                     errorBuilder: (context, error, stackTrace) {
-                      return SizedBox.shrink();
+                      return const SizedBox.shrink();
                     },
                   ),
           )
-        : SizedBox.shrink();
+        : const SizedBox.shrink();
   }
 }
