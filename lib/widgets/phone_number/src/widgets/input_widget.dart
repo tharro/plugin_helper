@@ -84,6 +84,7 @@ class InternationalPhoneNumberInput extends StatefulWidget {
   final List<String>? countries;
   final bool? isLTR;
   final BoxDecoration? boxDecorationPhoneNumber;
+  final double? itemHeight;
 
   const InternationalPhoneNumberInput({
     Key? key,
@@ -125,6 +126,7 @@ class InternationalPhoneNumberInput extends StatefulWidget {
     this.countries,
     this.isLTR = true,
     this.boxDecorationPhoneNumber,
+    this.itemHeight,
   }) : super(key: key);
 
   @override
@@ -303,6 +305,7 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
         isEnabled: widget.isEnabled,
         autoFocusSearchField: widget.autoFocusSearch,
         isScrollControlled: widget.countrySelectorScrollControlled,
+        itemHeight: widget.itemHeight,
       ));
     }
 
@@ -408,6 +411,7 @@ class _InputWidgetView
                 isEnabled: widget.isEnabled,
                 autoFocusSearchField: widget.autoFocusSearch,
                 isScrollControlled: widget.countrySelectorScrollControlled,
+                itemHeight: widget.itemHeight,
               ),
               SizedBox(
                 height: state.selectorButtonBottomPadding,

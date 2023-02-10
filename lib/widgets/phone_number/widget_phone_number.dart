@@ -27,6 +27,7 @@ class MyWidgetPhoneNumber extends StatefulWidget {
   final BoxDecoration? boxDecorationAll;
   final double spaceBetweenSelectorAndTextField;
   final double paddingIconRight, spaceBetweenLabelAndPhoneNumber;
+  final double? itemHeight;
   const MyWidgetPhoneNumber(
       {Key? key,
       this.label,
@@ -62,7 +63,8 @@ class MyWidgetPhoneNumber extends StatefulWidget {
       required this.selectorTextStyle,
       this.contentPaddingInputPhoneNumber,
       this.maxHeightInputPhoneNumber = 44,
-      this.height = 44})
+      this.height = 44,
+      this.itemHeight})
       : super(key: key);
   @override
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
@@ -187,6 +189,7 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
                     widget.onFieldSubmitted!();
                   }
                 },
+                itemHeight: widget.itemHeight,
                 autoFocus: widget.autoFocus,
                 formatInput: false,
                 keyboardType: TextInputType.number,
