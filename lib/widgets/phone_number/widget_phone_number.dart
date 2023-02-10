@@ -17,9 +17,10 @@ class MyWidgetPhoneNumber extends StatefulWidget {
   final List<String>? countries;
   final bool isLTR;
   final Widget? iconError, iconCorrect;
-  final TextStyle textStyle;
+  final TextStyle textStyle, labelStyle, hintStyle, selectorTextStyle;
   final String locale;
   final EdgeInsets? padding;
+  final String hintText;
   final SelectorConfig selectorConfig;
   final BoxDecoration? boxDecorationPhoneNumber;
   final BoxDecoration? boxDecorationAll;
@@ -54,6 +55,10 @@ class MyWidgetPhoneNumber extends StatefulWidget {
     this.paddingIconRight = 25,
     this.labelSearch,
     this.spaceBetweenLabelAndPhoneNumber = 8,
+    this.hintText = '',
+    required this.labelStyle,
+    required this.hintStyle,
+    required this.selectorTextStyle,
   }) : super(key: key);
   @override
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
@@ -99,7 +104,7 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
         if (widget.label != null)
           Text(
             widget.label!,
-            style: widget.textStyle,
+            style: widget.labelStyle,
           ),
         SizedBox(
           height: widget.spaceBetweenLabelAndPhoneNumber,
@@ -130,7 +135,7 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
                       borderSide: BorderSide(color: Colors.grey[300]!),
                     ),
                     labelText: widget.labelSearch,
-                    labelStyle: widget.textStyle),
+                    labelStyle: widget.labelStyle),
                 onInputChanged: (PhoneNumber number) {
                   if (widget.onInputChanged != null) {
                     if (number.phoneNumber!
@@ -158,14 +163,14 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
                 selectorConfig: widget.selectorConfig,
                 ignoreBlank: true,
                 autoValidateMode: AutovalidateMode.disabled,
-                selectorTextStyle: widget.textStyle,
+                selectorTextStyle: widget.selectorTextStyle,
                 textFieldController: widget.controller,
                 textStyle: widget.textStyle,
                 locale: widget.locale,
                 isEnabled: widget.isEnabled,
                 inputDecoration: InputDecoration(
-                  hintText: '',
-                  hintStyle: widget.textStyle,
+                  hintText: widget.hintText,
+                  hintStyle: widget.hintStyle,
                   border: InputBorder.none,
                 ),
                 onFieldSubmitted: (text) {
