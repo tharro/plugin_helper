@@ -19,7 +19,7 @@ class MyWidgetPhoneNumber extends StatefulWidget {
   final Widget? iconError, iconCorrect;
   final TextStyle textStyle, labelStyle, hintStyle, selectorTextStyle;
   final String locale;
-  final EdgeInsets? padding;
+  final EdgeInsets? padding, contentPaddingInputPhoneNumber;
   final String hintText;
   final SelectorConfig selectorConfig;
   final BoxDecoration? boxDecorationPhoneNumber;
@@ -59,6 +59,7 @@ class MyWidgetPhoneNumber extends StatefulWidget {
     required this.labelStyle,
     required this.hintStyle,
     required this.selectorTextStyle,
+    this.contentPaddingInputPhoneNumber,
   }) : super(key: key);
   @override
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
@@ -172,6 +173,8 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
                   hintText: widget.hintText,
                   hintStyle: widget.hintStyle,
                   border: InputBorder.none,
+                  isDense: true,
+                  contentPadding: widget.contentPaddingInputPhoneNumber,
                 ),
                 onFieldSubmitted: (text) {
                   if (widget.onFieldSubmitted != null) {
