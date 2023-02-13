@@ -386,6 +386,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
           maxLength: widget.maxLength,
           maxLines: widget.maxLines ?? 1,
           minLines: widget.minLines,
+          textAlignVertical: TextAlignVertical.center,
           decoration: InputDecoration(
             isDense: true,
             constraints: widget.constraints,
