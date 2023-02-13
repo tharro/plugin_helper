@@ -142,13 +142,7 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
                     labelStyle: widget.labelStyle),
                 onInputChanged: (PhoneNumber number) {
                   if (widget.onInputChanged != null) {
-                    if (number.phoneNumber!
-                            .replaceAll('${number.dialCode}', '') !=
-                        '0') {
-                      widget.onInputChanged!(number);
-                    } else {
-                      widget.controller!.text = '';
-                    }
+                    widget.onInputChanged!(number);
                   }
                 },
                 focusNode: widget.focusNode,
