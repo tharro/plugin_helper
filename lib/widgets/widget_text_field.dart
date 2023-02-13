@@ -44,7 +44,7 @@ class MyWidgetTextField extends StatefulWidget {
   final PasswordValidType passwordValidType;
   final TextStyle textStyle, labelStyle, errorStyle;
   final TextStyle? textStyleCounter, textStyleHint;
-  final InputBorder? errorBorder, border, focusBorder;
+  final InputBorder? errorBorder, border, focusBorder, disabledBorder;
   final Function? onListenFocus, onListenController;
   final bool? showError;
   final double? paddingLeftPrefixIcon,
@@ -54,7 +54,11 @@ class MyWidgetTextField extends StatefulWidget {
       borderRadius,
       spaceBetweenLabelAndTextField;
   final TextFieldType? textFieldType;
-  final Color? borderColor, focusBorderColor, errorBorderColor, fillColor;
+  final Color? borderColor,
+      focusBorderColor,
+      errorBorderColor,
+      fillColor,
+      disabledBorderColor;
   final Widget? customLabelOfTextFieldNormal;
   final Widget eyeActiveIcon, eyeDisableIcon;
   final bool autoFocus;
@@ -117,6 +121,8 @@ class MyWidgetTextField extends StatefulWidget {
     this.isValidCustomPassword,
     this.isValidNotEmpty,
     this.alignmentPasswordIcon = AlignmentPasswordIcon.right,
+    this.disabledBorder,
+    this.disabledBorderColor,
   }) : super(key: key);
 
   @override
@@ -315,22 +321,28 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
     }
   }
 
-  OutlineInputBorder errorBorder() => OutlineInputBorder(
+  OutlineInputBorder get errorBorder => OutlineInputBorder(
         borderRadius: BorderRadius.circular(widget.borderRadius!),
         borderSide: BorderSide(
           color: widget.errorBorderColor ?? Colors.red[400]!,
         ),
       );
-  OutlineInputBorder border() => OutlineInputBorder(
+  OutlineInputBorder get border => OutlineInputBorder(
         borderRadius: BorderRadius.circular(widget.borderRadius!),
         borderSide: BorderSide(
           color: widget.borderColor ?? Colors.grey[400]!,
         ),
       );
-  OutlineInputBorder focusBorder() => OutlineInputBorder(
+  OutlineInputBorder get focusBorder => OutlineInputBorder(
         borderRadius: BorderRadius.circular(widget.borderRadius!),
         borderSide: BorderSide(
           color: widget.focusBorderColor ?? Colors.green,
+        ),
+      );
+  OutlineInputBorder get disableBorder => OutlineInputBorder(
+        borderRadius: BorderRadius.circular(widget.borderRadius!),
+        borderSide: BorderSide(
+          color: widget.disabledBorderColor ?? Colors.green,
         ),
       );
 
@@ -393,19 +405,20 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
                     widget.showError!
                 ? getError()
                 : null,
-            errorBorder: widget.errorBorder ?? errorBorder(),
-            focusedErrorBorder: widget.errorBorder ?? errorBorder(),
+            errorBorder: widget.errorBorder ?? errorBorder,
+            focusedErrorBorder: widget.errorBorder ?? errorBorder,
             contentPadding: widget.contentPadding ??
                 const EdgeInsets.symmetric(horizontal: 17, vertical: 11),
-            border: widget.border ?? border(),
-            enabledBorder: widget.border ?? border(),
-            focusedBorder: widget.focusBorder ?? focusBorder(),
+            border: widget.border ?? border,
+            enabledBorder: widget.border ?? border,
+            focusedBorder: widget.focusBorder ?? focusBorder,
             labelText: widget.textFieldType == TextFieldType.animation
                 ? widget.label
                 : null,
             counterText: '',
             fillColor: widget.fillColor,
             filled: true,
+            disabledBorder: widget.disabledBorder ?? disableBorder,
             errorStyle: widget.errorStyle,
             prefixIconConstraints:
                 const BoxConstraints(minWidth: 0, minHeight: 0),
