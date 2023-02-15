@@ -65,6 +65,7 @@ class MyWidgetTextField extends StatefulWidget {
   final bool Function()? isValidCustomPassword;
   final bool Function()? isValidNotEmpty;
   final AlignmentPasswordIcon alignmentPasswordIcon;
+  final Brightness? keyboardAppearance;
   const MyWidgetTextField({
     Key? key,
     this.prefixIcon,
@@ -123,6 +124,7 @@ class MyWidgetTextField extends StatefulWidget {
     this.alignmentPasswordIcon = AlignmentPasswordIcon.right,
     this.disabledBorder,
     this.disabledBorderColor,
+    this.keyboardAppearance,
   }) : super(key: key);
 
   @override
@@ -387,6 +389,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
           maxLines: widget.maxLines ?? 1,
           minLines: widget.minLines,
           textAlignVertical: TextAlignVertical.center,
+          keyboardAppearance: widget.keyboardAppearance,
           decoration: InputDecoration(
             isDense: true,
             constraints: widget.constraints,
