@@ -142,37 +142,31 @@ class _CustomDialogState extends State<MyWidgetCustomDialog> {
                   )
                 else
                   Padding(
-                    padding: widget.paddingFooter ??
-                        const EdgeInsets.only(left: 24, right: 24, bottom: 24),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (widget.alignmentPrimaryRow ==
-                            AlignmentButtonRow.right)
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              if (widget.isShowSecondButton!)
-                                widget.buttonSecondary!,
-                              if (widget.isShowSecondButton!)
-                                SizedBox(width: widget.spaceBetweenButton),
-                              widget.buttonPrimary
-                            ],
-                          )
-                        else
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              widget.buttonPrimary,
-                              if (widget.isShowSecondButton!)
-                                SizedBox(width: widget.spaceBetweenButton),
-                              if (widget.isShowSecondButton!)
-                                widget.buttonSecondary!,
-                            ],
-                          )
-                      ],
-                    ),
-                  )
+                      padding: widget.paddingFooter ??
+                          const EdgeInsets.only(
+                              left: 24, right: 24, bottom: 24),
+                      child: widget.alignmentPrimaryRow ==
+                              AlignmentButtonRow.right
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                if (widget.isShowSecondButton!)
+                                  widget.buttonSecondary!,
+                                if (widget.isShowSecondButton!)
+                                  SizedBox(width: widget.spaceBetweenButton),
+                                widget.buttonPrimary
+                              ],
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                widget.buttonPrimary,
+                                if (widget.isShowSecondButton!)
+                                  SizedBox(width: widget.spaceBetweenButton),
+                                if (widget.isShowSecondButton!)
+                                  widget.buttonSecondary!,
+                              ],
+                            ))
               ],
             ),
             if (widget.isShowCloseIcon!)
