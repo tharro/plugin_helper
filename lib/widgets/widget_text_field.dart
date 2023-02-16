@@ -144,16 +144,11 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         if (widget.onListenFocus != null) {
           widget.onListenFocus!();
         }
-        if (widget.focus!.hasFocus) {
+
+        if (widget.focus!.hasFocus != hasFocus) {
           if (mounted) {
             setState(() {
-              hasFocus = true;
-            });
-          }
-        } else {
-          if (mounted) {
-            setState(() {
-              hasFocus = false;
+              hasFocus = widget.focus!.hasFocus;
             });
           }
         }
