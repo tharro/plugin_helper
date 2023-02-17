@@ -33,7 +33,8 @@ extension ConvertDouble on double {
 
 extension StringX on String {
   bool get isPhoneNumber {
-    return startsWith('+', 0); // || RegExp(r'^-?[0-9]+$').hasMatch(this);
+    return startsWith('+', 0) ||
+        startsWith('0', 0); // || RegExp(r'^-?[0-9]+$').hasMatch(this);
   }
 }
 

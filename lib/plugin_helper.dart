@@ -5,7 +5,7 @@ import 'dart:math';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:new_version_plus/new_version_plus.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:plugin_helper/widgets/phone_number/src/models/country_list.dart';
 import 'package:plugin_helper/widgets/phone_number/src/utils/phone_number/phone_number_util.dart';
 import './index.dart';
@@ -207,13 +207,13 @@ class MyPluginHelper {
     }
   }
 
-  static launchUrl({required String url, String? error}) async {
+  static launchFromUrl({required String url, String? error}) async {
     if (url.contains('https://') == false || url.contains('http://') == false) {
       url = 'https://$url';
     }
     try {
-      if (await canLaunch(url)) {
-        await launch(url);
+      if (await canLaunchUrl(Uri.parse(url))) {
+        await launchUrl(Uri.parse(url));
       } else {
         toast(error ?? MyPluginMessageRequire.canNotLaunchURL);
       }
@@ -224,7 +224,6 @@ class MyPluginHelper {
 
   static String formatUtcTime(
       {required String dateUtc,
-      //2022-05-23T07:54:17Z
       String? format = 'dd/MM/yyyy HH:mm:ss',
       String languageCode = 'en'}) {
     try {
