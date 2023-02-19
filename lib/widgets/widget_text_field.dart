@@ -200,7 +200,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
             setInValid();
           }
         } else {
-          if (widget.controller.text.isNotEmpty) {
+          if (widget.controller.text.trim().isNotEmpty) {
             setValid();
           } else {
             setInValid();
@@ -208,7 +208,8 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         }
         break;
       case ValidType.fullName:
-        if (MyPluginHelper.isValidFullName(text: widget.controller.text)) {
+        if (MyPluginHelper.isValidFullName(
+            text: widget.controller.text.trim())) {
           setValid();
         } else {
           setInValid();
