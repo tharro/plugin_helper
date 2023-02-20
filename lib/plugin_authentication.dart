@@ -197,9 +197,9 @@ class MyPluginAuthentication {
     //     return true;
     //   }
     // } else {
-    if (DateTime.now()
-        .add(const Duration(minutes: 5))
-        .isBefore(DateTime.parse(users.expiredToken!))) {
+    if (DateTime.parse(users.expiredToken!)
+        .subtract(const Duration(minutes: 5))
+        .isAfter(DateTime.now())) {
       return true;
     }
     // }
@@ -209,9 +209,9 @@ class MyPluginAuthentication {
 
   static Future<bool> checkRefreshTokenValidity() async {
     final users = await getUser();
-    if (DateTime.now()
-        .add(const Duration(minutes: 5))
-        .isBefore(DateTime.parse(users.expiredRefreshToken!))) {
+    if (DateTime.parse(users.expiredRefreshToken!)
+        .subtract(const Duration(minutes: 5))
+        .isAfter(DateTime.now())) {
       return true;
     }
     return false;
