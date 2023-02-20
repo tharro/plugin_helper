@@ -190,7 +190,8 @@ class MyPluginAuthentication {
 
   static Future<bool> checkTokenValidity() async {
     final users = await getUser();
-    if (users.expiredToken! > DateTime.now().millisecondsSinceEpoch) {
+    if (users.expiredToken != null &&
+        users.expiredToken! > DateTime.now().millisecondsSinceEpoch) {
       return true;
     }
 
@@ -199,7 +200,8 @@ class MyPluginAuthentication {
 
   static Future<bool> checkRefreshTokenValidity() async {
     final users = await getUser();
-    if (users.expiredRefreshToken! > DateTime.now().millisecondsSinceEpoch) {
+    if (users.expiredRefreshToken != null &&
+        users.expiredRefreshToken! > DateTime.now().millisecondsSinceEpoch) {
       return true;
     }
     return false;
@@ -254,8 +256,9 @@ class MyPluginAuthentication {
         userId: user,
         token: token,
         refreshToken: refreshToken,
-        expiredToken: int.parse(expiredToken!),
-        expiredRefreshToken: int.parse(expiredRefreshToken!),
+        expiredToken: expiredToken != null ? int.parse(expiredToken) : 0,
+        expiredRefreshToken:
+            expiredRefreshToken != null ? int.parse(expiredRefreshToken) : 0,
       );
     } catch (e) {
       return Users();
