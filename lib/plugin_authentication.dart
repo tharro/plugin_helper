@@ -191,7 +191,7 @@ class MyPluginAuthentication {
   static Future<bool> checkTokenValidity() async {
     final users = await getUser();
     if (users.expiredToken != null &&
-        users.expiredToken! > DateTime.now().millisecondsSinceEpoch) {
+        users.expiredToken! > DateTime.now().toUtc().millisecondsSinceEpoch) {
       return true;
     }
 
@@ -201,7 +201,8 @@ class MyPluginAuthentication {
   static Future<bool> checkRefreshTokenValidity() async {
     final users = await getUser();
     if (users.expiredRefreshToken != null &&
-        users.expiredRefreshToken! > DateTime.now().millisecondsSinceEpoch) {
+        users.expiredRefreshToken! >
+            DateTime.now().toUtc().millisecondsSinceEpoch) {
       return true;
     }
     return false;
