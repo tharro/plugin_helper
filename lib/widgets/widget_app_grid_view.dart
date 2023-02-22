@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:plugin_helper/index.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:plugin_helper/plugin_message_require.dart';
 
@@ -57,9 +59,11 @@ class _AppGridViewState extends State<MyWidgetAppGridView> {
   Widget build(BuildContext context) {
     return SmartRefresher(
       controller: widget.refreshController,
-      header: Platform.isIOS
-          ? const ClassHeaderIndicator()
-          : const MaterialClassicHeader(),
+      header: kIsWeb
+          ? null
+          : Platform.isIOS
+              ? const ClassHeaderGridIndicator()
+              : const MaterialClassicHeader(),
       onRefresh: () {
         widget.onRefresh();
       },
