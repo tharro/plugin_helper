@@ -257,9 +257,11 @@ class MyPluginAuthentication {
         userId: user,
         token: token,
         refreshToken: refreshToken,
-        expiredToken: expiredToken != null ? int.parse(expiredToken) : 0,
-        expiredRefreshToken:
-            expiredRefreshToken != null ? int.parse(expiredRefreshToken) : 0,
+        expiredToken:
+            expiredToken != null ? int.tryParse(expiredToken) ?? 0 : 0,
+        expiredRefreshToken: expiredRefreshToken != null
+            ? int.tryParse(expiredRefreshToken) ?? 0
+            : 0,
       );
     } catch (e) {
       return Users();
