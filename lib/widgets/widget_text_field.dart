@@ -340,7 +340,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
   OutlineInputBorder get disableBorder => OutlineInputBorder(
         borderRadius: BorderRadius.circular(widget.borderRadius!),
         borderSide: BorderSide(
-          color: widget.disabledBorderColor ?? Colors.green,
+          color: widget.disabledBorderColor ?? Colors.grey[400]!,
         ),
       );
 
