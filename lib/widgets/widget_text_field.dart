@@ -397,7 +397,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
                     style: widget.textStyleCounter ??
                         const TextStyle(fontSize: 13))
                 : null,
-            errorMaxLines: 2,
+            errorMaxLines: 3,
             labelStyle: widget.textFieldType == TextFieldType.animation
                 ? widget.labelStyle
                 : null,

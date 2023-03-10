@@ -1,9 +1,8 @@
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:plugin_helper/index.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:plugin_helper/plugin_message_require.dart';
 
 class MyWidgetAppGridView<T> extends StatefulWidget {
   final List<T> data;
@@ -12,14 +11,15 @@ class MyWidgetAppGridView<T> extends StatefulWidget {
   final int crossAxisCount;
   final double childAspectRatio;
   final Widget Function(int index) renderItem;
-  final Function()? onLoadMore;
-  final Function()? onScrollListener;
+  final VoidCallback? onLoadMore;
+  final VoidCallback? onScrollListener;
   final RefreshController refreshController;
-  final Function() onRefresh;
+  final VoidCallback onRefresh;
   final bool isLoadingMore;
   final Color colorRefresh;
   final Widget loadingMoreWidget;
   final bool shrinkWrap;
+  final EdgeInsets? padding;
   const MyWidgetAppGridView({
     Key? key,
     required this.data,
@@ -36,6 +36,7 @@ class MyWidgetAppGridView<T> extends StatefulWidget {
     required this.loadingMoreWidget,
     this.onScrollListener,
     this.shrinkWrap = false,
+    this.padding,
   }) : super(key: key);
   @override
   _AppGridViewState createState() => _AppGridViewState();
@@ -74,6 +75,7 @@ class _AppGridViewState extends State<MyWidgetAppGridView> {
           crossAxisCount: widget.crossAxisCount,
           childAspectRatio: widget.childAspectRatio,
         ),
+        padding: widget.padding,
         shrinkWrap: widget.shrinkWrap,
         controller: controller,
         itemBuilder: (context, index) {
@@ -94,8 +96,7 @@ class _AppGridViewState extends State<MyWidgetAppGridView> {
     if (widget.onScrollListener != null) {
       widget.onScrollListener!();
     }
-    if (widget.onLoadMore is Function &&
-        controller.position.extentAfter < 200) {
+    if (widget.onLoadMore != null && controller.position.extentAfter < 200) {
       widget.onLoadMore!();
     }
   }
