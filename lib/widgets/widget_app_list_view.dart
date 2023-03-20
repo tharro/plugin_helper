@@ -7,12 +7,12 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MyWidgetAppListView<T> extends StatefulWidget {
   final List<T> data;
-  final Function()? onLoadMore;
+  final VoidCallback? onLoadMore;
   final Axis scrollDirection;
   final Widget Function(int index) renderItem;
   final bool enablePullDown;
   final bool isNeverScroll;
-  final Function()? onRefresh;
+  final VoidCallback? onRefresh;
   final RefreshController? refreshController;
   final double separatorItem;
   final EdgeInsets? padding;
@@ -49,21 +49,21 @@ class MyWidgetAppListView<T> extends StatefulWidget {
 }
 
 class AppListViewState extends State<MyWidgetAppListView> {
-  late ScrollController controller;
+  late ScrollController _controller;
   @override
   void initState() {
     super.initState();
     if (widget.scrollController != null) {
-      controller = widget.scrollController!;
-      controller.addListener(_scrollListener);
+      _controller = widget.scrollController!;
+      _controller.addListener(_scrollListener);
     } else {
-      controller = ScrollController()..addListener(_scrollListener);
+      _controller = ScrollController()..addListener(_scrollListener);
     }
   }
 
   @override
   void dispose() {
-    controller.removeListener(_scrollListener);
+    _controller.removeListener(_scrollListener);
     super.dispose();
   }
 
@@ -83,29 +83,29 @@ class AppListViewState extends State<MyWidgetAppListView> {
               widget.onRefresh!();
             }
           },
-          child: listView());
+          child: _listView());
     }
-    return switchDirection();
+    return _switchDirection();
   }
 
-  Widget switchDirection() {
+  Widget _switchDirection() {
     if (widget.scrollDirection == Axis.horizontal) {
       return SizedBox(
         height: widget.heightListViewHorizontal,
-        child: listView(),
+        child: _listView(),
       );
     }
-    return listView();
+    return _listView();
   }
 
-  Widget listView() => ListView.separated(
+  Widget _listView() => ListView.separated(
         padding: widget.padding,
         physics: widget.isNeverScroll
             ? const NeverScrollableScrollPhysics()
             : const BouncingScrollPhysics(),
         addAutomaticKeepAlives: true,
         scrollDirection: widget.scrollDirection,
-        controller: controller,
+        controller: _controller,
         reverse: widget.reverse!,
         shrinkWrap: true,
         itemBuilder: (context, index) {
@@ -140,9 +140,9 @@ class AppListViewState extends State<MyWidgetAppListView> {
 
   void _scrollListener() {
     if (widget.onScrollListener != null) {
-      widget.onScrollListener!(controller);
+      widget.onScrollListener!(_controller);
     }
-    if (widget.onLoadMore != null && controller.position.extentAfter < 200) {
+    if (widget.onLoadMore != null && _controller.position.extentAfter < 200) {
       widget.onLoadMore!();
     }
   }

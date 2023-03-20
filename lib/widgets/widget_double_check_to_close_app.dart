@@ -12,14 +12,15 @@ class MyWidgetDoubleCheckToCloseApp extends StatefulWidget {
 }
 
 class _DoubleCheckToCloseAppState extends State<MyWidgetDoubleCheckToCloseApp> {
-  DateTime? currentBackPressTime;
-  Future<bool> onWillPop() {
+  DateTime? _currentBackPressTime;
+
+  Future<bool> _onWillPop() {
     DateTime now = DateTime.now();
-    if (currentBackPressTime == null ||
-        (currentBackPressTime != null &&
-            now.difference(currentBackPressTime!) >
+    if (_currentBackPressTime == null ||
+        (_currentBackPressTime != null &&
+            now.difference(_currentBackPressTime!) >
                 const Duration(seconds: 2))) {
-      currentBackPressTime = now;
+      _currentBackPressTime = now;
       toast(widget.message);
       return Future.value(false);
     }
@@ -29,7 +30,7 @@ class _DoubleCheckToCloseAppState extends State<MyWidgetDoubleCheckToCloseApp> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: onWillPop,
+      onWillPop: _onWillPop,
       child: widget.child,
     );
   }

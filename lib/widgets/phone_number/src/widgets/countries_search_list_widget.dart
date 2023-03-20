@@ -13,7 +13,7 @@ class CountrySearchListWidget extends StatefulWidget {
   final bool? showFlags;
   final bool? useEmoji;
 
-  CountrySearchListWidget(this.countries, this.locale,
+  const CountrySearchListWidget(this.countries, this.locale,
       {this.searchBoxDecoration,
       this.scrollController,
       this.showFlags,
@@ -26,7 +26,7 @@ class CountrySearchListWidget extends StatefulWidget {
 }
 
 class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   late List<Country> filteredCountries;
 
   @override
@@ -44,7 +44,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
   /// Returns [InputDecoration] of the search box
   InputDecoration getSearchBoxDecoration() {
     return widget.searchBoxDecoration ??
-        InputDecoration(labelText: 'Search by country name or dial code');
+        const InputDecoration(labelText: 'Search by country name or dial code');
   }
 
   /// Filters the list of Country by text from the search box.
@@ -90,7 +90,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextFormField(
-            key: Key(TestHelper.CountrySearchInputKeyValue),
+            key: const Key(TestHelper.CountrySearchInputKeyValue),
             decoration: getSearchBoxDecoration(),
             controller: _searchController,
             autofocus: widget.autoFocus,
@@ -117,7 +117,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
                         textAlign: TextAlign.start)),
                 subtitle: Align(
                     alignment: AlignmentDirectional.centerStart,
-                    child: Text('${country.dialCode ?? ''}',
+                    child: Text(country.dialCode ?? '',
                         textDirection: TextDirection.ltr,
                         textAlign: TextAlign.start)),
                 onTap: () => Navigator.of(context).pop(country),
@@ -159,8 +159,8 @@ class _Flag extends StatelessWidget {
                           package: 'plugin_helper',
                         ),
                       )
-                    : SizedBox.shrink(),
+                    : const SizedBox.shrink(),
           )
-        : SizedBox.shrink();
+        : const SizedBox.shrink();
   }
 }

@@ -9,54 +9,7 @@ class MyPluginNavigation<T> {
     navigationKey = GlobalKey<NavigatorState>();
   }
 
-  ///Push page without context
-  Future<void> replace(Widget _rn, {bool isFadeRoute = false}) {
-    return navigationKey!.currentState!.pushReplacement(isFadeRoute
-        ? FadePageRoute(child: _rn)
-        : MaterialPageRoute(builder: (_) => _rn));
-  }
-
-  Future<void> push(Widget _rn) {
-    return navigationKey!.currentState!
-        .push(MaterialPageRoute(builder: (_) => _rn));
-  }
-
-  Future<void> navigatePopUtil(Widget _rn) {
-    navigationKey!.currentState!.popUntil((route) => route.isFirst);
-    return replace(_rn);
-  }
-
-  Future<void> navigateToReplacementInTab(
-      {required BuildContext context,
-      bool isHoldTab = true,
-      required Widget screen,
-      PageRoute<T>? pageRoute}) async {
-    await Navigator.of(context, rootNavigator: !isHoldTab).pushReplacement(
-      pageRoute ??
-          _buildAdaptivePageRoute(
-            builder: (context) => screen,
-          ),
-    );
-  }
-
-  Future<void> navigateToInTab(
-      {required BuildContext context,
-      bool isHoldTab = true,
-      required Widget screen,
-      PageRoute<T>? pageRoute}) async {
-    await Navigator.of(context, rootNavigator: !isHoldTab).push(
-      pageRoute ??
-          _buildAdaptivePageRoute(
-            builder: (context) => screen,
-          ),
-    );
-  }
-
-  void goBack({T? callback}) {
-    return navigationKey!.currentState!.pop(callback);
-  }
-
-  PageRoute<T> _buildAdaptivePageRoute<T>({
+  PageRoute<T> buildAdaptivePageRoute<T>({
     required WidgetBuilder builder,
     bool fullScreenDialog = false,
   }) =>

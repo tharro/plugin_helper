@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyWidgetButtonCustom extends StatelessWidget {
-  final Function() onPressed;
+  final VoidCallback onPressed;
   final String title;
   final bool isSecondary, isOutLine;
   final Color? secondaryColor, primaryColor;
@@ -54,6 +54,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
     this.disableTextColor = const Color(0xff9a9a9a),
     this.disableBorderColor = const Color(0xfff1f1f2),
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -69,7 +70,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
               }
             : null,
         style: OutlinedButton.styleFrom(
-          foregroundColor: checkBackgroundColor() == Colors.white
+          foregroundColor: _checkBackgroundColor() == Colors.white
               ? Colors.grey
               : Colors.white,
           elevation: elevation,
@@ -78,11 +79,11 @@ class MyWidgetButtonCustom extends StatelessWidget {
               borderRadius: BorderRadius.circular(borderRadius)),
           backgroundColor: enabled == false
               ? disableBackgroundColor
-              : checkBackgroundColor(), // foreground text
+              : _checkBackgroundColor(), // foreground text
           side: enabled == false
               ? BorderSide(color: disableBorderColor!)
               : BorderSide(
-                  color: checkBorderColor(),
+                  color: _checkBorderColor(),
                 ), // foreground border
         ),
         child: Row(
@@ -92,7 +93,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
             if (icon != null) icon!,
             Text(
               title,
-              style: checkTextColor(textStyle!),
+              style: _checkTextColor(textStyle!),
               maxLines: 1,
             )
           ],
@@ -101,7 +102,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
     );
   }
 
-  Color checkBackgroundColor() {
+  Color _checkBackgroundColor() {
     if (backgroundColor != null) {
       return backgroundColor!;
     }
@@ -114,7 +115,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
     }
   }
 
-  Color checkBorderColor() {
+  Color _checkBorderColor() {
     if (borderColor != null) {
       return borderColor!;
     } else {
@@ -128,7 +129,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
     }
   }
 
-  TextStyle checkTextColor(TextStyle textStyle) {
+  TextStyle _checkTextColor(TextStyle textStyle) {
     if (!enabled) {
       return textStyle.copyWith(color: disableTextColor);
     } else {

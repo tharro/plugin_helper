@@ -5,7 +5,7 @@ class WidgetPickerImage extends StatelessWidget {
   final String title;
   final TextStyle titleStyle, itemStyles;
   final String? labelCamera, labelChoosePhoto, labelClose;
-  final Function() onTakePhoto, onPickImage;
+  final VoidCallback onTakePhoto, onPickImage;
   final Widget? children;
   const WidgetPickerImage(
       {Key? key,

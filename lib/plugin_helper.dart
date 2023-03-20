@@ -3,14 +3,15 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart' as path;
 import 'package:plugin_helper/widgets/phone_number/src/models/country_list.dart';
 import 'package:plugin_helper/widgets/phone_number/src/utils/phone_number/phone_number_util.dart';
+
 import './index.dart';
-import 'package:path/path.dart' as path;
-import 'package:http/http.dart' as http;
 
 DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 var dio = Dio();
@@ -285,7 +286,7 @@ class MyPluginHelper {
       required String androidId,
       String? iOSAppStoreCountry,
       required Function(VersionStatus) onUpdate,
-      required Function() onError}) async {
+      required VoidCallback onError}) async {
     final newVersion = NewVersionPlus(
         androidId: androidId,
         iOSId: iOSId,
@@ -306,11 +307,11 @@ class MyPluginHelper {
 
     if (devicePixelRatio < 2 && (width >= 1000 || height >= 1000)) {
       return true;
-    } else if (devicePixelRatio == 2 && (width >= 1920 || height >= 1920)) {
-      return true;
-    } else {
-      return false;
     }
+    if (devicePixelRatio == 2 && (width >= 1920 || height >= 1920)) {
+      return true;
+    }
+    return false;
   }
 
   static Future setLanguage({required String language}) async {
@@ -379,6 +380,7 @@ class MyPluginHelper {
     }
   }
 
+  // --- CREDIT CARD START ---
   /// Credit Card prefix patterns as of March 2019
   /// A [List<String>] represents a range.
   /// i.e. ['51', '55'] represents the range of cards starting with '51' to those starting with '55'
@@ -456,9 +458,11 @@ class MyPluginHelper {
 
     return cardType;
   }
+  // --- CREDIT CARD END ---
 
-  static WidgetsBinding? _widgetsBinding;
+  // --- PREVENTS APP START ---
   // Prevents app from closing splash screen, app layout will be build but not displayed
+  static WidgetsBinding? _widgetsBinding;
   static void preserve({required WidgetsBinding widgetsBinding}) {
     _widgetsBinding = widgetsBinding;
     _widgetsBinding?.deferFirstFrame();
@@ -469,6 +473,7 @@ class MyPluginHelper {
     _widgetsBinding?.allowFirstFrame();
     _widgetsBinding = null;
   }
+  // --- PREVENTS APP END ---
 
   static String getLinkImage(
       {required String key,

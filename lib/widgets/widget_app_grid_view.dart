@@ -43,16 +43,16 @@ class MyWidgetAppGridView<T> extends StatefulWidget {
 }
 
 class _AppGridViewState extends State<MyWidgetAppGridView> {
-  late ScrollController controller;
+  late ScrollController _controller;
   @override
   void initState() {
     super.initState();
-    controller = ScrollController()..addListener(_scrollListener);
+    _controller = ScrollController()..addListener(_scrollListener);
   }
 
   @override
   void dispose() {
-    controller.removeListener(_scrollListener);
+    _controller.removeListener(_scrollListener);
     super.dispose();
   }
 
@@ -77,7 +77,7 @@ class _AppGridViewState extends State<MyWidgetAppGridView> {
         ),
         padding: widget.padding,
         shrinkWrap: widget.shrinkWrap,
-        controller: controller,
+        controller: _controller,
         itemBuilder: (context, index) {
           if (index == widget.data.length) {
             return Center(
@@ -96,7 +96,8 @@ class _AppGridViewState extends State<MyWidgetAppGridView> {
     if (widget.onScrollListener != null) {
       widget.onScrollListener!();
     }
-    if (widget.onLoadMore != null && controller.position.extentAfter < 200) {
+
+    if (widget.onLoadMore != null && _controller.position.extentAfter < 200) {
       widget.onLoadMore!();
     }
   }

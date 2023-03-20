@@ -39,6 +39,7 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
   final bool automaticallyImplyLeading;
   final Color? foregroundColor;
+
   @override
   Widget build(BuildContext context) {
     return AppBar(

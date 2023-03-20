@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 enum ImageType { none, avatar }
 
 class MyWidgetCacheImageNetwork extends StatelessWidget {
-  final String imageUrl;
+  final String? imageUrl;
   final double? width;
   final double? height;
   final double borderRadius;
@@ -28,7 +28,7 @@ class MyWidgetCacheImageNetwork extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
-      child: imageUrl.isEmpty || imageUrl == 'null'
+      child: imageUrl == null || imageUrl!.isEmpty
           ? errorWidget ??
               Container(
                 height: height,
@@ -45,7 +45,7 @@ class MyWidgetCacheImageNetwork extends StatelessWidget {
                     : null,
               )
           : CachedNetworkImage(
-              imageUrl: imageUrl,
+              imageUrl: imageUrl!,
               color: customColor,
               placeholderFadeInDuration: Duration.zero,
               errorWidget: (_, __, ___) {

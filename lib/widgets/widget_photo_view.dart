@@ -12,6 +12,7 @@ class MyWidgetPhotoViewCustom extends StatefulWidget {
     required this.images,
     this.customHeader,
     this.customFooter,
+    this.onPageChanged,
   })  : pageController = PageController(initialPage: initialIndex),
         super(key: key);
 
@@ -22,6 +23,7 @@ class MyWidgetPhotoViewCustom extends StatefulWidget {
   final Axis scrollDirection;
   final List<String> images;
   final Widget? customHeader, customFooter;
+  final void Function(int index)? onPageChanged;
   @override
   State<StatefulWidget> createState() {
     return _MyWidgetPhotoViewCustomState();
@@ -29,14 +31,7 @@ class MyWidgetPhotoViewCustom extends StatefulWidget {
 }
 
 class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
-  late int _currentIndex = widget.initialIndex;
   bool _isShowClose = false;
-
-  void onPageChanged(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +57,7 @@ class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
                   loadingBuilder: widget.loadingBuilder,
                   backgroundDecoration: widget.backgroundDecoration,
                   pageController: widget.pageController,
-                  onPageChanged: onPageChanged,
+                  onPageChanged: widget.onPageChanged,
                   scrollDirection: widget.scrollDirection,
                 ),
                 AnimatedOpacity(

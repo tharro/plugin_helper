@@ -47,9 +47,9 @@ class Country {
   @override
   bool operator ==(Object other) {
     return other is Country &&
-        other.alpha2Code == this.alpha2Code &&
-        other.alpha3Code == this.alpha3Code &&
-        other.dialCode == this.dialCode;
+        other.alpha2Code == alpha2Code &&
+        other.alpha3Code == alpha3Code &&
+        other.dialCode == dialCode;
   }
 
   @override

@@ -80,7 +80,7 @@ class AsYouTypeFormatter extends TextInputFormatter {
               }
             }
 
-            this.onInputFormatted(
+            onInputFormatted(
               TextEditingValue(
                 text: parsedText,
                 selection: TextSelection.collapsed(offset: offset),

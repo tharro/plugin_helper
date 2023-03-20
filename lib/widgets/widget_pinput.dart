@@ -6,11 +6,11 @@ class MyWidgetPinPut extends StatelessWidget {
   final TextEditingController controller;
   final double paddingHorizontal;
   final double radius;
-  final bool? obscureText;
+  final bool obscureText;
   final Widget? obscuringWidget;
-  final String? obscuringCharacter;
+  final String obscuringCharacter;
   final List<BoxShadow>? boxShadows;
-  final Function(String value) onChanged;
+  final void Function(String value) onChanged;
   final Color? activeFillColor,
       inactiveColor,
       activeColor,
@@ -53,8 +53,8 @@ class MyWidgetPinPut extends StatelessWidget {
     return PinCodeTextField(
       appContext: context,
       length: length ?? 6,
-      obscureText: obscureText!,
-      obscuringCharacter: obscuringCharacter!,
+      obscureText: obscureText,
+      obscuringCharacter: obscuringCharacter,
       obscuringWidget: obscuringWidget,
       blinkWhenObscuring: true,
       animationType: AnimationType.fade,

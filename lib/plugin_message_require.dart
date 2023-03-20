@@ -42,12 +42,12 @@ class MyPluginMessageRequire {
     String? messageLinkEmpty,
     String? messageRequiredFullName,
     String? messageInvalidCvv,
-    messageInvalidExpired,
-    messageInvalidCardNumber,
-    messageHour,
-    messageDay,
-    messageMinute,
-    messageSecond,
+    String? messageInvalidExpired,
+    String? messageInvalidCardNumber,
+    String? messageHour,
+    String? messageDay,
+    String? messageMinute,
+    String? messageSecond,
   }) {
     noConnection = messageNoConnection;
     canNotLaunchURL = messageCanNotLaunchURL;

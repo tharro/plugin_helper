@@ -39,7 +39,7 @@ class SelectorButton extends StatelessWidget {
         ? countries.isNotEmpty && countries.length > 1
             ? DropdownButtonHideUnderline(
                 child: DropdownButton<Country>(
-                  key: Key(TestHelper.DropdownButtonKeyValue),
+                  key: const Key(TestHelper.DropdownButtonKeyValue),
                   hint: Item(
                       country: country,
                       showFlag: selectorConfig.showFlags,
@@ -64,7 +64,7 @@ class SelectorButton extends StatelessWidget {
                 textStyle: selectorTextStyle,
                 heightItem: selectorConfig.heightItem)
         : MaterialButton(
-            key: Key(TestHelper.DropdownButtonKeyValue),
+            key: const Key(TestHelper.DropdownButtonKeyValue),
             padding: EdgeInsets.zero,
             minWidth: 0,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -128,7 +128,7 @@ class SelectorButton extends StatelessWidget {
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) => AlertDialog(
-        content: Container(
+        content: SizedBox(
           width: double.maxFinite,
           child: CountrySearchListWidget(
             countries,
@@ -151,7 +151,7 @@ class SelectorButton extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       isScrollControlled: isScrollControlled,
       backgroundColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(12), topRight: Radius.circular(12))),
       builder: (BuildContext context) {
@@ -164,7 +164,7 @@ class SelectorButton extends StatelessWidget {
               return Container(
                 decoration: ShapeDecoration(
                   color: Theme.of(context).canvasColor,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(12),
                       topRight: Radius.circular(12),

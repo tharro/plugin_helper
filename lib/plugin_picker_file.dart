@@ -60,8 +60,8 @@ class MyPluginPickerFile {
 
   static Future<List<XFile>?>? uploadMultiImage({
     required BuildContext context,
-    Function()? onStartLoading,
-    Function()? onEndLoading,
+    VoidCallback? onStartLoading,
+    VoidCallback? onEndLoading,
     required Function(String code) onError,
     double maxWidth = 1024,
     double maxHeight = 1024,

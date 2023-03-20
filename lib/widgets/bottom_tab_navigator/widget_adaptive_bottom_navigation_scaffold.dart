@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'index.dart';
 
 /// A platform-aware Scaffold which encapsulates the common behaviour between

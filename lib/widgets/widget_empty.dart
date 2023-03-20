@@ -19,6 +19,7 @@ class MyWidgetEmpty extends StatelessWidget {
       this.onRefresh,
       this.refreshController})
       : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var child = Column(
@@ -26,7 +27,7 @@ class MyWidgetEmpty extends StatelessWidget {
       crossAxisAlignment: crossAxisAlignment,
       children: [
         if (icon != null) icon!,
-        if (icon != null) const SizedBox(height: 14),
+        if (icon != null) 14.h,
         Text(
           message ?? MyPluginMessageRequire.emptyData,
           style: textStyle,
@@ -34,6 +35,7 @@ class MyWidgetEmpty extends StatelessWidget {
         )
       ],
     );
+
     if (refreshController != null) {
       return SmartRefresher(
         onRefresh: onRefresh,
@@ -41,6 +43,7 @@ class MyWidgetEmpty extends StatelessWidget {
         child: child,
       );
     }
+
     return child;
   }
 }

@@ -132,10 +132,11 @@ class MyWidgetTextField extends StatefulWidget {
 }
 
 class _WidgetTextFieldState extends State<MyWidgetTextField> {
-  bool hasFocus = false;
-  bool valid = false;
-  bool hasChanged = false;
-  late bool _obscureText = true;
+  bool _hasFocus = false;
+  bool _valid = false;
+  bool _hasChanged = false;
+  bool _obscureText = true;
+
   @override
   void initState() {
     super.initState();
@@ -145,17 +146,17 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
           widget.onListenFocus!();
         }
 
-        if (widget.focus!.hasFocus != hasFocus) {
+        if (widget.focus!.hasFocus != _hasFocus) {
           if (mounted) {
             setState(() {
-              hasFocus = widget.focus!.hasFocus;
+              _hasFocus = widget.focus!.hasFocus;
             });
           }
         }
       });
     }
     if (widget.controller.text.isNotEmpty) {
-      hasChanged = true;
+      _hasChanged = true;
     }
     checkValidate();
     widget.controller.addListener(checkValidate);
@@ -255,10 +256,10 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
     if (widget.onListenController != null) {
       widget.onListenController!();
     }
-    if (hasChanged == false && widget.controller.text.isNotEmpty) {
+    if (_hasChanged == false && widget.controller.text.isNotEmpty) {
       if (mounted) {
         setState(() {
-          hasChanged = true;
+          _hasChanged = true;
         });
       }
     }
@@ -266,12 +267,12 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
 
   setValid() {
     if (mounted) {
-      if (!valid) {
+      if (!_valid) {
         setState(() {
-          valid = true;
+          _valid = true;
         });
         if (widget.onValid != null) {
-          widget.onValid!(valid);
+          widget.onValid!(_valid);
         }
       }
     }
@@ -279,12 +280,12 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
 
   setInValid() {
     if (mounted) {
-      if (valid) {
+      if (_valid) {
         setState(() {
-          valid = false;
+          _valid = false;
         });
         if (widget.onValid != null) {
-          widget.onValid!(valid);
+          widget.onValid!(_valid);
         }
       }
     }
@@ -391,7 +392,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
             constraints: widget.constraints,
             hintText: widget.hintText,
             hintStyle: widget.textStyleHint,
-            counter: widget.maxLength != null && hasFocus
+            counter: widget.maxLength != null && _hasFocus
                 ? Text(
                     "${widget.controller.text.characters.length} /${widget.maxLength}",
                     style: widget.textStyleCounter ??
@@ -401,7 +402,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
             labelStyle: widget.textFieldType == TextFieldType.animation
                 ? widget.labelStyle
                 : null,
-            errorText: ((!valid && hasChanged) || widget.textError != null) &&
+            errorText: ((!_valid && _hasChanged) || widget.textError != null) &&
                     widget.showError!
                 ? getError()
                 : null,
@@ -486,7 +487,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         return widget.eyeDisableIcon;
       }
     }
-    if (hasFocus) {
+    if (_hasFocus) {
       return widget.suffixActiveIcon!;
     } else {
       return widget.suffixDisableIcon!;

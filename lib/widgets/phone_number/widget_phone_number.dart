@@ -9,7 +9,7 @@ class MyWidgetPhoneNumber extends StatefulWidget {
   final bool isEnabled;
   final Function(PhoneNumber)? onInputChanged;
   final Function(bool)? onInputValidated;
-  final Function()? onFieldSubmitted;
+  final VoidCallback? onFieldSubmitted;
   final Function(PhoneNumber)? onSaved;
   final bool autoFocus;
   final FocusNode? focusNode;
@@ -71,6 +71,7 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
   bool _showIcon = false;
   bool _hasFocus = false;
   bool _isValidate = true;
+
   @override
   void initState() {
     widget.controller!.addListener(() {
@@ -88,6 +89,7 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
         }
       }
     });
+
     widget.focusNode!.addListener(() {
       if (mounted) {
         setState(() {

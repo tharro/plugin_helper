@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'index.dart';
 
 extension DateTimeX on DateTime {
@@ -51,34 +52,54 @@ class HexColor extends Color {
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
 
-Future<dynamic> push(Widget page) {
-  return MyPluginNavigation.instance.push(page);
+Future<T?> push<T>(Widget page) {
+  return MyPluginNavigation.instance.navigationKey!.currentState!
+      .push(MaterialPageRoute(builder: (_) => page));
 }
 
-Future<dynamic> replace(Widget page) {
-  return MyPluginNavigation.instance.replace(page);
+Future<T?> replace<T>(Widget page, {bool isFadeRoute = false}) {
+  return MyPluginNavigation.instance.navigationKey!.currentState!
+      .pushReplacement(isFadeRoute
+          ? FadePageRoute(child: page)
+          : MaterialPageRoute(builder: (_) => page));
 }
 
-Future<dynamic> popUtil(Widget page) {
-  return MyPluginNavigation.instance.navigatePopUtil(page);
+Future<T?> popUtil<T>(Widget page) {
+  MyPluginNavigation.instance.navigationKey!.currentState!
+      .popUntil((route) => route.isFirst);
+  return replace(page);
 }
 
-Future<dynamic> replaceInTab(
+Future<T?> navigateToReplacementInTab<T>(
     {required BuildContext context,
-    required Widget page,
-    bool isHoldTab = true}) {
-  return MyPluginNavigation.instance.navigateToReplacementInTab(
-      screen: page, isHoldTab: isHoldTab, context: context);
+    bool isHoldTab = true,
+    required Widget screen,
+    PageRoute<T>? pageRoute}) async {
+  return await Navigator.of(context, rootNavigator: !isHoldTab).pushReplacement(
+    pageRoute ??
+        MyPluginNavigation.instance.buildAdaptivePageRoute(
+          builder: (context) => screen,
+        ),
+  );
 }
 
-Future<dynamic> pushInTab(
+Future<T?> navigateToInTab<T>(
     {required BuildContext context,
-    required Widget page,
-    bool isHoldTab = true}) {
-  return MyPluginNavigation.instance
-      .navigateToInTab(screen: page, isHoldTab: isHoldTab, context: context);
+    bool isHoldTab = true,
+    required Widget screen,
+    PageRoute<T>? pageRoute}) async {
+  return await Navigator.of(context, rootNavigator: !isHoldTab).push(
+    pageRoute ??
+        MyPluginNavigation.instance.buildAdaptivePageRoute(
+          builder: (context) => screen,
+        ),
+  );
 }
 
-goBack<T>({T? callback}) {
-  return MyPluginNavigation.instance.goBack(callback: callback);
+void goBack<T>({BuildContext? context, T? callback}) {
+  if (context != null) {
+    Navigator.pop(context, callback);
+    return;
+  }
+  MyPluginNavigation.instance.navigationKey!.currentState!.pop(callback);
 }

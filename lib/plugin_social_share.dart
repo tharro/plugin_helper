@@ -213,7 +213,7 @@ class MyPluginSocialShare {
 
   static void shareEmail(
       {required String subject, required String message}) async {
-    await launch("mailto:email?subject=$subject&body=$message");
+    await launchUrl(Uri.parse("mailto:email?subject=$subject&body=$message"));
   }
 
   static void shareLinked(
@@ -230,12 +230,12 @@ class MyPluginSocialShare {
     String fallbackUrl = 'https://www.linkedin.com/';
 
     try {
-      bool launched = await launch(linkedProtocolUrl, forceSafariVC: false);
+      bool launched = await launchUrl(Uri.parse(linkedProtocolUrl));
       if (!launched) {
-        await launch(fallbackUrl, forceSafariVC: false);
+        await launchUrl(Uri.parse(fallbackUrl));
       }
     } catch (e) {
-      await launch(fallbackUrl, forceSafariVC: false);
+      toast(MyPluginMessageRequire.canNotLaunchURL);
     }
   }
 }

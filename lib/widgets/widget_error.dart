@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:plugin_helper/index.dart';
 
 class MyWidgetError extends StatelessWidget {
   final String error;
@@ -15,13 +15,14 @@ class MyWidgetError extends StatelessWidget {
     this.refreshController,
     this.iconError,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var child = Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         iconError ?? const Icon(Icons.error_outline, size: 20),
-        const SizedBox(height: 5),
+        5.h,
         Text(
           error,
           textAlign: TextAlign.center,
@@ -29,6 +30,7 @@ class MyWidgetError extends StatelessWidget {
         )
       ],
     );
+
     if (refreshController != null) {
       return SmartRefresher(
         onRefresh: onRefresh,
@@ -36,6 +38,7 @@ class MyWidgetError extends StatelessWidget {
         child: child,
       );
     }
+
     return child;
   }
 }

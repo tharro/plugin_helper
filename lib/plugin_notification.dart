@@ -8,10 +8,10 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:plugin_helper/index.dart';
 
 class MyPluginNotification {
-  static FirebaseMessaging messaging = FirebaseMessaging.instance;
-  static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-  static StreamSubscription? fcmListener;
+  static final FirebaseMessaging _messaging = FirebaseMessaging.instance;
+  static final FlutterLocalNotificationsPlugin
+      _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  static StreamSubscription? _fcmListener;
 
   static Future<void> _showNotification(
       {required String title,
@@ -33,7 +33,7 @@ class MyPluginNotification {
 
     var platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin
+    await _flutterLocalNotificationsPlugin
         .show(0, title, body, platformChannelSpecifics, payload: payload ?? '');
   }
 
@@ -48,7 +48,7 @@ class MyPluginNotification {
       required String chanelId,
       required String chanelName,
       required String channelDescription}) async {
-    NotificationSettings settings = await messaging.requestPermission(
+    NotificationSettings settings = await _messaging.requestPermission(
       alert: true,
       announcement: false,
       badge: true,
@@ -60,17 +60,17 @@ class MyPluginNotification {
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       var initializationSettingsAndroid =
           AndroidInitializationSettings(iconNotification);
-      var initializationSettingsIOS = const IOSInitializationSettings();
+      var initializationSettingsIOS = const DarwinInitializationSettings();
       var initializationSettings = InitializationSettings(
           android: initializationSettingsAndroid,
           iOS: initializationSettingsIOS);
-      flutterLocalNotificationsPlugin.initialize(initializationSettings,
-          onSelectNotification: (String? data) async {
-        onOpenLocalMessage(data ?? '');
+      _flutterLocalNotificationsPlugin.initialize(initializationSettings,
+          onDidReceiveNotificationResponse: (NotificationResponse? data) async {
+        onOpenLocalMessage(data?.payload ?? '');
       });
       Map<String, dynamic> body = await getInfoToRequest();
       onRegisterFCM(body);
-      fcmListener = FirebaseMessaging.onMessage
+      _fcmListener = FirebaseMessaging.onMessage
           .asBroadcastStream()
           .listen((RemoteMessage message) async {
         print('Got a message whilst in the foreground!');
@@ -103,7 +103,7 @@ class MyPluginNotification {
         .listen((message) => onHandleFCMMessage(message));
   }
 
-  static void setupCrashlytics({required Function() main}) {
+  static void setupCrashlytics({required VoidCallback main}) {
     runZonedGuarded<Future<void>>(() async {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
@@ -119,7 +119,7 @@ class MyPluginNotification {
   }
 
   static Future<Map<String, dynamic>> getInfoToRequest() async {
-    String? token = await messaging.getToken();
+    String? token = await _messaging.getToken();
     String meId = await MyPluginHelper.getMeIdDevice();
     Map<String, dynamic> body = {
       "type": "M",
@@ -131,6 +131,6 @@ class MyPluginNotification {
   }
 
   static dispose() {
-    fcmListener?.cancel();
+    _fcmListener?.cancel();
   }
 }
