@@ -524,11 +524,10 @@ packages:
   libphonenumber:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: f42668e946c10588f34b5b8b1e34fbf9ae168192
-      url: "https://github.com/emostar/flutter-libphonenumber"
-    source: git
+      name: libphonenumber
+      sha256: "16612d08ccfdec024f038c582eb0b63e6b9a628230123ef37eb563f4d10ab214"
+      url: "https://pub.dev"
+    source: hosted
     version: "2.0.2"
   lints:
     dependency: transitive

@@ -33,8 +33,7 @@ dependencies:
   pin_code_fields: ^7.4.0
   mime_type: ^1.0.0
   meta: ^1.8.0
-  libphonenumber: 
-    git: https://github.com/emostar/flutter-libphonenumber
+  libphonenumber: ^2.0.2
   equatable: ^2.0.5
   collection: ^1.17.0
   image: ^4.0.15
