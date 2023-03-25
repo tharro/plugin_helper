@@ -6,9 +6,23 @@ class ListModel<T> extends Equatable {
   final String? previous;
   final List<T>? results;
   final Map<String, dynamic>? params;
+  final bool? isLoading;
+  final bool? isLoadingMore;
+  final bool? isRefreshing;
+  final String? errorMessage;
 
-  const ListModel(
-      {this.count, this.next, this.previous, this.results, this.params});
+  const ListModel({
+    this.count,
+    this.next,
+    this.previous,
+    this.results,
+    this.params,
+    this.isLoading,
+    this.isLoadingMore,
+    this.isRefreshing,
+    this.errorMessage,
+  });
+
   factory ListModel.fromJson(
       Map<String, dynamic> json, T Function(Map<String, dynamic> json) convert,
       {Map<String, dynamic>? params}) {
@@ -24,21 +38,40 @@ class ListModel<T> extends Equatable {
         params: params);
   }
 
-  ListModel<T> copyWith(
-      {int? count,
-      String? next,
-      String? previous,
-      List<T>? results,
-      Map<String, dynamic>? params}) {
+  ListModel<T> copyWith({
+    int? count,
+    String? next,
+    String? previous,
+    List<T>? results,
+    Map<String, dynamic>? params,
+    bool? isLoading,
+    bool? isLoadingMore,
+    bool? isRefreshing,
+    String? errorMessage,
+  }) {
     return ListModel(
       count: count ?? this.count,
       next: next ?? this.next,
       previous: previous ?? this.previous,
       results: results ?? this.results,
       params: params ?? this.params,
+      isRefreshing: isRefreshing ?? this.isRefreshing,
+      isLoading: isLoading ?? this.isLoading,
+      isLoadingMore: isLoadingMore ?? this.isLoadingMore,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
   @override
-  List<Object?> get props => [count, next, previous, results, params];
+  List<Object?> get props => [
+        count,
+        next,
+        previous,
+        results,
+        params,
+        isLoadingMore,
+        isLoading,
+        isRefreshing,
+        errorMessage
+      ];
 }
