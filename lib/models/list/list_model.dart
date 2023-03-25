@@ -6,10 +6,10 @@ class ListModel<T> extends Equatable {
   final String? previous;
   final List<T>? results;
   final Map<String, dynamic>? params;
-  final bool? isLoading;
-  final bool? isLoadingMore;
-  final bool? isRefreshing;
-  final String? errorMessage;
+  final bool isLoading;
+  final bool isLoadingMore;
+  final bool isRefreshing;
+  final String errorMessage;
 
   const ListModel({
     this.count,
@@ -17,10 +17,10 @@ class ListModel<T> extends Equatable {
     this.previous,
     this.results,
     this.params,
-    this.isLoading,
-    this.isLoadingMore,
-    this.isRefreshing,
-    this.errorMessage,
+    this.isLoading = false,
+    this.isLoadingMore = false,
+    this.isRefreshing = false,
+    this.errorMessage = '',
   });
 
   factory ListModel.fromJson(
