@@ -108,7 +108,7 @@ class MyPluginNotification {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
       main();
-      if (kIsWeb) {
+      if (!kIsWeb) {
         await FirebaseCrashlytics.instance
             .setCrashlyticsCollectionEnabled(true);
         FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
