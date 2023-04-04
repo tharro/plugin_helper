@@ -11,25 +11,17 @@ class ListModel<T> extends Equatable {
   final bool isRefreshing;
   final String errorMessage;
 
-  ListModel({
-    int? count,
-    String? next,
-    String? previous,
-    List<T>? results,
-    Map<String, dynamic>? params,
-    bool? isLoading,
-    bool? isLoadingMore,
-    bool? isRefreshing,
-    String? errorMessage,
-  })  : results = [],
-        count = 0,
-        next = null,
-        previous = null,
-        params = null,
-        errorMessage = '',
-        isLoading = false,
-        isLoadingMore = false,
-        isRefreshing = false;
+  const ListModel({
+    this.count,
+    this.next,
+    this.previous,
+    this.results,
+    this.params,
+    this.isLoading = false,
+    this.isLoadingMore = false,
+    this.isRefreshing = false,
+    this.errorMessage = '',
+  });
 
   factory ListModel.fromJson(
       Map<String, dynamic> json, T Function(Map<String, dynamic> json) convert,
