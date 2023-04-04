@@ -22,7 +22,7 @@ class MyWidgetAppListView<T> extends StatefulWidget {
   final Function(ScrollController)? onScrollListener;
   final Widget loadingWidget;
   final double? heightListViewHorizontal, paddingHorizontal;
-
+  final Widget? customHeaderRefresh;
   const MyWidgetAppListView({
     Key? key,
     required this.data,
@@ -43,6 +43,7 @@ class MyWidgetAppListView<T> extends StatefulWidget {
     this.reverse = false,
     this.onScrollListener,
     required this.loadingWidget,
+    this.customHeaderRefresh,
   }) : super(key: key);
   @override
   AppListViewState createState() => AppListViewState();
@@ -75,9 +76,10 @@ class AppListViewState extends State<MyWidgetAppListView> {
           enablePullDown: widget.enablePullDown,
           header: kIsWeb
               ? null
-              : Platform.isIOS
-                  ? const ClassHeaderGridIndicator()
-                  : const MaterialClassicHeader(),
+              : widget.customHeaderRefresh ??
+                  (Platform.isIOS
+                      ? const ClassHeaderGridIndicator()
+                      : const MaterialClassicHeader()),
           onRefresh: () {
             if (widget.onRefresh != null) {
               widget.onRefresh!();

@@ -20,6 +20,7 @@ class MyWidgetAppGridView<T> extends StatefulWidget {
   final Widget loadingMoreWidget;
   final bool shrinkWrap;
   final EdgeInsets? padding;
+  final Widget? customHeaderRefresh;
   const MyWidgetAppGridView({
     Key? key,
     required this.data,
@@ -37,6 +38,7 @@ class MyWidgetAppGridView<T> extends StatefulWidget {
     this.onScrollListener,
     this.shrinkWrap = false,
     this.padding,
+    this.customHeaderRefresh,
   }) : super(key: key);
   @override
   _AppGridViewState createState() => _AppGridViewState();
@@ -62,9 +64,10 @@ class _AppGridViewState extends State<MyWidgetAppGridView> {
       controller: widget.refreshController,
       header: kIsWeb
           ? null
-          : Platform.isIOS
-              ? const ClassHeaderGridIndicator()
-              : const MaterialClassicHeader(),
+          : widget.customHeaderRefresh ??
+              (Platform.isIOS
+                  ? const ClassHeaderGridIndicator()
+                  : const MaterialClassicHeader()),
       onRefresh: () {
         widget.onRefresh();
       },

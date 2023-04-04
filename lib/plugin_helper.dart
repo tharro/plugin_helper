@@ -146,7 +146,7 @@ class MyPluginHelper {
     firstName = fullNames.first.toString();
     if (fullNames.length > 1) {
       fullNames.removeAt(0);
-      lastName = fullNames.reduce((a, b) => a + " " + b);
+      lastName = fullNames.reduce((a, b) => "$a $b");
     }
     return FullName(firstName: firstName, lastName: lastName);
   }
@@ -193,7 +193,7 @@ class MyPluginHelper {
           String time = DateTime.now().microsecondsSinceEpoch.toString();
           String name = time + links[i].split('/').last;
           saveFileDir = path.join(dir!.path, name);
-          await dio.download(links[i] + '?$time', saveFileDir);
+          await dio.download('${links[i]}?$time', saveFileDir);
         }
         onSuccess();
         return saveFileDir;
@@ -230,7 +230,7 @@ class MyPluginHelper {
     try {
       String date = dateUtc;
       if (!date.contains("Z")) {
-        date = date + "Z";
+        date = "${date}Z";
       }
       var dateLocal = DateTime.parse(date).toLocal();
       return DateFormat(format, languageCode).format(dateLocal);
@@ -380,7 +380,9 @@ class MyPluginHelper {
     }
   }
 
-  // --- CREDIT CARD START ---
+  // ======================================================================================
+  // ================================== CREDIT CARD =======================================
+  // ======================================================================================
   /// Credit Card prefix patterns as of March 2019
   /// A [List<String>] represents a range.
   /// i.e. ['51', '55'] represents the range of cards starting with '51' to those starting with '55'
@@ -458,10 +460,11 @@ class MyPluginHelper {
 
     return cardType;
   }
-  // --- CREDIT CARD END ---
 
-  // --- PREVENTS APP START ---
-  // Prevents app from closing splash screen, app layout will be build but not displayed
+  // ========================================================================================
+  // ================================== PREVENTS APP ========================================
+  // ========================================================================================
+  /// Prevents app from closing splash screen, app layout will be build but not displayed
   static WidgetsBinding? _widgetsBinding;
   static void preserve({required WidgetsBinding widgetsBinding}) {
     _widgetsBinding = widgetsBinding;
@@ -473,7 +476,7 @@ class MyPluginHelper {
     _widgetsBinding?.allowFirstFrame();
     _widgetsBinding = null;
   }
-  // --- PREVENTS APP END ---
+  // =========================================================================================
 
   static String getLinkImage(
       {required String key,
@@ -533,7 +536,7 @@ class MyPluginHelper {
     // get temporary path from temporary directory.
     String tempPath = tempDir.path;
     // create a new file in temporary path with random file name.
-    File file = File(tempPath + (rng.nextInt(100)).toString() + '.png');
+    File file = File('$tempPath${rng.nextInt(100)}.png');
     // call http.get method and pass imageUrl into it to get response.
     http.Response response = await http.get(Uri.parse(imageUrl));
     // write bodyBytes received in response to file.
