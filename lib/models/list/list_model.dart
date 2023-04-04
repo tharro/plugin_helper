@@ -35,15 +35,20 @@ class ListModel<T> extends Equatable {
       Map<String, dynamic> json, T Function(Map<String, dynamic> json) convert,
       {Map<String, dynamic>? params}) {
     return ListModel(
-        count: json['count'],
-        next: json['next'] != null
-            ? (json['next'] as String).replaceAll('http://', 'https://')
-            : null,
-        previous: json['previous'] != null
-            ? (json['previous'] as String).replaceAll('http://', 'https://')
-            : null,
-        results: (json['results'] as List).map((e) => convert(e)).toList(),
-        params: params);
+      count: json['count'],
+      next: json['next'] != null
+          ? (json['next'] as String).replaceAll('http://', 'https://')
+          : null,
+      previous: json['previous'] != null
+          ? (json['previous'] as String).replaceAll('http://', 'https://')
+          : null,
+      results: (json['results'] as List).map((e) => convert(e)).toList(),
+      params: params,
+      errorMessage: '',
+      isLoading: false,
+      isLoadingMore: false,
+      isRefreshing: false,
+    );
   }
 
   ListModel<T> copyWith({
