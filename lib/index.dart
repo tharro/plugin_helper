@@ -23,6 +23,7 @@ export 'package:path_provider/path_provider.dart';
 export 'package:permission_handler/permission_handler.dart';
 export 'package:pin_code_fields/pin_code_fields.dart';
 export 'package:pull_to_refresh/pull_to_refresh.dart';
+export 'package:share_plus/share_plus.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:url_launcher/url_launcher.dart';
 
@@ -51,4 +52,3 @@ export 'plugin_message_require.dart';
 export 'plugin_navigator.dart';
 export 'plugin_notification.dart';
 export 'plugin_picker_file.dart';
-export 'plugin_social_share.dart';
