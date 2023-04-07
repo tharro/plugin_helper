@@ -1,5 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:plugin_helper/index.dart';
 
 enum ImageType { none, avatar }
 
@@ -10,9 +10,9 @@ class MyWidgetCacheImageNetwork extends StatelessWidget {
   final double borderRadius;
   final BoxFit boxFit;
   final Color? customColor;
-
   final Widget? errorWidget;
   final ImageType imageType;
+  final bool useLinkCloudFont;
   const MyWidgetCacheImageNetwork({
     Key? key,
     required this.imageUrl,
@@ -23,6 +23,7 @@ class MyWidgetCacheImageNetwork extends StatelessWidget {
     this.errorWidget,
     this.customColor,
     this.imageType = ImageType.none,
+    this.useLinkCloudFont = false,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,9 @@ class MyWidgetCacheImageNetwork extends StatelessWidget {
                     : null,
               )
           : CachedNetworkImage(
-              imageUrl: imageUrl!,
+              imageUrl: useLinkCloudFont
+                  ? MyPluginAppEnvironment().linkCloudfront! + imageUrl!
+                  : imageUrl!,
               color: customColor,
               placeholderFadeInDuration: Duration.zero,
               errorWidget: (_, __, ___) {
