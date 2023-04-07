@@ -347,6 +347,7 @@ class MyPluginHelper {
         isScrollControlled: true,
         isDismissible: isDismissible,
         backgroundColor: backgroundColor,
+        elevation: 0,
         constraints: BoxConstraints(
             maxHeight: MediaQuery.of(context).size.height * 0.98),
         shape: shape ??

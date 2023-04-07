@@ -148,6 +148,7 @@ class SelectorButton extends StatelessWidget {
       BuildContext context, List<Country> countries) {
     return showModalBottomSheet(
       context: context,
+      elevation: 0,
       clipBehavior: Clip.hardEdge,
       isScrollControlled: isScrollControlled,
       backgroundColor: Colors.transparent,
