@@ -23,6 +23,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
   final double? width, height, elevation;
   final Widget? icon;
   final Gradient? gradient;
+  final Widget? customTitle;
   const MyWidgetButtonCustom({
     Key? key,
     required this.onPressed,
@@ -53,6 +54,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
     this.disableBackgroundColor = const Color(0xfff1f1f2),
     this.disableTextColor = const Color(0xff9a9a9a),
     this.disableBorderColor = const Color(0xfff1f1f2),
+    this.customTitle,
   }) : super(key: key);
 
   @override
@@ -91,11 +93,14 @@ class MyWidgetButtonCustom extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             if (icon != null) icon!,
-            Text(
-              title,
-              style: _checkTextColor(textStyle!),
-              maxLines: 1,
-            )
+            if (customTitle != null)
+              customTitle!
+            else
+              Text(
+                title,
+                style: _checkTextColor(textStyle!),
+                maxLines: 1,
+              )
           ],
         ),
       ),
