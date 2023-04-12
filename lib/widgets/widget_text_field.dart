@@ -59,7 +59,7 @@ class MyWidgetTextField extends StatefulWidget {
       errorBorderColor,
       fillColor,
       disabledBorderColor;
-  final Widget? customLabelOfTextFieldNormal;
+  final Widget? customLabelOfTextFieldNormal, prefixIconLabel;
   final Widget eyeActiveIcon, eyeDisableIcon;
   final bool autoFocus;
   final bool Function()? isValidCustomPassword;
@@ -125,6 +125,7 @@ class MyWidgetTextField extends StatefulWidget {
     this.disabledBorder,
     this.disabledBorderColor,
     this.keyboardAppearance,
+    this.prefixIconLabel,
   }) : super(key: key);
 
   @override
@@ -357,6 +358,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
                 EdgeInsets.only(bottom: widget.spaceBetweenLabelAndTextField!),
             child: Row(
               children: [
+                if (widget.prefixIconLabel != null) widget.prefixIconLabel!,
                 Text(
                   widget.label!,
                   style: widget.labelStyle,
