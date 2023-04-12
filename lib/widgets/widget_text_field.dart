@@ -66,6 +66,7 @@ class MyWidgetTextField extends StatefulWidget {
   final bool Function()? isValidNotEmpty;
   final AlignmentPasswordIcon alignmentPasswordIcon;
   final Brightness? keyboardAppearance;
+  final Decoration? boxDecorationTextField;
   const MyWidgetTextField({
     Key? key,
     this.prefixIcon,
@@ -126,6 +127,7 @@ class MyWidgetTextField extends StatefulWidget {
     this.disabledBorderColor,
     this.keyboardAppearance,
     this.prefixIconLabel,
+    this.boxDecorationTextField,
   }) : super(key: key);
 
   @override
@@ -368,80 +370,84 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
               ],
             ),
           ),
-        TextFormField(
-          autofocus: widget.autoFocus,
-          textInputAction: widget.textInputAction,
-          onFieldSubmitted: widget.onFieldSubmitted,
-          focusNode: widget.focus,
-          textCapitalization: widget.textCapitalization,
-          enabled: widget.enabled,
-          onTap: widget.onTap,
-          keyboardType: widget.keyboardType,
-          controller: widget.controller,
-          obscureText: widget.validType == ValidType.password
-              ? _obscureText
-              : widget.obscureText,
-          inputFormatters: widget.inputFormatters,
-          style: widget.textStyle,
-          scrollPadding: EdgeInsets.zero,
-          maxLength: widget.maxLength,
-          maxLines: widget.maxLines ?? 1,
-          minLines: widget.minLines,
-          textAlignVertical: TextAlignVertical.center,
-          keyboardAppearance: widget.keyboardAppearance,
-          decoration: InputDecoration(
-            isDense: true,
-            constraints: widget.constraints,
-            hintText: widget.hintText,
-            hintStyle: widget.textStyleHint,
-            counter: widget.maxLength != null && _hasFocus
-                ? Text(
-                    "${widget.controller.text.characters.length} /${widget.maxLength}",
-                    style: widget.textStyleCounter ??
-                        const TextStyle(fontSize: 13))
-                : null,
-            errorMaxLines: 3,
-            labelStyle: widget.textFieldType == TextFieldType.animation
-                ? widget.labelStyle
-                : null,
-            errorText: ((!_valid && _hasChanged) || widget.textError != null) &&
-                    widget.showError!
-                ? getError()
-                : null,
-            errorBorder: widget.errorBorder ?? errorBorder,
-            focusedErrorBorder: widget.errorBorder ?? errorBorder,
-            contentPadding: widget.contentPadding ??
-                const EdgeInsets.symmetric(horizontal: 17, vertical: 11),
-            border: widget.border ?? border,
-            enabledBorder: widget.border ?? border,
-            focusedBorder: widget.focusBorder ?? focusBorder,
-            labelText: widget.textFieldType == TextFieldType.animation
-                ? widget.label
-                : null,
-            counterText: '',
-            fillColor: widget.fillColor,
-            filled: true,
-            disabledBorder: widget.disabledBorder ?? disableBorder,
-            errorStyle: widget.errorStyle,
-            prefixIconConstraints:
-                const BoxConstraints(minWidth: 0, minHeight: 0),
-            prefixIcon: widget.validType == ValidType.password &&
-                    widget.alignmentPasswordIcon == AlignmentPasswordIcon.left
-                ? _suffixIcon
-                : widget.prefixIcon != null
-                    ? Padding(
-                        padding: EdgeInsets.only(
-                            left: widget.paddingLeftPrefixIcon!,
-                            right: widget.paddingRightPrefixIcon!),
-                        child: widget.prefixIcon,
-                      )
-                    : null,
-            suffixIconConstraints:
-                const BoxConstraints(minWidth: 0, minHeight: 0),
-            suffixIcon: widget.validType == ValidType.password &&
-                    widget.alignmentPasswordIcon == AlignmentPasswordIcon.left
-                ? null
-                : _suffixIcon,
+        Container(
+          decoration: widget.boxDecorationTextField,
+          child: TextFormField(
+            autofocus: widget.autoFocus,
+            textInputAction: widget.textInputAction,
+            onFieldSubmitted: widget.onFieldSubmitted,
+            focusNode: widget.focus,
+            textCapitalization: widget.textCapitalization,
+            enabled: widget.enabled,
+            onTap: widget.onTap,
+            keyboardType: widget.keyboardType,
+            controller: widget.controller,
+            obscureText: widget.validType == ValidType.password
+                ? _obscureText
+                : widget.obscureText,
+            inputFormatters: widget.inputFormatters,
+            style: widget.textStyle,
+            scrollPadding: EdgeInsets.zero,
+            maxLength: widget.maxLength,
+            maxLines: widget.maxLines ?? 1,
+            minLines: widget.minLines,
+            textAlignVertical: TextAlignVertical.center,
+            keyboardAppearance: widget.keyboardAppearance,
+            decoration: InputDecoration(
+              isDense: true,
+              constraints: widget.constraints,
+              hintText: widget.hintText,
+              hintStyle: widget.textStyleHint,
+              counter: widget.maxLength != null && _hasFocus
+                  ? Text(
+                      "${widget.controller.text.characters.length} /${widget.maxLength}",
+                      style: widget.textStyleCounter ??
+                          const TextStyle(fontSize: 13))
+                  : null,
+              errorMaxLines: 3,
+              labelStyle: widget.textFieldType == TextFieldType.animation
+                  ? widget.labelStyle
+                  : null,
+              errorText:
+                  ((!_valid && _hasChanged) || widget.textError != null) &&
+                          widget.showError!
+                      ? getError()
+                      : null,
+              errorBorder: widget.errorBorder ?? errorBorder,
+              focusedErrorBorder: widget.errorBorder ?? errorBorder,
+              contentPadding: widget.contentPadding ??
+                  const EdgeInsets.symmetric(horizontal: 17, vertical: 11),
+              border: widget.border ?? border,
+              enabledBorder: widget.border ?? border,
+              focusedBorder: widget.focusBorder ?? focusBorder,
+              labelText: widget.textFieldType == TextFieldType.animation
+                  ? widget.label
+                  : null,
+              counterText: '',
+              fillColor: widget.fillColor,
+              filled: true,
+              disabledBorder: widget.disabledBorder ?? disableBorder,
+              errorStyle: widget.errorStyle,
+              prefixIconConstraints:
+                  const BoxConstraints(minWidth: 0, minHeight: 0),
+              prefixIcon: widget.validType == ValidType.password &&
+                      widget.alignmentPasswordIcon == AlignmentPasswordIcon.left
+                  ? _suffixIcon
+                  : widget.prefixIcon != null
+                      ? Padding(
+                          padding: EdgeInsets.only(
+                              left: widget.paddingLeftPrefixIcon!,
+                              right: widget.paddingRightPrefixIcon!),
+                          child: widget.prefixIcon,
+                        )
+                      : null,
+              suffixIconConstraints:
+                  const BoxConstraints(minWidth: 0, minHeight: 0),
+              suffixIcon: widget.validType == ValidType.password &&
+                      widget.alignmentPasswordIcon == AlignmentPasswordIcon.left
+                  ? null
+                  : _suffixIcon,
+            ),
           ),
         ),
       ],
