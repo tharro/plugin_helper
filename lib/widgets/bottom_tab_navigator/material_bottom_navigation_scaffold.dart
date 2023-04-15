@@ -23,9 +23,6 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
     this.extendBody = false,
     this.showSelectedLabels = true,
     this.showUnselectedLabels = true,
-    this.iconSize = 24,
-    this.selectedFontSize = 14,
-    this.unselectedFontSize = 12,
     this.height,
   }) : super(key: key);
 
@@ -49,7 +46,6 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
   final BoxDecoration? decoration;
   final bool extendBody;
   final bool showSelectedLabels, showUnselectedLabels;
-  final double iconSize, selectedFontSize, unselectedFontSize;
   final double? height;
   @override
   _MaterialBottomNavigationScaffoldState createState() =>
@@ -160,12 +156,6 @@ class _MaterialBottomNavigationScaffoldState
                   unselectedLabelStyle: widget.unselectedLabelStyle,
                   selectedItemColor: widget.selectedItemColor,
                   unselectedItemColor: widget.unselectedItemColor,
-                  iconSize: widget.iconSize,
-                  selectedFontSize:
-                      widget.showSelectedLabels ? widget.selectedFontSize : 0,
-                  unselectedFontSize: widget.showUnselectedLabels
-                      ? widget.unselectedFontSize
-                      : 0,
                 ),
                 if (widget.customBottomBar != null) widget.customBottomBar!,
               ],
