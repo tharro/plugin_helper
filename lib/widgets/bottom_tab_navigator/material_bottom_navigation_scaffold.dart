@@ -23,6 +23,9 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
     this.extendBody = false,
     this.showSelectedLabels = true,
     this.showUnselectedLabels = true,
+    this.iconSize = 24,
+    this.selectedFontSize = 14,
+    this.height,
   }) : super(key: key);
 
   /// List of the tabs to be displayed with their respective navigator's keys.
@@ -45,7 +48,8 @@ class MyWidgetMaterialBottomNavigationScaffold extends StatefulWidget {
   final BoxDecoration? decoration;
   final bool extendBody;
   final bool showSelectedLabels, showUnselectedLabels;
-
+  final double iconSize, selectedFontSize;
+  final double? height;
   @override
   _MaterialBottomNavigationScaffoldState createState() =>
       _MaterialBottomNavigationScaffoldState();
@@ -133,6 +137,7 @@ class _MaterialBottomNavigationScaffoldState
         bottomNavigationBar: Container(
             padding: widget.padding,
             color: widget.backgroundColor,
+            height: widget.height,
             child: Stack(
               children: [
                 if (widget.customBottomBarBehind != null)
@@ -154,6 +159,8 @@ class _MaterialBottomNavigationScaffoldState
                   unselectedLabelStyle: widget.unselectedLabelStyle,
                   selectedItemColor: widget.selectedItemColor,
                   unselectedItemColor: widget.unselectedItemColor,
+                  iconSize: widget.iconSize,
+                  selectedFontSize: widget.selectedFontSize,
                 ),
                 if (widget.customBottomBar != null) widget.customBottomBar!,
               ],
