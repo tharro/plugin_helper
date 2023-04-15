@@ -19,7 +19,7 @@ class AdaptiveBottomNavigationScaffold extends StatefulWidget {
   final double elevation;
   final bool extendBody;
   final bool showSelectedLabels, showUnselectedLabels;
-  final double iconSize, selectedFontSize;
+  final double iconSize, selectedFontSize, unselectedFontSize;
   final double? height;
 
   const AdaptiveBottomNavigationScaffold({
@@ -42,6 +42,7 @@ class AdaptiveBottomNavigationScaffold extends StatefulWidget {
     this.indexDisableTap,
     this.iconSize = 24,
     this.selectedFontSize = 14,
+    this.unselectedFontSize = 12,
     this.height,
   }) : super(key: key);
 
@@ -93,6 +94,7 @@ class AdaptiveBottomNavigationScaffoldState
         height: widget.height,
         iconSize: widget.iconSize,
         selectedFontSize: widget.selectedFontSize,
+        unselectedFontSize: widget.unselectedFontSize,
       );
 
   /// Called when a tab selection occurs.
