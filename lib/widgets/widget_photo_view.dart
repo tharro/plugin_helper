@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
@@ -105,6 +107,19 @@ class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
   PhotoViewGalleryPageOptions _buildItem(BuildContext context, int index) {
     bool isFromUrl = widget.images[index].contains('http') ||
         widget.images[index].contains('https');
+    if ((Platform.isMacOS || Platform.isWindows || Platform.isLinux) &&
+        !isFromUrl) {
+      return PhotoViewGalleryPageOptions.customChild(
+        child: Image.file(
+          File(widget.images[index]),
+        ),
+        initialScale: PhotoViewComputedScale.contained,
+        minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
+        maxScale: PhotoViewComputedScale.covered * 4.1,
+        heroAttributes: const PhotoViewHeroAttributes(tag: ''),
+      );
+    }
+
     ImageProvider<Object>? imageProvider = (isFromUrl
         ? NetworkImage(widget.images[index])
         : AssetImage(widget.images[index])) as ImageProvider<Object>?;
