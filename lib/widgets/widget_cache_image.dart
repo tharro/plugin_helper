@@ -5,14 +5,13 @@ enum ImageType { none, avatar }
 
 class MyWidgetCacheImageNetwork extends StatelessWidget {
   final String? imageUrl;
-  final double? width;
-  final double? height;
+  final double? width, withResize;
+  final double? height, heightResize;
   final double borderRadius;
-  final BoxFit boxFit;
+  final BoxFit boxFit, boxFitResize;
   final Color? customColor;
   final Widget? errorWidget;
   final ImageType imageType;
-  final bool useLinkCloudFont;
   const MyWidgetCacheImageNetwork({
     Key? key,
     required this.imageUrl,
@@ -23,8 +22,11 @@ class MyWidgetCacheImageNetwork extends StatelessWidget {
     this.errorWidget,
     this.customColor,
     this.imageType = ImageType.none,
-    this.useLinkCloudFont = false,
+    this.withResize = 512,
+    this.heightResize = 512,
+    this.boxFitResize = BoxFit.cover,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -46,9 +48,13 @@ class MyWidgetCacheImageNetwork extends StatelessWidget {
                     : null,
               )
           : CachedNetworkImage(
-              imageUrl: useLinkCloudFont
-                  ? MyPluginAppEnvironment().linkCloudfront! + imageUrl!
-                  : imageUrl!,
+              imageUrl: Uri.parse(imageUrl!).host.isNotEmpty
+                  ? imageUrl!
+                  : MyPluginHelper.getLinkImage(
+                      key: imageUrl!,
+                      width: withResize,
+                      height: heightResize,
+                      fit: boxFitResize),
               color: customColor,
               placeholderFadeInDuration: Duration.zero,
               errorWidget: (_, __, ___) {
