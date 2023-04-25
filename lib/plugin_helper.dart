@@ -341,6 +341,8 @@ class MyPluginHelper {
     Color? backgroundColor,
     required Widget child,
     double? maxHeight,
+    double? width,
+    EdgeInsets? padding,
   }) async {
     return await showModalBottomSheet(
         context: context,
@@ -355,9 +357,9 @@ class MyPluginHelper {
                 borderRadius:
                     BorderRadius.vertical(top: Radius.circular(radiusShape))),
         builder: (context) => Padding(
-            padding: MediaQuery.of(context).viewInsets,
+            padding: padding ?? MediaQuery.of(context).viewInsets,
             child: Container(
-              width: MediaQuery.of(context).size.width,
+              width: width ?? MediaQuery.of(context).size.width,
               constraints: BoxConstraints(
                   maxHeight:
                       maxHeight ?? MediaQuery.of(context).size.height * 0.8),
