@@ -52,19 +52,37 @@ class HexColor extends Color {
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
 
-Future<T?> push<T>(Widget page) {
+Future<T?> push<T>(Widget page, {BuildContext? context}) {
+  if (context != null) {
+    return Navigator.push(context, MaterialPageRoute(builder: (_) => page));
+  }
+
   return MyPluginNavigation.instance.navigationKey!.currentState!
       .push(MaterialPageRoute(builder: (_) => page));
 }
 
-Future<T?> replace<T>(Widget page, {bool isFadeRoute = false}) {
+Future<T?> replace<T>(Widget page,
+    {BuildContext? context, bool isFadeRoute = false}) {
+  if (context != null) {
+    return Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (_) => page));
+  }
+
   return MyPluginNavigation.instance.navigationKey!.currentState!
       .pushReplacement(isFadeRoute
           ? FadePageRoute(child: page)
           : MaterialPageRoute(builder: (_) => page));
 }
 
-Future<T?> popUtil<T>(Widget page) {
+Future<T?> popUtil<T>(
+  Widget page, {
+  BuildContext? context,
+}) {
+  if (context != null) {
+    Navigator.popUntil(context, (route) => route.isFirst);
+    return replace(page, context: context);
+  }
+
   MyPluginNavigation.instance.navigationKey!.currentState!
       .popUntil((route) => route.isFirst);
   return replace(page);
