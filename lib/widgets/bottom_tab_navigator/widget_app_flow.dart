@@ -15,14 +15,4 @@ class MyWidgetAppFlow {
   final Widget activeIconData;
   final GlobalKey<NavigatorState> navigatorKey;
   final Widget child;
-
-  MyWidgetAppFlow copyWith({Widget? iconData, activeIconData}) {
-    return MyWidgetAppFlow(
-      activeIconData: activeIconData ?? this.activeIconData,
-      child: child,
-      iconData: iconData ?? this.iconData,
-      navigatorKey: navigatorKey,
-      title: title,
-    );
-  }
 }
