@@ -8,7 +8,7 @@ class MyPluginPickerFile {
   static Future<PickedFile?>? pickerFileCustom() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     if (result != null) {
-      PickedFile file = PickedFile(result.files.single.path!);
+      PickedFile file = PickedFile(result.files.first.path!);
       return file;
     }
     return null;
