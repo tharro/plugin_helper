@@ -251,9 +251,11 @@ class MyPluginHelper {
   }
 
   static String convertTimeToHourOrDay(
-      {required String dateTime, String? format = 'dd/MM/yyyy HH:mm:ss'}) {
+      {required String dateTime,
+      String? format = 'dd/MM/yyyy HH:mm:ss',
+      String languageCode = 'en'}) {
     try {
-      var date = DateFormat(format).parse(dateTime);
+      var date = DateFormat(format, languageCode).parse(dateTime);
       final dateNow = DateTime.now();
       final day = dateNow.difference(date).inDays.abs();
       if (day == 0) {
@@ -271,7 +273,7 @@ class MyPluginHelper {
         }
       }
       if (day > 7) {
-        return DateFormat(format).format(date);
+        return DateFormat(format, languageCode).format(date);
       }
       return "$day ${MyPluginMessageRequire.day}${day > 1 ? 's' : ''}";
     } catch (e) {
