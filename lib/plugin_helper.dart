@@ -13,7 +13,6 @@ import 'package:plugin_helper/widgets/phone_number/src/utils/phone_number/phone_
 
 import './index.dart';
 
-DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 var dio = Dio();
 
 enum PasswordValidType {
@@ -65,22 +64,6 @@ class MyPluginHelper {
       }
     }
     return phone;
-  }
-
-  static Future<String> getMeIdDevice() async {
-    String meId = '';
-    try {
-      if (Platform.isAndroid) {
-        AndroidDeviceInfo? androidDevice = await deviceInfoPlugin.androidInfo;
-        meId = androidDevice.id;
-      } else if (Platform.isIOS) {
-        IosDeviceInfo iosDevice = await deviceInfoPlugin.iosInfo;
-        meId = iosDevice.identifierForVendor!;
-      }
-    } on PlatformException {
-      print('Error:' 'Failed to get platform version.');
-    }
-    return meId;
   }
 
   static bool isValidPassword(

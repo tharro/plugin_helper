@@ -1,6 +1,5 @@
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:collection/collection.dart';
-export 'package:device_info_plus/device_info_plus.dart';
 export 'package:dio/dio.dart';
 export 'package:equatable/equatable.dart';
 export 'package:file_picker/file_picker.dart';
