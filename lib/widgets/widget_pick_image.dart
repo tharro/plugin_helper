@@ -50,9 +50,7 @@ class WidgetPickerImage extends StatelessWidget {
                     style: titleStyle,
                   ),
                 ),
-                const Divider(
-                  height: 1,
-                ),
+                Divider(height: 1, color: Colors.grey.shade300),
                 GestureDetector(
                   onTap: () async {
                     onTakePhoto();
@@ -71,9 +69,7 @@ class WidgetPickerImage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Divider(
-                  height: 1,
-                ),
+                Divider(height: 1, color: Colors.grey.shade300),
                 GestureDetector(
                   onTap: () async {
                     onPickImage();
