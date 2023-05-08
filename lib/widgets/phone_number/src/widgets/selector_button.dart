@@ -12,6 +12,7 @@ class SelectorButton extends StatelessWidget {
   final SelectorConfig selectorConfig;
   final TextStyle? selectorTextStyle;
   final InputDecoration? searchBoxDecoration;
+  final Widget? iconClose;
   final bool autoFocusSearchField;
   final String? locale;
   final bool isEnabled;
@@ -31,6 +32,7 @@ class SelectorButton extends StatelessWidget {
     required this.onCountryChanged,
     required this.isEnabled,
     required this.isScrollControlled,
+    this.iconClose,
   }) : super(key: key);
 
   @override
@@ -137,6 +139,7 @@ class SelectorButton extends StatelessWidget {
             showFlags: selectorConfig.showFlags,
             useEmoji: selectorConfig.useEmoji,
             autoFocus: autoFocusSearchField,
+            iconClose: iconClose,
           ),
         ),
       ),
@@ -180,6 +183,7 @@ class SelectorButton extends StatelessWidget {
                   showFlags: selectorConfig.showFlags,
                   useEmoji: selectorConfig.useEmoji,
                   autoFocus: autoFocusSearchField,
+                  iconClose: iconClose,
                 ),
               );
             },

@@ -27,6 +27,7 @@ class MyWidgetPhoneNumber extends StatefulWidget {
   final BoxDecoration? boxDecorationAll;
   final double spaceBetweenSelectorAndTextField;
   final double paddingIconRight, spaceBetweenLabelAndPhoneNumber;
+  final Widget? iconClose;
   const MyWidgetPhoneNumber(
       {Key? key,
       this.label,
@@ -61,7 +62,8 @@ class MyWidgetPhoneNumber extends StatefulWidget {
       required this.hintStyle,
       required this.selectorTextStyle,
       this.contentPaddingInputPhoneNumber,
-      this.height = 44})
+      this.height = 44,
+      this.iconClose})
       : super(key: key);
   @override
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
@@ -129,6 +131,7 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
               height: widget.height,
               padding: widget.padding ?? EdgeInsets.zero,
               child: InternationalPhoneNumberInput(
+                iconClose: widget.iconClose,
                 countries: widget.countries,
                 initialValue: widget.initialValue ??
                     PhoneNumber(isoCode: 'AU', dialCode: '+61'),

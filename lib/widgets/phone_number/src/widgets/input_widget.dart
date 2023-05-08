@@ -84,6 +84,7 @@ class InternationalPhoneNumberInput extends StatefulWidget {
   final List<String>? countries;
   final bool? isLTR;
   final BoxDecoration? boxDecorationPhoneNumber;
+  final Widget? iconClose;
 
   const InternationalPhoneNumberInput({
     Key? key,
@@ -125,6 +126,7 @@ class InternationalPhoneNumberInput extends StatefulWidget {
     this.countries,
     this.isLTR = true,
     this.boxDecorationPhoneNumber,
+    this.iconClose,
   }) : super(key: key);
 
   @override
@@ -149,7 +151,7 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
 
   @override
   void setState(fn) {
-    if (this.mounted) {
+    if (mounted) {
       super.setState(fn);
     }
   }
@@ -195,7 +197,7 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
 
   /// loads countries from [Countries.countryList] and selected Country
   void loadCountries({Country? previouslySelectedCountry}) {
-    if (this.mounted) {
+    if (mounted) {
       List<Country> countries =
           CountryProvider.getCountriesData(countries: widget.countries);
 
@@ -224,21 +226,20 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
   /// Listener that validates changes from the widget, returns a bool to
   /// the `ValueCallback` [widget.onInputValidated]
   void phoneNumberControllerListener() {
-    if (this.mounted) {
+    if (mounted) {
       String parsedPhoneNumberString =
           controller!.text.replaceAll(RegExp(r'[^\d+]'), '');
 
-      getParsedPhoneNumber(parsedPhoneNumberString, this.country?.alpha2Code)
+      getParsedPhoneNumber(parsedPhoneNumberString, country?.alpha2Code)
           .then((phoneNumber) {
         if (phoneNumber == null) {
-          String phoneNumber =
-              '${this.country?.dialCode}$parsedPhoneNumberString';
+          String phoneNumber = '${country?.dialCode}$parsedPhoneNumberString';
 
           if (widget.onInputChanged != null) {
             widget.onInputChanged!(PhoneNumber(
                 phoneNumber: phoneNumber,
-                isoCode: this.country?.alpha2Code,
-                dialCode: this.country?.dialCode));
+                isoCode: country?.alpha2Code,
+                dialCode: country?.dialCode));
           }
 
           if (widget.onInputValidated != null) {
@@ -249,8 +250,8 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
           if (widget.onInputChanged != null) {
             widget.onInputChanged!(PhoneNumber(
                 phoneNumber: phoneNumber,
-                isoCode: this.country?.alpha2Code,
-                dialCode: this.country?.dialCode));
+                isoCode: country?.alpha2Code,
+                dialCode: country?.dialCode));
           }
 
           if (widget.onInputValidated != null) {
@@ -286,7 +287,7 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
   InputDecoration getInputDecoration(InputDecoration? decoration) {
     InputDecoration value = decoration ??
         InputDecoration(
-          border: widget.inputBorder ?? UnderlineInputBorder(),
+          border: widget.inputBorder ?? const UnderlineInputBorder(),
           hintText: widget.hintText,
         );
 
@@ -303,6 +304,7 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
         isEnabled: widget.isEnabled,
         autoFocusSearchField: widget.autoFocusSearch,
         isScrollControlled: widget.countrySelectorScrollControlled,
+        iconClose: widget.iconClose,
       ));
     }
 
@@ -378,6 +380,7 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
 
 class _InputWidgetView
     extends WidgetView<InternationalPhoneNumberInput, _InputWidgetState> {
+  @override
   final _InputWidgetState state;
 
   const _InputWidgetView({Key? key, required this.state})
@@ -408,6 +411,7 @@ class _InputWidgetView
                 isEnabled: widget.isEnabled,
                 autoFocusSearchField: widget.autoFocusSearch,
                 isScrollControlled: widget.countrySelectorScrollControlled,
+                iconClose: widget.iconClose,
               ),
               SizedBox(
                 height: state.selectorButtonBottomPadding,

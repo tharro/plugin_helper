@@ -12,13 +12,16 @@ class CountrySearchListWidget extends StatefulWidget {
   final bool autoFocus;
   final bool? showFlags;
   final bool? useEmoji;
+  final Widget? iconClose;
 
   const CountrySearchListWidget(this.countries, this.locale,
-      {this.searchBoxDecoration,
+      {super.key,
+      this.searchBoxDecoration,
       this.scrollController,
       this.showFlags,
       this.useEmoji,
-      this.autoFocus = false});
+      this.autoFocus = false,
+      this.iconClose});
 
   @override
   _CountrySearchListWidgetState createState() =>
@@ -87,6 +90,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
+        if (widget.iconClose != null) widget.iconClose!,
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextFormField(
@@ -150,7 +154,7 @@ class _Flag extends StatelessWidget {
             child: useEmoji!
                 ? Text(
                     Utils.generateFlagEmojiUnicode(country?.alpha2Code ?? ''),
-                    style: Theme.of(context).textTheme.headline5,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   )
                 : country?.flagUri != null
                     ? CircleAvatar(
