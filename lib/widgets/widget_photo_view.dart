@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
@@ -11,7 +12,8 @@ class MyWidgetPhotoViewCustom extends StatefulWidget {
     this.backgroundDecoration,
     this.initialIndex = 0,
     this.scrollDirection = Axis.horizontal,
-    required this.images,
+    this.images,
+    this.imagesUint8List,
     this.customHeader,
     this.customFooter,
     this.onPageChanged,
@@ -23,7 +25,8 @@ class MyWidgetPhotoViewCustom extends StatefulWidget {
   final int initialIndex;
   final PageController pageController;
   final Axis scrollDirection;
-  final List<String> images;
+  final List<String>? images;
+  final List<Uint8List>? imagesUint8List;
   final Widget? customHeader, customFooter;
   final void Function(int index)? onPageChanged;
   @override
@@ -55,7 +58,8 @@ class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
                 PhotoViewGallery.builder(
                   scrollPhysics: const BouncingScrollPhysics(),
                   builder: _buildItem,
-                  itemCount: widget.images.length,
+                  itemCount:
+                      widget.images?.length ?? widget.imagesUint8List!.length,
                   loadingBuilder: widget.loadingBuilder,
                   backgroundDecoration: widget.backgroundDecoration,
                   pageController: widget.pageController,
@@ -104,25 +108,33 @@ class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
     );
   }
 
+  PhotoViewGalleryPageOptions _customChild(Widget child, {required int index}) {
+    return PhotoViewGalleryPageOptions.customChild(
+      child: child,
+      initialScale: PhotoViewComputedScale.contained,
+      minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
+      maxScale: PhotoViewComputedScale.covered * 4.1,
+      heroAttributes: const PhotoViewHeroAttributes(tag: ''),
+    );
+  }
+
   PhotoViewGalleryPageOptions _buildItem(BuildContext context, int index) {
-    bool isFromUrl = widget.images[index].contains('http') ||
-        widget.images[index].contains('https');
+    if (widget.imagesUint8List != null) {
+      return _customChild(Image.memory(widget.imagesUint8List![index]),
+          index: index);
+    }
+
+    bool isFromUrl = widget.images![index].contains('http') ||
+        widget.images![index].contains('https');
     if ((Platform.isMacOS || Platform.isWindows || Platform.isLinux) &&
         !isFromUrl) {
-      return PhotoViewGalleryPageOptions.customChild(
-        child: Image.file(
-          File(widget.images[index]),
-        ),
-        initialScale: PhotoViewComputedScale.contained,
-        minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
-        maxScale: PhotoViewComputedScale.covered * 4.1,
-        heroAttributes: const PhotoViewHeroAttributes(tag: ''),
-      );
+      return _customChild(Image.file(File(widget.images![index])),
+          index: index);
     }
 
     ImageProvider<Object>? imageProvider = (isFromUrl
-        ? NetworkImage(widget.images[index])
-        : AssetImage(widget.images[index])) as ImageProvider<Object>?;
+        ? NetworkImage(widget.images![index])
+        : AssetImage(widget.images![index])) as ImageProvider<Object>?;
     return PhotoViewGalleryPageOptions(
       imageProvider: imageProvider,
       initialScale: PhotoViewComputedScale.contained,
