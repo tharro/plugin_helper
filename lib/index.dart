@@ -23,6 +23,7 @@ export 'package:shared_preferences/shared_preferences.dart';
 export 'package:url_launcher/url_launcher.dart';
 
 export './config/app_assets.dart';
+export './models/image_element_model.dart';
 export './models/list/list_model.dart';
 export './widgets/bottom_tab_navigator/index.dart';
 export './widgets/masked_controller.dart';
