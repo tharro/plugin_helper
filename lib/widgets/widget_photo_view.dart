@@ -1,9 +1,10 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+
+import '../models/image_element_model.dart';
 
 class MyWidgetPhotoViewCustom extends StatefulWidget {
   MyWidgetPhotoViewCustom({
@@ -12,8 +13,7 @@ class MyWidgetPhotoViewCustom extends StatefulWidget {
     this.backgroundDecoration,
     this.initialIndex = 0,
     this.scrollDirection = Axis.horizontal,
-    this.images,
-    this.imagesUint8List,
+    required this.images,
     this.customHeader,
     this.customFooter,
     this.onPageChanged,
@@ -25,9 +25,8 @@ class MyWidgetPhotoViewCustom extends StatefulWidget {
   final int initialIndex;
   final PageController pageController;
   final Axis scrollDirection;
-  final List<String>? images;
-  final List<Uint8List>? imagesUint8List;
   final Widget? customHeader, customFooter;
+  final List<ImageElementModel> images;
   final void Function(int index)? onPageChanged;
   @override
   State<StatefulWidget> createState() {
@@ -58,8 +57,7 @@ class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
                 PhotoViewGallery.builder(
                   scrollPhysics: const BouncingScrollPhysics(),
                   builder: _buildItem,
-                  itemCount:
-                      widget.images?.length ?? widget.imagesUint8List!.length,
+                  itemCount: widget.images.length,
                   loadingBuilder: widget.loadingBuilder,
                   backgroundDecoration: widget.backgroundDecoration,
                   pageController: widget.pageController,
@@ -119,22 +117,22 @@ class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
   }
 
   PhotoViewGalleryPageOptions _buildItem(BuildContext context, int index) {
-    if (widget.imagesUint8List != null) {
-      return _customChild(Image.memory(widget.imagesUint8List![index]),
+    if (widget.images[index].bytes != null) {
+      return _customChild(Image.memory(widget.images[index].bytes!),
           index: index);
     }
 
-    bool isFromUrl = widget.images![index].contains('http') ||
-        widget.images![index].contains('https');
+    bool isFromUrl = widget.images[index].url!.contains('http') ||
+        widget.images[index].url!.contains('https');
     if ((Platform.isMacOS || Platform.isWindows || Platform.isLinux) &&
         !isFromUrl) {
-      return _customChild(Image.file(File(widget.images![index])),
+      return _customChild(Image.file(File(widget.images[index].url!)),
           index: index);
     }
 
     ImageProvider<Object>? imageProvider = (isFromUrl
-        ? NetworkImage(widget.images![index])
-        : AssetImage(widget.images![index])) as ImageProvider<Object>?;
+        ? NetworkImage(widget.images[index].url!)
+        : AssetImage(widget.images[index].url!)) as ImageProvider<Object>?;
     return PhotoViewGalleryPageOptions(
       imageProvider: imageProvider,
       initialScale: PhotoViewComputedScale.contained,
