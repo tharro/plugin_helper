@@ -112,7 +112,7 @@ class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
       initialScale: PhotoViewComputedScale.contained,
       minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
       maxScale: PhotoViewComputedScale.covered * 4.1,
-      heroAttributes: const PhotoViewHeroAttributes(tag: ''),
+      heroAttributes: PhotoViewHeroAttributes(tag: index.toString()),
     );
   }
 
@@ -138,7 +138,7 @@ class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
       initialScale: PhotoViewComputedScale.contained,
       minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
       maxScale: PhotoViewComputedScale.covered * 4.1,
-      heroAttributes: const PhotoViewHeroAttributes(tag: ''),
+      heroAttributes: PhotoViewHeroAttributes(tag: index.toString()),
     );
   }
 }
