@@ -7,23 +7,21 @@ import 'package:photo_view/photo_view_gallery.dart';
 import '../models/image_element_model.dart';
 
 class MyWidgetPhotoViewCustom extends StatefulWidget {
-  MyWidgetPhotoViewCustom({
+  const MyWidgetPhotoViewCustom({
     Key? key,
     this.loadingBuilder,
     this.backgroundDecoration,
-    this.initialIndex = 0,
     this.scrollDirection = Axis.horizontal,
     required this.images,
     this.customHeader,
     this.customFooter,
     this.onPageChanged,
     this.children,
-  })  : pageController = PageController(initialPage: initialIndex),
-        super(key: key);
+    required this.pageController,
+  }) : super(key: key);
 
   final LoadingBuilder? loadingBuilder;
   final BoxDecoration? backgroundDecoration;
-  final int initialIndex;
   final PageController pageController;
   final Axis scrollDirection;
   final Widget? customHeader, customFooter;
