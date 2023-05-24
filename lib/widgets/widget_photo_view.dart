@@ -17,6 +17,7 @@ class MyWidgetPhotoViewCustom extends StatefulWidget {
     this.customHeader,
     this.customFooter,
     this.onPageChanged,
+    this.children,
   })  : pageController = PageController(initialPage: initialIndex),
         super(key: key);
 
@@ -26,6 +27,7 @@ class MyWidgetPhotoViewCustom extends StatefulWidget {
   final PageController pageController;
   final Axis scrollDirection;
   final Widget? customHeader, customFooter;
+  final List<Widget>? children;
   final List<ImageElementModel> images;
   final void Function(int index)? onPageChanged;
   @override
@@ -99,7 +101,8 @@ class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
                       opacity: _isShowClose ? 1.0 : 0.0,
                       duration: const Duration(milliseconds: 100),
                       // The green box must be a child of the AnimatedOpacity widget.
-                      child: widget.customFooter!)
+                      child: widget.customFooter!),
+                if (widget.children != null) ...widget.children!
               ],
             ),
           )),
