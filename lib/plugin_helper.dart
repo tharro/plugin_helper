@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -280,21 +279,6 @@ class MyPluginHelper {
     } catch (e) {
       onError();
     }
-  }
-
-  static bool isTablet(BuildContext context) {
-    final double devicePixelRatio = ui.window.devicePixelRatio;
-    final ui.Size size = ui.window.physicalSize;
-    final double width = size.width;
-    final double height = size.height;
-
-    if (devicePixelRatio < 2 && (width >= 1000 || height >= 1000)) {
-      return true;
-    }
-    if (devicePixelRatio == 2 && (width >= 1920 || height >= 1920)) {
-      return true;
-    }
-    return false;
   }
 
   static Future setLanguage({required String language}) async {
