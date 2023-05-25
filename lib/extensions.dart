@@ -126,4 +126,3 @@ bool get kIsTablet {
   final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
   return data.size.shortestSide >= 600;
 }
-
