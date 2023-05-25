@@ -122,7 +122,8 @@ void goBack<T>({BuildContext? context, T? callback}) {
   MyPluginNavigation.instance.navigationKey!.currentState!.pop(callback);
 }
 
-bool kIsTablet(BuildContext context) {
+bool get kIsTablet {
   final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
   return data.size.shortestSide >= 600;
 }
+
