@@ -67,6 +67,7 @@ class MyWidgetTextField extends StatefulWidget {
   final AlignmentPasswordIcon alignmentPasswordIcon;
   final Brightness? keyboardAppearance;
   final Decoration? boxDecorationTextField;
+  final Function(String)? onChanged;
   const MyWidgetTextField({
     Key? key,
     this.prefixIcon,
@@ -128,6 +129,7 @@ class MyWidgetTextField extends StatefulWidget {
     this.keyboardAppearance,
     this.prefixIconLabel,
     this.boxDecorationTextField,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -393,6 +395,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
             minLines: widget.minLines,
             textAlignVertical: TextAlignVertical.center,
             keyboardAppearance: widget.keyboardAppearance,
+            onChanged: widget.onChanged,
             decoration: InputDecoration(
               isDense: true,
               constraints: widget.constraints,
