@@ -36,7 +36,7 @@ dependencies:
   overlay_support: ^2.1.0
   share_plus: ^6.3.1
   flutter_datetime_picker:
-    git: https://github.com/Realank/flutter_datetime_picker.git
+    path: custom_packages/flutter_datetime_picker
 
 
 dev_dependencies:

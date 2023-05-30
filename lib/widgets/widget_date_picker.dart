@@ -28,7 +28,7 @@ class MyWidgetDatePicker extends StatelessWidget {
   final Function? onTap;
   final TextStyle itemStyle, cancelStyle, doneStyle;
   final Widget child;
-  final DatePickerTheme? theme;
+  final DatePickerCustomTheme? theme;
   final LocaleType? locale;
   final DateType dateType;
 
@@ -95,9 +95,9 @@ class MyWidgetDatePicker extends StatelessWidget {
     onPress(date);
   }
 
-  DatePickerTheme get _theme =>
+  DatePickerCustomTheme get _theme =>
       theme ??
-      DatePickerTheme(
+      DatePickerCustomTheme(
           headerColor: Colors.white,
           backgroundColor: Colors.white,
           itemStyle: itemStyle,
