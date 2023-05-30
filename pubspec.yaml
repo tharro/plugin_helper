@@ -35,8 +35,6 @@ dependencies:
   path: ^1.8.2
   overlay_support: ^2.1.0
   share_plus: ^6.3.1
-  flutter_datetime_picker:
-    path: custom_packages/flutter_datetime_picker
 
 
 dev_dependencies:

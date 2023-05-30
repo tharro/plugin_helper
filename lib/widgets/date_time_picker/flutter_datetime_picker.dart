@@ -1,5 +1,3 @@
-library flutter_datetime_picker;
-
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';

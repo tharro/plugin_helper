@@ -182,13 +182,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
-  flutter_datetime_picker:
-    dependency: "direct main"
-    description:
-      path: "custom_packages/flutter_datetime_picker"
-      relative: true
-    source: path
-    version: "1.5.1"
   flutter_lints:
     dependency: "direct dev"
     description:

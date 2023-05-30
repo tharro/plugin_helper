@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
+import 'date_time_picker/flutter_datetime_picker.dart';
 
 enum DateType { datePicker, dateTimePicker, timePicker, timePicker24h }
 
