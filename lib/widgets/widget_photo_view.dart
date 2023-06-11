@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
@@ -125,10 +126,13 @@ class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
 
     bool isFromUrl = widget.images[index].url!.contains('http') ||
         widget.images[index].url!.contains('https');
-    if ((Platform.isMacOS || Platform.isWindows || Platform.isLinux) &&
-        !isFromUrl) {
-      return _customChild(Image.file(File(widget.images[index].url!)),
-          index: index);
+
+    if (!kIsWeb) {
+      if ((Platform.isMacOS || Platform.isWindows || Platform.isLinux) &&
+          !isFromUrl) {
+        return _customChild(Image.file(File(widget.images[index].url!)),
+            index: index);
+      }
     }
 
     ImageProvider<Object>? imageProvider = (isFromUrl
