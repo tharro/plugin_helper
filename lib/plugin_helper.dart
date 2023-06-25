@@ -282,11 +282,23 @@ class MyPluginHelper {
   }
 
   static Future setLanguage({required String language}) async {
+    if (Platform.isLinux) {
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString(MyPluginAppConstraints.language, language);
+      return;
+    }
+
     const storage = FlutterSecureStorage();
     await storage.write(key: MyPluginAppConstraints.language, value: language);
   }
 
   static Future<String> getLanguage() async {
+    if (Platform.isLinux) {
+      final prefs = await SharedPreferences.getInstance();
+      String? language = prefs.getString(MyPluginAppConstraints.language);
+      return language ?? 'en';
+    }
+
     const storage = FlutterSecureStorage();
     String? language = await storage.read(key: MyPluginAppConstraints.language);
     return language ?? 'en';

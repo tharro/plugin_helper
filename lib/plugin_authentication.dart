@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,15 +20,26 @@ class MyPluginAppConstraints {
 class MyPluginAuthentication {
   static const storage = FlutterSecureStorage();
   static Future<bool> hasToken() async {
+    final prefs = await SharedPreferences.getInstance();
     try {
-      String? token = await storage.read(key: MyPluginAppConstraints.token);
+      String? token;
+      if (Platform.isLinux) {
+        token = prefs.getString(MyPluginAppConstraints.token);
+      } else {
+        token = await storage.read(key: MyPluginAppConstraints.token);
+      }
+
       if (token != null) {
         return true;
       } else {
         return false;
       }
     } catch (e) {
-      await storage.deleteAll();
+      if (Platform.isLinux) {
+        await prefs.clear();
+      } else {
+        await storage.deleteAll();
+      }
       return false;
     }
   }
@@ -53,14 +66,25 @@ class MyPluginAuthentication {
 
   static Future<Users> getUser() async {
     try {
-      String? user = await storage.read(key: MyPluginAppConstraints.user);
-      String? token = await storage.read(key: MyPluginAppConstraints.token);
-      String? refreshToken =
-          await storage.read(key: MyPluginAppConstraints.refreshToken);
-      String? expiredToken =
-          await storage.read(key: MyPluginAppConstraints.expired);
-      String? expiredRefreshToken =
-          await storage.read(key: MyPluginAppConstraints.expiredRefresh);
+      String? user, token, refreshToken, expiredToken, expiredRefreshToken;
+      if (Platform.isLinux) {
+        final prefs = await SharedPreferences.getInstance();
+        user = prefs.getString(MyPluginAppConstraints.user);
+        token = prefs.getString(MyPluginAppConstraints.token);
+        refreshToken = prefs.getString(MyPluginAppConstraints.refreshToken);
+        expiredToken = prefs.getString(MyPluginAppConstraints.expired);
+        expiredRefreshToken =
+            prefs.getString(MyPluginAppConstraints.expiredRefresh);
+      } else {
+        user = await storage.read(key: MyPluginAppConstraints.user);
+        token = await storage.read(key: MyPluginAppConstraints.token);
+        refreshToken =
+            await storage.read(key: MyPluginAppConstraints.refreshToken);
+        expiredToken = await storage.read(key: MyPluginAppConstraints.expired);
+        expiredRefreshToken =
+            await storage.read(key: MyPluginAppConstraints.expiredRefresh);
+      }
+
       return Users(
         userId: user,
         token: token,
@@ -83,26 +107,43 @@ class MyPluginAuthentication {
     required int expiredToken,
     required int expiredRefreshToken,
   }) async {
-    await storage.write(key: MyPluginAppConstraints.user, value: userId);
-    await storage.write(key: MyPluginAppConstraints.token, value: token);
-    await storage.write(
-        key: MyPluginAppConstraints.refreshToken, value: refreshToken);
-    await storage.write(
-        key: MyPluginAppConstraints.expired, value: expiredToken.toString());
-    await storage.write(
-        key: MyPluginAppConstraints.expiredRefresh,
-        value: expiredRefreshToken.toString());
+    if (Platform.isLinux) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(MyPluginAppConstraints.user, userId);
+      await prefs.setString(MyPluginAppConstraints.token, token);
+      prefs.setString(MyPluginAppConstraints.refreshToken, refreshToken);
+      prefs.setString(MyPluginAppConstraints.expired, expiredToken.toString());
+      await prefs.setString(MyPluginAppConstraints.expiredRefresh,
+          expiredRefreshToken.toString());
+    } else {
+      await storage.write(key: MyPluginAppConstraints.user, value: userId);
+      await storage.write(key: MyPluginAppConstraints.token, value: token);
+      await storage.write(
+          key: MyPluginAppConstraints.refreshToken, value: refreshToken);
+      await storage.write(
+          key: MyPluginAppConstraints.expired, value: expiredToken.toString());
+      await storage.write(
+          key: MyPluginAppConstraints.expiredRefresh,
+          value: expiredRefreshToken.toString());
+    }
   }
 
   static Future<void> deleteUser() async {
-    await storage.delete(key: MyPluginAppConstraints.user);
-    await storage.delete(key: MyPluginAppConstraints.token);
-    await storage.delete(key: MyPluginAppConstraints.refreshToken);
-    await storage.delete(key: MyPluginAppConstraints.expired);
-    await storage.delete(key: MyPluginAppConstraints.expiredRefresh);
+    if (!Platform.isLinux) {
+      await storage.delete(key: MyPluginAppConstraints.user);
+      await storage.delete(key: MyPluginAppConstraints.token);
+      await storage.delete(key: MyPluginAppConstraints.refreshToken);
+      await storage.delete(key: MyPluginAppConstraints.expired);
+      await storage.delete(key: MyPluginAppConstraints.expiredRefresh);
+      return;
+    }
+
     final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
-    return;
+    await prefs.remove(MyPluginAppConstraints.user);
+    await prefs.remove(MyPluginAppConstraints.token);
+    await prefs.remove(MyPluginAppConstraints.refreshToken);
+    await prefs.remove(MyPluginAppConstraints.expired);
+    await prefs.remove(MyPluginAppConstraints.expiredRefresh);
   }
 }
 
