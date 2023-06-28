@@ -56,6 +56,7 @@ class MyWidgetCacheImageNetwork extends StatelessWidget {
                       height: heightResize,
                       fit: boxFitResize),
               color: customColor,
+              repeat: ImageRepeat.repeat,
               placeholderFadeInDuration: Duration.zero,
               errorWidget: (_, __, ___) {
                 if (imageType == ImageType.avatar) {
