@@ -22,6 +22,7 @@ class MyWidgetPinPut extends StatelessWidget {
   final PinCodeFieldShape? shape;
   final double? widthPinput, heightPinput;
   final int? length;
+  final bool autoFocus;
   const MyWidgetPinPut(
       {Key? key,
       this.onCompleted,
@@ -44,6 +45,7 @@ class MyWidgetPinPut extends StatelessWidget {
       this.widthPinput,
       this.heightPinput,
       required this.textStyle,
+      this.autoFocus=  false,
       this.length})
       : super(key: key);
   @override
@@ -61,6 +63,7 @@ class MyWidgetPinPut extends StatelessWidget {
       validator: (v) {
         return null;
       },
+      autoFocus: autoFocus,
       pinTheme: PinTheme(
         shape: shape ?? PinCodeFieldShape.box,
         borderRadius: BorderRadius.circular(radius),
