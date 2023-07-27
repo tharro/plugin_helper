@@ -47,7 +47,11 @@ class MyPluginAuthentication {
   static Future<bool> checkTokenValidity() async {
     final users = await getUser();
     if (users.expiredToken != null &&
-        users.expiredToken! > DateTime.now().toUtc().millisecondsSinceEpoch) {
+        users.expiredToken! >
+            DateTime.now()
+                .add(const Duration(minutes: 5))
+                .toUtc()
+                .millisecondsSinceEpoch) {
       return true;
     }
 
@@ -58,7 +62,10 @@ class MyPluginAuthentication {
     final users = await getUser();
     if (users.expiredRefreshToken != null &&
         users.expiredRefreshToken! >
-            DateTime.now().toUtc().millisecondsSinceEpoch) {
+            DateTime.now()
+                .add(const Duration(minutes: 5))
+                .toUtc()
+                .millisecondsSinceEpoch) {
       return true;
     }
     return false;
