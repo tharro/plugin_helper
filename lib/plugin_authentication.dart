@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,11 +24,10 @@ class MyPluginAuthentication {
     final prefs = await SharedPreferences.getInstance();
     try {
       String? token;
-      if (Platform.isLinux) {
+      if (!kIsWeb && Platform.isLinux) {
         token = prefs.getString(MyPluginAppConstraints.token);
-      } else {
-        token = await storage.read(key: MyPluginAppConstraints.token);
       }
+      token = await storage.read(key: MyPluginAppConstraints.token);
 
       if (token != null) {
         return true;
@@ -35,7 +35,7 @@ class MyPluginAuthentication {
         return false;
       }
     } catch (e) {
-      if (Platform.isLinux) {
+      if (!kIsWeb && Platform.isLinux) {
         await prefs.clear();
       } else {
         await storage.deleteAll();
@@ -74,7 +74,7 @@ class MyPluginAuthentication {
   static Future<Users> getUser() async {
     try {
       String? user, token, refreshToken, expiredToken, expiredRefreshToken;
-      if (Platform.isLinux) {
+      if (!kIsWeb && Platform.isLinux) {
         final prefs = await SharedPreferences.getInstance();
         user = prefs.getString(MyPluginAppConstraints.user);
         token = prefs.getString(MyPluginAppConstraints.token);
@@ -114,7 +114,7 @@ class MyPluginAuthentication {
     required int expiredToken,
     required int expiredRefreshToken,
   }) async {
-    if (Platform.isLinux) {
+    if (!kIsWeb && Platform.isLinux) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(MyPluginAppConstraints.user, userId);
       await prefs.setString(MyPluginAppConstraints.token, token);
@@ -136,7 +136,7 @@ class MyPluginAuthentication {
   }
 
   static Future<void> deleteUser() async {
-    if (!Platform.isLinux) {
+    if (kIsWeb || !Platform.isLinux) {
       await storage.delete(key: MyPluginAppConstraints.user);
       await storage.delete(key: MyPluginAppConstraints.token);
       await storage.delete(key: MyPluginAppConstraints.refreshToken);

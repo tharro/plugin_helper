@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -282,7 +283,7 @@ class MyPluginHelper {
   }
 
   static Future setLanguage({required String language}) async {
-    if (Platform.isLinux) {
+    if (!kIsWeb && Platform.isLinux) {
       final prefs = await SharedPreferences.getInstance();
       prefs.setString(MyPluginAppConstraints.language, language);
       return;
@@ -293,7 +294,7 @@ class MyPluginHelper {
   }
 
   static Future<String> getLanguage() async {
-    if (Platform.isLinux) {
+    if (!kIsWeb && Platform.isLinux) {
       final prefs = await SharedPreferences.getInstance();
       String? language = prefs.getString(MyPluginAppConstraints.language);
       return language ?? 'en';
