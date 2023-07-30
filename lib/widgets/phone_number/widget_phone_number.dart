@@ -13,6 +13,7 @@ class MyWidgetPhoneNumber extends StatefulWidget {
   final Function(PhoneNumber)? onSaved;
   final bool autoFocus;
   final FocusNode? focusNode;
+  final Function(bool)? onFocus;
   final bool? hasError;
   final List<String>? countries;
   final bool isLTR;
@@ -68,7 +69,8 @@ class MyWidgetPhoneNumber extends StatefulWidget {
       this.iconClose,
       this.borderRadius = 34,
       this.focusColor,
-      this.unFocusColor})
+      this.unFocusColor,
+      this.onFocus})
       : super(key: key);
   @override
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
@@ -102,6 +104,10 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
         setState(() {
           _hasFocus = widget.focusNode!.hasFocus;
         });
+      }
+
+      if (widget.onFocus != null) {
+        widget.onFocus!(widget.focusNode!.hasFocus);
       }
     });
     super.initState();
