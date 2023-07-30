@@ -74,12 +74,12 @@ class _Flag extends StatelessWidget {
             child: useEmoji!
                 ? Text(
                     Utils.generateFlagEmojiUnicode(country?.alpha2Code ?? ''),
-                    style: Theme.of(context).textTheme.headline5,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   )
                 : Image.asset(
                     country!.flagUri,
                     width: 32.0,
-                    package: 'lenddle',
+                    package: 'plugin_helper',
                     errorBuilder: (context, error, stackTrace) {
                       return const SizedBox.shrink();
                     },
