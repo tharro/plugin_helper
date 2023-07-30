@@ -28,6 +28,8 @@ class MyWidgetPhoneNumber extends StatefulWidget {
   final double spaceBetweenSelectorAndTextField;
   final double paddingIconRight, spaceBetweenLabelAndPhoneNumber;
   final Widget? iconClose;
+  final double borderRadius;
+  final Color? focusColor, unFocusColor;
   const MyWidgetPhoneNumber(
       {Key? key,
       this.label,
@@ -63,7 +65,10 @@ class MyWidgetPhoneNumber extends StatefulWidget {
       required this.selectorTextStyle,
       this.contentPaddingInputPhoneNumber,
       this.height = 44,
-      this.iconClose})
+      this.iconClose,
+      this.borderRadius = 34,
+      this.focusColor,
+      this.unFocusColor})
       : super(key: key);
   @override
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
@@ -124,9 +129,9 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
                     color: Colors.white,
                     border: Border.all(
                         color: _hasFocus
-                            ? const Color(0xffFEC02D)
-                            : const Color(0xffdddddd)),
-                    borderRadius: BorderRadius.circular(34),
+                            ? widget.focusColor ?? const Color(0xffFEC02D)
+                            : widget.unFocusColor ?? const Color(0xffdddddd)),
+                    borderRadius: BorderRadius.circular(widget.borderRadius),
                   ),
               height: widget.height,
               padding: widget.padding ?? EdgeInsets.zero,
