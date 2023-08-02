@@ -155,7 +155,7 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
                       borderSide: BorderSide(color: Colors.grey[300]!),
                     ),
                     labelText: widget.labelSearch,
-                    labelStyle: widget.labelStyle),
+                    labelStyle: widget.hintStyle),
                 onInputChanged: (PhoneNumber number) {
                   if (widget.onInputChanged != null) {
                     widget.onInputChanged!(number);
