@@ -24,6 +24,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
   final Widget? icon;
   final Gradient? gradient;
   final Widget? customTitle;
+  final Color? shadowColor;
   const MyWidgetButtonCustom({
     Key? key,
     required this.onPressed,
@@ -55,6 +56,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
     this.disableTextColor = const Color(0xff9a9a9a),
     this.disableBorderColor = const Color(0xfff1f1f2),
     this.customTitle,
+    this.shadowColor,
   }) : super(key: key);
 
   @override
@@ -77,6 +79,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
               : Colors.white,
           elevation: elevation,
           padding: padding,
+          shadowColor: shadowColor,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius)),
           backgroundColor: enabled == false
