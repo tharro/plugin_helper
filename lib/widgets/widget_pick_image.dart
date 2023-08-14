@@ -51,7 +51,7 @@ class WidgetPickerImage extends StatelessWidget {
                   ),
                 ),
                 Divider(height: 1, color: Colors.grey.shade300),
-                GestureDetector(
+                InkWell(
                   onTap: () async {
                     onTakePhoto();
                   },
@@ -70,7 +70,7 @@ class WidgetPickerImage extends StatelessWidget {
                   ),
                 ),
                 Divider(height: 1, color: Colors.grey.shade300),
-                GestureDetector(
+                InkWell(
                   onTap: () async {
                     onPickImage();
                   },
@@ -92,7 +92,7 @@ class WidgetPickerImage extends StatelessWidget {
             ),
           ),
           8.h,
-          GestureDetector(
+          InkWell(
             onTap: () {
               Navigator.pop(context);
             },
