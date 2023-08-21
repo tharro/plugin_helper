@@ -88,25 +88,24 @@ class Flag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return country != null && showFlag!
-        ? Container(
-            child: useEmoji!
-                ? Text(
-                    Utils.generateFlagEmojiUnicode(country?.alpha2Code ?? ''),
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  )
-                : ClipRRect(
-                    borderRadius: BorderRadius.circular(radius ?? 0),
-                    child: Image.asset(
-                      country!.flagUri,
-                      width: width ?? 32.0,
-                      height: height,
-                      package: 'plugin_helper',
-                      errorBuilder: (context, error, stackTrace) {
-                        return const SizedBox.shrink();
-                      },
-                    ),
-                  ),
-          )
+        ? useEmoji!
+            ? Text(
+                Utils.generateFlagEmojiUnicode(country?.alpha2Code ?? ''),
+                style: Theme.of(context).textTheme.headlineSmall,
+              )
+            : ClipRRect(
+                borderRadius: BorderRadius.circular(radius ?? 0),
+                child: Image.asset(
+                  country!.flagUri,
+                  width: width ?? 32.0,
+                  height: height,
+                  fit: BoxFit.cover,
+                  package: 'plugin_helper',
+                  errorBuilder: (context, error, stackTrace) {
+                    return const SizedBox.shrink();
+                  },
+                ),
+              )
         : const SizedBox.shrink();
   }
 }
