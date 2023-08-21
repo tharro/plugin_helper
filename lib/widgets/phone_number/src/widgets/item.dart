@@ -42,7 +42,7 @@ class Item extends StatelessWidget {
             if (showFlag!)
               Padding(
                 padding: flagPadding ?? EdgeInsets.zero,
-                child: _Flag(
+                child: Flag(
                   country: country,
                   showFlag: showFlag,
                   useEmoji: useEmoji,
@@ -59,12 +59,21 @@ class Item extends StatelessWidget {
   }
 }
 
-class _Flag extends StatelessWidget {
+class Flag extends StatelessWidget {
   final Country? country;
   final bool? showFlag;
   final bool? useEmoji;
+  final double? radius;
+  final double? width, height;
 
-  const _Flag({Key? key, this.country, this.showFlag, this.useEmoji})
+  const Flag(
+      {Key? key,
+      this.country,
+      this.showFlag,
+      this.useEmoji,
+      this.radius,
+      this.width,
+      this.height})
       : super(key: key);
 
   @override
@@ -76,13 +85,17 @@ class _Flag extends StatelessWidget {
                     Utils.generateFlagEmojiUnicode(country?.alpha2Code ?? ''),
                     style: Theme.of(context).textTheme.headlineSmall,
                   )
-                : Image.asset(
-                    country!.flagUri,
-                    width: 32.0,
-                    package: 'plugin_helper',
-                    errorBuilder: (context, error, stackTrace) {
-                      return const SizedBox.shrink();
-                    },
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(radius ?? 0),
+                    child: Image.asset(
+                      country!.flagUri,
+                      width: width ?? 32.0,
+                      height: height,
+                      package: 'plugin_helper',
+                      errorBuilder: (context, error, stackTrace) {
+                        return const SizedBox.shrink();
+                      },
+                    ),
                   ),
           )
         : const SizedBox.shrink();
