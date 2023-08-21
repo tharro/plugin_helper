@@ -14,6 +14,9 @@ class Item extends StatelessWidget {
   final Widget? iconLeft;
   final EdgeInsets? flagPadding;
   final double? heightItem;
+  final double? radius;
+  final double? width, height;
+
   const Item({
     Key? key,
     this.country,
@@ -26,6 +29,9 @@ class Item extends StatelessWidget {
     this.iconLeft,
     this.flagPadding,
     this.heightItem,
+    this.radius,
+    this.width,
+    this.height,
   }) : super(key: key);
 
   @override
@@ -46,6 +52,9 @@ class Item extends StatelessWidget {
                   country: country,
                   showFlag: showFlag,
                   useEmoji: useEmoji,
+                  height: height,
+                  width: width,
+                  radius: radius,
                 ),
               ),
             Text(

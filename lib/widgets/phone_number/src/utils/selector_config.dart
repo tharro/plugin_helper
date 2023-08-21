@@ -32,6 +32,8 @@ class SelectorConfig {
   final Widget? iconLeft, iconRight;
   final EdgeInsets? flagPadding;
   final double? heightItem;
+  final double? radius;
+  final double? width, height;
 
   const SelectorConfig({
     this.selectorType = PhoneInputSelectorType.DROPDOWN,
@@ -44,5 +46,8 @@ class SelectorConfig {
     this.iconRight,
     this.flagPadding,
     this.heightItem,
+    this.radius,
+    this.width,
+    this.height,
   });
 }

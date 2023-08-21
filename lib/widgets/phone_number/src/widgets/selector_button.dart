@@ -17,7 +17,6 @@ class SelectorButton extends StatelessWidget {
   final String? locale;
   final bool isEnabled;
   final bool isScrollControlled;
-
   final ValueChanged<Country?> onCountryChanged;
 
   const SelectorButton({
@@ -43,6 +42,9 @@ class SelectorButton extends StatelessWidget {
                 child: DropdownButton<Country>(
                   key: const Key(TestHelper.DropdownButtonKeyValue),
                   hint: Item(
+                      height: selectorConfig.height,
+                      width: selectorConfig.width,
+                      radius: selectorConfig.radius,
                       country: country,
                       showFlag: selectorConfig.showFlags,
                       useEmoji: selectorConfig.useEmoji,
@@ -57,6 +59,9 @@ class SelectorButton extends StatelessWidget {
                 ),
               )
             : Item(
+                height: selectorConfig.height,
+                width: selectorConfig.width,
+                radius: selectorConfig.radius,
                 country: country,
                 showFlag: selectorConfig.showFlags,
                 useEmoji: selectorConfig.useEmoji,
@@ -88,6 +93,9 @@ class SelectorButton extends StatelessWidget {
                   }
                 : null,
             child: Item(
+                height: selectorConfig.height,
+                width: selectorConfig.width,
+                radius: selectorConfig.radius,
                 country: country,
                 showFlag: selectorConfig.showFlags,
                 useEmoji: selectorConfig.useEmoji,
@@ -109,6 +117,9 @@ class SelectorButton extends StatelessWidget {
         child: Item(
           key: Key(TestHelper.countryItemKeyValue(country.alpha2Code)),
           country: country,
+          height: selectorConfig.height,
+          width: selectorConfig.width,
+          radius: selectorConfig.radius,
           showFlag: selectorConfig.showFlags,
           useEmoji: selectorConfig.useEmoji,
           textStyle: selectorTextStyle,
