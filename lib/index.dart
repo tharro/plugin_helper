@@ -37,6 +37,7 @@ export './widgets/widget_date_picker.dart';
 export './widgets/widget_double_check_to_close_app.dart';
 export './widgets/widget_empty.dart';
 export './widgets/widget_error.dart';
+export './widgets/widget_expanded.dart';
 export './widgets/widget_header_view.dart';
 export './widgets/widget_pinput.dart';
 export './widgets/widget_text_field.dart';
