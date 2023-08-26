@@ -32,6 +32,7 @@ class MyWidgetPhoneNumber extends StatefulWidget {
   final double borderRadius;
   final Color? focusColor, unFocusColor;
   final Color? cursorColor;
+  final InputDecoration? searchBoxDecoration;
   const MyWidgetPhoneNumber(
       {Key? key,
       this.label,
@@ -72,7 +73,8 @@ class MyWidgetPhoneNumber extends StatefulWidget {
       this.focusColor,
       this.unFocusColor,
       this.onFocus,
-      this.cursorColor})
+      this.cursorColor,
+      this.searchBoxDecoration})
       : super(key: key);
   @override
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
@@ -148,16 +150,17 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
                 countries: widget.countries,
                 initialValue: widget.initialValue ??
                     PhoneNumber(isoCode: 'AU', dialCode: '+61'),
-                searchBoxDecoration: InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey[300]!)),
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey[300]!)),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey[300]!),
-                    ),
-                    labelText: widget.labelSearch,
-                    labelStyle: widget.hintStyle),
+                searchBoxDecoration: widget.searchBoxDecoration ??
+                    InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey[300]!)),
+                        border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey[300]!)),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey[300]!),
+                        ),
+                        labelText: widget.labelSearch,
+                        labelStyle: widget.hintStyle),
                 onInputChanged: (PhoneNumber number) {
                   if (widget.onInputChanged != null) {
                     widget.onInputChanged!(number);
