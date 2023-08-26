@@ -31,6 +31,7 @@ class MyWidgetPhoneNumber extends StatefulWidget {
   final Widget? iconClose;
   final double borderRadius;
   final Color? focusColor, unFocusColor;
+  final Color? cursorColor;
   const MyWidgetPhoneNumber(
       {Key? key,
       this.label,
@@ -70,7 +71,8 @@ class MyWidgetPhoneNumber extends StatefulWidget {
       this.borderRadius = 34,
       this.focusColor,
       this.unFocusColor,
-      this.onFocus})
+      this.onFocus,
+      this.cursorColor})
       : super(key: key);
   @override
   _WidgetPhoneNumberState createState() => _WidgetPhoneNumberState();
@@ -170,7 +172,7 @@ class _WidgetPhoneNumberState extends State<MyWidgetPhoneNumber> {
                     widget.onInputValidated!(value);
                   }
                 },
-                cursorColor: Colors.black,
+                cursorColor: widget.cursorColor ?? Colors.black,
                 spaceBetweenSelectorAndTextField:
                     widget.spaceBetweenSelectorAndTextField,
                 textAlignVertical: TextAlignVertical.top,
