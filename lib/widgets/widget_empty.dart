@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:plugin_helper/index.dart';
 
@@ -9,6 +12,8 @@ class MyWidgetEmpty extends StatelessWidget {
   final Widget? icon;
   final VoidCallback? onRefresh;
   final RefreshController? refreshController;
+  final Widget? customHeaderRefresh;
+  final bool enablePullDown;
   const MyWidgetEmpty(
       {Key? key,
       this.mainAxisAlignment = MainAxisAlignment.center,
@@ -17,7 +22,9 @@ class MyWidgetEmpty extends StatelessWidget {
       this.icon,
       this.crossAxisAlignment = CrossAxisAlignment.center,
       this.onRefresh,
-      this.refreshController})
+      this.refreshController,
+      this.customHeaderRefresh,
+      this.enablePullDown = true})
       : super(key: key);
 
   @override
@@ -39,6 +46,13 @@ class MyWidgetEmpty extends StatelessWidget {
     if (refreshController != null) {
       return SmartRefresher(
         onRefresh: onRefresh,
+        enablePullDown: enablePullDown,
+        header: kIsWeb
+            ? null
+            : customHeaderRefresh ??
+                (Platform.isIOS
+                    ? const ClassHeaderGridIndicator()
+                    : const MaterialClassicHeader()),
         controller: refreshController!,
         child: child,
       );

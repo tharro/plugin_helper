@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:plugin_helper/index.dart';
 
@@ -7,6 +10,8 @@ class MyWidgetError extends StatelessWidget {
   final RefreshController? refreshController;
   final Widget? iconError;
   final TextStyle textStyle;
+  final bool enablePullDown;
+  final Widget? customHeaderRefresh;
   const MyWidgetError({
     Key? key,
     required this.error,
@@ -14,6 +19,8 @@ class MyWidgetError extends StatelessWidget {
     this.onRefresh,
     this.refreshController,
     this.iconError,
+    this.enablePullDown = true,
+    this.customHeaderRefresh,
   }) : super(key: key);
 
   @override
@@ -33,6 +40,13 @@ class MyWidgetError extends StatelessWidget {
 
     if (refreshController != null) {
       return SmartRefresher(
+        enablePullDown: enablePullDown,
+        header: kIsWeb
+            ? null
+            : customHeaderRefresh ??
+                (Platform.isIOS
+                    ? const ClassHeaderGridIndicator()
+                    : const MaterialClassicHeader()),
         onRefresh: onRefresh,
         controller: refreshController!,
         child: child,
