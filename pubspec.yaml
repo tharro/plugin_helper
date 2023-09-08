@@ -20,7 +20,7 @@ dependencies:
   file_picker: ^5.2.6
   url_launcher: ^6.1.10
   http: ^0.13.5
-  new_version_plus: ^0.0.9
+  new_version_plus: ^0.0.10
   cached_network_image: ^3.2.3
   pull_to_refresh: ^2.0.0
   pin_code_fields: ^7.4.0
@@ -34,7 +34,7 @@ dependencies:
   photo_view: ^0.14.0
   path: ^1.8.2
   overlay_support: ^2.1.0
-  share_plus: ^6.3.1
+  share_plus: ^7.1.0
 
 
 dev_dependencies:
