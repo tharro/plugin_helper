@@ -100,7 +100,8 @@ class _AppGridViewState extends State<MyWidgetAppGridView> {
       widget.onScrollListener!();
     }
 
-    if (widget.onLoadMore != null && _controller.position.extentAfter < 200) {
+    if (widget.onLoadMore != null &&
+        _controller.position.pixels > _controller.position.maxScrollExtent) {
       widget.onLoadMore!();
     }
   }

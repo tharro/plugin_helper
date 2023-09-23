@@ -144,7 +144,8 @@ class AppListViewState extends State<MyWidgetAppListView> {
     if (widget.onScrollListener != null) {
       widget.onScrollListener!(_controller);
     }
-    if (widget.onLoadMore != null && _controller.position.extentAfter < 200) {
+    if (widget.onLoadMore != null &&
+        _controller.position.pixels > _controller.position.maxScrollExtent) {
       widget.onLoadMore!();
     }
   }
