@@ -150,11 +150,10 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         }
 
         if (widget.focus!.hasFocus != _hasFocus) {
-          if (mounted) {
-            setState(() {
-              _hasFocus = widget.focus!.hasFocus;
-            });
-          }
+          if (!mounted) return;
+          setState(() {
+            _hasFocus = widget.focus!.hasFocus;
+          });
         }
       });
     }
@@ -260,37 +259,27 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
       widget.onListenController!();
     }
     if (_hasChanged == false && widget.controller.text.isNotEmpty) {
-      if (mounted) {
-        setState(() {
-          _hasChanged = true;
-        });
-      }
+      if (!mounted) return;
+      _hasChanged = true;
+      setState(() {});
     }
   }
 
   setValid() {
-    if (mounted) {
-      if (!_valid) {
-        setState(() {
-          _valid = true;
-        });
-        if (widget.onValid != null) {
-          widget.onValid!(_valid);
-        }
-      }
+    if (!mounted) return;
+    _valid = true;
+    setState(() {});
+    if (widget.onValid != null) {
+      widget.onValid!(_valid);
     }
   }
 
   setInValid() {
-    if (mounted) {
-      if (_valid) {
-        setState(() {
-          _valid = false;
-        });
-        if (widget.onValid != null) {
-          widget.onValid!(_valid);
-        }
-      }
+    if (!mounted) return;
+    _valid = false;
+    setState(() {});
+    if (widget.onValid != null) {
+      widget.onValid!(_valid);
     }
   }
 
@@ -470,11 +459,10 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
                 GestureDetector(
                   onTap: () {
                     if (widget.validType == ValidType.password) {
-                      if (mounted) {
-                        setState(() {
-                          _obscureText = !_obscureText;
-                        });
-                      }
+                      if (!mounted) return;
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
                     }
                     if (widget.onSuffixIconTap != null) {
                       widget.onSuffixIconTap!();
