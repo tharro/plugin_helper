@@ -222,7 +222,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         if (widget.controller.text.isEmpty ||
             widget.controller.text.length < 16) {
           setInValid();
-          return;
+          break;
         }
         setValid();
         break;
@@ -233,23 +233,28 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         }
 
         final DateTime now = DateTime.now();
-        final List<String> date = widget.controller.text.split(RegExp(r'/'));
-        final int month = int.parse(date.first);
-        final int year = int.parse(date.last);
-        final DateTime cardDate = DateTime(year, month);
+        if (widget.controller.text.length == 5) {
+          final List<String> date = widget.controller.text.split(RegExp(r'/'));
+          final int month = int.parse(date.first);
+          final int year = int.parse('20${date.last}');
+          final DateTime cardDate = DateTime(year, month);
 
-        if (cardDate.isBefore(now) || month > 12 || month == 0) {
-          setInValid();
-          return;
+          if (cardDate.isBefore(now) || month > 12 || month == 0) {
+            setInValid();
+            break;
+          }
+
+          setValid();
+          break;
         }
 
-        setValid();
+        setInValid();
         break;
       case ValidType.cvv:
         if (widget.controller.text.isEmpty ||
             widget.controller.text.length < 3) {
           setInValid();
-          return;
+          break;
         }
         setValid();
         break;
