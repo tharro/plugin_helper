@@ -236,7 +236,7 @@ class _WidgetTextFieldState extends State<MyWidgetTextField> {
         final DateTime now = DateTime.now();
         final List<String> date = widget.controller.text.split(RegExp(r'/'));
         final int month = int.parse(date.first);
-        final int year = int.parse('20${date.last}');
+        final int year = int.parse(date.last);
         final DateTime cardDate = DateTime(year, month);
 
         if (cardDate.isBefore(now) || month > 12 || month == 0) {
