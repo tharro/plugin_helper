@@ -101,13 +101,25 @@ class MyPluginHelper {
   }
 
   static String formatCurrency(
-      {String locale = 'en-US', required double number}) {
+      {String locale = 'en-US',
+      required double number,
+      bool isAlwayShowDecimal = false}) {
     NumberFormat formatCurrency =
         NumberFormat.currency(locale: locale, symbol: '\$');
     try {
-      return formatCurrency.format(number);
+      String currency = formatCurrency.format(number);
+      if (isAlwayShowDecimal) {
+        return currency;
+      }
+
+      List<String> arr = currency.split('.');
+      if (int.parse(arr.last) != 0) {
+        return currency;
+      }
+
+      return arr.first;
     } catch (e) {
-      return '\$0.00';
+      return '\$0${isAlwayShowDecimal ? '.00' : ''}';
     }
   }
 
