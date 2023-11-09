@@ -11,7 +11,6 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
       this.onPressLeftIcon,
       this.toolbarHeight,
       this.backgroundColor,
-      this.backgroundColorIconLeft,
       this.centerTitle = true,
       this.elevation = 0,
       this.isShowLeftIcon = true,
@@ -33,7 +32,7 @@ class MyWidgetHeader extends StatelessWidget implements PreferredSizeWidget {
   final bool isShowLeftIcon;
   final double? toolbarHeight, titleSpacing;
   final Color? backgroundColor;
-  final Color? backgroundColorIconLeft, onPrimaryColorIconLeft;
+  final Color? onPrimaryColorIconLeft;
   final double? leadingWidth;
   final SystemUiOverlayStyle? systemUiOverlayStyle;
   final PreferredSizeWidget? bottom;
