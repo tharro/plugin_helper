@@ -16,3 +16,10 @@ dependencies:
 ```
 
 ## Usages
+
+### Syntax
+To use widget or plugin 
+```
+MyPlugin...
+MyWidget...
+```

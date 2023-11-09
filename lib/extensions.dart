@@ -123,7 +123,8 @@ void goBack<T>({BuildContext? context, T? callback}) {
 }
 
 bool get kIsTablet {
-  final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+  final data = MediaQueryData.fromView(
+      WidgetsBinding.instance.platformDispatcher.views.single);
   if (Orientation.portrait == data.orientation) {
     return data.size.shortestSide >= 600;
   }
