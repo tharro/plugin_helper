@@ -1,4 +1,4 @@
-/// This plugin use for multiple languages
+/// Multiple languages
 class MyPluginMessageRequire {
   static String noConnection = 'No internet connection';
   static String canNotLaunchURL = 'Can not launch URL';

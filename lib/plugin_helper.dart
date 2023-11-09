@@ -45,6 +45,7 @@ class MyPluginHelper {
     return regExp.hasMatch(email.trim());
   }
 
+  /// Retrieve the phone number by country
   static String parsePhoneWithCountry({required String phone}) {
     final List<Locale> systemLocales = WidgetsBinding.instance.window.locales;
     String? isoCountryCode = systemLocales.first.countryCode;
@@ -100,6 +101,7 @@ class MyPluginHelper {
     return null;
   }
 
+  /// Format currency by locale
   static String formatCurrency(
       {String locale = 'en-US',
       required double number,
@@ -216,6 +218,7 @@ class MyPluginHelper {
     }
   }
 
+  /// Format utc time from the server to local time
   static String formatUtcTime(
       {required String dateUtc,
       String? format = 'dd/MM/yyyy HH:mm:ss',
@@ -232,6 +235,7 @@ class MyPluginHelper {
     }
   }
 
+  /// Format local time to utc time
   static String convertLocalTimeToUtcTime({String? dateTime}) {
     try {
       if (dateTime != null) {
@@ -245,6 +249,15 @@ class MyPluginHelper {
     }
   }
 
+  /// Calculate the time between today's time and the set time.
+  ///
+  /// Example
+  /// ```
+  /// DateTime now = DateTime.now(); // ~> 2023-09-09 07:00:00
+  /// String dateTime = '2023-09-09 09:00:00'
+  /// Strong formatTime = MyPluginHelper.convertTimeToHourOrDay(dateTime);
+  /// ```
+  /// Output: 2 hours
   static String convertTimeToHourOrDay(
       {required String dateTime,
       String? format = 'dd/MM/yyyy HH:mm:ss',
@@ -276,6 +289,7 @@ class MyPluginHelper {
     }
   }
 
+  /// Check version to redirect app updates
   static checkUpdateApp(
       {required String iOSId,
       required String androidId,
@@ -294,6 +308,8 @@ class MyPluginHelper {
     }
   }
 
+  /// Set default languages.
+  /// Use when the project has multiple languages.
   static Future setLanguage({required String language}) async {
     if (!kIsWeb && Platform.isLinux) {
       final prefs = await SharedPreferences.getInstance();
@@ -305,6 +321,8 @@ class MyPluginHelper {
     await storage.write(key: MyPluginAppConstraints.language, value: language);
   }
 
+  /// Get default languages.
+  /// Use when the project has multiple languages.
   static Future<String> getLanguage() async {
     if (!kIsWeb && Platform.isLinux) {
       final prefs = await SharedPreferences.getInstance();
@@ -317,6 +335,7 @@ class MyPluginHelper {
     return language ?? 'en';
   }
 
+  /// Check if application is on its first run
   static Future<bool> isFirstInstall() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool(MyPluginAppConstraints.firstRun) ?? true;
@@ -327,6 +346,7 @@ class MyPluginHelper {
     await prefs.setBool(MyPluginAppConstraints.firstRun, false);
   }
 
+  /// Shows a modal Material Design bottom sheet.
   static Future<T> showModalBottom<T>({
     required BuildContext context,
     double radiusShape = 16,
@@ -361,6 +381,7 @@ class MyPluginHelper {
             )));
   }
 
+  /// Specifies the set of orientations the application interface can be displayed in.
   static setOrientation({bool isPortrait = true}) {
     if (!isPortrait) {
       SystemChrome.setPreferredOrientations([
@@ -466,13 +487,14 @@ class MyPluginHelper {
     _widgetsBinding?.deferFirstFrame();
   }
 
+  /// Stop prevents app
   static Future<void> remove() async {
     await Future.delayed(const Duration(seconds: 1));
     _widgetsBinding?.allowFirstFrame();
     _widgetsBinding = null;
   }
-  // =========================================================================================
 
+  /// Get link image from the cloudfront server
   static String getLinkImage(
       {required String key,
       double? width,
@@ -498,6 +520,7 @@ class MyPluginHelper {
     return MyPluginAppEnvironment().linkCloudfront! + encoded;
   }
 
+  /// Set the TextField only allows characters matching a pattern.
   static List<TextInputFormatter> checkRegExt({required RegExpType type}) {
     switch (type) {
       case RegExpType.numberWithDecimal:
@@ -519,6 +542,7 @@ class MyPluginHelper {
     }
   }
 
+  /// Convert url to file.
   static Future<File> urlToFile(String imageUrl) async {
     // generate random number.
     var rng = Random();

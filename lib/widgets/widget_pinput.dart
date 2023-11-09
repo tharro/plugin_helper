@@ -45,7 +45,7 @@ class MyWidgetPinPut extends StatelessWidget {
       this.widthPinput,
       this.heightPinput,
       required this.textStyle,
-      this.autoFocus=  false,
+      this.autoFocus = false,
       this.length})
       : super(key: key);
   @override

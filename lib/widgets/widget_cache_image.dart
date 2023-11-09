@@ -3,6 +3,7 @@ import 'package:plugin_helper/index.dart';
 
 enum ImageType { none, avatar }
 
+/// Widget to load and cache network images.
 class MyWidgetCacheImageNetwork extends StatelessWidget {
   final String? imageUrl;
   final double? width, withResize;

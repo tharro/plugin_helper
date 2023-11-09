@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// This plugin use for authentication by AWS
 class MyPluginAppConstraints {
   static const String user = 'USER';
   static const String token = 'TOKEN';
@@ -18,8 +17,11 @@ class MyPluginAppConstraints {
   static const String language = 'LANGUAGE';
 }
 
+/// This plugin helps manage user access tokens.
 class MyPluginAuthentication {
   static const storage = FlutterSecureStorage();
+
+  /// Check whether token exists or not.
   static Future<bool> hasToken() async {
     final prefs = await SharedPreferences.getInstance();
     try {
@@ -44,6 +46,7 @@ class MyPluginAuthentication {
     }
   }
 
+  /// Check whether token is valid or not.
   static Future<bool> checkTokenValidity() async {
     final users = await getUser();
     if (users.expiredToken != null &&
@@ -58,6 +61,7 @@ class MyPluginAuthentication {
     return false;
   }
 
+  /// Check whether the refresh token is valid or not.
   static Future<bool> checkRefreshTokenValidity() async {
     final users = await getUser();
     if (users.expiredRefreshToken != null &&
@@ -71,6 +75,7 @@ class MyPluginAuthentication {
     return false;
   }
 
+  /// Retrieve user's token from local storage
   static Future<Users> getUser() async {
     try {
       String? user, token, refreshToken, expiredToken, expiredRefreshToken;
@@ -107,6 +112,7 @@ class MyPluginAuthentication {
     }
   }
 
+  /// Save user's token to local storage
   static Future<void> persistUser({
     required String userId,
     required String token,
@@ -135,6 +141,7 @@ class MyPluginAuthentication {
     }
   }
 
+  /// Delete user's token in local storage
   static Future<void> deleteUser() async {
     if (kIsWeb || !Platform.isLinux) {
       await storage.delete(key: MyPluginAppConstraints.user);
