@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+/// This plugin helper retrieves file in the device
 class MyPluginPickerFile {
   static Future<PickedFile?>? pickerFileCustom() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
