@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:plugin_helper/index.dart';
 
-/// Customize the widget to show empty data
+/// Show empty data
 class MyWidgetEmpty extends StatelessWidget {
   // How the children should be placed along the main axis in a flex layout.
   final MainAxisAlignment mainAxisAlignment;

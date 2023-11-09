@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Allows users to easily select a range of dates.
 class MyWidgetDateRangePickerCustom extends StatelessWidget {
   final Widget child;
   final String? initialFirstDate;

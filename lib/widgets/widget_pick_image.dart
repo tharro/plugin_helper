@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plugin_helper/index.dart';
 
+/// Allows users to easily select a image.
 class WidgetPickerImage extends StatelessWidget {
   final String title;
   final TextStyle titleStyle, itemStyles;

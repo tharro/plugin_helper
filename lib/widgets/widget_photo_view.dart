@@ -7,6 +7,8 @@ import 'package:photo_view/photo_view_gallery.dart';
 
 import '../models/image_element_model.dart';
 
+/// Photo View provides a gesture sensitive zoomable widget.
+/// Photo View is largely used to show interactive images.
 class MyWidgetPhotoViewCustom extends StatefulWidget {
   const MyWidgetPhotoViewCustom({
     Key? key,
