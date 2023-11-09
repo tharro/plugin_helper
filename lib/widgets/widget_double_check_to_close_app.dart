@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:plugin_helper/index.dart';
 
+/// Only Android.
+/// Handles double-tapping the back button to exit the app.
 class MyWidgetDoubleCheckToCloseApp extends StatefulWidget {
   final Widget child;
   final String message;

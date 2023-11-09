@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:plugin_helper/index.dart';
 
+/// Customize the widget to show error message
 class MyWidgetError extends StatelessWidget {
   final String error;
   final VoidCallback? onRefresh;

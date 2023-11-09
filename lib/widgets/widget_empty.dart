@@ -4,15 +4,33 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:plugin_helper/index.dart';
 
+/// Customize the widget to show empty data
 class MyWidgetEmpty extends StatelessWidget {
+  // How the children should be placed along the main axis in a flex layout.
   final MainAxisAlignment mainAxisAlignment;
+
+  /// How the children should be placed along the cross axis in a flex layout.
   final CrossAxisAlignment crossAxisAlignment;
+
+  /// Set empty message.
   final String? message;
+
+  /// Set text styles message.
   final TextStyle textStyle;
+
+  /// Customize empty icon.
   final Widget? icon;
+
+  /// Trigger when the user pull to refresh page if [refreshController] not null.
   final VoidCallback? onRefresh;
+
+  /// A controller control header and footer state, it can trigger driving request Refresh, set the initalRefresh, status if needed
   final RefreshController? refreshController;
+
+  /// Header indicator displace before content
   final Widget? customHeaderRefresh;
+
+  /// This bool will affect whether or not to have the function of drop-down refresh.
   final bool enablePullDown;
   const MyWidgetEmpty(
       {Key? key,
