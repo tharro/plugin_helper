@@ -1,28 +1,77 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+/// A widget which will help you to generate pin code fields.
 class MyWidgetPinPut extends StatelessWidget {
+  /// Trigger when the user fills in all the information
   final Function(String value)? onCompleted;
+
+  /// A controller for an editable text field.
   final TextEditingController controller;
+
+  /// Responsive width and height of the TextField with padding
   final double paddingHorizontal;
+
+  /// Border radius of each pin code field. Default is 5
   final double radius;
+
+  /// You already know what it does I guess. Default is false
   final bool obscureText;
+
+  /// Widget used to obscure text.
+  /// It overrides the obscuringCharacter.
   final Widget? obscuringWidget;
+
+  /// Character used for obscuring text if obscureText is true.
   final String obscuringCharacter;
+
+  /// Customize box shadows of the fields
   final List<BoxShadow>? boxShadows;
+
+  /// Returns the current typed text in the fields.
   final void Function(String value) onChanged;
-  final Color? activeFillColor,
-      inactiveColor,
-      activeColor,
-      inactiveFillColor,
-      selectedFillColor,
-      selectedColor;
+
+  /// Colors of the input fields which have inputs. Default is [Colors.white]
+  final Color? activeFillColor;
+
+  /// Colors of the input fields which don't have inputs. Default is [Colors.white]
+  final Color? inactiveColor;
+
+  /// Colors of the input fields which have inputs. Default is [Color(0xffffb41d)]
+  final Color? activeColor;
+
+  /// Colors of the input fields which don't have inputs. Default is [Colors.white]
+  final Color? inactiveFillColor;
+
+  /// Color of the input field which is currently selected. Default is [Colors.white]
+  final Color? selectedFillColor;
+
+  /// Color of the input field which is currently selected. Default is [Color(0xffffb41d)]
+  final Color? selectedColor;
+
+  /// The style of the text, default is [ fontSize: 20, fontWeight: FontWeight.bold]
   final TextStyle textStyle;
+
+  /// Border width for the each input fields. Default is [1.0]
   final double? borderWidth;
+
+  /// This defines the shape of the input fields. Default is underlined
   final PinCodeFieldShape? shape;
-  final double? widthPinput, heightPinput;
+
+  ///  [widthPinput] for the pin code field.
+  final double? widthPinput;
+
+  /// [heightPinput] for the pin code field.
+  final double? heightPinput;
+
+  /// Length of how many cells there should be.
+  /// 3{super.key}{super.key}{super.key}{super.key}-8 is recommended by me.
+  /// Default is 6
   final int? length;
+
+  /// If the pin code field should be autofocused or not. Default is [false]
   final bool autoFocus;
+
   const MyWidgetPinPut(
       {Key? key,
       this.onCompleted,

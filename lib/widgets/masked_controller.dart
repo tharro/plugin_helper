@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+/// A controller for an editable text field and format the input by a given mask.
+///
+/// Example
+/// Format card number, month/year
+/// ```
+/// MaskedTextController _cardNumber = MaskedTextController(mask: '0000 0000 0000 0000');
+/// MaskedTextController _expired = MaskedTextController(mask: '00/00');
+/// ```
 class MaskedTextController extends TextEditingController {
   MaskedTextController(
       {String? text, required this.mask, Map<String, RegExp>? translator})

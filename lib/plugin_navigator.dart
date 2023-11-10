@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// Manage navigator
 class MyPluginNavigation<T> {
+  /// A key to use when building the [Navigator].
   GlobalKey<NavigatorState>? navigationKey;
 
   static MyPluginNavigation instance = MyPluginNavigation();

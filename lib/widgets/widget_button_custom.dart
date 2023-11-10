@@ -1,30 +1,91 @@
 import 'package:flutter/material.dart';
 
+/// The MyWidgetButtonCustom widget is a customize button that triggers an action.
 class MyWidgetButtonCustom extends StatelessWidget {
+  /// A callback to be called when the user clicks on the button.
   final VoidCallback onPressed;
+
+  /// Title of the button.
   final String title;
+
+  /// Type of the button. Default is false.
   final bool isSecondary, isOutLine;
-  final Color? secondaryColor, primaryColor;
+
+  /// Color of the secondary button.
+  final Color? secondaryColor;
+
+  /// Color of the primary button.
+  final Color? primaryColor;
+
+  /// Color of the outline button.
   final Color? outLineColor;
-  final Color? secondaryBorderColor, primaryBorderColor;
+
+  /// Border color of the secondary button.
+  final Color? secondaryBorderColor;
+
+  /// Border color of the primary button.
+  final Color? primaryBorderColor;
+
+  /// Border color of the outline button.
   final Color? outLineBorderColor;
-  final Color? borderColor,
-      backgroundColor,
-      disableBackgroundColor,
-      disableTextColor,
-      disableBorderColor,
-      textColor;
-  final Color? textPrimaryColor, textSecondaryColor;
+
+  /// Border color of the button.
+  final Color? borderColor;
+
+  /// Background color button.
+  final Color? backgroundColor;
+
+  /// Disable background color button.
+  final Color? disableBackgroundColor;
+
+  /// Disable text color of the button.
+  final Color? disableTextColor;
+
+  /// Disable border color button.
+  final Color? disableBorderColor;
+
+  /// Text Color of the button.
+  final Color? textColor;
+
+  /// Text color of the primary button.
+  final Color? textPrimaryColor;
+
+  /// Text color of the secondary button.
+  final Color? textSecondaryColor;
+
+  /// Text color of the outline button.
   final Color? textOutLineColor;
+
+  /// The style of the text in the button.
   final TextStyle? textStyle;
+
+  /// Applies only to boxes with rectangular shapes. Default is 0.
   final double borderRadius;
+
+  /// Set margins of the button.
   final EdgeInsetsGeometry? padding;
+
+  /// This property indicates whether users can click the button or not.
   final bool enabled;
-  final double? width, height, elevation;
+
+  /// The width and height button
+  final double? width, height;
+
+  /// The elevation controls the shadow effect displayed below the button.
+  final double? elevation;
+
+  /// A widget display on the left [title]
   final Widget? icon;
+
+  /// A 2D gradient.
   final Gradient? gradient;
+
+  /// Change [title] to another widget.
   final Widget? customTitle;
+
+  /// Shadow color of the button.
   final Color? shadowColor;
+
   const MyWidgetButtonCustom({
     Key? key,
     required this.onPressed,
@@ -76,7 +137,7 @@ class MyWidgetButtonCustom extends StatelessWidget {
         style: OutlinedButton.styleFrom(
           foregroundColor: _checkBackgroundColor() == Colors.white
               ? Colors.grey
-              : Colors.white,
+              : const Color.fromRGBO(255, 255, 255, 1),
           elevation: elevation,
           padding: padding,
           shadowColor: shadowColor,

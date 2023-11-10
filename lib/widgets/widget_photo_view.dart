@@ -23,14 +23,35 @@ class MyWidgetPhotoViewCustom extends StatefulWidget {
     required this.pageController,
   }) : super(key: key);
 
+  /// While [ImageProvider] is not resolved, [loadingBuilder] is called by [PhotoView]
+  /// into the screen, by default it is a centered [CircularProgressIndicator]
   final LoadingBuilder? loadingBuilder;
+
+  /// The decoration to paint behind the [child] in the photo view.
   final BoxDecoration? backgroundDecoration;
+
+  /// An object that controls the [PageView] inside [PhotoViewGallery]
   final PageController pageController;
+
+  /// The axis along which the [PageView] scrolls. Mirror to [PageView.scrollDirection].
+  /// Default is horizontal
   final Axis scrollDirection;
-  final Widget? customHeader, customFooter;
+
+  /// Customize a widget on the top of the photo view.
+  final Widget? customHeader;
+
+  /// Customize a widget on the bottom of the photo view.
+  final Widget? customFooter;
+
+  /// Customize other widgets in the photo view.
   final List<Widget>? children;
+
+  /// Items in the gallery
   final List<ImageElementModel> images;
+
+  /// An callback to be called on a page change
   final void Function(int index)? onPageChanged;
+
   @override
   State<StatefulWidget> createState() {
     return _MyWidgetPhotoViewCustomState();
@@ -72,7 +93,6 @@ class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
                     // If the widget is hidden, animate to 1.0 (fully visible).
                     opacity: _isShowClose ? 1.0 : 0.0,
                     duration: const Duration(milliseconds: 100),
-                    // The green box must be a child of the AnimatedOpacity widget.
                     child: widget.customHeader ??
                         Container(
                           width: double.infinity,
@@ -101,7 +121,6 @@ class _MyWidgetPhotoViewCustomState extends State<MyWidgetPhotoViewCustom> {
                       // If the widget is hidden, animate to 1.0 (fully visible).
                       opacity: _isShowClose ? 1.0 : 0.0,
                       duration: const Duration(milliseconds: 100),
-                      // The green box must be a child of the AnimatedOpacity widget.
                       child: widget.customFooter!),
                 if (widget.children != null) ...widget.children!
               ],

@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:plugin_helper/index.dart';
 
-/// Show empty data
+/// Show empty data inline
 class MyWidgetEmpty extends StatelessWidget {
   // How the children should be placed along the main axis in a flex layout.
   final MainAxisAlignment mainAxisAlignment;
@@ -12,13 +12,13 @@ class MyWidgetEmpty extends StatelessWidget {
   /// How the children should be placed along the cross axis in a flex layout.
   final CrossAxisAlignment crossAxisAlignment;
 
-  /// Set empty message.
+  /// Empty message to show
   final String? message;
 
-  /// Set text styles message.
+  /// The style of the text
   final TextStyle textStyle;
 
-  /// Customize empty icon.
+  /// Customize empty icon above [message]
   final Widget? icon;
 
   /// Trigger when the user pull to refresh page if [refreshController] not null.
@@ -27,11 +27,12 @@ class MyWidgetEmpty extends StatelessWidget {
   /// A controller control header and footer state, it can trigger driving request Refresh, set the initalRefresh, status if needed
   final RefreshController? refreshController;
 
-  /// Header indicator displace before content
+  /// Customize a header indicator displace before content
   final Widget? customHeaderRefresh;
 
   /// This bool will affect whether or not to have the function of drop-down refresh.
   final bool enablePullDown;
+
   const MyWidgetEmpty(
       {Key? key,
       this.mainAxisAlignment = MainAxisAlignment.center,

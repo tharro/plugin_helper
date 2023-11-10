@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
+/// This widget have an expand/collapse for users to show/hide additional content.
 class MyWidgetExpanded extends StatefulWidget {
   final Widget child;
+
+  /// This property indicates whether the widget is expanded or not.
   final bool expand;
+
+  /// The length of time this animation should last.
   final Duration? duration;
 
   const MyWidgetExpanded(

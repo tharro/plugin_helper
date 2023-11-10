@@ -18,55 +18,173 @@ enum TextFieldType { normal, animation }
 enum AlignmentPasswordIcon { left, right }
 
 class MyWidgetTextField extends StatefulWidget {
+  /// Set label above the TextField.
   final String? label;
+
+  /// A controller for an editable text field.
   final TextEditingController controller;
+
+  /// An icon that appears after the editable part of the text field and after
+  /// the [suffix] or [suffixText], within the decoration's container.
+  /// [suffixActiveIcon] will show when the user focuses on the TextField.
+  /// [suffixDisableIcon] will show when the user unfocuses on the TextField.
   final Widget? suffixActiveIcon, suffixDisableIcon;
+
+  /// An icon that appears before the [prefix] or [prefixText] and before the editable part
+  /// of the text field, within the decoration's container.
   final Widget? prefixIcon;
+
+  /// List [TextInputFormatter] can be optionally injected into an [EditableText] to
+  /// provide as-you-type validation and formatting of the text being edited.
   final List<TextInputFormatter>? inputFormatters;
+
+  /// The type of information for which to optimize the text input control.
   final TextInputType? keyboardType;
+
+  /// Whether to hide the text being edited (e.g., for passwords).
   final bool obscureText;
+
+  /// Trigger when the user clicks the suffix icon
+  /// if [suffixActiveIcon] and [suffixDisableIcon] not null.
   final VoidCallback? onSuffixIconTap;
+
+  /// Set a valid type for the input. When the user enters a character,
+  /// the TextField automatically checks against that valid type.
+  /// The Textfield will automatically show errors corresponding to a valid type.
   final ValidType validType;
+
+  /// This property indicates whether users can enter character.
   final bool enabled;
+
+  /// Trigger when user enters character. Check whether input is valid or not.
+  /// If true, valid input.
+  /// If false, invalid input.
+  /// You use this value to prevent the user from performing further operations until it is valid.
   final Function(bool)? onValid;
+
+  /// Configures how the platform keyboard will select an uppercase or lowercase keyboard.
   final TextCapitalization textCapitalization;
+
+  /// Set hint text for the TextField.
   final String? hintText;
+
+  /// Limit the length of the text field.
   final int? maxLength;
+
+  /// You can set an error message when the default message doesn't like what you want.
+  /// It needs to be combined with the [onValid] function before setting a value for it.
   final String? textError;
+
+  /// A callback to be called when user taps on the TextField.
   final VoidCallback? onTap;
+
+  /// The padding for the input decoration's container.
   final EdgeInsets? contentPadding;
+
+  /// The maximum number of lines to show at one time.
   final int? maxLines;
+
+  /// The minimum number of lines to show at one time.
   final int? minLines;
+
+  /// An object that can be used by a stateful widget to obtain the keyboard
+  /// focus and to handle keyboard events.
   final FocusNode? focus;
+
+  /// Trigger when the user clicks the submit button on the keyboard.
   final Function(String)? onFieldSubmitted;
+
+  /// An action the user has requested the text input control to perform.
   final TextInputAction? textInputAction;
+
+  /// Defines minimum and maximum sizes for the [InputDecorator].
   final BoxConstraints? constraints;
+
+  /// If the textfield type [ValidType] is password,
+  /// you can choose the secure type for the password. Default is [PasswordValidType.atLeast8Characters]
   final PasswordValidType passwordValidType;
-  final TextStyle textStyle, labelStyle, errorStyle;
-  final TextStyle? textStyleCounter, textStyleHint;
-  final InputBorder? errorBorder, border, focusBorder, disabledBorder;
-  final Function? onListenFocus, onListenController;
+
+  /// The style of the text field.
+  final TextStyle textStyle;
+
+  /// The style of the label.
+  final TextStyle labelStyle;
+
+  /// The style of the error text.
+  final TextStyle errorStyle;
+
+  /// The style of the counter text.
+  final TextStyle? textStyleCounter;
+
+  /// The style of the hint text.
+  final TextStyle? textStyleHint;
+
+  /// The border to display when the [InputDecorator] does not have the focus and is showing an error.
+  final InputBorder? errorBorder;
+
+  /// The shape of the border to draw around the decoration's container.
+  final InputBorder? border;
+
+  /// The border to display when the [InputDecorator] has the focus and is not showing an error.
+  final InputBorder? focusBorder;
+
+  /// The border to display when the [InputDecorator] is disabled and is not showing an error.
+  final InputBorder? disabledBorder;
+
+  /// A callback to be called when the user focuses on the text field.
+  final Function? onListenFocus;
+
+  /// A callback to be called whenever the text changes.
+  final Function? onListenController;
+
+  /// This property indicates whether an error message is displayed or not.
   final bool? showError;
+
+  /// Set margins for prefix icon when [prefixIcon] is not null.
   final double? paddingLeftPrefixIcon,
       paddingRightPrefixIcon,
       paddingLeftSuffixIcon,
-      paddingRightSuffixIcon,
-      borderRadius,
-      spaceBetweenLabelAndTextField;
+      paddingRightSuffixIcon;
+
+  /// Border radius of the text field.
+  final double? borderRadius;
+
+  /// Space between the [label] and [TextField] when the [TextFieldType] is `normal` and label is not null.
+  final double? spaceBetweenLabelAndTextField;
+
+  /// Type of the text field.
   final TextFieldType? textFieldType;
+
+  /// Set border color of the text field.
   final Color? borderColor,
       focusBorderColor,
       errorBorderColor,
       fillColor,
       disabledBorderColor;
+
   final Widget? customLabelOfTextFieldNormal, prefixIconLabel;
+
+  /// Customize widget for the text field when [ValidType] is `password`.
   final Widget eyeActiveIcon, eyeDisableIcon;
+
+  /// Auto-focus the TextField.
   final bool autoFocus;
+
+  /// Custom validation logic for password text field.
   final bool Function()? isValidCustomPassword;
+
+  /// Custom validation logic for empty text field.
   final bool Function()? isValidNotEmpty;
+
+  /// Alignment password icon in the text field. Only for [ValidType] is `password`.
   final AlignmentPasswordIcon alignmentPasswordIcon;
+
+  /// Describes the contrast of a theme or color palette when the keyboard appears.
   final Brightness? keyboardAppearance;
+
+  // Customize a decoration for the text field.
   final Decoration? boxDecorationTextField;
+
   const MyWidgetTextField({
     Key? key,
     this.prefixIcon,

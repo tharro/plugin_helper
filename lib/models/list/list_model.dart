@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-/// Use when retrieving list data from the server.
+/// Retrieve list data from the server.
 class ListModel<T> extends Equatable {
   /// Total row of the list on the database.
   final int? count;

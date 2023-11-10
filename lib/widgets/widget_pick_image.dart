@@ -3,11 +3,28 @@ import 'package:plugin_helper/index.dart';
 
 /// Allows users to easily select a image.
 class WidgetPickerImage extends StatelessWidget {
+  /// The title of the widget.
   final String title;
-  final TextStyle titleStyle, itemStyles;
+
+  /// The text styles of the title.
+  final TextStyle titleStyle;
+
+  /// The text styles of the item.
+  final TextStyle itemStyles;
+
+  /// Provide [labelCamera], [labelChoosePhoto] and [labelClose] if you want to
+  /// customize labels.
   final String? labelCamera, labelChoosePhoto, labelClose;
-  final VoidCallback onTakePhoto, onPickImage;
+
+  /// Trigger when the user selects take a photo.
+  final VoidCallback onTakePhoto;
+
+  /// Trigger when the user selects pick an image from the gallery.
+  final VoidCallback onPickImage;
+
+  /// Add other widgets after [labelCamera] and [labelChoosePhoto]
   final Widget? children;
+
   const WidgetPickerImage(
       {Key? key,
       required this.title,

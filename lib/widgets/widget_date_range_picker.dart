@@ -3,16 +3,42 @@ import 'package:flutter/material.dart';
 /// Allows users to easily select a range of dates.
 class MyWidgetDateRangePickerCustom extends StatelessWidget {
   final Widget child;
+
+  /// The start of the range of dates.
   final String? initialFirstDate;
+
+  /// The end of the range of dates.
   final String? initialLastDate;
-  final Function onSelectedDate;
+
+  /// The returned [Future] resolves to the [DateTimeRange] selected by the user
+  /// when the user saves their selection.
+  final Function(DateTimeRange) onSelectedDate;
+
+  /// Trigger when the user wants to show modal dialog containing a Material Design date range
+  /// picker.
   final Function? onTap;
+
+  /// The style of the text in the button.
   final TextStyle textStyleButton;
-  final Color headerBackground,
-      headerTextColor,
-      bodyTextColor,
-      buttonHoverColor;
-  final int? firstDate, lastDate;
+
+  /// Customize header background color.
+  final Color headerBackground;
+
+  /// Customize header text color.
+  final Color headerTextColor;
+
+  /// Customize body text color.
+  final Color bodyTextColor;
+
+  /// Customize text color in the button.
+  final Color buttonHoverColor;
+
+  /// The earliest allowable date on the date range.
+  final int? firstDate;
+
+  /// The latest allowable date on the date range.
+  final int? lastDate;
+
   const MyWidgetDateRangePickerCustom(
       {Key? key,
       required this.child,
