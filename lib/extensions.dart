@@ -66,7 +66,7 @@ extension StringX on String {
   }
 }
 
-// Convert hex string to Color
+/// Convert hex string to Color
 class HexColor extends Color {
   static int _getColorFromHex(String hexColor) {
     hexColor = hexColor.toUpperCase().replaceAll("#", "");
