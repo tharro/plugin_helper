@@ -182,7 +182,7 @@ class MyWidgetTextField extends StatefulWidget {
   /// Describes the contrast of a theme or color palette when the keyboard appears.
   final Brightness? keyboardAppearance;
 
-  // Customize a decoration for the text field.
+  /// Customize a decoration for the text field.
   final Decoration? boxDecorationTextField;
 
   const MyWidgetTextField({
